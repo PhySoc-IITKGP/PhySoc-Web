@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initEventCountdown();
   initPuzzle();
   initContactForm();
-  // initSmoothScrolling();
+  initSmoothScrolling();
+  initWhatsappAuth();
 });
 
 /* =========================================================================
@@ -27,7 +28,7 @@ function initParticles() {
   let height = (canvas.height = window.innerHeight);
 
   const particles = [];
-  const particleCount = Math.min(18, Math.floor((width * height) / 80000));
+  const particleCount = Math.min(60, Math.floor((width * height) / 25000));
   
   class CosmicParticle {
     constructor() {
@@ -1225,3 +1226,9 @@ function initSmoothScrolling() {
     }, 500);
   }
 }
+
+make change here
+</#USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-19T22:42:00+05:30.
+</ADDITIONAL_METADATA>
