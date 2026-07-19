@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,15 +9,44 @@
   <link rel="icon" href="../logo.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fira+Code&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fira+Code&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
   <link rel="stylesheet" href="../shared.css" />
-</head>
+  
+  <style>
+    /* WhatsApp Verification Modal Styles */
+    .whatsapp-modal-card select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-bright);
+      outline: none;
+      font-size: 13px;
+      transition: border-color 0.2s ease;
+    }
 
+    .whatsapp-modal-card select:focus {
+      border-color: var(--cyan);
+    }
+
+    .whatsapp-modal-card input:focus {
+      border-color: var(--cyan) !important;
+    }
+
+    .whatsapp-modal-card input.invalid,
+    .whatsapp-modal-card select.invalid {
+      border-color: var(--danger) !important;
+      box-shadow: 0 0 5px rgba(255, 82, 82, 0.2);
+    }
+
+    .text-cyan {
+      color: var(--cyan) !important;
+    }
+  </style>
+</head>
 <body class="dark-theme">
   <canvas id="particle-canvas"></canvas>
 
@@ -27,8 +55,78 @@
       <div class="modal-icon">✅</div>
       <h3>Message Sent!</h3>
       <p>Thanks for reaching out. We'll reply on your IIT KGP email within 48 hours.</p>
-      <button class="btn btn-primary" onclick="closeModal()" style="margin:0 auto"><i class="fa-solid fa-check"></i>
-        Done</button>
+      <button class="btn btn-primary" onclick="closeModal()" style="margin:0 auto"><i class="fa-solid fa-check"></i> Done</button>
+    </div>
+  </div>
+
+  <!-- WhatsApp Identity Verification Modal -->
+  <div class="modal-overlay" id="whatsapp-modal" role="dialog" aria-modal="true">
+    <div class="modal-card whatsapp-modal-card" style="max-width: 450px; text-align: left; padding: 30px;">
+      <!-- Step 1: Loading Network Auto-detection -->
+      <div id="wa-step-detecting" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 0;">
+        <i class="fa-solid fa-wifi fa-spin-pulse" style="font-size: 48px; color: var(--cyan); margin-bottom: 20px; --fa-animation-duration: 2s;"></i>
+        <h3 style="margin-bottom: 10px;">Checking Campus Network</h3>
+        <p style="font-size: 13px; color: var(--text-muted); max-width: 320px; text-align: center;">Scanning for authorized institutional Wi-Fi networks (IITs or IIEST Shibpur)...</p>
+      </div>
+
+      <!-- Step 2: Auto-detection Success -->
+      <div id="wa-step-success" style="display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 0;">
+        <i class="fa-solid fa-circle-check" style="font-size: 56px; color: #10b981; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));"></i>
+        <h3 style="margin-bottom: 10px;">Network Verified!</h3>
+        <p id="wa-network-name" style="font-size: 14px; color: var(--text-bright); font-weight: 500; margin-bottom: 5px; text-align: center;">Access Granted via Campus Wifi</p>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Redirecting you to the Chairs' WhatsApp contact...</p>
+        <div class="loader-bar" style="width: 100%; height: 4px; background: var(--border-color); border-radius: 2px; overflow: hidden; position: relative;">
+          <div class="loader-progress" id="wa-progress-bar" style="width: 0%; height: 100%; background: var(--cyan); transition: width 1.5s linear;"></div>
+        </div>
+      </div>
+
+      <!-- Step 3: Manual Verification Form -->
+      <div id="wa-step-manual" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+          <div style="background: rgba(0, 242, 254, 0.1); width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0;">
+            <i class="fa-solid fa-shield-halved" style="font-size: 20px;"></i>
+          </div>
+          <div>
+            <h3 style="margin: 0; font-size: 18px; line-height: 1.2;">Verify Identity</h3>
+            <p style="margin: 3px 0 0 0; font-size: 11px; color: var(--text-muted);">Please verify your student credentials to message the Chairs.</p>
+          </div>
+        </div>
+
+        <form id="whatsapp-auth-form" style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="form-group" style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="wa-institute" style="font-size: 12px; color: var(--text-bright); font-weight: 500;">Select Institute *</label>
+            <select id="wa-institute" required>
+              <option value="kgp">IIT Kharagpur</option>
+              <option value="bombay">IIT Bombay</option>
+              <option value="kanpur">IIT Kanpur</option>
+              <option value="madras">IIT Madras</option>
+              <option value="delhi">IIT Delhi</option>
+              <option value="roorkee">IIT Roorkee</option>
+              <option value="guwahati">IIT Guwahati</option>
+              <option value="shibpur">IIEST Shibpur</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="wa-roll" id="wa-roll-label" style="font-size: 12px; color: var(--text-bright); font-weight: 500;">Roll Number *</label>
+            <input type="text" id="wa-roll" placeholder="e.g. 24PH10029" required style="font-family: 'Fira Code', monospace; width: 100%;">
+            <span class="error-msg" id="wa-roll-error" style="display: none; color: var(--danger); font-size: 11px; margin-top: 3px;"></span>
+          </div>
+
+          <div class="form-group" style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="wa-email" id="wa-email-label" style="font-size: 12px; color: var(--text-bright); font-weight: 500;">Institute Email *</label>
+            <input type="email" id="wa-email" placeholder="e.g. rollnumber@kgpian.iitkgp.ac.in" required style="width: 100%;">
+            <span class="error-msg" id="wa-email-error" style="display: none; color: var(--danger); font-size: 11px; margin-top: 3px;"></span>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 10px; width: 100%;">
+            <button type="button" class="btn btn-ghost" onclick="closeWhatsappModal()" style="flex: 1; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; justify-content: center;">Cancel</button>
+            <button type="submit" class="btn btn-primary" style="flex: 2; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+              Verify & Text <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -39,8 +137,7 @@
     <section class="card hero-card" style="margin-bottom:22px" aria-labelledby="contact-heading">
       <span class="section-label"><i class="fa-solid fa-envelope"></i> Get in Touch</span>
       <h1 id="contact-heading">Contact PhySoc</h1>
-      <p>Questions about membership, events, resources, or collaborations? Reach us via the form below. IIT KGP email
-        required.</p>
+      <p>Questions about membership, events, resources, or collaborations? Reach us via the form below. IIT KGP email required.</p>
     </section>
 
     <div class="contact-layout">
@@ -60,8 +157,7 @@
           </div>
           <div class="form-group">
             <label for="contact-email">IIT KGP Email <span style="color:var(--danger)">*</span></label>
-            <input type="email" id="contact-email" name="email" placeholder="rollno@iitkgp.ac.in" autocomplete="email"
-              required />
+            <input type="email" id="contact-email" name="email" placeholder="rollno@iitkgp.ac.in" autocomplete="email" required />
             <span class="error-msg">Please use your iitkgp.ac.in email address.</span>
           </div>
           <div class="form-group">
@@ -70,12 +166,10 @@
           </div>
           <div class="form-group" style="margin-bottom:22px">
             <label for="contact-msg">Message <span style="color:var(--danger)">*</span></label>
-            <textarea id="contact-msg" name="message" rows="6" placeholder="Write your message here…" required
-              style="resize:vertical"></textarea>
+            <textarea id="contact-msg" name="message" rows="6" placeholder="Write your message here…" required style="resize:vertical"></textarea>
             <span class="error-msg">Please write a message.</span>
           </div>
-          <button type="submit" class="btn btn-primary" id="form-submit"
-            style="width:100%;justify-content:center;padding:13px">
+          <button type="submit" class="btn btn-primary" id="form-submit" style="width:100%;justify-content:center;padding:13px">
             Send Message <i class="fa-solid fa-paper-plane"></i>
           </button>
         </form>
@@ -84,43 +178,31 @@
       <div style="display:flex;flex-direction:column;gap:16px">
         <div class="card contact-info-panel">
           <h4>📍 Find Us</h4>
-          <div class="info-row"><i class="fa-solid fa-location-dot"></i><span>Physics Department, IIT Kharagpur, West
-              Bengal — 721302</span></div>
-          <div class="info-row"><i class="fa-solid fa-envelope"></i><a href="#"
-              data-obfuscated-email="cGh5aWl0a2hhcmFncHVyQGdtYWlsLmNvbQ==" style="color:var(--cyan)">[email
-              protected]</a></div>
-          <div style="margin-top:16px"><a href="#" data-obfuscated-wa="OTE5ODg3MDc4NjE3"
-              data-wa-text="Hi Neeraj, I'm very interested to join PhySoc." target="_blank" class="btn btn-primary"
-              style="width:100%;justify-content:center;padding:10px 14px;gap:8px;white-space:normal;text-align:center;margin-bottom:1em;"><i
-                class="fa-brands fa-whatsapp"></i> Message Chairs</a></div>
-          <div class="info-row"><i class="fa-solid fa-clock"></i><span>Responses within 48 hours (working days)</span>
-          </div>
+          <div class="info-row"><i class="fa-solid fa-location-dot"></i><span>Physics Department, IIT Kharagpur, West Bengal — 721302</span></div>
+          <div class="info-row"><i class="fa-solid fa-envelope"></i><a href="mailto:phyiitkharagpur@gmail.com" style="color:var(--cyan)">phyiitkharagpur@gmail.com</a></div>
+          <div class="info-row"><i class="fa-brands fa-whatsapp"></i><a href="#" id="whatsapp-chair-btn" style="color:var(--cyan)">+91 98870 78617 (Chairs)</a></div>
+          <div class="info-row"><i class="fa-solid fa-clock"></i><span>Responses within 48 hours (working days)</span></div>
           <div class="divider" style="margin:14px 0"></div>
-        <h4 style="margin-bottom:12px">🌐 Socials</h4>
-<div style="display:flex;gap:10px;flex-wrap:wrap">
-  <a href="https://www.instagram.com/physoc_iitkgp/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding:8px 14px;font-size:12px">
-    <i class="fa-brands fa-instagram"></i> Instagram
-  </a>
-  <a href="https://www.linkedin.com/company/phy-soc-iit-kharagpur" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding:8px 14px;font-size:12px">
-    <i class="fa-brands fa-linkedin"></i> LinkedIn
-  </a>
-</div>
-</div>
+          <h4 style="margin-bottom:12px">🌐 Socials</h4>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="https://www.instagram.com/physoc_iitkgp/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding:8px 14px;font-size:12px">
+              <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.linkedin.com/company/phy-soc-iit-kharagpur" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding:8px 14px;font-size:12px">
+              <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </a>
+          </div>
+        </div>
         <div class="card" style="background:rgba(0,242,254,0.04);border-color:rgba(0,242,254,0.18)">
           <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:12px">🕐 Office Hours</h4>
-          <p style="font-size:13px;color:var(--text-muted);line-height:1.7">
-          <br><br><strong style="color:var(--cyan)">Mon–Fri</strong> · 5 PM – 7 PM<br><strong
-              style="color:var(--cyan)">Saturday</strong> · 10 AM – 12 PM</p>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.7">Physics Department Reading Room<br><br><strong style="color:var(--cyan)">Mon–Fri</strong> · 5 PM – 7 PM<br><strong style="color:var(--cyan)">Saturday</strong> · 10 AM – 12 PM</p>
         </div>
         <div class="card" style="text-align:center">
           <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:14px">Quick Links</h4>
           <div style="display:flex;flex-direction:column;gap:8px">
-            <a href="../announcements/" class="btn btn-ghost" style="justify-content:center"><i
-                class="fa-solid fa-bullhorn"></i> Announcements</a>
-            <a href="../officers/" class="btn btn-ghost" style="justify-content:center"><i
-                class="fa-solid fa-user-group"></i> Meet Officers</a>
-            <a href="../resources/" class="btn btn-ghost" style="justify-content:center"><i
-                class="fa-solid fa-book"></i> Resources</a>
+            <a href="../announcements/" class="btn btn-ghost" style="justify-content:center"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+            <a href="../officers/" class="btn btn-ghost" style="justify-content:center"><i class="fa-solid fa-user-group"></i> Meet Officers</a>
+            <a href="../resources/" class="btn btn-ghost" style="justify-content:center"><i class="fa-solid fa-book"></i> Resources</a>
           </div>
         </div>
       </div>
@@ -131,6 +213,255 @@
   <div id="physoc-footer"></div>
   <script src="../components.js"></script>
   <script src="../shared.js"></script>
-</body>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initWhatsappAuth();
+    });
 
+    function initWhatsappAuth() {
+      const whatsappBtn = document.getElementById("whatsapp-chair-btn");
+      const modal = document.getElementById("whatsapp-modal");
+      if (!whatsappBtn || !modal) return;
+
+      const stepDetecting = document.getElementById("wa-step-detecting");
+      const stepSuccess = document.getElementById("wa-step-success");
+      const stepManual = document.getElementById("wa-step-manual");
+      const networkNameLabel = document.getElementById("wa-network-name");
+      const progressBar = document.getElementById("wa-progress-bar");
+      
+      const authForm = document.getElementById("whatsapp-auth-form");
+      const instSelect = document.getElementById("wa-institute");
+      const rollInput = document.getElementById("wa-roll");
+      const emailInput = document.getElementById("wa-email");
+      const rollError = document.getElementById("wa-roll-error");
+      const emailError = document.getElementById("wa-email-error");
+
+      const WHATSAPP_URL = "https://wa.me/919887078617?text=Hi%20Neeraj%2C%20I%27m%20very%20interested%20to%20join%20PhySoc.%20I%20got%20your%20number%20from%20the%20website.";
+
+      const schemas = {
+        kgp: {
+          name: "IIT Kharagpur",
+          rollPlaceholder: "e.g. 24PH10029",
+          emailPlaceholder: "e.g. rollnumber@kgpian.iitkgp.ac.in",
+          rollRegex: /^\d{2}[A-Z]{2}\d{5}$/i,
+          emailCheck: (email) => email.endsWith("@kgpian.iitkgp.ac.in") || email.endsWith("@iitkgp.ac.in"),
+          rollErrorMsg: "Format must be: 2 digits + 2 letters + 5 digits (e.g., 24PH10029)",
+          emailErrorMsg: "Email must end with @kgpian.iitkgp.ac.in or @iitkgp.ac.in"
+        },
+        bombay: {
+          name: "IIT Bombay",
+          rollPlaceholder: "e.g. 240050012",
+          emailPlaceholder: "e.g. rollnumber@iitb.ac.in",
+          rollRegex: /^\d{2}[A-Z0-9]\d{6,7}$/i,
+          emailCheck: (email) => email.endsWith("@iitb.ac.in"),
+          rollErrorMsg: "Must be a 9 or 10-character code starting with year (e.g., 240050012)",
+          emailErrorMsg: "Email must end with @iitb.ac.in"
+        },
+        kanpur: {
+          name: "IIT Kanpur",
+          rollPlaceholder: "e.g. 240123",
+          emailPlaceholder: "e.g. username@iitk.ac.in",
+          rollRegex: /^\d{6,8}$/,
+          emailCheck: (email) => email.endsWith("@iitk.ac.in"),
+          rollErrorMsg: "Must be a 6 or 8 digit number starting with year (e.g., 240123)",
+          emailErrorMsg: "Email must end with @iitk.ac.in"
+        },
+        madras: {
+          name: "IIT Madras",
+          rollPlaceholder: "e.g. EE19D016",
+          emailPlaceholder: "e.g. rollnumber@smail.iitm.ac.in",
+          rollRegex: /^[A-Z]{2}\d{2}[A-Z]\d{3}$/i,
+          emailCheck: (email) => email.endsWith("@smail.iitm.ac.in") || email.endsWith("@iitm.ac.in"),
+          rollErrorMsg: "Must be in format: Dept + Year + Program + Serial (e.g., EE19D016)",
+          emailErrorMsg: "Email must end with @smail.iitm.ac.in or @iitm.ac.in"
+        },
+        delhi: {
+          name: "IIT Delhi",
+          rollPlaceholder: "e.g. 2024PH10123",
+          emailPlaceholder: "e.g. username@iitd.ac.in",
+          rollRegex: /^\d{4}[A-Z]{2}\d{5}$/i,
+          emailCheck: (email) => email.endsWith("@iitd.ac.in") || (email.includes("@") && email.split("@")[1].endsWith("iitd.ac.in")),
+          rollErrorMsg: "Must be 11 characters starting with 4-digit year (e.g., 2024PH10123)",
+          emailErrorMsg: "Email must end with @iitd.ac.in"
+        },
+        roorkee: {
+          name: "IIT Roorkee",
+          rollPlaceholder: "e.g. 24112023",
+          emailPlaceholder: "e.g. username@iitr.ac.in",
+          rollRegex: /^\d{8}$/,
+          emailCheck: (email) => email.endsWith("@iitr.ac.in"),
+          rollErrorMsg: "Must be an 8-digit enrollment number (e.g., 24112023)",
+          emailErrorMsg: "Email must end with @iitr.ac.in"
+        },
+        guwahati: {
+          name: "IIT Guwahati",
+          rollPlaceholder: "e.g. 240101012",
+          emailPlaceholder: "e.g. username@iitg.ac.in",
+          rollRegex: /^\d{9}$/,
+          emailCheck: (email) => email.endsWith("@iitg.ac.in"),
+          rollErrorMsg: "Must be a 9-digit roll number starting with year (e.g., 240101012)",
+          emailErrorMsg: "Email must end with @iitg.ac.in"
+        },
+        shibpur: {
+          name: "IIEST Shibpur",
+          rollPlaceholder: "e.g. 2024PHB012",
+          emailPlaceholder: "e.g. username@iiests.ac.in",
+          rollRegex: /^[A-Z0-9]{9,10}$/i,
+          emailCheck: (email) => email.endsWith("@iiests.ac.in"),
+          rollErrorMsg: "Must be a 9 or 10 character code (e.g., 2024PHB012)",
+          emailErrorMsg: "Email must end with @iiests.ac.in"
+        }
+      };
+
+      function updatePlaceholder() {
+        const inst = instSelect.value;
+        const schema = schemas[inst];
+        if (schema) {
+          rollInput.placeholder = schema.rollPlaceholder;
+          emailInput.placeholder = schema.emailPlaceholder;
+          rollError.style.display = "none";
+          emailError.style.display = "none";
+          rollInput.classList.remove("invalid");
+          emailInput.classList.remove("invalid");
+        }
+      }
+
+      instSelect.addEventListener("change", updatePlaceholder);
+      updatePlaceholder();
+
+      function showStep(step) {
+        stepDetecting.style.display = step === "detecting" ? "flex" : "none";
+        stepSuccess.style.display = step === "success" ? "flex" : "none";
+        stepManual.style.display = step === "manual" ? "block" : "none";
+      }
+
+      window.openWhatsappModal = function() {
+        modal.classList.add("active");
+        showStep("detecting");
+        
+        rollInput.value = "";
+        emailInput.value = "";
+        rollInput.classList.remove("invalid");
+        emailInput.classList.remove("invalid");
+        rollError.style.display = "none";
+        emailError.style.display = "none";
+        progressBar.style.width = "0%";
+
+        setTimeout(async () => {
+          const detectedInst = await checkCampusNetwork();
+          if (detectedInst) {
+            networkNameLabel.innerText = `Access Granted via ${detectedInst}`;
+            showStep("success");
+            setTimeout(() => {
+              progressBar.style.width = "100%";
+            }, 50);
+            
+            setTimeout(() => {
+              window.open(WHATSAPP_URL, "_blank");
+              closeWhatsappModal();
+            }, 1600);
+          } else {
+            showStep("manual");
+          }
+        }, 1500);
+      };
+
+      window.closeWhatsappModal = function() {
+        modal.classList.remove("active");
+      };
+
+      async function checkCampusNetwork() {
+        try {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), 3500);
+
+          const response = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+          clearTimeout(id);
+          
+          if (!response.ok) return null;
+          const data = await response.json();
+          
+          const org = (data.org || '').toLowerCase();
+          const isp = (data.isp || '').toLowerCase();
+          
+          if (org.includes('kharagpur') || isp.includes('kharagpur') || org.includes('iit kgp') || isp.includes('iit kgp')) {
+            return "IIT Kharagpur WiFi";
+          }
+          if (org.includes('bombay') || isp.includes('bombay') || org.includes('iitb') || isp.includes('iitb')) {
+            return "IIT Bombay WiFi";
+          }
+          if (org.includes('kanpur') || isp.includes('kanpur') || org.includes('iitk') || isp.includes('iitk')) {
+            return "IIT Kanpur WiFi";
+          }
+          if (org.includes('madras') || isp.includes('madras') || org.includes('iitm') || isp.includes('iitm')) {
+            return "IIT Madras WiFi";
+          }
+          if (org.includes('delhi') || isp.includes('delhi') || org.includes('iitd') || isp.includes('iitd')) {
+            return "IIT Delhi WiFi";
+          }
+          if (org.includes('roorkee') || isp.includes('roorkee') || org.includes('iitr') || isp.includes('iitr')) {
+            return "IIT Roorkee WiFi";
+          }
+          if (org.includes('guwahati') || isp.includes('guwahati') || org.includes('iitg') || isp.includes('iitg')) {
+            return "IIT Guwahati WiFi";
+          }
+          if (org.includes('shibpur') || isp.includes('shibpur') || org.includes('iiest') || isp.includes('iiest')) {
+            return "IIEST Shibpur WiFi";
+          }
+          if (org.includes('national knowledge network') || isp.includes('national knowledge network') || org.includes('nkn') || isp.includes('nkn') || org.includes('ernet') || isp.includes('ernet')) {
+            return "NKN (Campus Network)";
+          }
+          return null;
+        } catch (err) {
+          console.warn("Campus network check failed/timed out, falling back to manual validation.", err);
+          return null;
+        }
+      }
+
+      whatsappBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openWhatsappModal();
+      });
+
+      authForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const inst = instSelect.value;
+        const schema = schemas[inst];
+        if (!schema) return;
+
+        let isRollValid = true;
+        let isEmailValid = true;
+
+        const rollVal = rollInput.value.trim();
+        const emailVal = emailInput.value.trim();
+
+        rollInput.classList.remove("invalid");
+        emailInput.classList.remove("invalid");
+        rollError.style.display = "none";
+        emailError.style.display = "none";
+
+        if (!schema.rollRegex.test(rollVal)) {
+          rollInput.classList.add("invalid");
+          rollError.innerText = schema.rollErrorMsg;
+          rollError.style.display = "block";
+          isRollValid = false;
+        }
+
+        if (!schema.emailCheck(emailVal)) {
+          emailInput.classList.add("invalid");
+          emailError.innerText = schema.emailErrorMsg;
+          emailError.style.display = "block";
+          isEmailValid = false;
+        }
+
+        if (!isRollValid || !isEmailValid) return;
+
+        window.open(WHATSAPP_URL, "_blank");
+        closeWhatsappModal();
+      });
+    }
+  </script>
+</body>
 </html>
