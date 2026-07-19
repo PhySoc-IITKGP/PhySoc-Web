@@ -107,7 +107,7 @@ function initParticles() {
   const resize = () => {
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    const n = Math.min(45, Math.floor((W * H) / 32000));
+    const n = Math.min(18, Math.floor((W * H) / 80000));
     particles = Array.from({ length: n }, () => ({
       x: Math.random() * W,
       y: Math.random() * H,
@@ -647,10 +647,69 @@ function initDynamicResources() {
       tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
       tr.innerHTML = `
         <td style="padding:12px 16px;color:var(--text-bright)">${r.title}</td>
-        <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px">—</td>
-        <td style="padding:12px 16px">${r.description || '—'}</td>
+        <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px">${r.course_code || '—'}</td>
+        <td style="padding:12px 16px">${r.semester || '—'}</td>
         <td style="padding:12px 16px"><a href="${r.link_url}" target="_blank" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> Download</a></td>`;
       coursesContainer.prepend(tr);
+    }
+  });
+}
+
+/* -------------------------------------------------------
+   DYNAMIC INTERNSHIPS FROM ADMIN
+   ------------------------------------------------------- */
+function initDynamicInternships() {
+  const container = $('#internships-tbody');
+  if (!container) return;
+
+  const internships = JSON.parse(localStorage.getItem('physoc_internships') || '[]');
+  
+  if (internships.length === 0) {
+    container.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:32px">No internship opportunities listed at the moment.</td></tr>';
+    return;
+  }
+
+  container.innerHTML = '';
+  internships.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+    tr.innerHTML = `
+      <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">${item.company}</td>
+      <td style="padding:12px 16px;color:var(--text-muted)">${item.opportunity}</td>
+      <td style="padding:12px 16px;color:var(--text-muted)">${item.eligibility}</td>
+      <td style="padding:12px 16px;color:var(--text-muted);line-height:1.4">
+        <div><strong>Deadline:</strong> ${item.deadline || '—'}</div>
+        <div style="font-size:11px;margin-top:2px"><strong>Interviews:</strong> ${item.interview_dates || '—'}</div>
+      </td>`;
+    container.appendChild(tr);
+  });
+}
+
+/* -------------------------------------------------------
+   CONTACT OBFUSCATION & DECRYPTION (Anti-Scraping)
+   ------------------------------------------------------- */
+function initObfuscatedContacts() {
+  // Decrypt emails
+  document.querySelectorAll('[data-obfuscated-email]').forEach(el => {
+    const encoded = el.getAttribute('data-obfuscated-email');
+    if (!encoded) return;
+    const email = atob(encoded);
+    el.href = 'mailto:' + email;
+    const trimmedText = el.textContent.trim();
+    if (trimmedText === '[email protected]' || trimmedText === 'phyiitkharagpur@gmail.com') {
+      el.textContent = email;
+    }
+  });
+
+  // Decrypt WhatsApp/Phone links
+  document.querySelectorAll('[data-obfuscated-wa]').forEach(el => {
+    const encodedPhone = el.getAttribute('data-obfuscated-wa');
+    if (!encodedPhone) return;
+    const phone = atob(encodedPhone);
+    const text = el.getAttribute('data-wa-text') || '';
+    el.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    if (el.getAttribute('data-show-phone') === 'true') {
+      el.innerHTML = `<i class="fa-brands fa-whatsapp"></i> +91 ${phone.substring(2, 7)} ${phone.substring(7)} (Chairs)`;
     }
   });
 }
@@ -882,8 +941,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyBtn();
   initContact();
   initSandboxPreviews();
-  initSmoothScrolling();
-  initCursor();
+  // initSmoothScrolling();
+  // initCursor();
+  initDynamicInternships();
+  initObfuscatedContacts();
 });
 
 

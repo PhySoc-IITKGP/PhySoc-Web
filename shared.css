@@ -2141,7 +2141,7 @@ body.dark-theme #parallax-bg {
 }
 
 
-/* Custom Cursor */
+/* Custom Cursor disabled to restore standard browser cursor
 @media (pointer: fine) {
 
   body,
@@ -2153,6 +2153,7 @@ body.dark-theme #parallax-bg {
     cursor: none !important;
   }
 }
+*/
 
 .cursor-blob {
   position: fixed;

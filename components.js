@@ -61,7 +61,7 @@
       <div class="drawer-sep"></div>
       <div class="drawer-footer">
         Physics Society &middot; IIT Kharagpur<br>
-        <a href="mailto:phyiitkharagpur@gmail.com">phyiitkharagpur@gmail.com</a>
+        <a href="#" data-obfuscated-email="cGh5aWl0a2hhcmFncHVyQGdtYWlsLmNvbQ==">[email protected]</a>
       </div>
     </nav>
 
@@ -92,7 +92,7 @@
           <i class="fa-solid fa-moon moon-icon"></i>
           <i class="fa-solid fa-sun sun-icon"></i>
         </button>
-        <a href="https://wa.me/919887078617?text=Hi%20Neeraj%2C%20I%27m%20very%20interested%20to%20join%20PhySoc.%20I%20got%20your%20number%20from%20the%20website." target="_blank" rel="noopener" class="btn btn-primary" style="padding:7px 12px;font-size:12px;display:flex;align-items:center;gap:6px" aria-label="Join Us">
+        <a href="#" data-obfuscated-wa="OTE5ODg3MDc4NjE3" data-wa-text="Hi Neeraj, I'm very interested to join PhySoc. I got your number from the website." target="_blank" rel="noopener" class="btn btn-primary" style="padding:7px 12px;font-size:12px;display:flex;align-items:center;gap:6px" aria-label="Join Us">
           <i class="fa-brands fa-whatsapp" style="font-size:14px"></i> <span style="font-weight:600">Join Us</span>
         </a>
         <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">

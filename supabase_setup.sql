@@ -26,6 +26,8 @@ CREATE TABLE "physoc-resources" (
   category text not null,
   link_url text not null,
   description text,
+  course_code text,
+  semester text,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
@@ -106,4 +108,31 @@ CREATE POLICY "Enable full update for authenticated users" ON "physoc-weekly_puz
 FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
 
 CREATE POLICY "Enable delete for authenticated users" ON "physoc-weekly_puzzles"
+FOR DELETE TO authenticated USING (true);
+
+-- 10. Create Internships Table
+CREATE TABLE "physoc-internships" (
+  id uuid default gen_random_uuid() primary key,
+  company text not null,
+  opportunity text not null,
+  eligibility text not null,
+  deadline text not null,
+  interview_dates text,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+ALTER TABLE "physoc-internships" ENABLE ROW LEVEL SECURITY;
+
+-- Anyone can read internships
+CREATE POLICY "Enable read access for all" ON "physoc-internships"
+FOR SELECT USING (true);
+
+-- Authenticated users (admins) can insert/update/delete
+CREATE POLICY "Enable insert for authenticated users" ON "physoc-internships"
+FOR INSERT TO authenticated WITH CHECK (true);
+
+CREATE POLICY "Enable full update for authenticated users" ON "physoc-internships"
+FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+
+CREATE POLICY "Enable delete for authenticated users" ON "physoc-internships"
 FOR DELETE TO authenticated USING (true);

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initEventCountdown();
   initPuzzle();
   initContactForm();
-  initSmoothScrolling();
+  // initSmoothScrolling();
 });
 
 /* =========================================================================
@@ -27,7 +27,7 @@ function initParticles() {
   let height = (canvas.height = window.innerHeight);
 
   const particles = [];
-  const particleCount = Math.min(60, Math.floor((width * height) / 25000));
+  const particleCount = Math.min(18, Math.floor((width * height) / 80000));
   
   class CosmicParticle {
     constructor() {
