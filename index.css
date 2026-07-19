@@ -687,6 +687,75 @@ body.light-theme .theme-toggle-btn {
   font-size: 13px;
 }
 
+/* ==========================================================================
+   WHATSAPP IDENTITY VERIFICATION MODAL & INFO-ROW STYLES
+   ========================================================================== */
+
+/* Info Row Layout (Location, Email, WhatsApp, Socials) */
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.info-row i {
+  color: var(--cyan);
+  width: 18px;
+  text-align: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.info-row a {
+  text-decoration: none;
+  transition: color var(--transition-fast) ease;
+}
+
+.info-row a:hover {
+  color: var(--cyan) !important;
+  text-decoration: underline;
+}
+
+/* Modal Selector Input Overrides */
+.whatsapp-modal-card select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-bright);
+  outline: none;
+  font-size: 13px;
+  font-family: var(--font-body);
+  transition: border-color var(--transition-fast) ease;
+}
+
+.whatsapp-modal-card select:focus {
+  border-color: var(--cyan);
+}
+
+.whatsapp-modal-card input:focus {
+  border-color: var(--cyan) !important;
+}
+
+/* Invalid State Border Highlighting */
+.whatsapp-modal-card input.invalid,
+.whatsapp-modal-card select.invalid {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 5px rgba(255, 82, 82, 0.2);
+}
+
+.text-cyan {
+  color: var(--cyan) !important;
+}
+
+.text-green {
+  color: #10b981 !important;
+}
+
 /* -----------------------------------------
    CALENDAR WIDGET
 ----------------------------------------- */
