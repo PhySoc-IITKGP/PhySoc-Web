@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive De Broglie Atomic Orbit Simulator - Physics Society, IIT Kharagpur.">
+  <title>De Broglie Atomic Model | PhySoc Sandbox</title>
+  
+  <link rel="icon" type="image/svg+xml" href="../../logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../index.css">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #050c18;
+      color: #d4e8f5;
+    }
+    .sandbox-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+      flex: 1;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      color: #00f2fe;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .back-btn:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 30px;
+      align-items: start;
+    }
+    .canvas-card {
+      background-color: #020612;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+    canvas {
+      width: 100%;
+      height: 500px;
+      display: block;
+      cursor: crosshair;
+    }
+    .instructions {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #00f2fe;
+      font-size: 13px;
+      text-align: center;
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-style: italic;
+    }
+    .controls-card {
+      background-color: #0a1629;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+    .controls-card h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+    .ctrl-val {
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: #00f2fe;
+      font-weight: 600;
+    }
+    .primary-btn {
+      background: linear-gradient(135deg, #0284c7, #00f2fe);
+      color: #ffffff;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .primary-btn:hover {
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
+    }
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .secondary-btn:hover {
+      background: rgba(0, 242, 254, 0.15);
+      border-color: #00f2fe;
+    }
+    @media screen and (max-width: 900px) {
+      .game-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+  <!-- Particle Background -->
+  <canvas id="particle-canvas" style="position:fixed; z-index:-1; pointer-events:none;"></canvas>
+
+  <div class="sandbox-container">
+    <a href="../" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to All Sandboxes</a>
+    
+    <div class="info-card wide-card" style="margin-bottom: 30px; padding: 25px; background: #0a1629; border: 1px solid rgba(0,242,254,0.2); border-radius: 12px;">
+      <h2 style="font-family: var(--font-heading); margin-bottom: 10px; color: #ffffff;"><i class="fa-solid fa-atom" style="color:#ffe259"></i> De Broglie Atomic Standing Wave</h2>
+      <p style="color: #8bbcd9; font-size: 14px; margin: 0;">Visualizing de Broglie's standing electron wave condition 2πr = nλ (mvr = nℏ). Integer n creates stable constructive standing waves; non-integer n causes destructive wave collapse.</p>
+    </div>
+
+    <div class="game-layout">
+      <!-- Game Canvas -->
+      <div class="canvas-card">
+        <canvas id="bohr-canvas"></canvas>
+        <div class="instructions">Click anywhere on canvas to cycle quantum number n!</div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-card">
+        <h3>Quantization Controls</h3>
+        
+        <div class="control-group">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Quantum Number n</span>
+            <span id="bohr-n-val" class="ctrl-val">4.0</span>
+          </label>
+          <input type="range" id="bohr-n" min="1.0" max="8.0" step="0.1" value="4.0" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div class="control-group" style="margin-top: 18px;">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Wave Amplitude A</span>
+            <span id="bohr-amp-val" class="ctrl-val">0.18</span>
+          </label>
+          <input type="range" id="bohr-amp" min="0.05" max="0.4" step="0.01" value="0.18" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div class="control-group" style="margin-top: 18px;">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Phase Speed ω</span>
+            <span id="bohr-speed-val" class="ctrl-val">1.2</span>
+          </label>
+          <input type="range" id="bohr-speed" min="0.2" max="3.0" step="0.1" value="1.2" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.05); margin-top:20px; font-family:'Fira Code',monospace; font-size:11px">
+          <div>Radius rₙ: <span id="out-r" style="color:#00f2fe;font-weight:700">0.85 Å</span></div>
+          <div>Energy Eₙ: <span id="out-e" style="color:#00f2fe;font-weight:700">-0.85 eV</span></div>
+          <div>Status: <span id="out-status" style="color:#10b981;font-weight:700">Constructive</span></div>
+        </div>
+
+        <div class="control-actions" style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+          <button class="primary-btn" id="bohr-snap" style="width: 100%; border-radius: 8px !important; padding: 11px;"><i class="fa-solid fa-check-double"></i> Snap to Integer n</button>
+          <button class="secondary-btn" id="bohr-fractional" style="width: 100%; border-radius: 8px !important; padding: 11px;"><i class="fa-solid fa-triangle-exclamation"></i> Test Fractional n</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Background Particles
+      const pCanvas = document.getElementById("particle-canvas");
+      if (pCanvas) {
+        const pCtx = pCanvas.getContext("2d");
+        let w = (pCanvas.width = window.innerWidth);
+        let h = (pCanvas.height = window.innerHeight);
+        const particles = Array.from({length: 40}, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.5, alpha: Math.random() * 0.5 + 0.2,
+          dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4
+        }));
+        function animP() {
+          pCtx.clearRect(0, 0, w, h);
+          particles.forEach(p => {
+            p.x += p.dx; p.y += p.dy;
+            if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+            pCtx.fillStyle = `rgba(0, 242, 254, ${p.alpha})`;
+            pCtx.beginPath(); pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2); pCtx.fill();
+          });
+          requestAnimationFrame(animP);
+        }
+        animP();
+      }
+
+      // Bohr Atomic Wave Simulation Logic
+      const canvas = document.getElementById("bohr-canvas");
+      const ctx = canvas.getContext("2d");
+
+      function resizeCanvas() {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      let n = 4.0;
+      let amp = 0.18;
+      let speed = 1.2;
+      let phase = 0;
+
+      const inputN = document.getElementById("bohr-n");
+      const inputAmp = document.getElementById("bohr-amp");
+      const inputSpeed = document.getElementById("bohr-speed");
+
+      inputN.oninput = (e) => {
+        n = parseFloat(e.target.value);
+        document.getElementById("bohr-n-val").innerText = n.toFixed(1);
+      };
+      inputAmp.oninput = (e) => {
+        amp = parseFloat(e.target.value);
+        document.getElementById("bohr-amp-val").innerText = amp.toFixed(2);
+      };
+      inputSpeed.oninput = (e) => {
+        speed = parseFloat(e.target.value);
+        document.getElementById("bohr-speed-val").innerText = speed.toFixed(1);
+      };
+
+      document.getElementById("bohr-snap").onclick = () => {
+        n = Math.round(n);
+        inputN.value = n;
+        document.getElementById("bohr-n-val").innerText = n.toFixed(1);
+      };
+      document.getElementById("bohr-fractional").onclick = () => {
+        n = 3.4;
+        inputN.value = n;
+        document.getElementById("bohr-n-val").innerText = "3.4";
+      };
+
+      canvas.addEventListener("click", () => {
+        n = (n % 6) + 1;
+        inputN.value = n;
+        document.getElementById("bohr-n-val").innerText = n.toFixed(1);
+      });
+
+      function draw() {
+        ctx.fillStyle = "#020612";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const baseRadius = Math.min(canvas.width, canvas.height) * 0.32;
+
+        // Grid lines
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 30) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 30) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // Classical Circle Orbit
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath(); ctx.arc(cx, cy, baseRadius, 0, Math.PI * 2); ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Nucleus
+        const nucGrad = ctx.createRadialGradient(cx, cy, 2, cx, cy, 14);
+        nucGrad.addColorStop(0, "#ffffff");
+        nucGrad.addColorStop(0.4, "#f59e0b");
+        nucGrad.addColorStop(1, "transparent");
+        ctx.fillStyle = nucGrad;
+        ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2); ctx.fill();
+
+        // De Broglie Standing Wave R(θ) = baseRadius * (1 + A * sin(n * θ - phase))
+        const steps = 720;
+        ctx.beginPath();
+        ctx.lineWidth = 2.5;
+
+        const isInteger = Math.abs(n - Math.round(n)) < 0.05;
+        ctx.strokeStyle = isInteger ? "#00f2fe" : "#ef4444";
+        ctx.shadowColor = isInteger ? "#00f2fe" : "#ef4444";
+        ctx.shadowBlur = 12;
+
+        for (let i = 0; i <= steps; i++) {
+          const theta = (i / steps) * Math.PI * 2;
+          const r = baseRadius * (1 + amp * Math.sin(n * theta - phase));
+          const x = cx + r * Math.cos(theta);
+          const y = cy + r * Math.sin(theta);
+
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Electron Node
+        const eTheta = (phase / Math.max(n, 0.1)) % (Math.PI * 2);
+        const eR = baseRadius * (1 + amp * Math.sin(n * eTheta - phase));
+        const ex = cx + eR * Math.cos(eTheta);
+        const ey = cy + eR * Math.sin(eTheta);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowColor = "#00f2fe";
+        ctx.shadowBlur = 16;
+        ctx.beginPath(); ctx.arc(ex, ey, 7, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Update readouts
+        const r_bohr = 0.529 * (n * n) / 10;
+        const energy = -13.6 / (n * n);
+        document.getElementById("out-r").innerText = r_bohr.toFixed(2) + " Å";
+        document.getElementById("out-e").innerText = energy.toFixed(2) + " eV";
+
+        const statusEl = document.getElementById("out-status");
+        if (isInteger) {
+          statusEl.innerText = "Constructive (Stable)";
+          statusEl.style.color = "#10b981";
+        } else {
+          statusEl.innerText = "Destructive (Collapsing)";
+          statusEl.style.color = "#ef4444";
+        }
+      }
+
+      function loop() {
+        phase += 0.03 * speed;
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      loop();
+    });
+  </script>
+</body>
+</html>

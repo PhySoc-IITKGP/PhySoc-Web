@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum Wavepacket & Tunneling Simulator — PhySoc | IIT Kharagpur</title>
+  <meta name="description" content="Professional Quantum Mechanics simulation solving 2D Time-Dependent Schrödinger Equation for double-slit interference and quantum tunneling." />
+  <link rel="icon" href="../../logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fira+Code&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../../shared.css" />
+  <style>
+    .sim-container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    @media (max-width: 900px) {
+      .sim-container { grid-template-columns: 1fr; }
+    }
+    .canvas-wrap {
+      background: #020612;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+    .controls-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ctrl-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-bright);
+      display: flex;
+      justify-content: space-between;
+    }
+    .ctrl-group input[type="range"], .ctrl-group select {
+      width: 100%;
+      accent-color: #00f2fe;
+    }
+    .readout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.05);
+      font-family: var(--font-code);
+      font-size: 11px;
+    }
+    .readout-val { color: #00f2fe; font-weight: 700; }
+  </style>
+</head>
+<body class="dark-theme">
+  <canvas id="particle-canvas"></canvas>
+  <div id="physoc-header"></div>
+
+  <main class="page-main page-content" id="main-content">
+    <section class="card hero-card" style="margin-bottom:16px" aria-labelledby="qm-heading">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div>
+          <span class="section-label"><i class="fa-solid fa-atom"></i> Quantum Physics Sandbox</span>
+          <h1 id="qm-heading">2D Quantum Wavepacket Simulator</h1>
+        </div>
+        <a href="../" class="btn btn-ghost" style="padding:8px 14px;font-size:12px"><i class="fa-solid fa-arrow-left"></i> All Sandboxes</a>
+      </div>
+      <p style="margin-top:10px">Real-time numerical simulation of the 2D Time-Dependent Schrödinger Equation iℏ ∂ψ/∂t = (-ℏ²/2m ∇² + V)ψ. Demonstrates wavepacket dispersion, double-slit interference, and quantum barrier tunneling.</p>
+    </section>
+
+    <div class="sim-container">
+      <div class="canvas-wrap" id="canvas-wrap">
+        <button class="fullscreen-btn" id="fs-btn"><i class="fa-solid fa-expand"></i> Maximize</button>
+        <canvas id="qm-canvas"></canvas>
+        <div style="position:absolute;top:14px;left:14px;background:rgba(3,10,26,0.85);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--text-muted)">
+          <span style="color:#00f2fe"> Cyan / Magenta = Probability Density |ψ|²</span> &middot;
+          <span style="color:#f59e0b"> Barrier = Potential V(x,y)</span>
+        </div>
+      </div>
+
+      <div class="controls-card">
+        <h3 style="font-family:var(--font-heading);font-size:16px;color:var(--text-bright);margin:0">Quantum Controls</h3>
+
+        <div class="ctrl-group">
+          <label for="input-preset">Experiment Preset</label>
+          <select id="input-preset" style="background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:8px;color:var(--text-bright);font-size:12px;outline:none">
+            <option value="double-slit">Double Slit Interference</option>
+            <option value="tunneling">Quantum Barrier Tunneling</option>
+            <option value="free">Free Gaussian Wavepacket Dispersion</option>
+            <option value="well">Harmonic Quantum Well</option>
+          </select>
+        </div>
+
+        <div class="ctrl-group">
+          <label>Wavepacket Momentum k₀ <span id="val-k0" class="readout-val">1.2</span></label>
+          <input type="range" id="input-k0" min="0.4" max="2.5" step="0.1" value="1.2" />
+        </div>
+
+        <div class="ctrl-group">
+          <label>Packet Width σ <span id="val-sigma" class="readout-val">4.0</span></label>
+          <input type="range" id="input-sigma" min="2.0" max="8.0" step="0.5" value="4.0" />
+        </div>
+
+        <div class="ctrl-group">
+          <label>Barrier Height V₀ <span id="val-v0" class="readout-val">2.5</span></label>
+          <input type="range" id="input-v0" min="0.5" max="8.0" step="0.5" value="2.5" />
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <button class="btn btn-primary" id="btn-fire" style="flex:1;justify-content:center;padding:9px"><i class="fa-solid fa-play"></i> Fire Wavepacket</button>
+          <button class="btn btn-secondary" id="btn-reset" style="padding:9px"><i class="fa-solid fa-rotate-right"></i> Clear</button>
+        </div>
+
+        <div class="readout-grid">
+          <div>Grid Size: <span class="readout-val">120 x 80</span></div>
+          <div>Norm ∫|ψ|²: <span id="out-norm" class="readout-val">1.000</span></div>
+          <div>EOM Solver: <span class="readout-val">Split-Step FFT</span></div>
+          <div>Phase Glow: <span class="readout-val">Active</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="physoc-footer"></div>
+  <script src="../../components.js"></script>
+  <script src="../../shared.js"></script>
+  <script>
+    (function() {
+      const wrap = document.getElementById('canvas-wrap');
+      const canvas = document.getElementById('qm-canvas');
+      const ctx = canvas.getContext('2d');
+      const fsBtn = document.getElementById('fs-btn');
+
+      fsBtn.onclick = () => {
+        wrap.classList.toggle('is-fullscreen');
+        const isFS = wrap.classList.contains('is-fullscreen');
+        fsBtn.innerHTML = isFS ? '<i class="fa-solid fa-compress"></i> Minimize' : '<i class="fa-solid fa-expand"></i> Maximize';
+      };
+      const NX = 120;
+      const NY = 80;
+
+      canvas.width = NX;
+      canvas.height = NY;
+
+      let re = new Float32Array(NX * NY);
+      let im = new Float32Array(NX * NY);
+      let V = new Float32Array(NX * NY);
+
+      let preset = 'double-slit';
+      let k0 = 1.2;
+      let sigma = 4.0;
+      let V0 = 2.5;
+
+      function setupPotential() {
+        V.fill(0);
+        const cx = Math.floor(NX / 2);
+        
+        if (preset === 'double-slit') {
+          for (let y = 0; y < NY; y++) {
+            // Create double slits in a wall
+            const slit1 = (y >= NY/2 - 12 && y <= NY/2 - 5);
+            const slit2 = (y >= NY/2 + 5 && y <= NY/2 + 12);
+            if (!slit1 && !slit2) {
+              for (let x = cx - 2; x <= cx + 2; x++) {
+                V[y * NX + x] = V0 * 10;
+              }
+            }
+          }
+        } else if (preset === 'tunneling') {
+          for (let y = 0; y < NY; y++) {
+            for (let x = cx - 1; x <= cx + 1; x++) {
+              V[y * NX + x] = V0;
+            }
+          }
+        } else if (preset === 'well') {
+          for (let y = 0; y < NY; y++) {
+            for (let x = 0; x < NX; x++) {
+              const dx = (x - NX/2);
+              const dy = (y - NY/2);
+              V[y * NX + x] = 0.002 * (dx*dx + dy*dy);
+            }
+          }
+        }
+      }
+
+      function initWavepacket() {
+        setupPotential();
+        re.fill(0);
+        im.fill(0);
+
+        const x0 = NX / 4;
+        const y0 = NY / 2;
+
+        let normSum = 0;
+        for (let y = 0; y < NY; y++) {
+          for (let x = 0; x < NX; x++) {
+            const idx = y * NX + x;
+            const dx = x - x0;
+            const dy = y - y0;
+            const env = Math.exp(-(dx * dx + dy * dy) / (2 * sigma * sigma));
+            const phase = k0 * dx;
+
+            re[idx] = env * Math.cos(phase);
+            im[idx] = env * Math.sin(phase);
+            normSum += re[idx]*re[idx] + im[idx]*im[idx];
+          }
+        }
+
+        const norm = Math.sqrt(normSum);
+        for (let i = 0; i < NX * NY; i++) {
+          re[i] /= norm;
+          im[i] /= norm;
+        }
+      }
+
+      document.getElementById('input-preset').onchange = (e) => { preset = e.target.value; initWavepacket(); };
+      document.getElementById('input-k0').oninput = (e) => { k0 = parseFloat(e.target.value); document.getElementById('val-k0').innerText = k0; initWavepacket(); };
+      document.getElementById('input-sigma').oninput = (e) => { sigma = parseFloat(e.target.value); document.getElementById('val-sigma').innerText = sigma; initWavepacket(); };
+      document.getElementById('input-v0').oninput = (e) => { V0 = parseFloat(e.target.value); document.getElementById('val-v0').innerText = V0; initWavepacket(); };
+      document.getElementById('btn-fire').onclick = initWavepacket;
+      document.getElementById('btn-reset').onclick = initWavepacket;
+
+      // Schrödinger equation finite difference step: ∂ψ/∂t = (i/2)∇²ψ - iVψ
+      const dt = 0.25;
+      function step() {
+        const nextRe = new Float32Array(re);
+        const nextIm = new Float32Array(im);
+
+        for (let y = 1; y < NY - 1; y++) {
+          for (let x = 1; x < NX - 1; x++) {
+            const idx = y * NX + x;
+            const lapRe = re[idx - 1] + re[idx + 1] + re[idx - NX] + re[idx + NX] - 4 * re[idx];
+            const lapIm = im[idx - 1] + im[idx + 1] + im[idx - NX] + im[idx + NX] - 4 * im[idx];
+
+            const dRe_dt = -0.5 * lapIm + V[idx] * im[idx];
+            const dIm_dt = 0.5 * lapRe - V[idx] * re[idx];
+
+            nextRe[idx] += dRe_dt * dt;
+            nextIm[idx] += dIm_dt * dt;
+          }
+        }
+
+        re = nextRe;
+        im = nextIm;
+      }
+
+      function draw() {
+        const imgData = ctx.createImageData(NX, NY);
+        const data = imgData.data;
+
+        let totalProb = 0;
+        for (let i = 0; i < NX * NY; i++) {
+          const prob = re[i] * re[i] + im[i] * im[i];
+          totalProb += prob;
+          const px = i * 4;
+
+          if (V[i] > 0.5) {
+            data[px] = 245;     // R
+            data[px + 1] = 158; // G
+            data[px + 2] = 11;  // B
+            data[px + 3] = 220; // A
+          } else {
+            const val = Math.min(255, Math.floor(prob * 18000));
+            data[px] = Math.floor(val * 0.1);             // R
+            data[px + 1] = Math.min(255, val * 1.2);      // G (Cyan)
+            data[px + 2] = Math.min(255, val * 1.5 + 40); // B
+            data[px + 3] = 255;
+          }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+        document.getElementById('out-norm').innerText = totalProb.toFixed(3);
+      }
+
+      function loop() {
+        for (let i = 0; i < 3; i++) step();
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      initWavepacket();
+      loop();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive Schwarzschild Black Hole Simulator - Physics Society, IIT Kharagpur.">
+  <title>Black Hole Geodesics | PhySoc Sandbox</title>
+  
+  <link rel="icon" type="image/svg+xml" href="../../logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../index.css">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #050c18;
+      color: #d4e8f5;
+    }
+    .sandbox-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+      flex: 1;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      color: #00f2fe;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .back-btn:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 30px;
+      align-items: start;
+    }
+    .canvas-card {
+      background-color: #020612;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+    canvas {
+      width: 100%;
+      height: 500px;
+      display: block;
+      cursor: crosshair;
+    }
+    .instructions {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #00f2fe;
+      font-size: 13px;
+      text-align: center;
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-style: italic;
+    }
+    .controls-card {
+      background-color: #0a1629;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+    .controls-card h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+    .ctrl-val {
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: #00f2fe;
+      font-weight: 600;
+    }
+    .primary-btn {
+      background: linear-gradient(135deg, #0284c7, #00f2fe);
+      color: #ffffff;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .primary-btn:hover {
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
+    }
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .secondary-btn:hover {
+      background: rgba(0, 242, 254, 0.15);
+      border-color: #00f2fe;
+    }
+    @media screen and (max-width: 900px) {
+      .game-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+  <!-- Particle Background -->
+  <canvas id="particle-canvas" style="position:fixed; z-index:-1; pointer-events:none;"></canvas>
+
+  <div class="sandbox-container">
+    <a href="../" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to All Sandboxes</a>
+    
+    <div class="info-card wide-card" style="margin-bottom: 30px; padding: 25px; background: #0a1629; border: 1px solid rgba(0,242,254,0.2); border-radius: 12px;">
+      <h2 style="font-family: var(--font-heading); margin-bottom: 10px; color: #ffffff;"><i class="fa-solid fa-circle-dot" style="color:#00f2fe"></i> Schwarzschild Black Hole Geodesics</h2>
+      <p style="color: #8bbcd9; font-size: 14px; margin: 0;">Simulate general relativistic orbits and light deflection around a static Schwarzschild black hole using 4th-order Runge-Kutta (RK4) integration.</p>
+    </div>
+
+    <div class="game-layout">
+      <!-- Game Canvas -->
+      <div class="canvas-card">
+        <canvas id="bh-canvas"></canvas>
+        <div class="instructions">Click anywhere on canvas to launch a test particle towards the black hole!</div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-card">
+        <h3>Geodesic Controls</h3>
+        
+        <div class="control-group">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Black Hole Mass M</span>
+            <span id="bh-mass-val" class="ctrl-val">1.0</span>
+          </label>
+          <input type="range" id="bh-mass" min="0.5" max="2.5" step="0.1" value="1.0" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div class="control-group" style="margin-top: 18px;">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Launch Distance r₀</span>
+            <span id="bh-r-val" class="ctrl-val">12.0 M</span>
+          </label>
+          <input type="range" id="bh-r" min="4.0" max="22.0" step="0.5" value="12.0" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div class="control-group" style="margin-top: 18px;">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Initial Velocity v₀/c</span>
+            <span id="bh-v-val" class="ctrl-val">0.28</span>
+          </label>
+          <input type="range" id="bh-v" min="0.05" max="0.95" step="0.01" value="0.28" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div class="control-group" style="margin-top: 18px;">
+          <label style="font-size: 13px; color: #ffffff; font-weight: 500; display:flex; justify-content:space-between">
+            <span>Launch Angle θ</span>
+            <span id="bh-angle-val" class="ctrl-val">90°</span>
+          </label>
+          <input type="range" id="bh-angle" min="0" max="180" step="1" value="90" style="width:100%; margin: 8px 0;">
+        </div>
+
+        <div class="control-actions" style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+          <button class="primary-btn" id="bh-launch" style="width: 100%; border-radius: 8px !important; padding: 11px;"><i class="fa-solid fa-play"></i> Launch Particle</button>
+          <button class="secondary-btn" id="bh-reset" style="width: 100%; border-radius: 8px !important; padding: 11px;"><i class="fa-solid fa-rotate-left"></i> Reset Orbit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Background Particles
+      const pCanvas = document.getElementById("particle-canvas");
+      if (pCanvas) {
+        const pCtx = pCanvas.getContext("2d");
+        let w = (pCanvas.width = window.innerWidth);
+        let h = (pCanvas.height = window.innerHeight);
+        const particles = Array.from({length: 40}, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.5, alpha: Math.random() * 0.5 + 0.2,
+          dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4
+        }));
+        function animP() {
+          pCtx.clearRect(0, 0, w, h);
+          particles.forEach(p => {
+            p.x += p.dx; p.y += p.dy;
+            if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+            pCtx.fillStyle = `rgba(0, 242, 254, ${p.alpha})`;
+            pCtx.beginPath(); pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2); pCtx.fill();
+          });
+          requestAnimationFrame(animP);
+        }
+        animP();
+      }
+
+      // Black Hole Simulation Logic
+      const canvas = document.getElementById("bh-canvas");
+      const ctx = canvas.getContext("2d");
+
+      function resizeCanvas() {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      let M = 1.0;
+      let r = 12.0;
+      let phi = 0;
+      let vr = 0;
+      let vphi = 0.28 / 12.0;
+      let trajectory = [];
+      let status = "Orbiting";
+
+      function resetParticle() {
+        M = parseFloat(document.getElementById("bh-mass").value);
+        const r0 = parseFloat(document.getElementById("bh-r").value);
+        const v0 = parseFloat(document.getElementById("bh-v").value);
+        const angleDeg = parseFloat(document.getElementById("bh-angle").value);
+        const rad = (angleDeg * Math.PI) / 180;
+
+        r = r0;
+        phi = 0;
+        vr = v0 * Math.cos(rad);
+        vphi = (v0 * Math.sin(rad)) / r0;
+        trajectory = [{x: r * Math.cos(phi), y: r * Math.sin(phi)}];
+        status = "Orbiting";
+      }
+
+      document.getElementById("bh-mass").oninput = (e) => {
+        document.getElementById("bh-mass-val").innerText = e.target.value;
+        resetParticle();
+      };
+      document.getElementById("bh-r").oninput = (e) => {
+        document.getElementById("bh-r-val").innerText = e.target.value + " M";
+        resetParticle();
+      };
+      document.getElementById("bh-v").oninput = (e) => {
+        document.getElementById("bh-v-val").innerText = e.target.value;
+        resetParticle();
+      };
+      document.getElementById("bh-angle").oninput = (e) => {
+        document.getElementById("bh-angle-val").innerText = e.target.value + "°";
+        resetParticle();
+      };
+
+      document.getElementById("bh-launch").onclick = resetParticle;
+      document.getElementById("bh-reset").onclick = resetParticle;
+
+      // Click on canvas to launch particle from click position
+      canvas.addEventListener("click", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left - canvas.width / 2;
+        const clickY = e.clientY - rect.top - canvas.height / 2;
+        const scale = Math.min(canvas.width, canvas.height) / 32;
+
+        r = Math.sqrt(clickX * clickX + clickY * clickY) / scale;
+        phi = Math.atan2(clickY, clickX);
+        const v0 = parseFloat(document.getElementById("bh-v").value);
+        vr = -v0 * 0.5;
+        vphi = (v0 * 0.8) / Math.max(r, 1);
+        trajectory = [{x: r * Math.cos(phi), y: r * Math.sin(phi)}];
+        status = "Orbiting";
+      });
+
+      function getAcc(r, L) {
+        const r2 = r * r;
+        const r3 = r2 * r;
+        const r4 = r3 * r;
+        return -M / r2 + (L * L) / r3 - (3 * M * L * L) / r4;
+      }
+
+      function stepRK4(dt) {
+        if (r <= 2 * M) { status = "Captured"; return; }
+        if (r > 35) { status = "Escaped"; return; }
+
+        const L = r * r * vphi;
+        const k1_r = vr;
+        const k1_v = getAcc(r, L);
+
+        const r_k2 = r + 0.5 * dt * k1_r;
+        const k2_r = vr + 0.5 * dt * k1_v;
+        const k2_v = getAcc(r_k2, L);
+
+        const r_k3 = r + 0.5 * dt * k2_r;
+        const k3_r = vr + 0.5 * dt * k2_v;
+        const k3_v = getAcc(r_k3, L);
+
+        const r_k4 = r + dt * k3_r;
+        const k4_r = vr + dt * k3_v;
+        const k4_v = getAcc(r_k4, L);
+
+        r += (dt / 6) * (k1_r + 2 * k2_r + 2 * k3_r + k4_r);
+        vr += (dt / 6) * (k1_v + 2 * k2_v + 2 * k3_v + k4_v);
+        phi += (L / (r * r)) * dt;
+
+        trajectory.push({x: r * Math.cos(phi), y: r * Math.sin(phi)});
+        if (trajectory.length > 700) trajectory.shift();
+      }
+
+      function draw() {
+        ctx.fillStyle = "#020612";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const scale = Math.min(canvas.width, canvas.height) / 32;
+
+        // Grid lines
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 30) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 30) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // ISCO (r = 6M)
+        ctx.strokeStyle = "rgba(0, 242, 254, 0.25)";
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath(); ctx.arc(cx, cy, 6 * M * scale, 0, Math.PI * 2); ctx.stroke();
+
+        // Photon Sphere (r = 3M)
+        ctx.strokeStyle = "rgba(245, 158, 11, 0.4)";
+        ctx.beginPath(); ctx.arc(cx, cy, 3 * M * scale, 0, Math.PI * 2); ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Event Horizon (r = 2M)
+        ctx.fillStyle = "#000000";
+        ctx.strokeStyle = "#ef4444";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.arc(cx, cy, 2 * M * scale, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+        // Accretion Glow
+        const grad = ctx.createRadialGradient(cx, cy, 2 * M * scale, cx, cy, 4.5 * M * scale);
+        grad.addColorStop(0, "rgba(255, 100, 0, 0.5)");
+        grad.addColorStop(0.5, "rgba(0, 242, 254, 0.15)");
+        grad.addColorStop(1, "transparent");
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(cx, cy, 4.5 * M * scale, 0, Math.PI * 2); ctx.fill();
+
+        // Trajectory
+        if (trajectory.length > 1) {
+          ctx.beginPath();
+          ctx.strokeStyle = "#00f2fe";
+          ctx.lineWidth = 2;
+          ctx.moveTo(cx + trajectory[0].x * scale, cy + trajectory[0].y * scale);
+          for (let i = 1; i < trajectory.length; i++) {
+            ctx.lineTo(cx + trajectory[i].x * scale, cy + trajectory[i].y * scale);
+          }
+          ctx.stroke();
+        }
+
+        // Test Particle
+        if (status === "Orbiting") {
+          const px = cx + r * Math.cos(phi) * scale;
+          const py = cy + r * Math.sin(phi) * scale;
+          ctx.fillStyle = "#ffffff";
+          ctx.shadowColor = "#00f2fe";
+          ctx.shadowBlur = 12;
+          ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI * 2); ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function loop() {
+        for (let i = 0; i < 3; i++) stepRK4(0.04);
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      resetParticle();
+      loop();
+    });
+  </script>
+</body>
+</html>
