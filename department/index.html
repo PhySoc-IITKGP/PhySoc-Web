@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physics Department — IIT Kharagpur | PhySoc</title>
+  <meta name="description" content="Official faculty directory of the Department of Physics, IIT Kharagpur — Head of Department, Professors, Associate Professors, and Assistant Professors." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://physoc.iitkgp.ac.in/department/" />
+  <link rel="icon" href="../logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fira+Code&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <link rel="stylesheet" href="../shared.css" />
+  <style>
+    .fac-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .fac-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 24px;
+    }
+    .fac-search-bar input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text-bright);
+      font-size: 14px;
+      font-family: var(--font-body);
+    }
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+    .fac-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+    .fac-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: 0 8px 24px rgba(0, 242, 254, 0.15);
+    }
+    .fac-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .fac-img-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 242, 254, 0.4);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(167, 139, 250, 0.2));
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      font-size: 22px;
+    }
+    .fac-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .fac-name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin: 0 0 2px 0;
+      line-height: 1.3;
+    }
+    .fac-desig {
+      font-size: 12px;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .fac-research {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+      flex: 1;
+    }
+    .fac-email {
+      font-size: 11px;
+      font-family: var(--font-code);
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.15);
+      padding: 6px 10px;
+      border-radius: 6px;
+      word-break: break-all;
+    }
+    .tier-section-heading {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin: 28px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body class="dark-theme">
+  <canvas id="particle-canvas"></canvas>
+  <div id="physoc-header"></div>
+
+  <main class="page-main page-content" id="main-content">
+
+    <!-- HERO SECTION -->
+    <section class="card hero-card" style="margin-bottom:22px" aria-labelledby="dept-heading">
+      <span class="section-label"><i class="fa-solid fa-building-columns"></i> IIT Kharagpur</span>
+      <h1 id="dept-heading">Department of Physics</h1>
+      <p>Established in 1951, the Department of Physics at IIT Kharagpur has a distinguished history of pioneering research and academic excellence. From fundamental theoretical quantum mechanics to advanced nanodevices and cosmology.</p>
+    </section>
+
+    <!-- DEPARTMENT OVERVIEW -->
+    <section class="card" style="margin-bottom:24px">
+      <h3 style="font-family:var(--font-heading);font-size:18px;color:var(--text-bright);margin-bottom:12px"><i class="fa-solid fa-landmark" style="color:var(--cyan);margin-right:8px"></i> About the Department</h3>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:12px">
+        The Department hosts over 40 distinguished faculty members, 150+ research scholars, and state-of-the-art national research facilities. Departmental talks and seminars take place in the historic <strong>H.N. Bose Seminar Room</strong>.
+      </p>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin:0">
+        Main Department Location: <strong style="color:var(--text-bright)">Physics Building, IIT Kharagpur, WB 721302</strong>
+      </p>
+    </section>
+
+    <!-- FACULTY DIRECTORY BY DESIGNATION TIERS -->
+    <section class="card" style="margin-bottom:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+        <div>
+          <span class="section-label"><i class="fa-solid fa-users-gear"></i> Faculty Directory</span>
+          <h2 style="margin:4px 0 0 0;font-size:24px;color:var(--text-bright)">Physics Department Faculty</h2>
+        </div>
+        <span style="font-size:12px;color:var(--text-muted)" id="fac-count">Showing 42 Faculty Members</span>
+      </div>
+
+      <!-- DESIGNATION TIER TABS -->
+      <div class="fac-filter-bar">
+        <button class="filter-btn active" data-tier="all">All Faculty (42)</button>
+        <button class="filter-btn" data-tier="hod">Head of Department</button>
+        <button class="filter-btn" data-tier="prof">Professors</button>
+        <button class="filter-btn" data-tier="assoc">Associate Professors</button>
+        <button class="filter-btn" data-tier="asst">Assistant Professors</button>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="fac-search-bar">
+        <i class="fa-solid fa-magnifying-glass" style="color:var(--cyan)"></i>
+        <input type="text" id="fac-search" placeholder="Search professor by name, research area, or email…" />
+      </div>
+
+      <!-- CONTAINER FOR CATEGORIZED TIERS -->
+      <div id="faculty-tiers-container">
+        <!-- Tier Sections Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- RESEARCH FACILITIES -->
+    <section class="card">
+      <h2 style="font-family:var(--font-heading);font-size:22px;color:var(--text-bright);margin-bottom:16px"><i class="fa-solid fa-vial-virus" style="color:var(--cyan);margin-right:8px"></i> Department Research Laboratories</h2>
+      <div class="grid-3" style="gap:14px">
+        <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="font-family:var(--font-heading);color:var(--text-bright);font-size:14px;margin-bottom:6px">Advanced Condensed Matter (FIST)</h4>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;line-height:1.5">Cryogenic transport, high magnetic field measurements, and thin film heterostructures.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="font-family:var(--font-heading);color:var(--text-bright);font-size:14px;margin-bottom:6px">Energy Materials &amp; Storage Lab</h4>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;line-height:1.5">3D printing of energy devices, sodium-ion batteries, and supercapacitors.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="font-family:var(--font-heading);color:var(--text-bright);font-size:14px;margin-bottom:6px">Quantum Optics &amp; Laser Physics</h4>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;line-height:1.5">Ultrafast spectroscopy, microresonators, nonlinear photonics, and optical fiber sensors.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="font-family:var(--font-heading);color:var(--text-bright);font-size:14px;margin-bottom:6px">HPC Supercomputing &amp; Astrophysics</h4>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;line-height:1.5">Parallel HPC clusters for 21-cm cosmology, AdS/CFT simulations, and DFT modelling.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="font-family:var(--font-heading);color:var(--text-bright);font-size:14px;margin-bottom:6px">Nuclear Physics &amp; Radiation Lab</h4>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;line-height:1.5">Gamma-ray spectroscopy, double beta decay simulations, and nuclear detector systems.</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="font-family:var(--font-heading);color:var(--text-bright);font-size:14px;margin-bottom:6px">Spintronics &amp; Microscience Lab</h4>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;line-height:1.5">Magnetic skyrmions, spin vortices, and quantum transport in 2D heterostructures.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="physoc-footer"></div>
+  <script src="../components.js"></script>
+  <script src="../shared.js"></script>
+  <script>
+    (function() {
+      const FACULTY_LIST = [
+        { name: "Prof. Somnath Bharadwaj", tier: "hod", role: "Head of Department (HOD) & Professor", email: "hod@phy.iitkgp.ac.in", code: "ph-somnath", area: "Theoretical Astrophysics, Cosmology, 21-cm Signal from Epoch of Reionization, Large Scale Structure of Universe." },
+        { name: "Prof. Achintya Dhar", tier: "prof", role: "Professor", email: "ph-adhar@phy.iitkgp.ac.in", code: "ph-adhar", area: "Experimental Condensed Matter Physics, Semiconductor Thin Films, Solar Photovoltaics." },
+        { name: "Prof. Ajay Kumar Singh", tier: "prof", role: "Professor", email: "ph-singh@phy.iitkgp.ac.in", code: "ph-singh", area: "Quantum Information Theory, Quantum Optics, Quantum Cryptography & Entanglement." },
+        { name: "Prof. Amreesh Chandra", tier: "prof", role: "Professor", email: "achandra@phy.iitkgp.ac.in", code: "ph-achandra", area: "Energy Materials, Sodium-Ion Batteries, Supercapacitors, Multiferroics & Device Fabrication." },
+        { name: "Prof. Anushree Roy", tier: "prof", role: "Professor", email: "anushree@phy.iitkgp.ac.in", code: "ph-anushree", area: "Raman Scattering Spectroscopy, Nanomaterials, Phonon Dynamics & Optical Spectroscopy." },
+        { name: "Prof. Arghya Taraphder", tier: "prof", role: "Professor", email: "arghya@phy.iitkgp.ac.in", code: "ph-arghya", area: "Theoretical Condensed Matter Physics, Disordered Superconductors, Quantum Phase Transitions." },
+        { name: "Prof. Dipak Kumar Goswami", tier: "prof", role: "Professor", email: "dipak@phy.iitkgp.ac.in", code: "ph-dipak", area: "Organic Electronics, Bio-Photonics, Flexible Electronic Devices & Biosensors." },
+        { name: "Prof. Kamal Lochan Panigrahi", tier: "prof", role: "Professor", email: "panigrahi@phy.iitkgp.ac.in", code: "ph-panigrahi", area: "High Energy Physics, String Theory, Dualities & Non-perturbative Quantum Field Theory." },
+        { name: "Prof. Partha Roy Chaudhuri", tier: "prof", role: "Professor", email: "roycp@phy.iitkgp.ac.in", code: "ph-roycp", area: "Fiber & Integrated Optics, Photonics Metamaterials, Optical Waveguide Arrays & Sensors." },
+        { name: "Prof. Pragya Shukla", tier: "prof", role: "Professor", email: "shukla@phy.iitkgp.ac.in", code: "ph-shukla", area: "Quantum Chaos, Random Matrix Theory, Statistical Physics of Complex Systems." },
+        { name: "Prof. Prasanta Kumar Datta", tier: "prof", role: "Professor", email: "pkdatta@phy.iitkgp.ac.in", code: "ph-pkdatta", area: "Laser Physics, Ultrafast Optical Spectroscopy, Terahertz Photonics & Nonlinear Optics." },
+        { name: "Prof. Samit Kumar Ray", tier: "prof", role: "Professor & Former Director", email: "physkr@phy.iitkgp.ac.in", code: "ph-physkr", area: "Nanotechnology, Quantum Dot Photodetectors, Silicon Photonics & Semiconductor Nanostructures." },
+        { name: "Prof. Sayan Kar", tier: "prof", role: "Professor", email: "sayan@phy.iitkgp.ac.in", code: "ph-sayan", area: "General Relativity, Modified Gravity, Wormholes, Black Holes & Classical Gravitation." },
+        { name: "Prof. Sonjoy Majumder", tier: "prof", role: "Professor", email: "sonjoym@phy.iitkgp.ac.in", code: "ph-sonjoym", area: "Physics of Ultra-Cold Atoms, Bose-Einstein Condensation & Relativistic Atomic Structure." },
+        { name: "Prof. Sudhansu Sekhar Mandal", tier: "prof", role: "Professor", email: "sudhansu@phy.iitkgp.ac.in", code: "ph-sudhansu", area: "Fractional Quantum Hall Effect, Topological Order, Anyons & Quantum Matter." },
+        { name: "Prof. Sugata Pratik Khastgir", tier: "prof", role: "Professor", email: "pratik@phy.iitkgp.ac.in", code: "ph-pratik", area: "Mathematical Physics, Classical & Quantum Integrable Models & Field Theory." },
+        { name: "Prof. Tapan Kumar Nath", tier: "prof", role: "Professor", email: "tnath@phy.iitkgp.ac.in", code: "ph-tnath", area: "GMR & Spintronics Nanomaterials, Multiferroic & Magneto-caloric Functional Materials." },
+        { name: "Prof. Alpana Nayak", tier: "assoc", role: "Associate Professor", email: "ph-nayak@phy.iitkgp.ac.in", code: "ph-nayak", area: "Biophysical Chemistry, Soft Matter Physics, Molecular Self-assembly & Bio-interfaces." },
+        { name: "Prof. Amal Kumar Das", tier: "assoc", role: "Associate Professor", email: "ph-amal@phy.iitkgp.ac.in", code: "ph-amal", area: "Experimental Condensed Matter, Thin Film Magnetism, GMR & Spintronics." },
+        { name: "Prof. Debamalya Banerjee", tier: "assoc", role: "Associate Professor", email: "debamalya@phy.iitkgp.ac.in", code: "ph-debamalya", area: "Spintronics, Magnetic Vortices, Skyrmions & Electron Transport in 2D Heterostructures." },
+        { name: "Prof. Debraj Choudhury", tier: "assoc", role: "Associate Professor", email: "debraj@phy.iitkgp.ac.in", code: "ph-debraj", area: "Engineered Oxide & Semiconductor Heterostructures, Magneto-electric & Multiferroic Materials." },
+        { name: "Prof. Jyotirmoy Bhattacharya", tier: "assoc", role: "Associate Professor", email: "jyoti@phy.iitkgp.ac.in", code: "ph-jyoti", area: "String Theory, Quantum Gravity, Gravity-Fluid Duality & AdS/CFT Correspondence." },
+        { name: "Prof. Kartick Tarafder", tier: "assoc", role: "Associate Professor", email: "kartick@phy.iitkgp.ac.in", code: "ph-kartick", area: "Density Functional Theory (DFT), Computational Materials Science & Energy Harvesting." },
+        { name: "Prof. Maruthi Manoj Brundavanam", tier: "assoc", role: "Associate Professor", email: "bmmanoj@phy.iitkgp.ac.in", code: "ph-bmmanoj", area: "Applied Optics, Singular Optics, Geometric Phase Holograms & Optical Manipulation." },
+        { name: "Prof. Poornachandra Sekhar Burada", tier: "assoc", role: "Associate Professor", email: "psburada@phy.iitkgp.ac.in", code: "ph-psburada", area: "Non-equilibrium Statistical Mechanics, Stochastic Processes & Brownian Ratchets." },
+        { name: "Prof. Sajal Dhara", tier: "assoc", role: "Associate Professor", email: "sajaldhara@phy.iitkgp.ac.in", code: "ph-sajaldhara", area: "Nanoscale Optoelectronics, Quantum Transport in 2D Materials & Nanophotonics." },
+        { name: "Prof. Samudra Roy", tier: "assoc", role: "Associate Professor", email: "samudra.roy@phy.iitkgp.ac.in", code: "ph-samudra.roy", area: "Nonlinear Photonics, Supercontinuum Generation, Airy Pulses & Cavity Solitons." },
+        { name: "Prof. Sandipan Sengupta", tier: "assoc", role: "Associate Professor", email: "sandipan@phy.iitkgp.ac.in", code: "ph-sandipan", area: "General Relativity, Canonical Quantum Gravity, Torsion & Gauge Theories of Gravity." },
+        { name: "Prof. Sanjeev Kumar Srivastava", tier: "assoc", role: "Associate Professor", email: "sanjeev@phy.iitkgp.ac.in", code: "ph-sanjeev", area: "Electronic & Magnetic Materials, Swift Heavy Ion Irradiation & Thin Films." },
+        { name: "Prof. Shivakiran B N Bhaktha", tier: "assoc", role: "Associate Professor", email: "kiranbhaktha@phy.iitkgp.ac.in", code: "ph-kiranbhaktha", area: "Integrated Photonics, Glass & Glass-Ceramics, Random Lasers & Microresonators." },
+        { name: "Prof. Tirtha Sankar Ray", tier: "assoc", role: "Associate Professor", email: "tsray@phy.iitkgp.ac.in", code: "ph-tsray", area: "Theoretical High Energy Physics, Dark Matter, Higgs Physics & Collider Phenomenology." },
+        { name: "Prof. Amar Nath Gupta", tier: "asst", role: "Assistant Professor", email: "ang@phy.iitkgp.ac.in", code: "ph-ang", area: "Single-Molecule Force Spectroscopy, Protein Folding, Biological & Soft Matter Physics." },
+        { name: "Prof. Aniket Patra", tier: "asst", role: "Assistant Professor", email: "ph-aniket@phy.iitkgp.ac.in", code: "ph-patraaniket177", area: "Theoretical High Energy Physics, Quantum Field Theory & Particle Physics Phenomenology." },
+        { name: "Prof. Debmalya Chakraborty", tier: "asst", role: "Assistant Professor", email: "debmalya.c@phy.iitkgp.ac.in", code: "ph-debmalya.chakraborty", area: "Unconventional Superconductivity, Strongly Correlated Electron Systems & Quantum Spin Liquids." },
+        { name: "Prof. Pintu Patra", tier: "asst", role: "Assistant Professor", email: "pintupatra@phy.iitkgp.ac.in", code: "ph-pintupatra", area: "Low-Reynolds Number Hydrodynamics, Active Matter, Microrheology & Soft Condensed Matter." },
+        { name: "Prof. Raghunath Ghara", tier: "asst", role: "Assistant Professor", email: "rghara@phy.iitkgp.ac.in", code: "ph-rghara", area: "Astrophysics, 21-cm Cosmology, Cosmic Dawn & Epoch of Reionization Physics." },
+        { name: "Prof. Rickmoy Samanta", tier: "asst", role: "Assistant Professor", email: "rickmoysamanta@phy.iitkgp.ac.in", code: "ph-rickmoysamanta", area: "Theoretical Particle Physics, Beyond Standard Model Physics & Neutrino Physics." },
+        { name: "Prof. Saikat Das", tier: "asst", role: "Assistant Professor", email: "saikat@phy.iitkgp.ac.in", code: "ph-saikat", area: "Astroparticle Physics, High-Energy Gamma-Ray Astrophysics & Cosmic Ray Physics." },
+        { name: "Prof. Sitikantha Dhurjati Das", tier: "asst", role: "Assistant Professor", email: "sitikantha.das@phy.iitkgp.ac.in", code: "ph-sitikantha.das", area: "Experimental High Energy Physics, Heavy-Ion Collision Physics & Detector Instrumentation." },
+        { name: "Prof. Soumangsu Bhusan Chakraborty", tier: "asst", role: "Assistant Professor", email: "soumangsu@phy.iitkgp.ac.in", code: "ph-soumangsu", area: "Gravitational Waves, Numerical Relativity & Binary Black Hole Coalescence." },
+        { name: "Prof. Tamoghna Das", tier: "asst", role: "Assistant Professor", email: "tamoghna@phy.iitkgp.ac.in", code: "ph-tamoghna", area: "Soft Condensed Matter Physics, Polymer Physics, Glass Transition & Computer Simulations." },
+        { name: "Prof. Vishwanath Shukla", tier: "asst", role: "Assistant Professor", email: "vishwanath.shukla@phy.iitkgp.ac.in", code: "ph-vishwanath.shukla", area: "Quantum/Classical Turbulence, Gross-Pitaevskii Equation & Computational Fluid Dynamics." }
+      ];
+
+      const TIER_TITLES = {
+        hod: "👑 Head of Department (HOD)",
+        prof: "🎓 Professors",
+        assoc: "⚡ Associate Professors",
+        asst: "🔬 Assistant Professors"
+      };
+
+      const tiersContainer = document.getElementById('faculty-tiers-container');
+      const searchInput = document.getElementById('fac-search');
+      const filterBtns = document.querySelectorAll('.fac-filter-bar .filter-btn');
+      const countLabel = document.getElementById('fac-count');
+
+      let activeTierFilter = 'all';
+      let searchQ = '';
+
+      function renderTiers() {
+        const filtered = FACULTY_LIST.filter(fac => {
+          const matchTier = activeTierFilter === 'all' || fac.tier === activeTierFilter;
+          const matchQ = fac.name.toLowerCase().includes(searchQ) ||
+                         fac.area.toLowerCase().includes(searchQ) ||
+                         fac.role.toLowerCase().includes(searchQ) ||
+                         fac.email.toLowerCase().includes(searchQ);
+          return matchTier && matchQ;
+        });
+
+        countLabel.innerText = `Showing ${filtered.length} Faculty Members`;
+        tiersContainer.innerHTML = '';
+
+        if (filtered.length === 0) {
+          tiersContainer.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;font-size:14px">No faculty members found matching your search.</p>';
+          return;
+        }
+
+        // Group filtered members by tier
+        const groups = { hod: [], prof: [], assoc: [], asst: [] };
+        filtered.forEach(f => {
+          if (groups[f.tier]) groups[f.tier].push(f);
+        });
+
+        Object.keys(groups).forEach(tKey => {
+          const members = groups[tKey];
+          if (members.length === 0) return;
+
+          const section = document.createElement('div');
+          section.style.marginBottom = '32px';
+
+          const heading = document.createElement('h3');
+          heading.className = 'tier-section-heading';
+          heading.innerHTML = `${TIER_TITLES[tKey]} <span style="font-size:13px;font-weight:400;color:var(--text-muted)">(${members.length})</span>`;
+          section.appendChild(heading);
+
+          const grid = document.createElement('div');
+          grid.className = 'faculty-grid';
+
+          members.forEach(fac => {
+            const card = document.createElement('div');
+            card.className = 'fac-card';
+            const imgUrl = `https://www.iitkgp.ac.in/assets/images/faculty/${fac.code}.jpg`;
+
+            card.innerHTML = `
+              <div class="fac-header">
+                <div class="fac-img-wrap">
+                  <img src="${imgUrl}" alt="${fac.name}" onerror="this.onerror=null; this.src='https://www.iitkgp.ac.in/files/faculty_profile/${fac.code}.jpg'; this.onerror=function(){ this.style.display='none'; this.nextElementSibling.style.display='flex'; };" />
+                  <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:20px;color:var(--cyan);font-family:var(--font-heading);font-weight:700">
+                    ${fac.name.replace('Prof. ', '').split(' ').map(n=>n[0]).slice(0,2).join('')}
+                  </div>
+                </div>
+                <div>
+                  <h3 class="fac-name">${fac.name}</h3>
+                  <span class="fac-desig">${fac.role}</span>
+                </div>
+              </div>
+              <p class="fac-research"><strong>Research Areas:</strong> ${fac.area}</p>
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:auto">
+                <div class="fac-email"><i class="fa-regular fa-envelope"></i> ${fac.email}</div>
+                <a href="https://www.iitkgp.ac.in/department/PH/faculty/${fac.code}" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:4px 10px;font-size:11px;border-radius:6px"><i class="fa-solid fa-arrow-up-right-from-square"></i> IIT Profile</a>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+
+          section.appendChild(grid);
+          tiersContainer.appendChild(section);
+        });
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeTierFilter = btn.dataset.tier;
+          renderTiers();
+        });
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        searchQ = e.target.value.toLowerCase().trim();
+        renderTiers();
+      });
+
+      renderTiers();
+    })();
+  </script>
+</body>
+</html>

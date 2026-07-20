@@ -31,6 +31,7 @@
       <div class="filter-bar" style="margin-bottom:22px;border-bottom:1px solid var(--border);padding-bottom:0;border-radius:0;background:none" role="tablist">
         <button class="filter-btn res-tab active" data-target="books" role="tab" aria-selected="true">📚 Textbooks</button>
         <button class="filter-btn res-tab" data-target="courses" role="tab" aria-selected="false">📖 Course Notes</button>
+        <button class="filter-btn res-tab" data-target="internships" role="tab" aria-selected="false">💼 Internships &amp; Research</button>
         <button class="filter-btn res-tab" data-target="urop" role="tab" aria-selected="false">🔬 UROP Guide</button>
       </div>
 
@@ -63,6 +64,15 @@
               <!-- Courses will be dynamically loaded here -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- INTERNSHIPS & RESEARCH PANE -->
+      <div class="res-pane" id="pane-internships" role="tabpanel">
+        <h3 style="font-family:var(--font-heading);margin-bottom:14px">Internships &amp; Research Fellowships</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.7">Curated summer research fellowships, national lab internships, and industrial opportunities for Physics students.</p>
+        <div class="grid-2" id="internships-container">
+          <!-- Internships dynamically loaded here -->
         </div>
       </div>
 

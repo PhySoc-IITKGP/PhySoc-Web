@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Physics Sandbox — PhySoc | IIT Kharagpur</title>
-  <meta name="description" content="Interactive physics simulations — orbital mechanics, double pendulum, and more." />
+  <meta name="description" content="Interactive physics simulations — Bohr-De Broglie atomic orbits, Schwarzschild black holes, orbital mechanics, and double pendulums." />
   <link rel="canonical" href="https://physoc.iitkgp.ac.in/sandbox/" />
   <link rel="icon" href="../logo.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,52 +20,70 @@
 
   <main class="page-main page-content" id="main-content">
 
-    <section class="card hero-card" style="min-height:310px;background-image:linear-gradient(135deg,rgba(3,10,26,0.95),rgba(6,14,40,0.92)),url('../anim_orbital_planet.png');background-size:cover;background-position:center;margin-bottom:22px" aria-labelledby="sandbox-heading">
-      <span class="section-label"><i class="fa-solid fa-atom"></i> Physics Sandbox</span>
+    <section class="card hero-card" style="min-height:280px;background-image:linear-gradient(135deg,rgba(3,10,26,0.95),rgba(6,14,40,0.92)),url('../anim_orbital_planet.png');background-size:cover;background-position:center;margin-bottom:22px" aria-labelledby="sandbox-heading">
+      <span class="section-label"><i class="fa-solid fa-atom fa-spin-pulse" style="color:#00f2fe"></i> Advanced Physics Sandbox</span>
       <h1 id="sandbox-heading">Interactive Physics<br>Simulations</h1>
-      <p>Explore the laws of physics through real-time, interactive simulations built by PhySoc members. From orbital mechanics to chaotic pendulums — experience physics in motion.</p>
+      <p>Explore fundamental laws of nature through high-precision, real-time numerical simulations — De Broglie Standing Atomic Waves, General Relativity, Orbital Physics, and Chaos.</p>
       <div class="hero-actions">
-        <a href="orbit/" class="btn btn-primary"><i class="fa-solid fa-circle-dot"></i> Orbit Simulator</a>
-        <a href="double-pendulum/" class="btn btn-secondary"><i class="fa-solid fa-rotate"></i> Double Pendulum</a>
+        <a href="bohr-atom/" class="btn btn-primary"><i class="fa-solid fa-atom"></i> De Broglie Atomic Model</a>
+        <a href="black-hole/" class="btn btn-secondary"><i class="fa-solid fa-circle-dot"></i> Black Hole GR</a>
       </div>
     </section>
 
-    <div style="border-radius:14px;overflow:hidden;margin-bottom:22px;border:1px solid var(--border);height:200px;position:relative">
-      <img src="../anim_orbital_planet.png" alt="Glowing planet tracing an elliptical orbit" style="width:100%;height:100%;object-fit:cover" />
-      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(3,10,26,0.85),transparent,rgba(3,10,26,0.85));display:flex;align-items:center;justify-content:center">
-        <div style="text-align:center;padding:0 20px">
-          <p style="font-family:var(--font-heading);font-size:clamp(13px,2vw,18px);color:var(--gold);letter-spacing:1px;font-weight:700;margin-bottom:4px">Kepler's Laws in Real-Time</p>
-          <p style="font-size:12px;color:var(--text-muted)">Equal areas swept in equal times — Newton's gravitational law in action</p>
-        </div>
-      </div>
-    </div>
-
     <section aria-labelledby="sims-heading">
-      <h2 id="sims-heading" style="font-family:var(--font-heading);font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--text-bright);margin-bottom:18px">Available Simulations</h2>
-      <div class="sandbox-grid">
+      <h2 id="sims-heading" style="font-family:var(--font-heading);font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--text-bright);margin-bottom:18px">Featured Professional Simulations</h2>
+      
+      <div class="sandbox-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+        <!-- 1. BOHR DE BROGLIE ATOMIC MODEL -->
+        <article class="game-card">
+          <div class="game-preview" style="background:radial-gradient(circle at center,#051630,#020612);display:flex;align-items:center;justify-content:center">
+            <i class="fa-solid fa-atom fa-spin-pulse" style="font-size:54px;color:#ffe259;filter:drop-shadow(0 0 18px rgba(255,226,89,0.7))"></i>
+          </div>
+          <div class="game-body">
+            <h3>⚛️ De Broglie Atomic Standing Wave</h3>
+            <p>Visualizing Bohr's quantization condition <em>mvr = nℏ</em> (2πr = nλ). Demonstrates constructive standing electron waves along circular orbits vs non-integer destructive collapse.</p>
+            <a href="bohr-atom/" class="btn btn-primary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulation</a>
+          </div>
+        </article>
+
+        <!-- 2. BLACK HOLE SIMULATOR -->
+        <article class="game-card">
+          <div class="game-preview" style="background:radial-gradient(circle at center,#000000,#04091a);display:flex;align-items:center;justify-content:center">
+            <i class="fa-solid fa-circle-dot" style="font-size:54px;color:#00f2fe;filter:drop-shadow(0 0 16px rgba(0,242,254,0.6))"></i>
+          </div>
+          <div class="game-body">
+            <h3>🕳️ Schwarzschild Black Hole GR</h3>
+            <p>General Relativity simulation solving 2nd-order geodesic differential equations around a black hole with RK4 integration. Displays Event Horizon (2M), Photon Sphere (3M), ISCO (6M), and perihelion precession.</p>
+            <a href="black-hole/" class="btn btn-primary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulation</a>
+          </div>
+        </article>
+
+        <!-- 3. ORBITAL MECHANICS -->
         <article class="game-card">
           <div class="game-preview"><canvas id="mini-orbit"></canvas></div>
           <div class="game-body">
             <h3>🪐 Orbital Mechanics</h3>
-            <p>Simulate Keplerian orbits with adjustable velocity, mass ratio, and eccentricity. Watch elliptical, parabolic, and hyperbolic trajectories in real time. Features gravitational binding energy and apoapsis/periapsis markers.</p>
-            <a href="orbit/" class="btn btn-primary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulator</a>
+            <p>Simulate Keplerian orbits with adjustable velocity, mass ratio, and eccentricity. Watch elliptical, parabolic, and hyperbolic trajectories in real time with energy conservation markers.</p>
+            <a href="orbit/" class="btn btn-primary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulation</a>
           </div>
         </article>
+
+        <!-- 4. CHAOTIC DOUBLE PENDULUM -->
         <article class="game-card">
           <div class="game-preview" style="background:linear-gradient(135deg,#030210,#070118)"><canvas id="mini-pendulum"></canvas></div>
           <div class="game-body">
             <h3>🌀 Chaotic Double Pendulum</h3>
-            <p>Experience chaos theory first-hand. Two pendulums with slightly different initial conditions diverge exponentially — a demonstration of sensitive dependence. Lagrangian EOM solved in real time with RK4 integration.</p>
-            <a href="double-pendulum/" class="btn btn-secondary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulator</a>
+            <p>Experience chaos theory first-hand. Two pendulums with slightly different initial conditions diverge exponentially — Lagrangian EOM solved in real time with RK4 integration.</p>
+            <a href="double-pendulum/" class="btn btn-primary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulation</a>
           </div>
         </article>
       </div>
     </section>
 
     <div class="card" style="margin-top:22px;text-align:center;border-style:dashed">
-      <div style="font-size:32px;margin-bottom:12px">🔭</div>
-      <h3 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:8px">More Simulations Coming Soon</h3>
-      <p style="font-size:13px;color:var(--text-muted);max-width:450px;margin:0 auto 18px;line-height:1.7">Our members are building quantum harmonic oscillators, wave interference patterns, and the three-body problem.</p>
+      <div style="font-size:32px;margin-bottom:12px">🔬</div>
+      <h3 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:8px">Built by IIT KGP Physics Students</h3>
+      <p style="font-size:13px;color:var(--text-muted);max-width:480px;margin:0 auto 18px;line-height:1.7">Have an interactive physics code or simulation idea in WebGL/Canvas? Submit your project to the PhySoc team.</p>
       <a href="../contact/" class="btn btn-ghost"><i class="fa-solid fa-code"></i> Contribute a Simulation</a>
     </div>
 

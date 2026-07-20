@@ -172,6 +172,7 @@
         <div class="sidebar-section">Content</div>
         <a class="sidebar-link" data-page="announcements"><i class="fa-solid fa-bullhorn" style="width:16px"></i> Announcements</a>
         <a class="sidebar-link" data-page="resources"><i class="fa-solid fa-book-open-reader" style="width:16px"></i> Resources</a>
+        <a class="sidebar-link" data-page="internships"><i class="fa-solid fa-briefcase" style="width:16px"></i> Internships</a>
         <a class="sidebar-link" data-page="submissions"><i class="fa-solid fa-inbox" style="width:16px"></i> Contact Inbox</a>
         <a class="sidebar-link" data-page="puzzles"><i class="fa-solid fa-puzzle-piece" style="width:16px"></i> Weekly Puzzles</a>
         <div class="sidebar-section">Database</div>
@@ -257,6 +258,26 @@
                 </select>
               </div>
             </div>
+            <div class="form-row" style="display:flex;gap:14px;margin-bottom:14px">
+              <div class="form-group" style="flex:1;margin-bottom:0">
+                <label for="res-code">Course Code (e.g. PH11001)</label>
+                <input type="text" id="res-code" placeholder="e.g. PH11001 or PH20003" />
+              </div>
+              <div class="form-group" style="width:180px;margin-bottom:0">
+                <label for="res-sem">Semester</label>
+                <select id="res-sem" style="background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;width:100%;outline:none">
+                  <option value="All">All Semesters</option>
+                  <option value="Sem 1">Autumn (Sem 1)</option>
+                  <option value="Sem 2">Spring (Sem 2)</option>
+                  <option value="Sem 3">Autumn (Sem 3)</option>
+                  <option value="Sem 4">Spring (Sem 4)</option>
+                  <option value="Sem 5">Autumn (Sem 5)</option>
+                  <option value="Sem 6">Spring (Sem 6)</option>
+                  <option value="Sem 7">Autumn (Sem 7)</option>
+                  <option value="Sem 8">Spring (Sem 8)</option>
+                </select>
+              </div>
+            </div>
             <div class="form-group" style="margin-bottom:14px">
               <label for="res-link">PDF / Link URL <span style="color:var(--danger)">*</span></label>
               <input type="url" id="res-link" placeholder="https://..." />
@@ -271,6 +292,53 @@
           <h3 style="font-family:var(--font-heading);margin-bottom:14px">Published Resources</h3>
           <div id="res-list">
             <p style="font-size:13px;color:var(--text-muted)">No resources yet. Add one above.</p>
+          </div>
+        </div>
+
+        <!-- ── INTERNSHIPS ── -->
+        <div class="admin-page" id="page-internships">
+          <h2 style="font-family:var(--font-heading);margin-bottom:22px">💼 Manage Internships &amp; Research Opportunities</h2>
+
+          <div class="ann-form">
+            <h4 style="font-family:var(--font-heading);margin-bottom:18px">Publish New Opportunity</h4>
+            <div class="form-row" style="display:flex;gap:14px;margin-bottom:14px">
+              <div class="form-group" style="flex:2;margin-bottom:0">
+                <label for="intern-title">Program Title <span style="color:var(--danger)">*</span></label>
+                <input type="text" id="intern-title" placeholder="e.g. IAS-SRFP Summer Research Fellowship 2026" />
+              </div>
+              <div class="form-group" style="flex:1;margin-bottom:0">
+                <label for="intern-org">Organization / Institute <span style="color:var(--danger)">*</span></label>
+                <input type="text" id="intern-org" placeholder="e.g. Indian Academy of Sciences / TIFR" />
+              </div>
+            </div>
+            <div class="form-row" style="display:flex;gap:14px;margin-bottom:14px">
+              <div class="form-group" style="flex:1;margin-bottom:0">
+                <label for="intern-stipend">Stipend / Support</label>
+                <input type="text" id="intern-stipend" placeholder="e.g. ₹12,500/month + Travel" />
+              </div>
+              <div class="form-group" style="flex:1;margin-bottom:0">
+                <label for="intern-elig">Eligibility</label>
+                <input type="text" id="intern-elig" placeholder="e.g. 2nd &amp; 3rd Year BSc / Integrated MSc" />
+              </div>
+              <div class="form-group" style="width:160px;margin-bottom:0">
+                <label for="intern-deadline">Deadline</label>
+                <input type="date" id="intern-deadline" style="background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;width:100%;outline:none" />
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:14px">
+              <label for="intern-link">Application URL <span style="color:var(--danger)">*</span></label>
+              <input type="url" id="intern-link" placeholder="https://..." />
+            </div>
+            <div class="form-group" style="margin-bottom:18px">
+              <label for="intern-desc">Description &amp; Details</label>
+              <textarea id="intern-desc" rows="3" placeholder="Brief summary of research areas, submission guidelines..." style="resize:vertical"></textarea>
+            </div>
+            <button class="btn btn-primary" id="publish-intern-btn"><i class="fa-solid fa-plus"></i> Post Opportunity</button>
+          </div>
+
+          <h3 style="font-family:var(--font-heading);margin-bottom:14px">Posted Opportunities</h3>
+          <div id="intern-list">
+            <p style="font-size:13px;color:var(--text-muted)">No opportunities posted yet. Add one above.</p>
           </div>
         </div>
 
@@ -443,6 +511,7 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     renderAnns();
     renderRes();
     renderDashSubs();
+    if (typeof renderInterns === 'function') renderInterns();
     if (typeof renderPuzzles === 'function') renderPuzzles();
   }
 
@@ -583,6 +652,8 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     const link  = $('#res-link').value.trim();
     const desc  = $('#res-desc').value.trim();
     const cat   = $('#res-cat').value;
+    const code  = $('#res-code')?.value.trim();
+    const sem   = $('#res-sem')?.value;
     
     let ok = true;
     if (!title) { $('#res-title').style.borderColor = 'var(--danger)'; ok = false; } else { $('#res-title').style.borderColor = ''; }
@@ -590,13 +661,78 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     if (!ok) return;
 
     const res = getRes();
-    res.push({ title, link_url: link, description: desc, category: cat });
+    res.push({ title, link_url: link, description: desc, category: cat, code, sem });
     setRes(res);
     
     $('#res-title').value = '';
     $('#res-link').value  = '';
     $('#res-desc').value  = '';
+    if ($('#res-code')) $('#res-code').value = '';
     anime({ targets: '#publish-res-btn', scale: [1, 0.95, 1], duration: 200 });
+  });
+
+  // ── INTERNSHIPS ──────────────────────────────────────────────
+  const INTERN_KEY = 'physoc_internships';
+  const getInterns = () => JSON.parse(localStorage.getItem(INTERN_KEY) || '[]');
+  const setInterns = (arr) => { localStorage.setItem(INTERN_KEY, JSON.stringify(arr)); renderInterns(); };
+
+  function renderInterns() {
+    const list = getInterns();
+    const el = $('#intern-list');
+    if (!el) return;
+    if (!list.length) { el.innerHTML = '<p style="font-size:13px;color:var(--text-muted)">No opportunities posted yet. Add one above.</p>'; return; }
+    el.innerHTML = list.slice().reverse().map((item, i) => `
+      <div class="ann-list-item">
+        <div class="ann-meta">
+          <div class="ann-title">${item.title}</div>
+          <div style="margin-bottom:4px">
+            <span class="tag tag-research" style="font-size:10px;padding:2px 8px">${item.org || 'Research'}</span>
+            ${item.deadline ? `<span style="font-size:11px;color:#ef4444;margin-left:8px">Deadline: ${item.deadline}</span>` : ''}
+          </div>
+          <div class="ann-body">${item.desc || ''} &middot; <a href="${item.link_url}" target="_blank" style="color:var(--cyan)">Link</a></div>
+        </div>
+        <button class="del-btn" onclick="deleteIntern(${list.length - 1 - i})">Delete</button>
+      </div>`).join('');
+  }
+
+  window.deleteIntern = function(idx) {
+    if (!confirm('Delete this internship opportunity?')) return;
+    const list = getInterns();
+    list.splice(idx, 1);
+    setInterns(list);
+  };
+
+  $('#publish-intern-btn')?.addEventListener('click', () => {
+    const title    = $('#intern-title').value.trim();
+    const org      = $('#intern-org').value.trim();
+    const link     = $('#intern-link').value.trim();
+    const stipend  = $('#intern-stipend').value.trim();
+    const elig     = $('#intern-elig').value.trim();
+    const deadline = $('#intern-deadline').value;
+    const desc     = $('#intern-desc').value.trim();
+
+    let ok = true;
+    if (!title) { $('#intern-title').style.borderColor = 'var(--danger)'; ok = false; } else { $('#intern-title').style.borderColor = ''; }
+    if (!org)   { $('#intern-org').style.borderColor = 'var(--danger)'; ok = false; } else { $('#intern-org').style.borderColor = ''; }
+    if (!link)  { $('#intern-link').style.borderColor = 'var(--danger)'; ok = false; } else { $('#intern-link').style.borderColor = ''; }
+    if (!ok) return;
+
+    const list = getInterns();
+    list.push({ 
+      title, org, link_url: link, stipend, eligibility: elig, 
+      deadline: deadline ? new Date(deadline).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : null, 
+      desc 
+    });
+    setInterns(list);
+
+    $('#intern-title').value = '';
+    $('#intern-org').value = '';
+    $('#intern-link').value = '';
+    $('#intern-stipend').value = '';
+    $('#intern-elig').value = '';
+    $('#intern-deadline').value = '';
+    $('#intern-desc').value = '';
+    anime({ targets: '#publish-intern-btn', scale: [1, 0.95, 1], duration: 200 });
   });
 
   // ── PUZZLES ──────────────────────────────────────────────────

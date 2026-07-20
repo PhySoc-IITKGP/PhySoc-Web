@@ -9,6 +9,8 @@
 
   /* --------------------------------------------------
      BASE PATH DETECTION
+     Reads the href of the shared.css link so this file
+     works at any folder depth without configuration.
   -------------------------------------------------- */
   const cssLink = document.querySelector('link[href*="shared.css"]');
   const base = cssLink
@@ -21,6 +23,7 @@
   const NAV = [
     { href: '',            icon: 'fa-house-chimney',    label: 'Home' },
     { href: 'about/',      icon: 'fa-circle-info',      label: 'About' },
+    { href: 'department/', icon: 'fa-building-columns', label: 'Department' },
     { href: 'announcements/', icon: 'fa-bullhorn',      label: 'Announcements' },
     { href: 'resources/',  icon: 'fa-book-open-reader', label: 'Resources' },
     { href: 'officers/',   icon: 'fa-user-group',       label: 'Team' },
@@ -89,6 +92,10 @@
         <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
           <i class="fa-solid fa-moon moon-icon"></i>
           <i class="fa-solid fa-sun sun-icon"></i>
+        </button>
+        <a href="#" class="btn btn-primary whatsapp-auth-btn" style="padding:7px 12px;font-size:12px;display:flex;align-items:center;gap:6px" aria-label="Join Us">
+          <i class="fa-brands fa-whatsapp" style="font-size:14px"></i> <span style="font-weight:600">Join Us</span>
+        </a>
         <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>

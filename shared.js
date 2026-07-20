@@ -525,27 +525,11 @@ function initAnnouncements() {
   const searchEl = $('#ann-search');
   if (!container) return;
 
-  // Merge admin-published announcements from localStorage (most recent first)
+  // Load admin-published announcements from localStorage
   const adminAnns = JSON.parse(localStorage.getItem('physoc_announcements') || '[]');
-  const adminFormatted = adminAnns.map(a => ({
-    title: a.title, date: a.date, tag: a.category, desc: a.body || ''
+  const DATA = adminAnns.map(a => ({
+    title: a.title, date: a.event_date || a.date, tag: a.category, desc: a.body || ''
   }));
-
-  const DATA = [
-    ...adminFormatted,
-    {
-      title: '2nd Year Executive Selections — July 25, 2026',
-      date: 'July 18, 2026',
-      tag: 'events',
-      desc: 'Selections for 2nd year student executives will be held on July 25, 2026 in the Physics Department Seminar Room. Interested students should prepare a brief Statement of Purpose.'
-    },
-    {
-      title: 'PhySoc Official Website Launch',
-      date: 'July 18, 2026',
-      tag: 'events',
-      desc: 'Welcome to the official digital home of Physics Society, IIT Kharagpur! Explore our events, resources, and meet the team.'
-    }
-  ];
 
   let activeFilter = 'all';
   let searchQ = '';
@@ -558,7 +542,7 @@ function initAnnouncements() {
     });
 
     container.innerHTML = list.length === 0
-      ? '<p style="color:var(--text-muted);padding:30px;text-align:center;font-size:14px">No announcements found.</p>'
+      ? '<p style="color:var(--text-muted);padding:30px;text-align:center;font-size:14px">No announcements posted yet. Check back soon!</p>'
       : '';
 
     list.forEach(item => {
@@ -617,15 +601,30 @@ function initResTabs() {
 }
 
 /* -------------------------------------------------------
-   DYNAMIC RESOURCES FROM ADMIN
+   DYNAMIC RESOURCES & INTERNSHIPS FROM ADMIN
    ------------------------------------------------------- */
 function initDynamicResources() {
   const booksContainer = $('#books-container');
   const coursesContainer = $('#courses-tbody');
-  if (!booksContainer && !coursesContainer) return;
+  const internshipsContainer = $('#internships-container');
 
+  // Load Custom Admin Resources
   const res = JSON.parse(localStorage.getItem('physoc_resources') || '[]');
   
+  if (booksContainer && booksContainer.children.length === 0) {
+    const books = res.filter(r => r.category === 'books');
+    if (books.length === 0) {
+      booksContainer.innerHTML = '<p style="color:var(--text-muted);font-size:13px;grid-column:1/-1;padding:15px;text-align:center">No textbooks uploaded yet. Admin can publish resources anytime.</p>';
+    }
+  }
+
+  if (coursesContainer && coursesContainer.children.length === 0) {
+    const courses = res.filter(r => r.category === 'courses');
+    if (courses.length === 0) {
+      coursesContainer.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted);font-size:13px;padding:20px;text-align:center">No course notes uploaded yet.</td></tr>';
+    }
+  }
+
   res.forEach(r => {
     if (r.category === 'books' && booksContainer) {
       const div = document.createElement('div');
@@ -637,7 +636,8 @@ function initDynamicResources() {
           <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${r.description || ''}</p>
           <div style="display:flex;gap:8px">
             <a href="${r.link_url}" target="_blank" class="btn btn-primary" style="padding:6px 10px;font-size:11px"><i class="fa-solid fa-link"></i> Open</a>
-            <span class="tag tag-academic">Admin Added</span>
+            ${r.code ? `<span class="tag tag-events" style="font-size:11px">${r.code}</span>` : ''}
+            ${r.sem ? `<span class="tag tag-academic" style="font-size:11px">${r.sem}</span>` : ''}
           </div>
         </div>`;
       booksContainer.prepend(div);
@@ -646,13 +646,48 @@ function initDynamicResources() {
       const tr = document.createElement('tr');
       tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
       tr.innerHTML = `
-        <td style="padding:12px 16px;color:var(--text-bright)">${r.title}</td>
-        <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px">—</td>
-        <td style="padding:12px 16px">${r.description || '—'}</td>
+        <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">${r.title}</td>
+        <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${r.code || '—'}</td>
+        <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${r.sem || 'All Semesters'}</span></td>
         <td style="padding:12px 16px"><a href="${r.link_url}" target="_blank" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> Download</a></td>`;
       coursesContainer.prepend(tr);
     }
   });
+
+  // Render Internships & Research Fellowships from Admin
+  if (internshipsContainer) {
+    const customInternships = JSON.parse(localStorage.getItem('physoc_internships') || '[]');
+
+    if (customInternships.length === 0) {
+      internshipsContainer.innerHTML = '<p style="color:var(--text-muted);font-size:13px;grid-column:1/-1;padding:20px;text-align:center">No internships posted yet. New opportunities will appear here once published by officers.</p>';
+    } else {
+      internshipsContainer.innerHTML = '';
+      customInternships.forEach(item => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px';
+        card.innerHTML = `
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+            <div>
+              <span class="tag tag-research" style="margin-bottom:6px;display:inline-block">Fellowship / Project</span>
+              <h4 style="font-family:var(--font-heading);font-size:16px;color:var(--text-bright);margin-bottom:4px;line-height:1.3">${item.title}</h4>
+              <span style="font-size:12px;color:var(--cyan);font-weight:500"><i class="fa-solid fa-building-columns"></i> ${item.org}</span>
+            </div>
+            ${item.deadline ? `<span class="badge" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.25);padding:3px 8px;font-size:10px;border-radius:6px;white-space:nowrap">Deadline: ${item.deadline}</span>` : ''}
+          </div>
+          <p style="font-size:12px;color:var(--text-muted);line-height:1.6;margin:0">${item.desc || ''}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)">
+            <div><strong>Stipend:</strong> ${item.stipend || 'Specified upon selection'}</div>
+            <div><strong>Eligibility:</strong> ${item.eligibility || 'Physics Undergraduates'}</div>
+          </div>
+          <div style="margin-top:4px">
+            <a href="${item.link_url}" target="_blank" class="btn btn-primary" style="padding:7px 14px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
+              <i class="fa-solid fa-paper-plane"></i> Apply / Learn More
+            </a>
+          </div>`;
+        internshipsContainer.appendChild(card);
+      });
+    }
+  }
 }
 
 /* -------------------------------------------------------
@@ -883,41 +918,362 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact();
   initSandboxPreviews();
   initSmoothScrolling();
-  initCursor();
+  initWhatsappAuth();
 });
+
+/* -------------------------------------------------------
+   WHATSAPP ACCESS IDENTITY VERIFICATION & NETWORK AUTH
+   ------------------------------------------------------- */
+function initWhatsappAuth() {
+  const modal = document.getElementById("whatsapp-modal");
+  if (!modal) return;
+
+  const stepDetecting = document.getElementById("wa-step-detecting");
+  const stepSuccess = document.getElementById("wa-step-success");
+  const stepManual = document.getElementById("wa-step-manual");
+  const networkNameLabel = document.getElementById("wa-network-name");
+  const progressBar = document.getElementById("wa-progress-bar");
+  
+  const authForm = document.getElementById("whatsapp-auth-form");
+  const instSelect = document.getElementById("wa-institute");
+  const rollInput = document.getElementById("wa-roll");
+  const emailInput = document.getElementById("wa-email");
+  const rollError = document.getElementById("wa-roll-error");
+  const emailError = document.getElementById("wa-email-error");
+
+  const WHATSAPP_URL = "https://wa.me/919887078617?text=Hi%20Neeraj%2C%20I%27m%20very%20interested%20to%20join%20PhySoc.%20I%20got%20your%20number%20from%20the%20website.";
+
+  // Recognized Department Codes per Institute
+  const KGP_DEPTS = ["AE","AG","AR","AT","BT","CD","CE","CH","CL","CS","CY","EC","EE","ET","EX","GG","HS","IE","IM","IP","IT","MA","ME","MF","MI","MN","MT","NA","NT","OE","PH","QD","RE","RT","RX","TS","WM"];
+  const MADRAS_DEPTS = ["AE","AM","BT","CH","CE","CS","CY","ED","EE","HS","MA","ME","MM","OE","PH"];
+  const DELHI_DEPTS = ["AM","BB","CE","CH","CS","CY","EE","ES","HS","MA","ME","MS","PH","TT","TX","MT"];
+
+  const schemas = {
+    kgp: {
+      name: "IIT Kharagpur",
+      rollPlaceholder: "e.g. 24PH10029",
+      emailPlaceholder: "e.g. rollnumber@kgpian.iitkgp.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim().toUpperCase();
+        if (!/^\d{2}[A-Z]{2}\d{5}$/.test(roll)) {
+          return "Format must be 2-digit year + 2-letter Dept + 5-digit Roll (e.g. 24PH10029)";
+        }
+        const yr = parseInt(roll.substring(0, 2), 10);
+        if (yr < 14 || yr > 26) {
+          return `Entry year '${yr}' is invalid. Must be between 14 (2014) and 26 (2026).`;
+        }
+        const dept = roll.substring(2, 4);
+        if (!KGP_DEPTS.includes(dept)) {
+          return `'${dept}' is not a valid department code at IIT Kharagpur.`;
+        }
+        return null;
+      },
+      emailCheck: (email, roll) => {
+        if (!email.endsWith("@kgpian.iitkgp.ac.in") && !email.endsWith("@iitkgp.ac.in")) {
+          return "Email must end with @kgpian.iitkgp.ac.in or @iitkgp.ac.in";
+        }
+        const prefix = email.split("@")[0].toUpperCase();
+        if (prefix.length === 9 && /^\d{2}[A-Z]{2}\d{5}$/.test(prefix) && prefix !== roll.toUpperCase()) {
+          return `Email prefix '${prefix}' does not match entered Roll Number '${roll}'.`;
+        }
+        return null;
+      }
+    },
+    bombay: {
+      name: "IIT Bombay",
+      rollPlaceholder: "e.g. 240050012",
+      emailPlaceholder: "e.g. rollnumber@iitb.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim().toUpperCase();
+        if (!/^\d{9,10}$/.test(roll) && !/^\d{2}[A-Z0-9]{2}\d{5,6}$/.test(roll)) {
+          return "Must be a 9 or 10-character code starting with year (e.g. 240050012)";
+        }
+        const yr = parseInt(roll.substring(0, 2), 10);
+        if (yr < 14 || yr > 26) {
+          return `Entry year '${yr}' is invalid. Must be between 14 (2014) and 26 (2026).`;
+        }
+        return null;
+      },
+      emailCheck: (email) => email.endsWith("@iitb.ac.in") ? null : "Email must end with @iitb.ac.in"
+    },
+    kanpur: {
+      name: "IIT Kanpur",
+      rollPlaceholder: "e.g. 240123",
+      emailPlaceholder: "e.g. username@iitk.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim();
+        if (!/^\d{6,8}$/.test(roll)) {
+          return "IIT Kanpur roll number must be 6 or 8 digits (e.g. 240123)";
+        }
+        const yr = parseInt(roll.substring(0, 2), 10);
+        if (yr < 14 || yr > 26) {
+          return `Entry year '${yr}' is invalid. Must be between 14 (2014) and 26 (2026).`;
+        }
+        return null;
+      },
+      emailCheck: (email) => email.endsWith("@iitk.ac.in") ? null : "Email must end with @iitk.ac.in"
+    },
+    madras: {
+      name: "IIT Madras",
+      rollPlaceholder: "e.g. EE19D016",
+      emailPlaceholder: "e.g. rollnumber@smail.iitm.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim().toUpperCase();
+        const match = roll.match(/^([A-Z]{2})(\d{2})([BDMSP])(\d{3})$/);
+        if (!match) {
+          return "Must be in format: Dept + Year + Program + Serial (e.g. EE19D016)";
+        }
+        const dept = match[1];
+        const yr = parseInt(match[2], 10);
+        if (!MADRAS_DEPTS.includes(dept)) {
+          return `'${dept}' is not a valid department code at IIT Madras.`;
+        }
+        if (yr < 14 || yr > 26) {
+          return `Entry year '${yr}' is invalid. Must be between 14 (2014) and 26 (2026).`;
+        }
+        return null;
+      },
+      emailCheck: (email) => (email.endsWith("@smail.iitm.ac.in") || email.endsWith("@iitm.ac.in")) ? null : "Email must end with @smail.iitm.ac.in or @iitm.ac.in"
+    },
+    delhi: {
+      name: "IIT Delhi",
+      rollPlaceholder: "e.g. 2024PH10123",
+      emailPlaceholder: "e.g. username@iitd.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim().toUpperCase();
+        let yr, dept;
+        if (/^\d{4}[A-Z]{2}\d{5}$/.test(roll)) {
+          yr = parseInt(roll.substring(0, 4), 10);
+          dept = roll.substring(4, 6);
+        } else if (/^\d{2}[A-Z]{2}\d{5}$/.test(roll)) {
+          yr = 2000 + parseInt(roll.substring(0, 2), 10);
+          dept = roll.substring(2, 4);
+        } else {
+          return "Must be 9 or 11 characters starting with entry year (e.g. 2024PH10123)";
+        }
+        if (yr < 2014 || yr > 2026) {
+          return `Entry year '${yr}' is invalid. Must be between 2014 and 2026.`;
+        }
+        if (!DELHI_DEPTS.includes(dept)) {
+          return `'${dept}' is not a valid department code at IIT Delhi.`;
+        }
+        return null;
+      },
+      emailCheck: (email) => (email.endsWith("@iitd.ac.in") || (email.includes("@") && email.split("@")[1].endsWith("iitd.ac.in"))) ? null : "Email must end with @iitd.ac.in"
+    },
+    roorkee: {
+      name: "IIT Roorkee",
+      rollPlaceholder: "e.g. 24112023",
+      emailPlaceholder: "e.g. username@iitr.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim();
+        if (!/^\d{8}$/.test(roll)) {
+          return "IIT Roorkee enrollment number must be 8 digits (e.g. 24112023)";
+        }
+        const yr = parseInt(roll.substring(0, 2), 10);
+        if (yr < 14 || yr > 26) {
+          return `Entry year '${yr}' is invalid. Must be between 14 (2014) and 26 (2026).`;
+        }
+        return null;
+      },
+      emailCheck: (email) => email.endsWith("@iitr.ac.in") ? null : "Email must end with @iitr.ac.in"
+    },
+    guwahati: {
+      name: "IIT Guwahati",
+      rollPlaceholder: "e.g. 240101012",
+      emailPlaceholder: "e.g. username@iitg.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim();
+        if (!/^\d{9}$/.test(roll)) {
+          return "IIT Guwahati roll number must be 9 digits (e.g. 240101012)";
+        }
+        const yr = parseInt(roll.substring(0, 2), 10);
+        if (yr < 14 || yr > 26) {
+          return `Entry year '${yr}' is invalid. Must be between 14 (2014) and 26 (2026).`;
+        }
+        return null;
+      },
+      emailCheck: (email) => email.endsWith("@iitg.ac.in") ? null : "Email must end with @iitg.ac.in"
+    },
+    shibpur: {
+      name: "IIEST Shibpur",
+      rollPlaceholder: "e.g. 2024PHB012",
+      emailPlaceholder: "e.g. username@iiests.ac.in",
+      validateRoll: (roll) => {
+        roll = roll.trim().toUpperCase();
+        if (!/^[A-Z0-9]{9,10}$/.test(roll)) {
+          return "IIEST Shibpur roll number must be 9 or 10 characters (e.g. 2024PHB012)";
+        }
+        let yr = parseInt(roll.substring(0, 2), 10);
+        if (roll.length === 10 && !isNaN(parseInt(roll.substring(0, 4), 10))) {
+          yr = parseInt(roll.substring(0, 4), 10) - 2000;
+        }
+        if (yr < 14 || yr > 26) {
+          return `Entry year is invalid. Must be between 2014 and 2026.`;
+        }
+        return null;
+      },
+      emailCheck: (email) => email.endsWith("@iiests.ac.in") ? null : "Email must end with @iiests.ac.in"
+    }
+  };
+
+  function updatePlaceholder() {
+    if (!instSelect) return;
+    const inst = instSelect.value;
+    const schema = schemas[inst];
+    if (schema) {
+      if (rollInput) {
+        rollInput.placeholder = schema.rollPlaceholder;
+        rollInput.classList.remove("invalid");
+      }
+      if (emailInput) {
+        emailInput.placeholder = schema.emailPlaceholder;
+        emailInput.classList.remove("invalid");
+      }
+      if (rollError) rollError.style.display = "none";
+      if (emailError) emailError.style.display = "none";
+    }
+  }
+
+  if (instSelect) {
+    instSelect.addEventListener("change", updatePlaceholder);
+    updatePlaceholder();
+  }
+
+  function showStep(step) {
+    if (stepDetecting) stepDetecting.style.display = step === "detecting" ? "flex" : "none";
+    if (stepSuccess) stepSuccess.style.display = step === "success" ? "flex" : "none";
+    if (stepManual) stepManual.style.display = step === "manual" ? "block" : "none";
+  }
+
+  window.openWhatsappModal = function() {
+    modal.classList.add("active");
+    showStep("detecting");
+    
+    if (rollInput) rollInput.value = "";
+    if (emailInput) emailInput.value = "";
+    if (rollInput) rollInput.classList.remove("invalid");
+    if (emailInput) emailInput.classList.remove("invalid");
+    if (rollError) rollError.style.display = "none";
+    if (emailError) emailError.style.display = "none";
+    if (progressBar) progressBar.style.width = "0%";
+
+    setTimeout(async () => {
+      const detectedInst = await checkCampusNetwork();
+      if (detectedInst) {
+        if (networkNameLabel) networkNameLabel.innerText = `Access Granted via ${detectedInst}`;
+        showStep("success");
+        setTimeout(() => {
+          if (progressBar) progressBar.style.width = "100%";
+        }, 50);
+        
+        setTimeout(() => {
+          window.open(WHATSAPP_URL, "_blank");
+          closeWhatsappModal();
+        }, 1600);
+      } else {
+        showStep("manual");
+      }
+    }, 1200);
+  };
+
+  window.closeWhatsappModal = function() {
+    modal.classList.remove("active");
+  };
+
+  async function checkCampusNetwork() {
+    try {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 3500);
+
+      const response = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+      clearTimeout(id);
+      
+      if (!response.ok) return null;
+      const data = await response.json();
+      
+      const org = (data.org || '').toLowerCase();
+      const isp = (data.isp || '').toLowerCase();
+      
+      if (org.includes('kharagpur') || isp.includes('kharagpur') || org.includes('iit kgp') || isp.includes('iit kgp')) return "IIT Kharagpur WiFi";
+      if (org.includes('bombay') || isp.includes('bombay') || org.includes('iitb') || isp.includes('iitb')) return "IIT Bombay WiFi";
+      if (org.includes('kanpur') || isp.includes('kanpur') || org.includes('iitk') || isp.includes('iitk')) return "IIT Kanpur WiFi";
+      if (org.includes('madras') || isp.includes('madras') || org.includes('iitm') || isp.includes('iitm')) return "IIT Madras WiFi";
+      if (org.includes('delhi') || isp.includes('delhi') || org.includes('iitd') || isp.includes('iitd')) return "IIT Delhi WiFi";
+      if (org.includes('roorkee') || isp.includes('roorkee') || org.includes('iitr') || isp.includes('iitr')) return "IIT Roorkee WiFi";
+      if (org.includes('guwahati') || isp.includes('guwahati') || org.includes('iitg') || isp.includes('iitg')) return "IIT Guwahati WiFi";
+      if (org.includes('shibpur') || isp.includes('shibpur') || org.includes('iiest') || isp.includes('iiest')) return "IIEST Shibpur WiFi";
+      if (org.includes('national knowledge network') || isp.includes('national knowledge network') || org.includes('nkn') || isp.includes('nkn') || org.includes('ernet') || isp.includes('ernet')) return "NKN (Campus Network)";
+      
+      return null;
+    } catch (err) {
+      console.warn("Campus network check fallback to manual validation.", err);
+      return null;
+    }
+  }
+
+  // Document event delegation for all WhatsApp triggers across the site
+  document.addEventListener("click", (e) => {
+    const target = e.target.closest(".whatsapp-auth-btn, #whatsapp-chair-btn, a[href*='wa.me'], a[data-obfuscated-wa]");
+    if (target) {
+      e.preventDefault();
+      openWhatsappModal();
+    }
+  });
+
+  // Handle Form Submission Validation
+  if (authForm) {
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      const inst = instSelect.value;
+      const schema = schemas[inst];
+      if (!schema) return;
+
+      const rollVal = rollInput ? rollInput.value.trim() : "";
+      const emailVal = emailInput ? emailInput.value.trim() : "";
+
+      if (rollInput) rollInput.classList.remove("invalid");
+      if (emailInput) emailInput.classList.remove("invalid");
+      if (rollError) rollError.style.display = "none";
+      if (emailError) emailError.style.display = "none";
+
+      // 1. Strict Roll Number Validation
+      const rollErrReason = schema.validateRoll(rollVal);
+      if (rollErrReason) {
+        if (rollInput) rollInput.classList.add("invalid");
+        if (rollError) {
+          rollError.innerText = rollErrReason;
+          rollError.style.display = "block";
+        }
+        return;
+      }
+
+      // 2. Strict Email Validation & Roll-Email Alignment Check
+      const emailErrReason = schema.emailCheck(emailVal, rollVal);
+      if (emailErrReason) {
+        if (emailInput) emailInput.classList.add("invalid");
+        if (emailError) {
+          emailError.innerText = emailErrReason;
+          emailError.style.display = "block";
+        }
+        return;
+      }
+
+      // Successful Verification
+      window.open(WHATSAPP_URL, "_blank");
+      closeWhatsappModal();
+    });
+  }
+}
 
 
 function initSmoothScrolling() {
-  if (typeof Lenis === 'undefined' || typeof gsap === 'undefined') return;
-
-  const lenis = new Lenis({
-    duration: 1.8,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    wheelMultiplier: 1.2
-  });
-
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-  gsap.ticker.lagSmoothing(0);
-
+  document.documentElement.style.scrollBehavior = 'smooth';
   const parallaxBg = document.getElementById('parallax-bg');
   if (parallaxBg) {
-    gsap.to(parallaxBg, {
-      yPercent: -15,
-      ease: "none",
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true
-      }
-    });
-    setTimeout(() => { parallaxBg.style.opacity = '0.65'; }, 500);
+    parallaxBg.style.willChange = 'transform';
+    parallaxBg.style.opacity = '0.65';
   }
 }
 

@@ -1503,11 +1503,12 @@ function initWhatsappAuth() {
         return;
       }
 
-      // 2. Strict Email Validation
-      if (!schema.emailCheck(emailVal)) {
+      // 2. Strict Email Validation & Roll-Email Alignment Check
+      const emailErrReason = schema.emailCheck(emailVal, rollVal);
+      if (emailErrReason) {
         if (emailInput) emailInput.classList.add("invalid");
         if (emailError) {
-          emailError.innerText = schema.emailErrorMsg;
+          emailError.innerText = emailErrReason;
           emailError.style.display = "block";
         }
         return;
