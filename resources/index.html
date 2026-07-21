@@ -4,9 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resources — PhySoc | IIT Kharagpur</title>
-  <meta name="description" content="Physics resources for IIT Kharagpur students — textbooks, lecture notes, roadmaps, and UROP guides." />
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Physics study resources for IIT Kharagpur students — textbooks, quantum physics notes, research roadmaps, and internship guides." />
+  <meta name="keywords" content="Physics Resources, IIT Kharagpur Physics Notes, Physics Textbooks, UROP Guides, PhySoc Study Materials" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="publisher" content="Physics Society, Department of Physics, IIT Kharagpur" />
   <link rel="canonical" href="https://physoc.iitkgp.ac.in/resources/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://physoc.iitkgp.ac.in/resources/" />
+  <meta property="og:title" content="Resources — PhySoc | IIT Kharagpur" />
+  <meta property="og:description" content="Physics resources for IIT Kharagpur students — textbooks, lecture notes, roadmaps, and UROP guides." />
+  <meta property="og:image" content="https://physoc.iitkgp.ac.in/logo.svg" />
+  <meta property="og:site_name" content="Physics Society (PhySoc) — IIT Kharagpur" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://physoc.iitkgp.ac.in/resources/" />
+  <meta name="twitter:title" content="Resources — PhySoc | IIT Kharagpur" />
+  <meta name="twitter:description" content="Physics resources for IIT Kharagpur students — textbooks, lecture notes, roadmaps, and UROP guides." />
+  <meta name="twitter:image" content="https://physoc.iitkgp.ac.in/logo.svg" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://physoc.iitkgp.ac.in/#organization",
+        "name": "Physics Society (PhySoc), IIT Kharagpur",
+        "url": "https://physoc.iitkgp.ac.in/",
+        "logo": "https://physoc.iitkgp.ac.in/logo.svg"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://physoc.iitkgp.ac.in/resources/#webpage",
+        "url": "https://physoc.iitkgp.ac.in/resources/",
+        "name": "Resources — PhySoc | IIT Kharagpur",
+        "description": "Physics resources for IIT Kharagpur students — textbooks, lecture notes, roadmaps, and UROP guides.",
+        "isPartOf": { "@id": "https://physoc.iitkgp.ac.in/#organization" }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="../logo.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,16 +66,15 @@
     <section class="card hero-card" style="margin-bottom:22px" aria-labelledby="res-heading">
       <span class="section-label"><i class="fa-solid fa-book-open-reader"></i> Resource Library</span>
       <h1 id="res-heading">Study Materials &amp; Guides</h1>
-      <p>Curated resources by Physics studetns for IIT KGP students. From standard textbooks to UROP roadmaps, everything you need to navigate your physics degree.</p>
+      <p>Curated resources by Physics students for IIT KGP students. From standard textbooks to UROP roadmaps, everything you need to navigate your physics degree.</p>
     </section>
 
     <div class="card" aria-label="Resources browser" style="margin-top: 40px;">
       <div class="filter-bar" style="margin-bottom:22px;border-bottom:1px solid var(--border);padding-bottom:0;border-radius:0;background:none" role="tablist">
-        <button class="filter-btn res-tab active" data-target="books" role="tab" aria-selected="true">📚 Textbooks</button>
-        <button class="filter-btn res-tab" data-target="courses" role="tab" aria-selected="false">📖 Course Notes</button>
-        <button class="filter-btn res-tab" data-target="internships" role="tab" aria-selected="false">💼 Internships &amp; Research</button>
-        <button class="filter-btn res-tab" data-target="urop" role="tab" aria-selected="false">🔬 UROP Guide</button>
-        <button class="filter-btn res-tab" data-target="internships" role="tab" aria-selected="false">💼 Internships</button>
+        <button class="filter-btn res-tab active" data-target="books" role="tab" aria-selected="true"><i class="fa-solid fa-book"></i> Textbooks</button>
+        <button class="filter-btn res-tab" data-target="courses" role="tab" aria-selected="false"><i class="fa-solid fa-book-open"></i> Course Notes</button>
+        <button class="filter-btn res-tab" data-target="internships" role="tab" aria-selected="false"><i class="fa-solid fa-briefcase"></i> Internships &amp; Research</button>
+        <button class="filter-btn res-tab" data-target="urop" role="tab" aria-selected="false"><i class="fa-solid fa-microscope"></i> UROP Guide</button>
       </div>
 
       <!-- TEXTBOOKS PANE -->
@@ -142,6 +183,8 @@ Roll Number: [Roll No]</pre>
 
   <div id="physoc-footer"></div>
   <script src="../components.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../supabase-config.js"></script>
   <script src="../shared.js"></script>
 </body>
 </html>

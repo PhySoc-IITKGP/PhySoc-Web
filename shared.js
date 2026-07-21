@@ -605,87 +605,171 @@ function initResTabs() {
 function initDynamicResources() {
   const booksContainer = $('#books-container');
   const coursesContainer = $('#courses-tbody');
-  const internshipsContainer = $('#internships-container');
+  const internshipsContainer = $('#internships-tbody');
 
-  // Load Custom Admin Resources
-  const res = JSON.parse(localStorage.getItem('physoc_resources') || '[]');
-  
-  if (booksContainer && booksContainer.children.length === 0) {
-    const books = res.filter(r => r.category === 'books');
-    if (books.length === 0) {
-      booksContainer.innerHTML = '<p style="color:var(--text-muted);font-size:13px;grid-column:1/-1;padding:15px;text-align:center">No textbooks uploaded yet. Admin can publish resources anytime.</p>';
+  // Standard Default Textbooks with Direct PDF Links
+  const defaultBooks = [
+    { 
+      title: "Introduction to Electrodynamics", 
+      code: "PH31205 / PH21209", 
+      sem: "Sem 3 / Sem 5", 
+      desc: "David J. Griffiths — Essential reference for Classical Electromagnetism and Vector Calculus.", 
+      link_url: "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf" 
+    },
+    { 
+      title: "Quantum Mechanics: Concepts & Applications", 
+      code: "PH31201 / PH21212", 
+      sem: "Sem 4 / Sem 5", 
+      desc: "Nouredine Zettili — Comprehensive guide to wave mechanics, state operators, and perturbation theory.", 
+      link_url: "https://bibliotecatrevijano.files.wordpress.com/2017/10/zettili.pdf" 
+    },
+    { 
+      title: "Classical Mechanics", 
+      code: "PH31207 / PH21205", 
+      sem: "Sem 3 / Sem 5", 
+      desc: "Herbert Goldstein, Charles P. Poole, John L. Safko — Gold standard text for Lagrangian dynamics and Hamiltonian mechanics.", 
+      link_url: "https://www.math.toronto.edu/khesin/biblio/GoldsteinPooleSafkoClassicalMechanics.pdf" 
+    },
+    { 
+      title: "Solid State Physics", 
+      code: "PH30204", 
+      sem: "Sem 6", 
+      desc: "Neil W. Ashcroft & N. David Mermin — Definitive guide on crystal lattices, band theory, and condensed matter physics.", 
+      link_url: "https://kaf70.mephi.ru/content/public/uploads/files/pdf/Ashcroft_Mermin_eng.pdf" 
     }
-  }
+  ];
 
-  if (coursesContainer && coursesContainer.children.length === 0) {
-    const courses = res.filter(r => r.category === 'courses');
-    if (courses.length === 0) {
-      coursesContainer.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted);font-size:13px;padding:20px;text-align:center">No course notes uploaded yet.</td></tr>';
-    }
-  }
+  // Full IIT Kharagpur Physics (B.S. 4Y) Official Curriculum
+  const defaultCourses = [
+    // Semester 1
+    { title: "PHYSICS OF WAVES", code: "PH11003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "ADVANCED CALCULUS", code: "MA11003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "BASIC ELECTRONICS", code: "EC21201", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "PROGRAMMING AND DATA STRUCTURES", code: "CS10003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "PHYSICS LABORATORY", code: "PH19003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
+    // Semester 2
+    { title: "INTERACTIVE PHYSICS LABORATORY", code: "PH19004", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "LINEAR ALGEBRA, NUMERICAL & COMPLEX ANALYSIS", code: "MA11004", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "CHEMISTRY", code: "CY11003", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "ELECTRICAL TECHNOLOGY", code: "EE11003", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "BASIC ENGINEERING MECHANICS", code: "ME11003", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
+    // Semester 3
+    { title: "CLASSICAL DYNAMICS AND SPECIAL RELATIVITY", code: "PH21205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "ELECTROMAGNETISM", code: "PH21209", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "MATHEMATICS FOR PHYSICS - I", code: "PH20206", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "PROBABILITY AND STATISTICS", code: "MA20205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "ELECTROMAGNETISM LAB", code: "PH29207", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "GENERAL PROPERTIES OF MATTER LAB", code: "PH29205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
+    // Semester 4
+    { title: "QUANTUM PHYSICS", code: "PH21212", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "THERMAL PHYSICS", code: "PH21210", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "OPTICS", code: "PH21214", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "THE ESSENTIALS OF MACHINE LEARNING", code: "AI20001", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "THERMAL PHYSICS LAB", code: "PH29208", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "OPTICS LAB", code: "PH29212", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
+    // Semester 5
+    { title: "CLASSICAL MECHANICS", code: "PH31207", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "ELECTRODYNAMICS", code: "PH31205", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "QUANTUM MECHANICS", code: "PH31201", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "MATHEMATICS FOR PHYSICS II", code: "PH30207", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "COMPUTATIONAL PHYSICS", code: "PH30201", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "COMPUTATIONAL PHYSICS LAB", code: "PH39209", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "MODERN PHYSICS LAB", code: "PH39201", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
+    // Semester 6
+    { title: "STATISTICAL PHYSICS", code: "PH31202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "CONDENSED MATTER PHYSICS", code: "PH30204", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "ATOMIC AND MOLECULAR PHYSICS", code: "PH30202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "NUCLEAR PHYSICS", code: "PH30210", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "NUCLEAR PHYSICS LAB", code: "PH39204", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "CONDENSED MATTER PHYSICS LAB", code: "PH39202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    { title: "SPECTROSCOPY LAB", code: "PH39214", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
+    // Semester 7
+    { title: "SUMMER INTERNSHIP", code: "PH48201", sem: "Sem 7", link_url: "https://www.iitkgp.ac.in/" }
+  ];
 
-  res.forEach(r => {
-    if (r.category === 'books' && booksContainer) {
-      const div = document.createElement('div');
-      div.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;gap:16px';
-      div.innerHTML = `
-        <div style="font-size:32px;flex-shrink:0;opacity:0.8">📑</div>
-        <div>
-          <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:4px;font-size:15px">${r.title}</h4>
-          <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${r.description || ''}</p>
-          <div style="display:flex;gap:8px">
-            <a href="${r.link_url}" target="_blank" class="btn btn-primary" style="padding:6px 10px;font-size:11px"><i class="fa-solid fa-link"></i> Open</a>
-            ${r.code ? `<span class="tag tag-events" style="font-size:11px">${r.code}</span>` : ''}
-            ${r.sem ? `<span class="tag tag-academic" style="font-size:11px">${r.sem}</span>` : ''}
-          </div>
-        </div>`;
-      booksContainer.prepend(div);
-    } 
-    else if (r.category === 'courses' && coursesContainer) {
-      const tr = document.createElement('tr');
-      tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
-      tr.innerHTML = `
-        <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">${r.title}</td>
-        <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${r.code || '—'}</td>
-        <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${r.sem || 'All Semesters'}</span></td>
-        <td style="padding:12px 16px"><a href="${r.link_url}" target="_blank" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> Download</a></td>`;
-      coursesContainer.prepend(tr);
-    }
-  });
+  // Standard Default Internships / Fellowships
+  const defaultInternships = [
+    { org: "CERN", opp: "Summer Student Programme", elig: "3rd & 4th Year Physics B.Sc / B.Tech", date: "Jan 31 (Annual)" },
+    { org: "TIFR Mumbai", opp: "Visiting Students Research Program (VSRP)", elig: "2nd & 3rd Year Physics Students", date: "Feb 15 (Annual)" },
+    { org: "Raman Research Institute", opp: "Visiting Student Fellowships (VSSP)", elig: "Undergraduate / Integrated M.Sc", date: "Mar 10 (Annual)" },
+    { org: "IISc Bengaluru", opp: "Physics Department Summer Research Program", elig: "Pre-final & Final Year Students", date: "Feb 28 (Annual)" }
+  ];
+  // Render Base Resources
+  const renderResources = (cloudResources = [], cloudInternships = []) => {
+    const res = [...cloudResources, ...JSON.parse(localStorage.getItem('physoc_resources') || '[]')];
 
-  // Render Internships & Research Fellowships from Admin
-  if (internshipsContainer) {
-    const customInternships = JSON.parse(localStorage.getItem('physoc_internships') || '[]');
-
-    if (customInternships.length === 0) {
-      internshipsContainer.innerHTML = '<p style="color:var(--text-muted);font-size:13px;grid-column:1/-1;padding:20px;text-align:center">No internships posted yet. New opportunities will appear here once published by officers.</p>';
-    } else {
-      internshipsContainer.innerHTML = '';
-      customInternships.forEach(item => {
-        const card = document.createElement('div');
-        card.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px';
-        card.innerHTML = `
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
-            <div>
-              <span class="tag tag-research" style="margin-bottom:6px;display:inline-block">Fellowship / Project</span>
-              <h4 style="font-family:var(--font-heading);font-size:16px;color:var(--text-bright);margin-bottom:4px;line-height:1.3">${item.title}</h4>
-              <span style="font-size:12px;color:var(--cyan);font-weight:500"><i class="fa-solid fa-building-columns"></i> ${item.org}</span>
+    if (booksContainer) {
+      const books = res.filter(r => r.category === 'books');
+      const displayBooks = [...books, ...defaultBooks];
+      booksContainer.innerHTML = '';
+      displayBooks.forEach(r => {
+        const div = document.createElement('div');
+        div.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;gap:16px';
+        div.innerHTML = `
+          <div style="font-size:24px;flex-shrink:0;color:var(--cyan)"><i class="fa-solid fa-file-pdf"></i></div>
+          <div>
+            <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:4px;font-size:15px">${r.title}</h4>
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${r.description || r.desc || ''}</p>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <a href="${r.link_url || '#'}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:6px 10px;font-size:11px"><i class="fa-solid fa-file-pdf"></i> Read PDF / Download</a>
+              ${r.code ? `<span class="tag tag-events" style="font-size:11px">${r.code}</span>` : ''}
+              ${r.sem ? `<span class="tag tag-academic" style="font-size:11px">${r.sem}</span>` : ''}
             </div>
-            ${item.deadline ? `<span class="badge" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.25);padding:3px 8px;font-size:10px;border-radius:6px;white-space:nowrap">Deadline: ${item.deadline}</span>` : ''}
-          </div>
-          <p style="font-size:12px;color:var(--text-muted);line-height:1.6;margin:0">${item.desc || ''}</p>
-          <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)">
-            <div><strong>Stipend:</strong> ${item.stipend || 'Specified upon selection'}</div>
-            <div><strong>Eligibility:</strong> ${item.eligibility || 'Physics Undergraduates'}</div>
-          </div>
-          <div style="margin-top:4px">
-            <a href="${item.link_url}" target="_blank" class="btn btn-primary" style="padding:7px 14px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-              <i class="fa-solid fa-paper-plane"></i> Apply / Learn More
-            </a>
           </div>`;
-        internshipsContainer.appendChild(card);
+        booksContainer.appendChild(div);
       });
     }
+
+    if (coursesContainer) {
+      const courses = res.filter(r => r.category === 'courses');
+      const displayCourses = [...courses, ...defaultCourses];
+      coursesContainer.innerHTML = '';
+      displayCourses.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        tr.innerHTML = `
+          <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">${r.title}</td>
+          <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${r.code || '—'}</td>
+          <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${r.sem || 'All Semesters'}</span></td>
+          <td style="padding:12px 16px"><a href="${r.link_url || '#'}" target="_blank" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> View Notes</a></td>`;
+        coursesContainer.appendChild(tr);
+      });
+    }
+
+    if (internshipsContainer) {
+      const customInternships = [...cloudInternships, ...JSON.parse(localStorage.getItem('physoc_internships') || '[]')];
+      const displayInternships = [...customInternships, ...defaultInternships];
+      internshipsContainer.innerHTML = '';
+      displayInternships.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        tr.innerHTML = `
+          <td style="padding:12px 16px;color:var(--text-bright);font-weight:600"><i class="fa-solid fa-building-columns" style="color:var(--cyan);margin-right:6px"></i> ${item.org}</td>
+          <td style="padding:12px 16px;color:var(--text);font-weight:500">${item.opp || item.title || 'Research Internship'}</td>
+          <td style="padding:12px 16px;color:var(--text-muted);font-size:12px">${item.elig || item.eligibility || 'Physics Undergraduates'}</td>
+          <td style="padding:12px 16px"><span class="tag tag-research" style="font-size:11px">${item.date || item.deadline || 'Open'}</span></td>`;
+        internshipsContainer.appendChild(tr);
+      });
+    }
+  };
+
+  // Render initial local + defaults first
+  renderResources();
+
+  // Query Supabase for cloud entries added by senior / admin
+  if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+    Promise.all([
+      supabaseClient.from('physoc-resources').select('*').order('created_at', { ascending: false }),
+      supabaseClient.from('physoc-internships').select('*').order('created_at', { ascending: false })
+    ]).then(([resData, intData]) => {
+      const cloudRes = resData && resData.data ? resData.data : [];
+      const cloudInt = intData && intData.data ? intData.data : [];
+      if (cloudRes.length > 0 || cloudInt.length > 0) {
+        renderResources(cloudRes, cloudInt);
+      }
+    }).catch(err => {
+      console.warn("Supabase fetch notice:", err);
+    });
   }
 }
 

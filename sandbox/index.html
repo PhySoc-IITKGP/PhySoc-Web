@@ -4,8 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Physics Sandbox — PhySoc | IIT Kharagpur</title>
-  <meta name="description" content="Interactive physics simulations — Bohr-De Broglie atomic orbits, Schwarzschild black holes, orbital mechanics, and double pendulums." />
+  <meta name="description" content="Interactive physics simulations — Bohr atomic orbits, Schwarzschild black hole raytracing, orbital dynamics, double pendulums, and wave collapse." />
+  <meta name="keywords" content="Physics Simulations, Quantum Mechanics Visualizer, Black Hole Simulation, Double Pendulum Chaos, PhySoc Sandbox, Interactive Physics" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="publisher" content="Physics Society, Department of Physics, IIT Kharagpur" />
   <link rel="canonical" href="https://physoc.iitkgp.ac.in/sandbox/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://physoc.iitkgp.ac.in/sandbox/" />
+  <meta property="og:title" content="Physics Sandbox — PhySoc | IIT Kharagpur" />
+  <meta property="og:description" content="Interactive physics simulations — Bohr-De Broglie atomic orbits, Schwarzschild black holes, orbital mechanics, and double pendulums." />
+  <meta property="og:image" content="https://physoc.iitkgp.ac.in/logo.svg" />
+  <meta property="og:site_name" content="Physics Society (PhySoc) — IIT Kharagpur" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://physoc.iitkgp.ac.in/sandbox/" />
+  <meta name="twitter:title" content="Physics Sandbox — PhySoc | IIT Kharagpur" />
+  <meta name="twitter:description" content="Interactive physics simulations — Bohr-De Broglie atomic orbits, Schwarzschild black holes, orbital mechanics, and double pendulums." />
+  <meta name="twitter:image" content="https://physoc.iitkgp.ac.in/logo.svg" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://physoc.iitkgp.ac.in/#organization",
+        "name": "Physics Society (PhySoc), IIT Kharagpur",
+        "url": "https://physoc.iitkgp.ac.in/",
+        "logo": "https://physoc.iitkgp.ac.in/logo.svg"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://physoc.iitkgp.ac.in/sandbox/#webpage",
+        "url": "https://physoc.iitkgp.ac.in/sandbox/",
+        "name": "Physics Sandbox — PhySoc | IIT Kharagpur",
+        "description": "Interactive physics simulations — Bohr-De Broglie atomic orbits, Schwarzschild black holes, orbital mechanics, and double pendulums.",
+        "isPartOf": { "@id": "https://physoc.iitkgp.ac.in/#organization" }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="../logo.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -72,7 +115,7 @@
         <article class="game-card">
           <div class="game-preview" style="background:linear-gradient(135deg,#030210,#070118)"><canvas id="mini-pendulum"></canvas></div>
           <div class="game-body">
-            <h3>🌀 Chaotic Double Pendulum</h3>
+            <h3><i class="fa-solid fa-arrows-spin" style="color:var(--cyan)"></i> Chaotic Double Pendulum</h3>
             <p>Experience chaos theory first-hand. Two pendulums with slightly different initial conditions diverge exponentially — Lagrangian EOM solved in real time with RK4 integration.</p>
             <a href="double-pendulum/" class="btn btn-primary" style="align-self:flex-start"><i class="fa-solid fa-play"></i> Launch Simulation</a>
           </div>
@@ -81,7 +124,7 @@
     </section>
 
     <div class="card" style="margin-top:22px;text-align:center;border-style:dashed">
-      <div style="font-size:32px;margin-bottom:12px">🔬</div>
+      <div style="font-size:26px;margin-bottom:12px;color:var(--cyan)"><i class="fa-solid fa-microscope"></i></div>
       <h3 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:8px">Built by IIT KGP Physics Students</h3>
       <p style="font-size:13px;color:var(--text-muted);max-width:480px;margin:0 auto 18px;line-height:1.7">Have an interactive physics code or simulation idea in WebGL/Canvas? Submit your project to the PhySoc team.</p>
       <a href="../contact/" class="btn btn-ghost"><i class="fa-solid fa-code"></i> Contribute a Simulation</a>

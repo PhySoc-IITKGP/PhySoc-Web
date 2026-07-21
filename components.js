@@ -1,6 +1,6 @@
 /**
  * PHYSOC — components.js
- * Injects shared header + footer into every page.
+ * Injects shared banner, header + footer into every page.
  * Auto-detects base path from the <link href="shared.css"> tag.
  * Works at any folder depth: root, /about/, /sandbox/orbit/, etc.
  */
@@ -9,8 +9,6 @@
 
   /* --------------------------------------------------
      BASE PATH DETECTION
-     Reads the href of the shared.css link so this file
-     works at any folder depth without configuration.
   -------------------------------------------------- */
   const cssLink = document.querySelector('link[href*="shared.css"]');
   const base = cssLink
@@ -44,9 +42,37 @@
   ).join('');
 
   /* --------------------------------------------------
+     SELECTIONS BANNER HTML
+  -------------------------------------------------- */
+  const selectionsBannerHTML = `
+    <div class="selections-banner" id="selections-banner" role="region" aria-label="Selections Announcement">
+      <div class="selections-banner-inner">
+        <div class="selections-banner-content">
+          <div class="selections-badge">
+            <span class="selections-pulse-dot"></span>
+            <i class="fa-solid fa-wand-magic-sparkles"></i> SELECTIONS LIVE
+          </div>
+          <span class="selections-text">
+            <strong>Physics Society Selections are now OPEN!</strong> Join the PhySoc team today.
+          </span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <a href="https://forms.gle/xsBqWg9eYrEe55jA9" target="_blank" rel="noopener noreferrer" class="selections-cta">
+            <span>Join / Apply Here</span>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i>
+          </a>
+          <button class="selections-close" id="selections-banner-close" aria-label="Dismiss banner">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </div>`;
+
+  /* --------------------------------------------------
      HEADER HTML
   -------------------------------------------------- */
   const headerHTML = `
+    ${selectionsBannerHTML}
     <div class="mobile-overlay" id="mobile-overlay"></div>
     <nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
       <div class="mobile-drawer-header">
@@ -199,7 +225,7 @@
   </div>`;
 
   /* --------------------------------------------------
-     INJECT
+     INJECT COMPONENTS
   -------------------------------------------------- */
   const headerEl = document.getElementById('physoc-header');
   if (headerEl) headerEl.outerHTML = headerHTML;
@@ -209,6 +235,67 @@
 
   if (!document.getElementById('whatsapp-modal')) {
     document.body.insertAdjacentHTML('beforeend', whatsappModalHTML);
+  }
+
+  /* --------------------------------------------------
+     BANNER DISMISS HANDLER
+  -------------------------------------------------- */
+  const bannerCloseBtn = document.getElementById('selections-banner-close');
+  if (bannerCloseBtn) {
+    bannerCloseBtn.addEventListener('click', function () {
+      const banner = document.getElementById('selections-banner');
+      if (banner) {
+        if (window.anime) {
+          window.anime({
+            targets: banner,
+            opacity: [1, 0],
+            height: [banner.offsetHeight, 0],
+            paddingTop: [10, 0],
+            paddingBottom: [10, 0],
+            duration: 350,
+            easing: 'easeInOutSine',
+            complete: function() {
+              banner.style.display = 'none';
+            }
+          });
+        } else {
+          banner.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  /* --------------------------------------------------
+     DYNAMICAL ANIME.JS LOADER & INITIALIZER
+  -------------------------------------------------- */
+  function initAnimeJS() {
+    if (!window.anime) return;
+
+    // Anime.js icon hover physics micro-interactions
+    document.querySelectorAll('.desktop-nav a, .mobile-drawer .drawer-link, .btn, .icon-btn, .selections-cta').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        const icon = el.querySelector('i');
+        if (icon) {
+          window.anime.remove(icon);
+          window.anime({
+            targets: icon,
+            scale: [1, 1.28, 1.1],
+            rotate: [0, -12, 12, 0],
+            duration: 450,
+            easing: 'easeOutElastic(1, .6)'
+          });
+        }
+      });
+    });
+  }
+
+  if (!window.anime) {
+    const animeScript = document.createElement('script');
+    animeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+    animeScript.onload = initAnimeJS;
+    document.head.appendChild(animeScript);
+  } else {
+    initAnimeJS();
   }
 
 })();
