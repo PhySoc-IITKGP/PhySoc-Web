@@ -134,7 +134,7 @@
       <div id="wa-step-detecting" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 0;">
         <i class="fa-solid fa-wifi fa-spin-pulse" style="font-size: 48px; color: var(--cyan, #00f2fe); margin-bottom: 20px; --fa-animation-duration: 2s;"></i>
         <h3 style="margin-bottom: 10px;">Checking Campus Network</h3>
-        <p style="font-size: 13px; color: var(--text-muted); max-width: 320px; text-align: center;">Scanning for authorized institutional Wi-Fi networks (IITs or IIEST Shibpur)...</p>
+        <p style="font-size: 13px; color: var(--text-muted); max-width: 320px; text-align: center;">Scanning for authorized institutional Wi-Fi networks (IITs or IISc Bangalore)...</p>
       </div>
 
       <!-- Step 2: Auto-detection Success -->
@@ -171,7 +171,7 @@
               <option value="delhi">IIT Delhi</option>
               <option value="roorkee">IIT Roorkee</option>
               <option value="guwahati">IIT Guwahati</option>
-              <option value="shibpur">IIEST Shibpur</option>
+              <option value="iisc">IISc Bangalore</option>
             </select>
           </div>
 
