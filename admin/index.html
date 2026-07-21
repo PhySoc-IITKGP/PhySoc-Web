@@ -351,6 +351,7 @@
               <input type="text" id="res-desc" placeholder="Brief description..." />
             </div>
             <button class="btn btn-primary" id="publish-res-btn"><i class="fa-solid fa-plus"></i> Add Resource</button>
+            <div id="res-status-msg" style="margin-top:14px;font-size:13px;padding:12px;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid var(--border);display:none"></div>
           </div>
 
           <h3 style="font-family:var(--font-heading);margin-bottom:14px">Published Resources</h3>
@@ -719,6 +720,7 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     const code  = $('#res-code')?.value.trim();
     const sem   = $('#res-sem')?.value;
     const prof  = $('#res-prof')?.value.trim();
+    const statusEl = $('#res-status-msg');
     
     let ok = true;
     if (!title) { $('#res-title').style.borderColor = 'var(--danger)'; ok = false; } else { $('#res-title').style.borderColor = ''; }
@@ -743,15 +745,24 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     res.push(resourceObj);
     setRes(res);
 
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.style.borderColor = 'var(--cyan)';
+      statusEl.style.color = 'var(--cyan)';
+      statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving resource to local storage & Cloud Supabase...';
+    }
+
+    let cloudOk = false;
+    let cloudErr = '';
+
     // Save to Supabase Cloud Table if connected
     if (typeof supabaseClient !== 'undefined' && supabaseClient) {
       try {
         const { error } = await supabaseClient.from('physoc-resources').insert([resourceObj]);
         if (error) {
           console.warn("Supabase insert notice, attempting schema fallback:", error);
-          // Fallback if custom columns don't match table schema exactly
           const fallbackDesc = prof ? `${desc ? desc + ' | ' : ''}Prof: ${prof}` : desc;
-          await supabaseClient.from('physoc-resources').insert([{
+          const { error: err2 } = await supabaseClient.from('physoc-resources').insert([{
             title: title,
             category: cat,
             link_url: link,
@@ -759,9 +770,32 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
             course_code: code,
             semester: sem
           }]);
+          if (err2) {
+            cloudErr = err2.message || JSON.stringify(err2);
+          } else {
+            cloudOk = true;
+          }
+        } else {
+          cloudOk = true;
         }
       } catch (err) {
-        console.error("Supabase insert error:", err);
+        cloudErr = err.message || 'Connection error';
+      }
+    }
+
+    if (statusEl) {
+      if (cloudOk) {
+        statusEl.style.borderColor = 'rgba(63,210,115,0.4)';
+        statusEl.style.color = '#3fd273';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Published!</strong> Resource inserted live into <code>physoc-resources</code> table and synced across all devices.';
+      } else if (cloudErr) {
+        statusEl.style.borderColor = 'rgba(234,179,8,0.4)';
+        statusEl.style.color = '#eab308';
+        statusEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>Saved locally</strong>, but Supabase Cloud Notice: <code>${cloudErr}</code>.<br><span style="font-size:12px;opacity:0.9;margin-top:4px;display:block">💡 If blocked by Row Level Security (RLS), open your Supabase SQL Editor and run:<br><code style="color:var(--cyan)">CREATE POLICY "Enable insert for all" ON "physoc-resources" FOR INSERT WITH CHECK (true);</code></span>`;
+      } else {
+        statusEl.style.borderColor = 'rgba(63,210,115,0.4)';
+        statusEl.style.color = '#3fd273';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Saved!</strong> Resource stored in Local Storage.';
       }
     }
     
