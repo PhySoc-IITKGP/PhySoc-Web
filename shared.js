@@ -619,8 +619,17 @@ function initDynamicResources() {
     if (booksContainer) {
       const books = allResources.filter(r => r.category === 'books');
       const filteredBooks = books.filter(r => {
+        const normCode = r.code || r.course_code || '';
+        const normSem  = r.sem  || r.semester || '';
+        let   normProf = r.prof || r.author || '';
+        const normDesc = r.description || r.desc || '';
+        if (!normProf && normDesc) {
+          const match = normDesc.match(/prof(?:essor)?:\s*([^|]+)/i);
+          if (match) normProf = match[1].trim();
+        }
+
         if (!q) return true;
-        const haystack = `${r.title || ''} ${r.code || ''} ${r.sem || ''} ${r.prof || ''} ${r.author || ''} ${r.description || r.desc || ''}`.toLowerCase();
+        const haystack = `${r.title || ''} ${normCode} ${normSem} ${normProf} ${normDesc}`.toLowerCase();
         return haystack.includes(q);
       });
 
@@ -633,18 +642,27 @@ function initDynamicResources() {
           </div>`;
       } else {
         filteredBooks.forEach(r => {
+          const normCode = r.code || r.course_code || '';
+          const normSem  = r.sem  || r.semester || '';
+          let   normProf = r.prof || r.author || '';
+          const normDesc = r.description || r.desc || '';
+          if (!normProf && normDesc) {
+            const match = normDesc.match(/prof(?:essor)?:\s*([^|]+)/i);
+            if (match) normProf = match[1].trim();
+          }
+
           const div = document.createElement('div');
           div.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;gap:16px';
           div.innerHTML = `
             <div style="font-size:24px;flex-shrink:0;color:var(--cyan)"><i class="fa-solid fa-file-pdf"></i></div>
             <div>
               <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:4px;font-size:15px">${r.title}</h4>
-              ${(r.prof || r.author) ? `<div style="font-size:12px;color:var(--gold);margin-bottom:6px;font-weight:500"><i class="fa-solid fa-user-tie"></i> ${r.prof || r.author}</div>` : ''}
-              <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${r.description || r.desc || ''}</p>
+              ${normProf ? `<div style="font-size:12px;color:var(--gold);margin-bottom:6px;font-weight:500"><i class="fa-solid fa-user-tie"></i> ${normProf}</div>` : ''}
+              <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${normDesc}</p>
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
                 <a href="${r.link_url || '#'}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:6px 10px;font-size:11px"><i class="fa-solid fa-file-pdf"></i> Read / Download</a>
-                ${r.code ? `<span class="tag tag-events" style="font-size:11px">${r.code}</span>` : ''}
-                ${r.sem ? `<span class="tag tag-academic" style="font-size:11px">${r.sem}</span>` : ''}
+                ${normCode ? `<span class="tag tag-events" style="font-size:11px">${normCode}</span>` : ''}
+                ${normSem ? `<span class="tag tag-academic" style="font-size:11px">${normSem}</span>` : ''}
               </div>
             </div>`;
           booksContainer.appendChild(div);
@@ -656,8 +674,17 @@ function initDynamicResources() {
     if (coursesContainer) {
       const courses = allResources.filter(r => r.category === 'courses');
       const filteredCourses = courses.filter(r => {
+        const normCode = r.code || r.course_code || '';
+        const normSem  = r.sem  || r.semester || '';
+        let   normProf = r.prof || r.author || '';
+        const normDesc = r.description || r.desc || '';
+        if (!normProf && normDesc) {
+          const match = normDesc.match(/prof(?:essor)?:\s*([^|]+)/i);
+          if (match) normProf = match[1].trim();
+        }
+
         if (!q) return true;
-        const haystack = `${r.title || ''} ${r.code || ''} ${r.sem || ''} ${r.prof || ''} ${r.author || ''} ${r.description || r.desc || ''}`.toLowerCase();
+        const haystack = `${r.title || ''} ${normCode} ${normSem} ${normProf} ${normDesc}`.toLowerCase();
         return haystack.includes(q);
       });
 
@@ -672,15 +699,24 @@ function initDynamicResources() {
           </tr>`;
       } else {
         filteredCourses.forEach(r => {
+          const normCode = r.code || r.course_code || '';
+          const normSem  = r.sem  || r.semester || '';
+          let   normProf = r.prof || r.author || '';
+          const normDesc = r.description || r.desc || '';
+          if (!normProf && normDesc) {
+            const match = normDesc.match(/prof(?:essor)?:\s*([^|]+)/i);
+            if (match) normProf = match[1].trim();
+          }
+
           const tr = document.createElement('tr');
           tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
           tr.innerHTML = `
             <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">
               <div>${r.title}</div>
-              ${(r.prof || r.author) ? `<div style="font-size:11px;color:var(--gold);margin-top:2px;font-weight:400"><i class="fa-solid fa-user-tie"></i> ${r.prof || r.author}</div>` : ''}
+              ${normProf ? `<div style="font-size:11px;color:var(--gold);margin-top:2px;font-weight:400"><i class="fa-solid fa-user-tie"></i> ${normProf}</div>` : ''}
             </td>
-            <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${r.code || '—'}</td>
-            <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${r.sem || 'All Semesters'}</span></td>
+            <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${normCode || '—'}</td>
+            <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${normSem || 'All Semesters'}</span></td>
             <td style="padding:12px 16px"><a href="${r.link_url || '#'}" target="_blank" rel="noopener" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> View Notes</a></td>`;
           coursesContainer.appendChild(tr);
         });

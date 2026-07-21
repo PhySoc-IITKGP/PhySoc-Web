@@ -711,7 +711,7 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     setRes(res);
   }
 
-  $('#publish-res-btn')?.addEventListener('click', () => {
+  $('#publish-res-btn')?.addEventListener('click', async () => {
     const title = $('#res-title').value.trim();
     const link  = $('#res-link').value.trim();
     const desc  = $('#res-desc').value.trim();
@@ -725,9 +725,45 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     if (!link) { $('#res-link').style.borderColor = 'var(--danger)'; ok = false; } else { $('#res-link').style.borderColor = ''; }
     if (!ok) return;
 
+    const resourceObj = { 
+      title, 
+      category: cat, 
+      link_url: link, 
+      description: desc, 
+      code: code, 
+      course_code: code,
+      sem: sem, 
+      semester: sem, 
+      prof: prof, 
+      author: prof 
+    };
+
+    // Save to LocalStorage
     const res = getRes();
-    res.push({ title, link_url: link, description: desc, category: cat, code, sem, prof });
+    res.push(resourceObj);
     setRes(res);
+
+    // Save to Supabase Cloud Table if connected
+    if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+      try {
+        const { error } = await supabaseClient.from('physoc-resources').insert([resourceObj]);
+        if (error) {
+          console.warn("Supabase insert notice, attempting schema fallback:", error);
+          // Fallback if custom columns don't match table schema exactly
+          const fallbackDesc = prof ? `${desc ? desc + ' | ' : ''}Prof: ${prof}` : desc;
+          await supabaseClient.from('physoc-resources').insert([{
+            title: title,
+            category: cat,
+            link_url: link,
+            description: fallbackDesc,
+            course_code: code,
+            semester: sem
+          }]);
+        }
+      } catch (err) {
+        console.error("Supabase insert error:", err);
+      }
+    }
     
     $('#res-title').value = '';
     $('#res-link').value  = '';
