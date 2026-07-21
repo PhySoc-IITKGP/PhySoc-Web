@@ -323,6 +323,10 @@
                 <label for="res-code">Course Code (e.g. PH11003)</label>
                 <input type="text" id="res-code" placeholder="e.g. PH11003" />
               </div>
+              <div class="form-group" style="flex:1;margin-bottom:0">
+                <label for="res-prof">Professor / Author Name</label>
+                <input type="text" id="res-prof" placeholder="e.g. Prof. Somnath Bharadwaj" />
+              </div>
               <div class="form-group" style="width:180px;margin-bottom:0">
                 <label for="res-sem">Semester</label>
                 <select id="res-sem" style="background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;width:100%;outline:none">
@@ -714,6 +718,7 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     const cat   = $('#res-cat').value;
     const code  = $('#res-code')?.value.trim();
     const sem   = $('#res-sem')?.value;
+    const prof  = $('#res-prof')?.value.trim();
     
     let ok = true;
     if (!title) { $('#res-title').style.borderColor = 'var(--danger)'; ok = false; } else { $('#res-title').style.borderColor = ''; }
@@ -721,13 +726,14 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     if (!ok) return;
 
     const res = getRes();
-    res.push({ title, link_url: link, description: desc, category: cat, code, sem });
+    res.push({ title, link_url: link, description: desc, category: cat, code, sem, prof });
     setRes(res);
     
     $('#res-title').value = '';
     $('#res-link').value  = '';
     $('#res-desc').value  = '';
     if ($('#res-code')) $('#res-code').value = '';
+    if ($('#res-prof')) $('#res-prof').value = '';
     if ($('#res-preset')) $('#res-preset').value = '';
     anime({ targets: '#publish-res-btn', scale: [1, 0.95, 1], duration: 200 });
   });

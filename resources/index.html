@@ -70,6 +70,12 @@
     </section>
 
     <div class="card" aria-label="Resources browser" style="margin-top: 40px;">
+      <!-- LIVE SEARCH BAR -->
+      <div style="margin-bottom:20px;position:relative">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--cyan);font-size:14px"></i>
+        <input type="text" id="res-search-input" placeholder="Search by course title, code (e.g. PH31201), professor name, author, semester, or keyword..." style="width:100%;padding:14px 16px 14px 44px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box" />
+      </div>
+
       <div class="filter-bar" style="margin-bottom:22px;border-bottom:1px solid var(--border);padding-bottom:0;border-radius:0;background:none" role="tablist">
         <button class="filter-btn res-tab active" data-target="books" role="tab" aria-selected="true"><i class="fa-solid fa-book"></i> Textbooks</button>
         <button class="filter-btn res-tab" data-target="courses" role="tab" aria-selected="false"><i class="fa-solid fa-book-open"></i> Course Notes</button>

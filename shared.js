@@ -606,118 +606,135 @@ function initDynamicResources() {
   const booksContainer = $('#books-container');
   const coursesContainer = $('#courses-tbody');
   const internshipsContainer = $('#internships-tbody');
+  const searchInput = $('#res-search-input');
 
-  // Standard Default Textbooks with Direct PDF Links
-  const defaultBooks = [
-    { 
-      title: "Introduction to Electrodynamics", 
-      code: "PH31205 / PH21209", 
-      sem: "Sem 3 / Sem 5", 
-      desc: "David J. Griffiths — Essential reference for Classical Electromagnetism and Vector Calculus.", 
-      link_url: "https://www.hlevkin.com/hlevkin/90MathPhysBioBooks/Physics/Physics/Electrodynamics/David%20J.%20Griffiths%20-%20Introduction%20to%20Electrodynamics-Prentice%20Hall%20(1999).pdf" 
-    },
-    { 
-      title: "Quantum Mechanics: Concepts & Applications", 
-      code: "PH31201 / PH21212", 
-      sem: "Sem 4 / Sem 5", 
-      desc: "Nouredine Zettili — Comprehensive guide to wave mechanics, state operators, and perturbation theory.", 
-      link_url: "https://bibliotecatrevijano.files.wordpress.com/2017/10/zettili.pdf" 
-    },
-    { 
-      title: "Classical Mechanics", 
-      code: "PH31207 / PH21205", 
-      sem: "Sem 3 / Sem 5", 
-      desc: "Herbert Goldstein, Charles P. Poole, John L. Safko — Gold standard text for Lagrangian dynamics and Hamiltonian mechanics.", 
-      link_url: "https://www.math.toronto.edu/khesin/biblio/GoldsteinPooleSafkoClassicalMechanics.pdf" 
-    },
-    { 
-      title: "Solid State Physics", 
-      code: "PH30204", 
-      sem: "Sem 6", 
-      desc: "Neil W. Ashcroft & N. David Mermin — Definitive guide on crystal lattices, band theory, and condensed matter physics.", 
-      link_url: "https://kaf70.mephi.ru/content/public/uploads/files/pdf/Ashcroft_Mermin_eng.pdf" 
-    }
-  ];
+  let allResources = [];
+  let allInternships = [];
+  let currentSearchQuery = '';
 
-  // Featured Core Courses (Admins can publish notes for any subject using the Preset dropdown)
-  const defaultCourses = [
-    { title: "PHYSICS OF WAVES", code: "PH11003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "CLASSICAL DYNAMICS AND SPECIAL RELATIVITY", code: "PH21205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "QUANTUM PHYSICS", code: "PH21212", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "ELECTRODYNAMICS", code: "PH31205", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "STATISTICAL PHYSICS", code: "PH31202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" }
-  ];
+  const renderResources = () => {
+    const q = currentSearchQuery.toLowerCase().trim();
 
-  // Standard Default Internships / Fellowships
-  const defaultInternships = [
-    { org: "CERN", opp: "Summer Student Programme", elig: "3rd & 4th Year Physics B.Sc / B.Tech", date: "Jan 31 (Annual)" },
-    { org: "TIFR Mumbai", opp: "Visiting Students Research Program (VSRP)", elig: "2nd & 3rd Year Physics Students", date: "Feb 15 (Annual)" },
-    { org: "Raman Research Institute", opp: "Visiting Student Fellowships (VSSP)", elig: "Undergraduate / Integrated M.Sc", date: "Mar 10 (Annual)" },
-    { org: "IISc Bengaluru", opp: "Physics Department Summer Research Program", elig: "Pre-final & Final Year Students", date: "Feb 28 (Annual)" }
-  ];
-  // Render Base Resources
-  const renderResources = (cloudResources = [], cloudInternships = []) => {
-    const res = [...cloudResources, ...JSON.parse(localStorage.getItem('physoc_resources') || '[]')];
-
+    // Filter books
     if (booksContainer) {
-      const books = res.filter(r => r.category === 'books');
-      const displayBooks = [...books, ...defaultBooks];
+      const books = allResources.filter(r => r.category === 'books');
+      const filteredBooks = books.filter(r => {
+        if (!q) return true;
+        const haystack = `${r.title || ''} ${r.code || ''} ${r.sem || ''} ${r.prof || ''} ${r.author || ''} ${r.description || r.desc || ''}`.toLowerCase();
+        return haystack.includes(q);
+      });
+
       booksContainer.innerHTML = '';
-      displayBooks.forEach(r => {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;gap:16px';
-        div.innerHTML = `
-          <div style="font-size:24px;flex-shrink:0;color:var(--cyan)"><i class="fa-solid fa-file-pdf"></i></div>
-          <div>
-            <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:4px;font-size:15px">${r.title}</h4>
-            <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${r.description || r.desc || ''}</p>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <a href="${r.link_url || '#'}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:6px 10px;font-size:11px"><i class="fa-solid fa-file-pdf"></i> Read PDF / Download</a>
-              ${r.code ? `<span class="tag tag-events" style="font-size:11px">${r.code}</span>` : ''}
-              ${r.sem ? `<span class="tag tag-academic" style="font-size:11px">${r.sem}</span>` : ''}
-            </div>
+      if (filteredBooks.length === 0) {
+        booksContainer.innerHTML = `
+          <div style="text-align:center;padding:40px 20px;grid-column:1/-1;color:var(--text-muted)">
+            <i class="fa-solid fa-book-open" style="font-size:32px;color:var(--cyan);margin-bottom:12px;display:block"></i>
+            <p style="font-size:14px;margin:0">${q ? `No textbooks found matching "${currentSearchQuery}".` : 'No textbooks uploaded yet. Officers can publish textbooks via the Admin Panel.'}</p>
           </div>`;
-        booksContainer.appendChild(div);
-      });
+      } else {
+        filteredBooks.forEach(r => {
+          const div = document.createElement('div');
+          div.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;gap:16px';
+          div.innerHTML = `
+            <div style="font-size:24px;flex-shrink:0;color:var(--cyan)"><i class="fa-solid fa-file-pdf"></i></div>
+            <div>
+              <h4 style="font-family:var(--font-heading);color:var(--text-bright);margin-bottom:4px;font-size:15px">${r.title}</h4>
+              ${(r.prof || r.author) ? `<div style="font-size:12px;color:var(--gold);margin-bottom:6px;font-weight:500"><i class="fa-solid fa-user-tie"></i> ${r.prof || r.author}</div>` : ''}
+              <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${r.description || r.desc || ''}</p>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <a href="${r.link_url || '#'}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:6px 10px;font-size:11px"><i class="fa-solid fa-file-pdf"></i> Read / Download</a>
+                ${r.code ? `<span class="tag tag-events" style="font-size:11px">${r.code}</span>` : ''}
+                ${r.sem ? `<span class="tag tag-academic" style="font-size:11px">${r.sem}</span>` : ''}
+              </div>
+            </div>`;
+          booksContainer.appendChild(div);
+        });
+      }
     }
 
+    // Filter courses
     if (coursesContainer) {
-      const courses = res.filter(r => r.category === 'courses');
-      const displayCourses = [...courses, ...defaultCourses];
-      coursesContainer.innerHTML = '';
-      displayCourses.forEach(r => {
-        const tr = document.createElement('tr');
-        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
-        tr.innerHTML = `
-          <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">${r.title}</td>
-          <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${r.code || '—'}</td>
-          <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${r.sem || 'All Semesters'}</span></td>
-          <td style="padding:12px 16px"><a href="${r.link_url || '#'}" target="_blank" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> View Notes</a></td>`;
-        coursesContainer.appendChild(tr);
+      const courses = allResources.filter(r => r.category === 'courses');
+      const filteredCourses = courses.filter(r => {
+        if (!q) return true;
+        const haystack = `${r.title || ''} ${r.code || ''} ${r.sem || ''} ${r.prof || ''} ${r.author || ''} ${r.description || r.desc || ''}`.toLowerCase();
+        return haystack.includes(q);
       });
+
+      coursesContainer.innerHTML = '';
+      if (filteredCourses.length === 0) {
+        coursesContainer.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align:center;padding:40px 20px;color:var(--text-muted)">
+              <i class="fa-solid fa-graduation-cap" style="font-size:28px;color:var(--cyan);margin-bottom:10px;display:block"></i>
+              <p style="font-size:14px;margin:0">${q ? `No course notes found matching "${currentSearchQuery}".` : 'No course notes uploaded yet. Officers can add notes via the Admin Panel.'}</p>
+            </td>
+          </tr>`;
+      } else {
+        filteredCourses.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+          tr.innerHTML = `
+            <td style="padding:12px 16px;color:var(--text-bright);font-weight:600">
+              <div>${r.title}</div>
+              ${(r.prof || r.author) ? `<div style="font-size:11px;color:var(--gold);margin-top:2px;font-weight:400"><i class="fa-solid fa-user-tie"></i> ${r.prof || r.author}</div>` : ''}
+            </td>
+            <td style="padding:12px 16px;font-family:var(--font-code);font-size:12px;color:var(--cyan)">${r.code || '—'}</td>
+            <td style="padding:12px 16px"><span class="tag tag-academic" style="font-size:11px">${r.sem || 'All Semesters'}</span></td>
+            <td style="padding:12px 16px"><a href="${r.link_url || '#'}" target="_blank" rel="noopener" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> View Notes</a></td>`;
+          coursesContainer.appendChild(tr);
+        });
+      }
     }
 
+    // Filter internships
     if (internshipsContainer) {
-      const customInternships = [...cloudInternships, ...JSON.parse(localStorage.getItem('physoc_internships') || '[]')];
-      const displayInternships = [...customInternships, ...defaultInternships];
-      internshipsContainer.innerHTML = '';
-      displayInternships.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
-        tr.innerHTML = `
-          <td style="padding:12px 16px;color:var(--text-bright);font-weight:600"><i class="fa-solid fa-building-columns" style="color:var(--cyan);margin-right:6px"></i> ${item.org}</td>
-          <td style="padding:12px 16px;color:var(--text);font-weight:500">${item.opp || item.title || 'Research Internship'}</td>
-          <td style="padding:12px 16px;color:var(--text-muted);font-size:12px">${item.elig || item.eligibility || 'Physics Undergraduates'}</td>
-          <td style="padding:12px 16px"><span class="tag tag-research" style="font-size:11px">${item.date || item.deadline || 'Open'}</span></td>`;
-        internshipsContainer.appendChild(tr);
+      const filteredInternships = allInternships.filter(item => {
+        if (!q) return true;
+        const haystack = `${item.org || ''} ${item.opp || item.title || ''} ${item.elig || item.eligibility || ''} ${item.desc || ''}`.toLowerCase();
+        return haystack.includes(q);
       });
+
+      internshipsContainer.innerHTML = '';
+      if (filteredInternships.length === 0) {
+        internshipsContainer.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align:center;padding:40px 20px;color:var(--text-muted)">
+              <i class="fa-solid fa-briefcase" style="font-size:28px;color:var(--cyan);margin-bottom:10px;display:block"></i>
+              <p style="font-size:14px;margin:0">${q ? `No internships found matching "${currentSearchQuery}".` : 'No internships posted yet. New opportunities will appear here once published by officers.'}</p>
+            </td>
+          </tr>`;
+      } else {
+        filteredInternships.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+          tr.innerHTML = `
+            <td style="padding:12px 16px;color:var(--text-bright);font-weight:600"><i class="fa-solid fa-building-columns" style="color:var(--cyan);margin-right:6px"></i> ${item.org || item.company}</td>
+            <td style="padding:12px 16px;color:var(--text);font-weight:500">${item.opp || item.title || item.opportunity || 'Research Opportunity'}</td>
+            <td style="padding:12px 16px;color:var(--text-muted);font-size:12px">${item.elig || item.eligibility || 'Physics Undergraduates'}</td>
+            <td style="padding:12px 16px"><span class="tag tag-research" style="font-size:11px">${item.date || item.deadline || 'Open'}</span></td>`;
+          internshipsContainer.appendChild(tr);
+        });
+      }
     }
   };
 
-  // Render initial local + defaults first
+  // Load from localStorage first
+  const localRes = JSON.parse(localStorage.getItem('physoc_resources') || '[]');
+  const localInt = JSON.parse(localStorage.getItem('physoc_internships') || '[]');
+  allResources = localRes;
+  allInternships = localInt;
   renderResources();
 
-  // Query Supabase for cloud entries added by senior / admin
+  // Attach search input handler
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearchQuery = e.target.value;
+      renderResources();
+    });
+  }
+
+  // Fetch live cloud data from Supabase if connected
   if (typeof supabaseClient !== 'undefined' && supabaseClient) {
     Promise.all([
       supabaseClient.from('physoc-resources').select('*').order('created_at', { ascending: false }),
@@ -725,9 +742,17 @@ function initDynamicResources() {
     ]).then(([resData, intData]) => {
       const cloudRes = resData && resData.data ? resData.data : [];
       const cloudInt = intData && intData.data ? intData.data : [];
-      if (cloudRes.length > 0 || cloudInt.length > 0) {
-        renderResources(cloudRes, cloudInt);
-      }
+      
+      // Combine cloud + local avoiding duplicates by title/link
+      const resMap = new Map();
+      [...cloudRes, ...localRes].forEach(item => { if (item.title) resMap.set(item.title, item); });
+      allResources = Array.from(resMap.values());
+
+      const intMap = new Map();
+      [...cloudInt, ...localInt].forEach(item => { const key = item.org || item.company || item.title; if (key) intMap.set(key, item); });
+      allInternships = Array.from(intMap.values());
+
+      renderResources();
     }).catch(err => {
       console.warn("Supabase fetch notice:", err);
     });
