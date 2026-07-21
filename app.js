@@ -1349,26 +1349,19 @@ function initWhatsappAuth() {
       emailCheck: (email) => email.endsWith("@iitg.ac.in"),
       emailErrorMsg: "Email must end with @iitg.ac.in"
     },
-    shibpur: {
-      name: "IIEST Shibpur",
-      rollPlaceholder: "e.g. 2024PHB012",
-      emailPlaceholder: "e.g. username@iiests.ac.in",
+    iisc: {
+      name: "IISc Bangalore",
+      rollPlaceholder: "e.g. 24012 or 04-03-00-10-12-24",
+      emailPlaceholder: "e.g. username@iisc.ac.in",
       validateRoll: (roll) => {
         roll = roll.trim().toUpperCase();
-        if (!/^[A-Z0-9]{9,10}$/.test(roll)) {
-          return "IIEST Shibpur roll number must be 9 or 10 characters (e.g. 2024PHB012)";
-        }
-        let yr = parseInt(roll.substring(0, 2), 10);
-        if (roll.length === 10 && !isNaN(parseInt(roll.substring(0, 4), 10))) {
-          yr = parseInt(roll.substring(0, 4), 10) - 2000;
-        }
-        if (yr < 14 || yr > 26) {
-          return `Joining year is invalid. Must be between 2014 and 2026.`;
+        if (!/^[A-Z0-9-]{5,15}$/.test(roll)) {
+          return "IISc Roll / SRAD number must be between 5 and 15 characters (e.g. 24012)";
         }
         return null;
       },
-      emailCheck: (email) => email.endsWith("@iiests.ac.in"),
-      emailErrorMsg: "Email must end with @iiests.ac.in"
+      emailCheck: (email) => email.endsWith("@iisc.ac.in"),
+      emailErrorMsg: "Email must end with @iisc.ac.in"
     }
   };
 
@@ -1457,7 +1450,7 @@ function initWhatsappAuth() {
       if (org.includes('delhi') || isp.includes('delhi') || org.includes('iitd') || isp.includes('iitd')) return "IIT Delhi WiFi";
       if (org.includes('roorkee') || isp.includes('roorkee') || org.includes('iitr') || isp.includes('iitr')) return "IIT Roorkee WiFi";
       if (org.includes('guwahati') || isp.includes('guwahati') || org.includes('iitg') || isp.includes('iitg')) return "IIT Guwahati WiFi";
-      if (org.includes('shibpur') || isp.includes('shibpur') || org.includes('iiest') || isp.includes('iiest')) return "IIEST Shibpur WiFi";
+      if (org.includes('iisc') || isp.includes('iisc') || org.includes('indian institute of science') || isp.includes('indian institute of science')) return "IISc Bangalore WiFi";
       if (org.includes('national knowledge network') || isp.includes('national knowledge network') || org.includes('nkn') || isp.includes('nkn') || org.includes('ernet') || isp.includes('ernet')) return "NKN (Campus Network)";
 
       return null;
