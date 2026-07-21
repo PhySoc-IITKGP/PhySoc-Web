@@ -231,6 +231,7 @@
               <textarea id="ann-body" rows="4" placeholder="Announcement body text…" style="resize:vertical"></textarea>
             </div>
             <button class="btn btn-primary" id="publish-ann-btn"><i class="fa-solid fa-paper-plane"></i> Publish</button>
+            <div id="ann-status-msg" style="margin-top:14px;font-size:13px;padding:12px;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid var(--border);display:none"></div>
           </div>
 
           <h3 style="font-family:var(--font-heading);margin-bottom:14px">Published Announcements</h3>
@@ -399,6 +400,7 @@
               <textarea id="intern-desc" rows="3" placeholder="Brief summary of research areas, submission guidelines..." style="resize:vertical"></textarea>
             </div>
             <button class="btn btn-primary" id="publish-intern-btn"><i class="fa-solid fa-plus"></i> Post Opportunity</button>
+            <div id="intern-status-msg" style="margin-top:14px;font-size:13px;padding:12px;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid var(--border);display:none"></div>
           </div>
 
           <h3 style="font-family:var(--font-heading);margin-bottom:14px">Posted Opportunities</h3>
@@ -666,19 +668,69 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     setAnns(anns);
   }
 
-  $('#publish-ann-btn')?.addEventListener('click', () => {
+  $('#publish-ann-btn')?.addEventListener('click', async () => {
     const title = $('#ann-title').value.trim();
     const body  = $('#ann-body').value.trim();
     const cat   = $('#ann-cat').value;
     const evDt  = $('#ann-date').value;
+    const statusEl = $('#ann-status-msg');
+
     if (!title) { $('#ann-title').style.borderColor = 'var(--danger)'; return; }
-    const anns = getAnns();
-    anns.push({ 
+    
+    const annObj = { 
       title, body, category: cat, 
       event_date: evDt ? new Date(evDt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : null,
       date: new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) 
-    });
+    };
+
+    const anns = getAnns();
+    anns.push(annObj);
     setAnns(anns);
+
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.style.borderColor = 'var(--cyan)';
+      statusEl.style.color = 'var(--cyan)';
+      statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving announcement to local storage & Cloud Supabase...';
+    }
+
+    let cloudOk = false;
+    let cloudErr = '';
+
+    if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+      try {
+        const { error } = await supabaseClient.from('physoc-announcements').insert([{
+          title: title,
+          body: body,
+          category: cat,
+          event_date: evDt || null
+        }]);
+        if (error) {
+          cloudErr = error.message || JSON.stringify(error);
+        } else {
+          cloudOk = true;
+        }
+      } catch (err) {
+        cloudErr = err.message || 'Connection error';
+      }
+    }
+
+    if (statusEl) {
+      if (cloudOk) {
+        statusEl.style.borderColor = 'rgba(63,210,115,0.4)';
+        statusEl.style.color = '#3fd273';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Published!</strong> Announcement inserted live into <code>physoc-announcements</code> table and synced across site.';
+      } else if (cloudErr) {
+        statusEl.style.borderColor = 'rgba(234,179,8,0.4)';
+        statusEl.style.color = '#eab308';
+        statusEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>Saved locally</strong>, but Supabase Cloud Notice: <code>${cloudErr}</code>.`;
+      } else {
+        statusEl.style.borderColor = 'rgba(63,210,115,0.4)';
+        statusEl.style.color = '#3fd273';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Saved!</strong> Announcement stored in Local Storage.';
+      }
+    }
+
     $('#ann-title').value = '';
     $('#ann-body').value  = '';
     $('#ann-date').value  = '';
@@ -859,7 +911,7 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     setInterns(list);
   };
 
-  $('#publish-intern-btn')?.addEventListener('click', () => {
+  $('#publish-intern-btn')?.addEventListener('click', async () => {
     const title    = $('#intern-title').value.trim();
     const org      = $('#intern-org').value.trim();
     const link     = $('#intern-link').value.trim();
@@ -867,6 +919,7 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     const elig     = $('#intern-elig').value.trim();
     const deadline = $('#intern-deadline').value;
     const desc     = $('#intern-desc').value.trim();
+    const statusEl = $('#intern-status-msg');
 
     let ok = true;
     if (!title) { $('#intern-title').style.borderColor = 'var(--danger)'; ok = false; } else { $('#intern-title').style.borderColor = ''; }
@@ -874,13 +927,66 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     if (!link)  { $('#intern-link').style.borderColor = 'var(--danger)'; ok = false; } else { $('#intern-link').style.borderColor = ''; }
     if (!ok) return;
 
-    const list = getInterns();
-    list.push({ 
-      title, org, link_url: link, stipend, eligibility: elig, 
+    const internObj = { 
+      title, org, company: org, opportunity: title, link_url: link, stipend, eligibility: elig, 
       deadline: deadline ? new Date(deadline).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : null, 
-      desc 
-    });
+      desc, description: desc 
+    };
+
+    const list = getInterns();
+    list.push(internObj);
     setInterns(list);
+
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.style.borderColor = 'var(--cyan)';
+      statusEl.style.color = 'var(--cyan)';
+      statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving opportunity to local storage & Cloud Supabase...';
+    }
+
+    let cloudOk = false;
+    let cloudErr = '';
+
+    if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+      try {
+        const { error } = await supabaseClient.from('physoc-internships').insert([internObj]);
+        if (error) {
+          console.warn("Supabase insert notice, attempting schema fallback:", error);
+          const { error: err2 } = await supabaseClient.from('physoc-internships').insert([{
+            org: org,
+            opp: title,
+            link_url: link,
+            elig: elig,
+            date: deadline ? new Date(deadline).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : 'Open'
+          }]);
+          if (err2) {
+            cloudErr = err2.message || JSON.stringify(err2);
+          } else {
+            cloudOk = true;
+          }
+        } else {
+          cloudOk = true;
+        }
+      } catch (err) {
+        cloudErr = err.message || 'Connection error';
+      }
+    }
+
+    if (statusEl) {
+      if (cloudOk) {
+        statusEl.style.borderColor = 'rgba(63,210,115,0.4)';
+        statusEl.style.color = '#3fd273';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Posted!</strong> Opportunity inserted live into <code>physoc-internships</code> table and synced across site.';
+      } else if (cloudErr) {
+        statusEl.style.borderColor = 'rgba(234,179,8,0.4)';
+        statusEl.style.color = '#eab308';
+        statusEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>Saved locally</strong>, but Supabase Cloud Notice: <code>${cloudErr}</code>.`;
+      } else {
+        statusEl.style.borderColor = 'rgba(63,210,115,0.4)';
+        statusEl.style.color = '#3fd273';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Saved!</strong> Opportunity stored in Local Storage.';
+      }
+    }
 
     $('#intern-title').value = '';
     $('#intern-org').value = '';
