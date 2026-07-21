@@ -408,7 +408,6 @@ function initCalendar() {
   const EVENTS = {
     '2026-07-25': { title: '2nd Year Executive Selections', desc: 'Physics Dept. Seminar Room · 10 AM' },
     '2026-08-15': { title: 'Independence Day Physics Seminar', desc: 'Open to all · Main Auditorium' },
-    '2026-09-06': { title: 'Autumn Fest Science Exhibition', desc: 'Physics stall open · Science Day' }
   };
 
   let year = new Date().getFullYear();
