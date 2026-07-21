@@ -245,10 +245,70 @@
 
           <div class="ann-form">
             <h4 style="font-family:var(--font-heading);margin-bottom:18px">Add New Resource</h4>
+            
+            <div class="form-group" style="margin-bottom:14px">
+              <label for="res-preset"><i class="fa-solid fa-graduation-cap" style="color:var(--cyan);margin-right:6px"></i> Quick Select IIT KGP Physics Subject (Preset)</label>
+              <select id="res-preset" style="background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;width:100%;outline:none">
+                <option value="">-- Select from Official KGP Subject List (Or 'Other') --</option>
+                <optgroup label="Semester 1">
+                  <option value="PH11003|PHYSICS OF WAVES|Sem 1">PH11003 — PHYSICS OF WAVES (Sem 1)</option>
+                  <option value="MA11003|ADVANCED CALCULUS|Sem 1">MA11003 — ADVANCED CALCULUS (Sem 1)</option>
+                  <option value="EC21201|BASIC ELECTRONICS|Sem 1">EC21201 — BASIC ELECTRONICS (Sem 1)</option>
+                  <option value="CS10003|PROGRAMMING AND DATA STRUCTURES|Sem 1">CS10003 — PROGRAMMING AND DATA STRUCTURES (Sem 1)</option>
+                  <option value="PH19003|PHYSICS LABORATORY|Sem 1">PH19003 — PHYSICS LABORATORY (Sem 1)</option>
+                </optgroup>
+                <optgroup label="Semester 2">
+                  <option value="PH19004|INTERACTIVE PHYSICS LABORATORY|Sem 2">PH19004 — INTERACTIVE PHYSICS LABORATORY (Sem 2)</option>
+                  <option value="MA11004|LINEAR ALGEBRA, NUMERICAL & COMPLEX ANALYSIS|Sem 2">MA11004 — LINEAR ALGEBRA, NUMERICAL & COMPLEX ANALYSIS (Sem 2)</option>
+                  <option value="CY11003|CHEMISTRY|Sem 2">CY11003 — CHEMISTRY (Sem 2)</option>
+                  <option value="EE11003|ELECTRICAL TECHNOLOGY|Sem 2">EE11003 — ELECTRICAL TECHNOLOGY (Sem 2)</option>
+                  <option value="ME11003|BASIC ENGINEERING MECHANICS|Sem 2">ME11003 — BASIC ENGINEERING MECHANICS (Sem 2)</option>
+                </optgroup>
+                <optgroup label="Semester 3">
+                  <option value="PH21205|CLASSICAL DYNAMICS AND SPECIAL RELATIVITY|Sem 3">PH21205 — CLASSICAL DYNAMICS AND SPECIAL RELATIVITY (Sem 3)</option>
+                  <option value="PH21209|ELECTROMAGNETISM|Sem 3">PH21209 — ELECTROMAGNETISM (Sem 3)</option>
+                  <option value="PH20206|MATHEMATICS FOR PHYSICS - I|Sem 3">PH20206 — MATHEMATICS FOR PHYSICS - I (Sem 3)</option>
+                  <option value="MA20205|PROBABILITY AND STATISTICS|Sem 3">MA20205 — PROBABILITY AND STATISTICS (Sem 3)</option>
+                  <option value="PH29207|ELECTROMAGNETISM LAB|Sem 3">PH29207 — ELECTROMAGNETISM LAB (Sem 3)</option>
+                  <option value="PH29205|GENERAL PROPERTIES OF MATTER LAB|Sem 3">PH29205 — GENERAL PROPERTIES OF MATTER LAB (Sem 3)</option>
+                </optgroup>
+                <optgroup label="Semester 4">
+                  <option value="PH21212|QUANTUM PHYSICS|Sem 4">PH21212 — QUANTUM PHYSICS (Sem 4)</option>
+                  <option value="PH21210|THERMAL PHYSICS|Sem 4">PH21210 — THERMAL PHYSICS (Sem 4)</option>
+                  <option value="PH21214|OPTICS|Sem 4">PH21214 — OPTICS (Sem 4)</option>
+                  <option value="AI20001|THE ESSENTIALS OF MACHINE LEARNING|Sem 4">AI20001 — THE ESSENTIALS OF MACHINE LEARNING (Sem 4)</option>
+                  <option value="PH29208|THERMAL PHYSICS LAB|Sem 4">PH29208 — THERMAL PHYSICS LAB (Sem 4)</option>
+                  <option value="PH29212|OPTICS LAB|Sem 4">PH29212 — OPTICS LAB (Sem 4)</option>
+                </optgroup>
+                <optgroup label="Semester 5">
+                  <option value="PH31207|CLASSICAL MECHANICS|Sem 5">PH31207 — CLASSICAL MECHANICS (Sem 5)</option>
+                  <option value="PH31205|ELECTRODYNAMICS|Sem 5">PH31205 — ELECTRODYNAMICS (Sem 5)</option>
+                  <option value="PH31201|QUANTUM MECHANICS|Sem 5">PH31201 — QUANTUM MECHANICS (Sem 5)</option>
+                  <option value="PH30207|MATHEMATICS FOR PHYSICS II|Sem 5">PH30207 — MATHEMATICS FOR PHYSICS II (Sem 5)</option>
+                  <option value="PH30201|COMPUTATIONAL PHYSICS|Sem 5">PH30201 — COMPUTATIONAL PHYSICS (Sem 5)</option>
+                  <option value="PH39209|COMPUTATIONAL PHYSICS LAB|Sem 5">PH39209 — COMPUTATIONAL PHYSICS LAB (Sem 5)</option>
+                  <option value="PH39201|MODERN PHYSICS LAB|Sem 5">PH39201 — MODERN PHYSICS LAB (Sem 5)</option>
+                </optgroup>
+                <optgroup label="Semester 6">
+                  <option value="PH31202|STATISTICAL PHYSICS|Sem 6">PH31202 — STATISTICAL PHYSICS (Sem 6)</option>
+                  <option value="PH30204|CONDENSED MATTER PHYSICS|Sem 6">PH30204 — CONDENSED MATTER PHYSICS (Sem 6)</option>
+                  <option value="PH30202|ATOMIC AND MOLECULAR PHYSICS|Sem 6">PH30202 — ATOMIC AND MOLECULAR PHYSICS (Sem 6)</option>
+                  <option value="PH30210|NUCLEAR PHYSICS|Sem 6">PH30210 — NUCLEAR PHYSICS (Sem 6)</option>
+                  <option value="PH39204|NUCLEAR PHYSICS LAB|Sem 6">PH39204 — NUCLEAR PHYSICS LAB (Sem 6)</option>
+                  <option value="PH39202|CONDENSED MATTER PHYSICS LAB|Sem 6">PH39202 — CONDENSED MATTER PHYSICS LAB (Sem 6)</option>
+                  <option value="PH39214|SPECTROSCOPY LAB|Sem 6">PH39214 — SPECTROSCOPY LAB (Sem 6)</option>
+                </optgroup>
+                <optgroup label="Semester 7">
+                  <option value="PH48201|SUMMER INTERNSHIP|Sem 7">PH48201 — SUMMER INTERNSHIP (Sem 7)</option>
+                </optgroup>
+                <option value="OTHER">Other / Custom Course (Type manually below)</option>
+              </select>
+            </div>
+
             <div class="form-row" style="display:flex;gap:14px;margin-bottom:14px">
               <div class="form-group" style="flex:1;margin-bottom:0">
                 <label for="res-title">Resource Title <span style="color:var(--danger)">*</span></label>
-                <input type="text" id="res-title" placeholder="e.g. Classical Mechanics - Goldstein" />
+                <input type="text" id="res-title" placeholder="e.g. Classical Mechanics Notes" />
               </div>
               <div class="form-group" style="width:160px;margin-bottom:0">
                 <label for="res-cat">Category</label>
@@ -260,8 +320,8 @@
             </div>
             <div class="form-row" style="display:flex;gap:14px;margin-bottom:14px">
               <div class="form-group" style="flex:1;margin-bottom:0">
-                <label for="res-code">Course Code (e.g. PH11001)</label>
-                <input type="text" id="res-code" placeholder="e.g. PH11001 or PH20003" />
+                <label for="res-code">Course Code (e.g. PH11003)</label>
+                <input type="text" id="res-code" placeholder="e.g. PH11003" />
               </div>
               <div class="form-group" style="width:180px;margin-bottom:0">
                 <label for="res-sem">Semester</label>
@@ -668,7 +728,28 @@ const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
     $('#res-link').value  = '';
     $('#res-desc').value  = '';
     if ($('#res-code')) $('#res-code').value = '';
+    if ($('#res-preset')) $('#res-preset').value = '';
     anime({ targets: '#publish-res-btn', scale: [1, 0.95, 1], duration: 200 });
+  });
+
+  $('#res-preset')?.addEventListener('change', (e) => {
+    const val = e.target.value;
+    if (!val) return;
+    if (val === 'OTHER') {
+      $('#res-title').value = '';
+      $('#res-code').value = '';
+      $('#res-sem').value = 'All';
+      $('#res-cat').value = 'books';
+    } else {
+      const parts = val.split('|');
+      if (parts.length === 3) {
+        const [code, name, sem] = parts;
+        $('#res-title').value = name;
+        $('#res-code').value = code;
+        $('#res-sem').value = sem;
+        $('#res-cat').value = 'courses';
+      }
+    }
   });
 
   // ── INTERNSHIPS ──────────────────────────────────────────────

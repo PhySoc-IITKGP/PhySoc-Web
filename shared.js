@@ -639,52 +639,13 @@ function initDynamicResources() {
     }
   ];
 
-  // Full IIT Kharagpur Physics (B.S. 4Y) Official Curriculum
+  // Featured Core Courses (Admins can publish notes for any subject using the Preset dropdown)
   const defaultCourses = [
-    // Semester 1
     { title: "PHYSICS OF WAVES", code: "PH11003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "ADVANCED CALCULUS", code: "MA11003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "BASIC ELECTRONICS", code: "EC21201", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "PROGRAMMING AND DATA STRUCTURES", code: "CS10003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "PHYSICS LABORATORY", code: "PH19003", sem: "Sem 1", link_url: "https://www.iitkgp.ac.in/" },
-    // Semester 2
-    { title: "INTERACTIVE PHYSICS LABORATORY", code: "PH19004", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "LINEAR ALGEBRA, NUMERICAL & COMPLEX ANALYSIS", code: "MA11004", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "CHEMISTRY", code: "CY11003", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "ELECTRICAL TECHNOLOGY", code: "EE11003", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "BASIC ENGINEERING MECHANICS", code: "ME11003", sem: "Sem 2", link_url: "https://www.iitkgp.ac.in/" },
-    // Semester 3
     { title: "CLASSICAL DYNAMICS AND SPECIAL RELATIVITY", code: "PH21205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "ELECTROMAGNETISM", code: "PH21209", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "MATHEMATICS FOR PHYSICS - I", code: "PH20206", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "PROBABILITY AND STATISTICS", code: "MA20205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "ELECTROMAGNETISM LAB", code: "PH29207", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "GENERAL PROPERTIES OF MATTER LAB", code: "PH29205", sem: "Sem 3", link_url: "https://www.iitkgp.ac.in/" },
-    // Semester 4
     { title: "QUANTUM PHYSICS", code: "PH21212", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "THERMAL PHYSICS", code: "PH21210", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "OPTICS", code: "PH21214", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "THE ESSENTIALS OF MACHINE LEARNING", code: "AI20001", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "THERMAL PHYSICS LAB", code: "PH29208", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "OPTICS LAB", code: "PH29212", sem: "Sem 4", link_url: "https://www.iitkgp.ac.in/" },
-    // Semester 5
-    { title: "CLASSICAL MECHANICS", code: "PH31207", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
     { title: "ELECTRODYNAMICS", code: "PH31205", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "QUANTUM MECHANICS", code: "PH31201", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "MATHEMATICS FOR PHYSICS II", code: "PH30207", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "COMPUTATIONAL PHYSICS", code: "PH30201", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "COMPUTATIONAL PHYSICS LAB", code: "PH39209", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "MODERN PHYSICS LAB", code: "PH39201", sem: "Sem 5", link_url: "https://www.iitkgp.ac.in/" },
-    // Semester 6
-    { title: "STATISTICAL PHYSICS", code: "PH31202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "CONDENSED MATTER PHYSICS", code: "PH30204", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "ATOMIC AND MOLECULAR PHYSICS", code: "PH30202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "NUCLEAR PHYSICS", code: "PH30210", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "NUCLEAR PHYSICS LAB", code: "PH39204", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "CONDENSED MATTER PHYSICS LAB", code: "PH39202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    { title: "SPECTROSCOPY LAB", code: "PH39214", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" },
-    // Semester 7
-    { title: "SUMMER INTERNSHIP", code: "PH48201", sem: "Sem 7", link_url: "https://www.iitkgp.ac.in/" }
+    { title: "STATISTICAL PHYSICS", code: "PH31202", sem: "Sem 6", link_url: "https://www.iitkgp.ac.in/" }
   ];
 
   // Standard Default Internships / Fellowships
