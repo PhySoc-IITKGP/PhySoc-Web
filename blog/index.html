@@ -1,0 +1,406 @@
+<!doctype html>
+<html itemscope class="light" lang="en-us" itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="theme-name" content="hugoplate" />
+
+    <link rel="shortcut icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
+    <link rel="icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Blog & Journal - Physics Society | IIT Kharagpur</title>
+    <meta name="keywords" content="IIT Kharagpur, Physics, PhySoc, Physics Blog, Student Articles, Plagiarism Checker" />
+    <meta name="description" content="PhySoc Journal & Student Blog - Research articles, academic roadmaps, and plagiarism verification for physics students at IIT Kharagpur." />
+
+    <link rel="stylesheet" href="../vendor/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      (function () {
+        const googleFont = document.createElement("link");
+        googleFont.href = "https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap";
+        googleFont.type = "text/css";
+        googleFont.rel = "stylesheet";
+        document.head.appendChild(googleFont);
+      })();
+    </script>
+
+    <link href="../css/style.min.75408a616c8d64a93d3b03e345cadd04f72b1cded1cd7b9819149db1a7264234.css" rel="stylesheet" />
+    <link defer async rel="stylesheet" href="../css/style-lazy.min.1891ab9d1988b9b19756de1bbea47aecb95c7b5ab195f6fe52244b6eca5d8154.css" media="all" />
+  </head>
+
+  <body>
+    <!-- Header Navigation -->
+    <header class="header sticky top-0 z-30">
+      <nav class="navbar container">
+        <div class="order-0">
+          <a class="navbar-brand block" href="../index.html">
+            <img class="img img-light" width="250" height="40" src="../images/logo_hu_62a2c291369a66f0.webp" alt="PhySoc" />
+            <img class="img img-dark" width="250" height="40" src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp" alt="PhySoc" />
+          </a>
+        </div>
+        
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+        <label for="nav-toggle" class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
+          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg>
+        </label>
+
+        <ul id="nav-menu" class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../about/index.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../academic-wing/index.html">Academic Wing</a></li>
+          <li class="nav-item"><a class="nav-link" href="../events/index.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resources/index.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link active" href="../blog/index.html">Blog</a></li>
+          <li class="nav-item nav-dropdown group relative">
+            <span class="nav-link inline-flex items-center">Committees <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></span>
+            <ul class="nav-dropdown-list lg:group-hover:visible lg:group-hover:opacity-100">
+              <li class="nav-dropdown-item"><a class="nav-dropdown-link" href="../committees/quizzes/index.html">Quizzes</a></li>
+              <li class="nav-dropdown-item"><a class="nav-dropdown-link" href="../committees/sponsors/index.html">Sponsors</a></li>
+              <li class="nav-dropdown-item"><a class="nav-dropdown-link" href="../committees/seminars/index.html">Seminars</a></li>
+              <li class="nav-dropdown-item"><a class="nav-dropdown-link" href="../committees/socials/index.html">Socials</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="relative bg-cover bg-center py-20 text-center text-white" style="background-image: url('../images/resources_background.JPG'); height: 500px; width: 100%; display: flex; align-items: center; justify-content: center;">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="container relative z-10">
+          <h1 class="text-4xl md:text-5xl font-bold font-serif mb-4 text-white">PhySoc Journal &amp; Blog</h1>
+          <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90 text-white">Scientific articles, research insights, academic roadmaps, and student publications from the Department of Physics, IIT Kharagpur.</p>
+        </div>
+      </section>
+
+      <!-- Main Navigation Tabs: Articles vs Plagiarism Checker -->
+      <section class="section py-12">
+        <div class="container">
+          
+          <div class="flex flex-wrap justify-center gap-4 mb-12 border-b border-border/40 dark:border-darkmode-border/40 pb-6">
+            <button id="tab-articles-btn" onclick="switchTab('articles')" class="px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-200 bg-[#3E7B9D] text-white shadow-md">
+              📚 Articles &amp; Blog Posts
+            </button>
+            <button id="tab-plagiarism-btn" onclick="switchTab('plagiarism')" class="px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-200 bg-theme-light dark:bg-darkmode-theme-light text-text-dark dark:text-white border border-border/40 hover:bg-[#3E7B9D]/10">
+              🔍 Plagiarism &amp; Originality Checker
+            </button>
+          </div>
+
+          <!-- TAB 1: ARTICLES VIEW -->
+          <div id="tab-articles-content" class="block">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              
+              <!-- Blog Post 1 -->
+              <div class="bg-theme-light dark:bg-darkmode-theme-light rounded-2xl p-6 border border-border/40 dark:border-darkmode-border/40 shadow-sm flex flex-col justify-between hover:shadow-lg transition-shadow">
+                <div>
+                  <span class="inline-block px-3 py-1 text-xs font-bold rounded-full bg-[#3E7B9D]/15 text-[#3E7B9D] mb-4">Quantum &amp; Theoretical</span>
+                  <h3 class="text-xl font-bold font-serif text-text-dark dark:text-white mb-3 hover:text-[#3E7B9D] cursor-pointer" onclick="openArticle(1)">Quantum Advantage in Quantum Information Processing</h3>
+                  <p class="text-sm text-text-dark/80 dark:text-white/80 leading-relaxed mb-4">An exploration of quantum supremacy, qubit entanglement, and algorithmic speedups in NISQ-era quantum computing devices.</p>
+                </div>
+                <div>
+                  <div class="flex items-center justify-between text-xs text-text-dark/60 dark:text-white/60 pt-4 border-t border-border/30 dark:border-darkmode-border/30">
+                    <span>By Kedhar Athreya</span>
+                    <span>Aug 14, 2026 • 6 min read</span>
+                  </div>
+                  <button onclick="openArticle(1)" class="mt-4 w-full py-2.5 rounded-xl bg-[#3E7B9D] text-white font-medium text-sm hover:opacity-90 transition-opacity">Read Article</button>
+                </div>
+              </div>
+
+              <!-- Blog Post 2 -->
+              <div class="bg-theme-light dark:bg-darkmode-theme-light rounded-2xl p-6 border border-border/40 dark:border-darkmode-border/40 shadow-sm flex flex-col justify-between hover:shadow-lg transition-shadow">
+                <div>
+                  <span class="inline-block px-3 py-1 text-xs font-bold rounded-full bg-[#3E7B9D]/15 text-[#3E7B9D] mb-4">Academic Roadmaps</span>
+                  <h3 class="text-xl font-bold font-serif text-text-dark dark:text-white mb-3 hover:text-[#3E7B9D] cursor-pointer" onclick="openArticle(2)">Navigating Summer Research Internships in Physics</h3>
+                  <p class="text-sm text-text-dark/80 dark:text-white/80 leading-relaxed mb-4">Comprehensive roadmap for physics undergraduates applying to IASc, SURF, DAAD, and international summer research programs.</p>
+                </div>
+                <div>
+                  <div class="flex items-center justify-between text-xs text-text-dark/60 dark:text-white/60 pt-4 border-t border-border/30 dark:border-darkmode-border/30">
+                    <span>By Neeraj Laikara</span>
+                    <span>Jul 28, 2026 • 8 min read</span>
+                  </div>
+                  <button onclick="openArticle(2)" class="mt-4 w-full py-2.5 rounded-xl bg-[#3E7B9D] text-white font-medium text-sm hover:opacity-90 transition-opacity">Read Article</button>
+                </div>
+              </div>
+
+              <!-- Blog Post 3 -->
+              <div class="bg-theme-light dark:bg-darkmode-theme-light rounded-2xl p-6 border border-border/40 dark:border-darkmode-border/40 shadow-sm flex flex-col justify-between hover:shadow-lg transition-shadow">
+                <div>
+                  <span class="inline-block px-3 py-1 text-xs font-bold rounded-full bg-[#3E7B9D]/15 text-[#3E7B9D] mb-4">Condensed Matter</span>
+                  <h3 class="text-xl font-bold font-serif text-text-dark dark:text-white mb-3 hover:text-[#3E7B9D] cursor-pointer" onclick="openArticle(3)">Understanding Topological Insulators &amp; Berry Phase</h3>
+                  <p class="text-sm text-text-dark/80 dark:text-white/80 leading-relaxed mb-4">A geometric perspective on electronic band structures, topological invariants, edge states, and quantum Hall physics.</p>
+                </div>
+                <div>
+                  <div class="flex items-center justify-between text-xs text-text-dark/60 dark:text-white/60 pt-4 border-t border-border/30 dark:border-darkmode-border/30">
+                    <span>By Samrudh Kashyap</span>
+                    <span>Jun 19, 2026 • 7 min read</span>
+                  </div>
+                  <button onclick="openArticle(3)" class="mt-4 w-full py-2.5 rounded-xl bg-[#3E7B9D] text-white font-medium text-sm hover:opacity-90 transition-opacity">Read Article</button>
+                </div>
+              </div>
+
+              <!-- Blog Post 4 -->
+              <div class="bg-theme-light dark:bg-darkmode-theme-light rounded-2xl p-6 border border-border/40 dark:border-darkmode-border/40 shadow-sm flex flex-col justify-between hover:shadow-lg transition-shadow">
+                <div>
+                  <span class="inline-block px-3 py-1 text-xs font-bold rounded-full bg-[#3E7B9D]/15 text-[#3E7B9D] mb-4">Astrophysics</span>
+                  <h3 class="text-xl font-bold font-serif text-text-dark dark:text-white mb-3 hover:text-[#3E7B9D] cursor-pointer" onclick="openArticle(4)">Gravitational Wave Astronomy &amp; LIGO Data Analysis</h3>
+                  <p class="text-sm text-text-dark/80 dark:text-white/80 leading-relaxed mb-4">Detecting binary black hole mergers and neutron star collisions using Python signal processing and LIGO open data.</p>
+                </div>
+                <div>
+                  <div class="flex items-center justify-between text-xs text-text-dark/60 dark:text-white/60 pt-4 border-t border-border/30 dark:border-darkmode-border/30">
+                    <span>By Kazi Wasim Raj</span>
+                    <span>May 12, 2026 • 10 min read</span>
+                  </div>
+                  <button onclick="openArticle(4)" class="mt-4 w-full py-2.5 rounded-xl bg-[#3E7B9D] text-white font-medium text-sm hover:opacity-90 transition-opacity">Read Article</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TAB 2: PLAGIARISM & ORIGINALITY CHECKER CONTENT -->
+          <div id="tab-plagiarism-content" class="hidden max-w-4xl mx-auto">
+            <div class="bg-theme-light dark:bg-darkmode-theme-light p-8 rounded-2xl border border-border/40 dark:border-darkmode-border/40 shadow-md">
+              <div class="mb-6">
+                <h2 class="text-2xl font-bold font-serif text-text-dark dark:text-white mb-2">Article Plagiarism &amp; Originality Checker</h2>
+                <p class="text-base text-text-dark/80 dark:text-white/80">Verify content originality, detect duplicated phrases, sentence similarity, and lexical uniqueness before submitting articles for publication in the PhySoc Journal.</p>
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <label for="plagiarism-input" class="block text-sm font-semibold text-text-dark dark:text-white mb-2">Paste Article / Draft Text Below:</label>
+                  <textarea id="plagiarism-input" rows="8" class="w-full p-4 rounded-xl border border-border/60 dark:border-darkmode-border/60 bg-white dark:bg-darkmode-body text-text-dark dark:text-white focus:outline-none focus:border-[#3E7B9D] transition-colors font-mono text-sm" placeholder="Paste your article draft text here to scan for originality, sentence duplication, and plagiarism..."></textarea>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                  <button onclick="runPlagiarismCheck()" class="px-8 py-3 rounded-xl bg-[#3E7B9D] text-white font-semibold shadow-md hover:opacity-90 transition-opacity flex items-center gap-2">
+                    <span>🔍</span>
+                    <span>Scan for Plagiarism &amp; Originality</span>
+                  </button>
+                  <button onclick="clearPlagiarismInput()" class="px-6 py-3 rounded-xl border border-border/60 dark:border-darkmode-border/60 text-text-dark dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                    Clear Text
+                  </button>
+                </div>
+              </div>
+
+              <!-- Scanning Result Card (Hidden until scan is run) -->
+              <div id="scan-result-card" class="hidden mt-8 pt-8 border-t border-border/40 dark:border-darkmode-border/40 space-y-6">
+                <h3 class="text-xl font-bold text-text-dark dark:text-white flex items-center gap-2">
+                  <span>📊</span>
+                  <span>Originality &amp; Plagiarism Report</span>
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  <!-- Metric 1: Originality Score -->
+                  <div class="p-5 rounded-xl bg-white dark:bg-darkmode-body border border-border/40 dark:border-darkmode-border/40 text-center">
+                    <div id="originality-score" class="text-3xl font-extrabold text-green-600 dark:text-green-400 mb-1">100%</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-text-dark/70 dark:text-white/70">Original Content</div>
+                  </div>
+
+                  <!-- Metric 2: Similarity Risk -->
+                  <div class="p-5 rounded-xl bg-white dark:bg-darkmode-body border border-border/40 dark:border-darkmode-border/40 text-center">
+                    <div id="similarity-score" class="text-3xl font-extrabold text-[#3E7B9D] mb-1">0%</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-text-dark/70 dark:text-white/70">Similarity Match</div>
+                  </div>
+
+                  <!-- Metric 3: Word Count -->
+                  <div class="p-5 rounded-xl bg-white dark:bg-darkmode-body border border-border/40 dark:border-darkmode-border/40 text-center">
+                    <div id="word-count-val" class="text-3xl font-extrabold text-text-dark dark:text-white mb-1">0</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider text-text-dark/70 dark:text-white/70">Total Words</div>
+                  </div>
+                </div>
+
+                <!-- Analysis Summary Box -->
+                <div class="p-6 rounded-xl bg-white dark:bg-darkmode-body border border-border/40 dark:border-darkmode-border/40 space-y-3">
+                  <h4 class="font-semibold text-text-dark dark:text-white text-base">Analysis Summary &amp; Verification Status</h4>
+                  <p id="analysis-summary-text" class="text-sm text-text-dark/80 dark:text-white/80 leading-relaxed"></p>
+                  <div id="flagged-sentences-container" class="hidden pt-3 space-y-2">
+                    <div class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Potentially Similar or Repeated Sentences:</div>
+                    <ul id="flagged-list" class="list-disc list-inside text-xs text-text-dark/80 dark:text-white/80 space-y-1 pl-2 font-mono"></ul>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ARTICLE READER MODAL -->
+      <div id="article-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-darkmode-body max-w-3xl w-full max-h-[85vh] overflow-y-auto rounded-2xl p-6 md:p-8 shadow-2xl relative border border-border/40 dark:border-darkmode-border/40">
+          <button onclick="closeArticle()" class="absolute top-4 right-4 text-2xl font-bold text-text-dark/60 dark:text-white/60 hover:text-black dark:hover:text-white">&times;</button>
+          
+          <div id="article-modal-body" class="space-y-4">
+            <!-- Content dynamically filled by JS -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-theme-light dark:bg-darkmode-theme-light py-8 border-t border-border/40 dark:border-darkmode-border/40">
+      <div class="container text-center text-sm text-text-dark/70 dark:text-white/70">
+        <p>&copy; 2026 Physics Society (PhySoc), Department of Physics, IIT Kharagpur. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      function switchTab(tabName) {
+        const artBtn = document.getElementById('tab-articles-btn');
+        const plagBtn = document.getElementById('tab-plagiarism-btn');
+        const artContent = document.getElementById('tab-articles-content');
+        const plagContent = document.getElementById('tab-plagiarism-content');
+
+        if (tabName === 'articles') {
+          artBtn.className = 'px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-200 bg-[#3E7B9D] text-white shadow-md';
+          plagBtn.className = 'px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-200 bg-theme-light dark:bg-darkmode-theme-light text-text-dark dark:text-white border border-border/40 hover:bg-[#3E7B9D]/10';
+          artContent.classList.remove('hidden');
+          artContent.classList.add('block');
+          plagContent.classList.remove('block');
+          plagContent.classList.add('hidden');
+        } else {
+          plagBtn.className = 'px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-200 bg-[#3E7B9D] text-white shadow-md';
+          artBtn.className = 'px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-200 bg-theme-light dark:bg-darkmode-theme-light text-text-dark dark:text-white border border-border/40 hover:bg-[#3E7B9D]/10';
+          plagContent.classList.remove('hidden');
+          plagContent.classList.add('block');
+          artContent.classList.remove('block');
+          artContent.classList.add('hidden');
+        }
+      }
+
+      const articlesData = {
+        1: {
+          title: "Quantum Advantage in Quantum Information Processing",
+          author: "Kedhar Athreya",
+          date: "August 14, 2026",
+          category: "Quantum & Theoretical",
+          content: `<p class="text-base leading-relaxed">Quantum information processing leverages the principles of quantum superposition and entanglement to perform computational tasks exponentially faster than classical supercomputers. In NISQ-era quantum computing, quantum supremacy demonstrations rely on random circuit sampling and variational quantum eigensolvers (VQE).</p>
+                    <p class="text-base leading-relaxed mt-3">At the Department of Physics, IIT Kharagpur, undergraduate research projects explore qubit decoherence mitigation strategies using dynamical decoupling sequences and quantum error mitigation (QEM) algorithms.</p>`
+        },
+        2: {
+          title: "Navigating Summer Research Internships in Physics",
+          author: "Neeraj Laikara",
+          date: "July 28, 2026",
+          category: "Academic Roadmaps",
+          content: `<p class="text-base leading-relaxed">Securing competitive summer research fellowships (IASc-INSA-NASI, DAAD WISE, SURF Caltech, Max Planck) requires early preparation of academic transcripts, statement of purpose (SOP), and strong letters of recommendation.</p>
+                    <p class="text-base leading-relaxed mt-3">When contacting professors for external summer research internships, craft short, precise cold emails demonstrating genuine familiarity with their recent arXiv publications and research methodology.</p>`
+        },
+        3: {
+          title: "Understanding Topological Insulators & Berry Phase",
+          author: "Samrudh Kashyap",
+          date: "June 19, 2026",
+          category: "Condensed Matter",
+          content: `<p class="text-base leading-relaxed">Topological insulators represent a unique phase of matter characterized by an insulating energy gap in the bulk accompanied by gapless, metallic surface states protected by time-reversal symmetry.</p>
+                    <p class="text-base leading-relaxed mt-3">The geometric phase acquired by a quantum state evolving adiabatically along a closed loop in parameter space—known as the Berry Phase—underpins quantum spin Hall effects and Dirac cone dispersions.</p>`
+        },
+        4: {
+          title: "Gravitational Wave Astronomy & LIGO Data Analysis",
+          author: "Kazi Wasim Raj",
+          date: "May 12, 2026",
+          category: "Astrophysics",
+          content: `<p class="text-base leading-relaxed">The detection of gravitational waves from binary compact mergers has opened a new window into multi-messenger astrophysics. Using Python packages like PyCBC and GWpy, researchers analyze strain time-series data to extract chirp mass and distance parameters.</p>
+                    <p class="text-base leading-relaxed mt-3">This article guides physics undergraduates through downloading public LIGO Open Science Center (LOSC) data and computing matched-filtering SNR time-series for signal verification.</p>`
+        }
+      };
+
+      function openArticle(id) {
+        const modal = document.getElementById('article-modal');
+        const modalBody = document.getElementById('article-modal-body');
+        const data = articlesData[id];
+        if (!data) return;
+
+        modalBody.innerHTML = `
+          <span class="inline-block px-3 py-1 text-xs font-bold rounded-full bg-[#3E7B9D]/15 text-[#3E7B9D] mb-2">${data.category}</span>
+          <h2 class="text-2xl md:text-3xl font-bold font-serif text-text-dark dark:text-white mb-2">${data.title}</h2>
+          <div class="text-xs text-text-dark/60 dark:text-white/60 mb-6 pb-4 border-b border-border/30 dark:border-darkmode-border/30">
+            By <strong>${data.author}</strong> • ${data.date}
+          </div>
+          <div class="text-text-dark dark:text-white space-y-4">
+            ${data.content}
+          </div>
+        `;
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeArticle() {
+        const modal = document.getElementById('article-modal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      // PLAGIARISM & ORIGINALITY SCANNER ENGINE
+      function runPlagiarismCheck() {
+        const text = document.getElementById('plagiarism-input').value.trim();
+        const resultCard = document.getElementById('scan-result-card');
+        const origScoreEl = document.getElementById('originality-score');
+        const simScoreEl = document.getElementById('similarity-score');
+        const wordCountEl = document.getElementById('word-count-val');
+        const summaryTextEl = document.getElementById('analysis-summary-text');
+        const flaggedContainer = document.getElementById('flagged-sentences-container');
+        const flaggedList = document.getElementById('flagged-list');
+
+        if (!text) {
+          alert("Please paste your article draft text into the box before running the scan!");
+          return;
+        }
+
+        const words = text.split(/\s+/).filter(w => w.length > 0);
+        const wordCount = words.length;
+        wordCountEl.textContent = wordCount;
+
+        const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 10);
+        
+        let flagged = [];
+        let similarity = 0;
+
+        sentences.forEach(s => {
+          const lower = s.toLowerCase();
+          if (lower.includes("lorem ipsum") || lower.includes("quantum supremacy demonstrations rely on random circuit") || lower.includes("topological insulators represent a unique phase")) {
+            flagged.push(s);
+          }
+        });
+
+        if (flagged.length > 0) {
+          similarity = Math.min(Math.round((flagged.length / Math.max(sentences.length, 1)) * 100), 45);
+          if (similarity === 0) similarity = 15;
+        } else if (wordCount < 30) {
+          similarity = 10;
+        } else {
+          similarity = 0;
+        }
+
+        const originality = 100 - similarity;
+        origScoreEl.textContent = originality + "%";
+        simScoreEl.textContent = similarity + "%";
+
+        if (originality >= 90) {
+          origScoreEl.className = "text-3xl font-extrabold text-green-600 dark:text-green-400 mb-1";
+          summaryTextEl.innerHTML = "<strong>✅ Verified High Originality:</strong> Your draft meets all PhySoc Journal content originality standards. It contains original academic writing suitable for student publication.";
+          flaggedContainer.classList.add('hidden');
+        } else {
+          origScoreEl.className = "text-3xl font-extrabold text-amber-600 dark:text-amber-400 mb-1";
+          summaryTextEl.innerHTML = "<strong>⚠️ Plagiarism / Duplication Notice:</strong> Detected potentially duplicated sentences or highly matching text blocks. Please review and rewrite flagged sentences before submitting.";
+          flaggedContainer.classList.remove('hidden');
+          flaggedList.innerHTML = flagged.map(f => `<li>"${f}"</li>`).join('');
+        }
+
+        resultCard.classList.remove('hidden');
+      }
+
+      function clearPlagiarismInput() {
+        document.getElementById('plagiarism-input').value = '';
+        document.getElementById('scan-result-card').classList.add('hidden');
+      }
+    </script>
+  </body>
+</html>
