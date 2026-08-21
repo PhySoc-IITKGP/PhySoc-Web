@@ -1,5 +1,5 @@
-// PhySoc IIT Kharagpur - PWA Service Worker & Push Notification Handler
-const CACHE_NAME = 'physoc-cache-v2';
+// PhySoc IIT Kharagpur - PWA Service Worker with Background Sync & Push
+const CACHE_NAME = 'physoc-cache-v3';
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
@@ -37,7 +37,35 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Push Notification Event Listener
+// Helper: Check Calendar in Background
+async function checkCalendarInBackground() {
+  try {
+    const res = await fetch('/api/calendar-events');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.events || data.events.length === 0) return;
+
+    const latest = data.events[0];
+    self.registration.showNotification('📅 PhySoc Event Alert: ' + latest.title, {
+      body: latest.description ? latest.description.slice(0, 100) : 'Check calendar for latest schedule!',
+      icon: '/images/icon-192.png',
+      badge: '/images/icon-192.png',
+      vibrate: [200, 100, 200],
+      tag: 'physoc-bg-sync',
+      renotify: true,
+      data: { url: '/events/index.html' }
+    });
+  } catch(e) {}
+}
+
+// Periodic Background Sync (runs in background on Android/Chrome)
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'physoc-calendar-sync') {
+    event.waitUntil(checkCalendarInBackground());
+  }
+});
+
+// Push Notification Event Listener (for cloud push)
 self.addEventListener('push', (event) => {
   let data = { title: 'PhySoc IIT Kharagpur', body: 'New physics event updated! Check calendar for details.', icon: '/images/icon-192.png', url: '/events/index.html' };
   
@@ -54,6 +82,8 @@ self.addEventListener('push', (event) => {
     icon: data.icon || '/images/icon-192.png',
     badge: '/images/icon-192.png',
     vibrate: [200, 100, 200],
+    tag: 'physoc-push-' + Date.now(),
+    renotify: true,
     data: {
       url: data.url || '/events/index.html'
     }
