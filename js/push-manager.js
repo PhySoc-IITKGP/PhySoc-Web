@@ -1,21 +1,11 @@
-// PhySoc IIT Kharagpur - PWA Service Worker, Push Notifications & Auto Event Sync Engine
+// PhySoc IIT Kharagpur - PWA Service Worker & Real-Time Event Push Notification Engine
 (function() {
-  window.deferredPWAInstallPrompt = null;
-
-  // 1. Listen for Chrome/Android/Edge beforeinstallprompt event
-  window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault();
-    window.deferredPWAInstallPrompt = e;
-    console.log('PWA beforeinstallprompt event captured');
-    showInstallPromptUI();
-  });
-
-  // 2. Register PWA Service Worker
+  // 1. Service Worker Registration
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('/service-worker.js')
         .then(function(reg) {
-          console.log('PhySoc Service Worker registered successfully:', reg.scope);
+          console.log('PhySoc Service Worker registered:', reg.scope);
         })
         .catch(function(err) {
           console.log('Service Worker registration failed:', err);
@@ -23,166 +13,210 @@
     });
   }
 
-  // 3. Trigger PWA App Installation
-  window.triggerPWAInstall = function() {
-    if (window.deferredPWAInstallPrompt) {
-      window.deferredPWAInstallPrompt.prompt();
-      window.deferredPWAInstallPrompt.userChoice.then(function(choiceResult) {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted PWA installation');
-        }
-        window.deferredPWAInstallPrompt = null;
-      });
-    } else {
-      alert("To install PhySoc App on your device:\n\n1. Tap your browser menu (⋮ or share icon)\n2. Select 'Add to Home Screen' or 'Install App'");
-    }
-  };
-
-  // 4. Helper to Dispatch Native Web Push Notification
+  // 2. Dispatch Push Notification via Service Worker or Web Notification API
   window.sendPhySocNotification = function(title, body, url) {
     if (!('Notification' in window)) return;
     if (Notification.permission === 'granted') {
+      const notifOptions = {
+        body: body || 'New physics event update on PhySoc Calendar!',
+        icon: '/images/icon-192.png',
+        badge: '/images/icon-192.png',
+        vibrate: [200, 100, 200],
+        tag: 'physoc-event-' + Date.now(),
+        renotify: true,
+        data: { url: url || '/events/index.html' }
+      };
+
       if (navigator.serviceWorker && navigator.serviceWorker.controller) {
         navigator.serviceWorker.ready.then(function(reg) {
-          reg.showNotification(title || 'PhySoc IIT Kharagpur', {
-            body: body || 'New physics event updated! Check calendar for details.',
-            icon: '/images/icon-192.png',
-            badge: '/images/icon-192.png',
-            vibrate: [100, 50, 100],
-            data: { url: url || '/events/index.html' }
-          });
+          reg.showNotification(title || 'PhySoc IIT Kharagpur', notifOptions);
         });
       } else {
-        new Notification(title || 'PhySoc IIT Kharagpur', {
-          body: body || 'New physics event updated! Check calendar for details.',
-          icon: '/images/icon-192.png'
-        });
+        new Notification(title || 'PhySoc IIT Kharagpur', notifOptions);
       }
     }
   };
 
-  // 5. Automatic Live Event Sync & Notification Dispatcher
+  // 3. Client-Side iCal Parser Fallback (for static environments)
+  function parseIcalFallback(rawText) {
+    try {
+      const unfolded = rawText.replace(/\r?\n[ \t]/g, '');
+      const blocks = unfolded.split('BEGIN:VEVENT');
+      const events = [];
+      for (let i = 1; i < blocks.length; i++) {
+        const b = blocks[i].split('END:VEVENT')[0];
+        const getVal = function(key) {
+          const m = b.match(new RegExp('^' + key + '[:;](.*?)$', 'm'));
+          if (!m) return '';
+          let val = m[1];
+          if (val.indexOf(';') !== -1 && val.indexOf(':') !== -1) {
+            val = val.split(':').slice(1).join(':');
+          }
+          return val.replace(/\\,/g, ',').replace(/\\;/g, ';').replace(/\\n/g, ' ').trim();
+        };
+        const summary = getVal('SUMMARY');
+        if (summary) {
+          events.push({
+            uid: getVal('UID') || String(i),
+            title: summary,
+            start: getVal('DTSTART'),
+            description: getVal('DESCRIPTION'),
+            location: getVal('LOCATION'),
+            lastModified: getVal('LAST-MODIFIED') || getVal('DTSTAMP')
+          });
+        }
+      }
+      return events;
+    } catch(e) {
+      return [];
+    }
+  }
+
+  // 4. Format iCal Date
+  function formatIcalDate(dt) {
+    if (!dt) return '';
+    try {
+      // Format: YYYYMMDDTHHMMSSZ or VALUE=DATE:YYYYMMDD or YYYYMMDD
+      const clean = dt.replace(/^.*:/, '');
+      if (clean.length >= 8) {
+        const y = clean.substring(0, 4);
+        const m = clean.substring(4, 6);
+        const d = clean.substring(6, 8);
+        return d + '/' + m + '/' + y;
+      }
+    } catch(e){}
+    return '';
+  }
+
+  // 5. Automated Real-Time Calendar Sync & Event Detection
   async function syncCalendarAndNotify() {
+    let events = [];
+
+    // Try Vercel API endpoint first
     try {
       const res = await fetch('/api/calendar-events');
-      if (!res.ok) return;
-      const data = await res.json();
-      if (!data.events || data.events.length === 0) return;
+      if (res.ok) {
+        const data = await res.json();
+        if (data.events && data.events.length > 0) {
+          events = data.events;
+        }
+      }
+    } catch(e) {}
 
-      const latestEvent = data.events[0];
-      const lastSeenUid = localStorage.getItem('physoc_last_seen_event_uid');
+    // Fallback if API was unavailable
+    if (events.length === 0) {
+      try {
+        const icalUrl = 'https://calendar.google.com/calendar/ical/409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com/public/basic.ics';
+        const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(icalUrl);
+        const res = await fetch(proxyUrl);
+        if (res.ok) {
+          const raw = await res.text();
+          events = parseIcalFallback(raw);
+        }
+      } catch(e) {}
+    }
 
-      if (lastSeenUid && lastSeenUid !== latestEvent.uid) {
-        // New event detected!
+    if (events.length === 0) return;
+
+    // Build event fingerprint dictionary: { [uid]: { title, lastModified, desc } }
+    const currentFingerprint = {};
+    events.forEach(function(ev) {
+      currentFingerprint[ev.uid] = {
+        title: ev.title,
+        lastModified: ev.lastModified || '',
+        start: ev.start || '',
+        desc: ev.description || ''
+      };
+    });
+
+    const cachedRaw = localStorage.getItem('physoc_events_cache_v3');
+
+    if (!cachedRaw) {
+      // First time user with permissions enabled: notify about the nearest upcoming event
+      const upcoming = events[0];
+      if (upcoming) {
+        const dateStr = formatIcalDate(upcoming.start);
         sendPhySocNotification(
-          '📅 New Event: ' + latestEvent.title,
-          latestEvent.description ? latestEvent.description.slice(0, 120) + '...' : 'A new event has been added to the PhySoc calendar!',
+          '📅 PhySoc Event: ' + upcoming.title,
+          (dateStr ? 'Date: ' + dateStr + ' • ' : '') + (upcoming.description ? upcoming.description.slice(0, 100) : 'Check website calendar for details!'),
           '/events/index.html'
         );
       }
-
-      // Save latest event UID
-      localStorage.setItem('physoc_last_seen_event_uid', latestEvent.uid);
-    } catch (e) {
-      console.log('Calendar sync error:', e);
-    }
-  }
-
-  // 6. Show PWA Install Prompt Banner UI
-  function showInstallPromptUI() {
-    let banner = document.getElementById('physoc-pwa-install-card');
-    if (banner) return;
-
-    try {
-      if (localStorage.getItem('physoc_pwa_install_dismissed')) return;
-    } catch(e){}
-
-    banner = document.createElement('div');
-    banner.id = 'physoc-pwa-install-card';
-    banner.className = 'fixed bottom-4 left-4 z-50 max-w-sm bg-white dark:bg-darkmode-theme-light p-5 rounded-2xl shadow-2xl border border-border/40 dark:border-darkmode-border/40 transition-all duration-300 transform translate-y-0';
-    banner.innerHTML = `
-      <div class="flex items-start gap-3">
-        <img src="/images/icon-192.png" alt="PhySoc" class="w-12 h-12 rounded-xl shadow-sm object-cover" />
-        <div class="flex-1">
-          <h4 class="font-bold text-base text-text-dark dark:text-white mb-1">Install PhySoc App</h4>
-          <p class="text-xs text-text-dark/80 dark:text-white/80 leading-relaxed mb-4">Install the Physics Society app on your home screen for fast access &amp; instant event alerts!</p>
-          <div class="flex items-center gap-2">
-            <button onclick="triggerPWAInstall(); document.getElementById('physoc-pwa-install-card').remove();" class="px-4 py-2 rounded-xl bg-[#3E7B9D] text-white text-xs font-semibold shadow hover:opacity-90 transition-opacity flex items-center gap-1.5">
-              <span>📲</span>
-              <span>Install App</span>
-            </button>
-            <button onclick="document.getElementById('physoc-pwa-install-card').remove(); try{localStorage.setItem('physoc_pwa_install_dismissed', 'true');}catch(e){}" class="px-3 py-2 rounded-xl border border-border/40 text-text-dark/70 dark:text-white/70 text-xs font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-              Later
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(banner);
-  }
-
-  // 7. Notification Permission Banner UI
-  function initNotificationUI() {
-    if (!('Notification' in window)) return;
-    if (Notification.permission !== 'default') {
-      // If already granted, run live calendar sync check
-      syncCalendarAndNotify();
-      return;
-    }
-
-    try {
-      if (localStorage.getItem('physoc_notif_dismissed')) return;
-    } catch(e){}
-
-    const banner = document.createElement('div');
-    banner.id = 'physoc-push-banner';
-    banner.className = 'fixed bottom-4 right-4 z-50 max-w-sm bg-white dark:bg-darkmode-theme-light p-5 rounded-2xl shadow-2xl border border-border/40 dark:border-darkmode-border/40 transition-all duration-300 transform translate-y-0';
-    banner.innerHTML = `
-      <div class="flex items-start gap-3">
-        <div class="text-3xl select-none">🔔</div>
-        <div class="flex-1">
-          <h4 class="font-bold text-base text-text-dark dark:text-white mb-1">Get PhySoc Event Alerts</h4>
-          <p class="text-xs text-text-dark/80 dark:text-white/80 leading-relaxed mb-4">Enable notifications to receive instant updates for Physics Competitions, Telescope Observation Nights, Workshops &amp; Announcements!</p>
-          <div class="flex items-center gap-2">
-            <button id="enable-notif-btn" class="px-4 py-2 rounded-xl bg-[#3E7B9D] text-white text-xs font-semibold shadow hover:opacity-90 transition-opacity">
-              Enable Alerts
-            </button>
-            <button id="dismiss-notif-btn" class="px-3 py-2 rounded-xl border border-border/40 text-text-dark/70 dark:text-white/70 text-xs font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-              Later
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(banner);
-
-    document.getElementById('enable-notif-btn').addEventListener('click', function() {
-      Notification.requestPermission().then(function(permission) {
-        if (permission === 'granted') {
-          banner.remove();
-          sendPhySocNotification(
-            '🔔 PhySoc Notifications Enabled!',
-            'You will now receive instant updates on your phone & desktop whenever new physics events or announcements are posted.',
-            '/events/index.html'
-          );
-          syncCalendarAndNotify();
-        } else {
-          banner.remove();
-        }
-      });
-    });
-
-    document.getElementById('dismiss-notif-btn').addEventListener('click', function() {
-      banner.remove();
+    } else {
+      // Compare against cached fingerprint to detect NEW or MODIFIED events
       try {
-        localStorage.setItem('physoc_notif_dismissed', 'true');
-      } catch(e){}
-    });
+        const cached = JSON.parse(cachedRaw);
+        let notifiedCount = 0;
+
+        for (let i = 0; i < events.length; i++) {
+          const ev = events[i];
+          const prev = cached[ev.uid];
+
+          if (!prev) {
+            // New event added!
+            const dateStr = formatIcalDate(ev.start);
+            sendPhySocNotification(
+              '🎉 New Event Added: ' + ev.title,
+              (dateStr ? 'Date: ' + dateStr + ' • ' : '') + (ev.description ? ev.description.slice(0, 100) : 'New event on PhySoc calendar!'),
+              '/events/index.html'
+            );
+            notifiedCount++;
+            break; // Notify 1 at a time to avoid spamming
+          } else if (prev.lastModified !== ev.lastModified || prev.title !== ev.title || prev.desc !== ev.description) {
+            // Event was updated/modified!
+            const dateStr = formatIcalDate(ev.start);
+            sendPhySocNotification(
+              '🔔 Event Updated: ' + ev.title,
+              (dateStr ? 'Date: ' + dateStr + ' • ' : '') + (ev.description ? ev.description.slice(0, 100) : 'Event details updated on calendar!'),
+              '/events/index.html'
+            );
+            notifiedCount++;
+            break;
+          }
+        }
+      } catch(e) {}
+    }
+
+    // Save latest state
+    localStorage.setItem('physoc_events_cache_v3', JSON.stringify(currentFingerprint));
+  }
+
+  // 6. Seamless Automatic Permission Request & Real-Time Sync (No annoying popups/tabs!)
+  function initLiveNotifications() {
+    if (!('Notification' in window)) return;
+
+    if (Notification.permission === 'granted') {
+      // Permission already granted: sync events immediately
+      syncCalendarAndNotify();
+      // Periodically check for event updates every 30 seconds while user is browsing
+      setInterval(syncCalendarAndNotify, 30000);
+    } else if (Notification.permission === 'default') {
+      // Automatically request permission on first user interaction or page load
+      const requestSilentPermission = function() {
+        Notification.requestPermission().then(function(perm) {
+          if (perm === 'granted') {
+            syncCalendarAndNotify();
+            setInterval(syncCalendarAndNotify, 30000);
+          }
+        });
+        document.removeEventListener('click', requestSilentPermission);
+      };
+      document.addEventListener('click', requestSilentPermission, { once: true });
+      // Also try calling it after 2 seconds
+      setTimeout(function() {
+        if (Notification.permission === 'default') {
+          Notification.requestPermission().then(function(perm) {
+            if (perm === 'granted') {
+              syncCalendarAndNotify();
+              setInterval(syncCalendarAndNotify, 30000);
+            }
+          }).catch(function(){});
+        }
+      }, 2000);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initNotificationUI, 1500);
+    initLiveNotifications();
   });
 })();
