@@ -3,7 +3,7 @@
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register(window.location.origin + '/service-worker.js')
+      navigator.serviceWorker.register('/service-worker.js')
         .then(function(reg) {
           console.log('PhySoc Service Worker registered successfully:', reg.scope);
         })
