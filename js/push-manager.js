@@ -6,17 +6,6 @@
       navigator.serviceWorker.register('/service-worker.js')
         .then(function(reg) {
           console.log('PhySoc Service Worker registered:', reg.scope);
-          if ('periodicSync' in reg) {
-            try {
-              reg.periodicSync.register('physoc-calendar-sync', {
-                minInterval: 15 * 60 * 1000
-              }).then(function() {
-                console.log('Periodic Background Sync registered successfully!');
-              }).catch(function(e) {
-                console.log('Periodic sync registration:', e);
-              });
-            } catch(e){}
-          }
         })
         .catch(function(err) {
           console.log('Service Worker registration failed:', err);
