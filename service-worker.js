@@ -1,5 +1,5 @@
 // PhySoc IIT Kharagpur - PWA Service Worker & Push Notification Handler
-const CACHE_NAME = 'physoc-cache-v2';
+const CACHE_NAME = 'physoc-cache-v1';
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
@@ -7,8 +7,7 @@ const URLS_TO_CACHE = [
   '/resources/index.html',
   '/about/index.html',
   '/manifest.webmanifest',
-  '/images/icon-192.png',
-  '/images/icon-512.png'
+  '/images/logo2_hu_20f6f98a0862d010.png'
 ];
 
 // Install Event
@@ -39,7 +38,7 @@ self.addEventListener('activate', (event) => {
 
 // Push Notification Event Listener
 self.addEventListener('push', (event) => {
-  let data = { title: 'PhySoc IIT Kharagpur', body: 'New physics event updated! Check calendar for details.', icon: '/images/icon-192.png', url: '/events/index.html' };
+  let data = { title: 'PhySoc IIT Kharagpur', body: 'New physics event updated! Check calendar for details.', icon: '/images/logo2_hu_20f6f98a0862d010.png', url: '/events/index.html' };
   
   if (event.data) {
     try {
@@ -51,12 +50,16 @@ self.addEventListener('push', (event) => {
 
   const options = {
     body: data.body,
-    icon: data.icon || '/images/icon-192.png',
-    badge: '/images/icon-192.png',
-    vibrate: [200, 100, 200],
+    icon: data.icon || '/images/logo2_hu_20f6f98a0862d010.png',
+    badge: '/images/logo2_hu_20f6f98a0862d010.png',
+    vibrate: [100, 50, 100],
     data: {
       url: data.url || '/events/index.html'
-    }
+    },
+    actions: [
+      { action: 'open_events', title: '📅 View Events' },
+      { action: 'close', title: 'Close' }
+    ]
   };
 
   event.waitUntil(
@@ -67,6 +70,8 @@ self.addEventListener('push', (event) => {
 // Notification Click Listener
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
+
+  if (event.action === 'close') return;
 
   const targetUrl = (event.notification.data && event.notification.data.url) ? event.notification.data.url : '/events/index.html';
 
