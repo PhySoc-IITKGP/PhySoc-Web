@@ -1,8 +1,8 @@
-// PhySoc IIT Kharagpur - PWA Service Worker, Push Notifications & Auto Event Sync Engine
+// PhySoc IIT Kharagpur - PWA Service Worker, Push Notifications & Install App Manager
 (function() {
   window.deferredPWAInstallPrompt = null;
 
-  // 1. Listen for Chrome/Android/Edge beforeinstallprompt event
+  // Listen for Chrome/Android/Edge beforeinstallprompt event
   window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();
     window.deferredPWAInstallPrompt = e;
@@ -10,10 +10,10 @@
     showInstallPromptUI();
   });
 
-  // 2. Register PWA Service Worker
+  // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/service-worker.js')
+      navigator.serviceWorker.register(window.location.origin + '/service-worker.js')
         .then(function(reg) {
           console.log('PhySoc Service Worker registered successfully:', reg.scope);
         })
@@ -23,22 +23,24 @@
     });
   }
 
-  // 3. Trigger PWA App Installation
+  // Trigger PWA App Installation
   window.triggerPWAInstall = function() {
     if (window.deferredPWAInstallPrompt) {
       window.deferredPWAInstallPrompt.prompt();
       window.deferredPWAInstallPrompt.userChoice.then(function(choiceResult) {
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted PWA installation');
+          const btn = document.getElementById('pwa-install-btn-nav');
+          if (btn) btn.style.display = 'none';
         }
         window.deferredPWAInstallPrompt = null;
       });
     } else {
-      alert("To install PhySoc App on your device:\n\n1. Tap your browser menu (⋮ or share icon)\n2. Select 'Add to Home Screen' or 'Install App'");
+      alert("To install PhySoc App on your phone/computer:\n\n1. Tap your browser menu (⋮ or share button)\n2. Select 'Add to Home Screen' or 'Install App'");
     }
   };
 
-  // 4. Helper to Dispatch Native Web Push Notification
+  // Helper to show Push Notification
   window.sendPhySocNotification = function(title, body, url) {
     if (!('Notification' in window)) return;
     if (Notification.permission === 'granted') {
@@ -61,34 +63,7 @@
     }
   };
 
-  // 5. Automatic Live Event Sync & Notification Dispatcher
-  async function syncCalendarAndNotify() {
-    try {
-      const res = await fetch('/api/calendar-events');
-      if (!res.ok) return;
-      const data = await res.json();
-      if (!data.events || data.events.length === 0) return;
-
-      const latestEvent = data.events[0];
-      const lastSeenUid = localStorage.getItem('physoc_last_seen_event_uid');
-
-      if (lastSeenUid && lastSeenUid !== latestEvent.uid) {
-        // New event detected!
-        sendPhySocNotification(
-          '📅 New Event: ' + latestEvent.title,
-          latestEvent.description ? latestEvent.description.slice(0, 120) + '...' : 'A new event has been added to the PhySoc calendar!',
-          '/events/index.html'
-        );
-      }
-
-      // Save latest event UID
-      localStorage.setItem('physoc_last_seen_event_uid', latestEvent.uid);
-    } catch (e) {
-      console.log('Calendar sync error:', e);
-    }
-  }
-
-  // 6. Show PWA Install Prompt Banner UI
+  // Show PWA Install Prompt Banner UI
   function showInstallPromptUI() {
     let banner = document.getElementById('physoc-pwa-install-card');
     if (banner) return;
@@ -122,14 +97,10 @@
     document.body.appendChild(banner);
   }
 
-  // 7. Notification Permission Banner UI
+  // Notification Subscription Banner UI
   function initNotificationUI() {
     if (!('Notification' in window)) return;
-    if (Notification.permission !== 'default') {
-      // If already granted, run live calendar sync check
-      syncCalendarAndNotify();
-      return;
-    }
+    if (Notification.permission !== 'default') return;
 
     try {
       if (localStorage.getItem('physoc_notif_dismissed')) return;
@@ -167,7 +138,6 @@
             'You will now receive instant updates on your phone & desktop whenever new physics events or announcements are posted.',
             '/events/index.html'
           );
-          syncCalendarAndNotify();
         } else {
           banner.remove();
         }
@@ -183,6 +153,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initNotificationUI, 1500);
+    setTimeout(initNotificationUI, 2000);
   });
 })();
