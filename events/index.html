@@ -336,25 +336,30 @@
   rel="stylesheet"
   href="../css/style-lazy.min.1891ab9d1988b9b19756de1bbea47aecb95c7b5ab195f6fe52244b6eca5d8154.css"
   media="all"
-   />    <style>
+   />
+    <style>
       /* Universal Font Consistency */
       html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
       }
 
-      /* Animated Dynamic Header Gradient */
+      /* Animated Dynamic Header & Footer Gradient */
       .header,
       .header-gradient-home,
-      .header-gradient-all {
+      .header-gradient-all,
+      footer,
+      footer.bg-theme-light,
+      .footer-custom {
         position: relative !important;
         overflow: hidden !important;
-        border-bottom: 1px solid rgba(62, 123, 157, 0.25) !important;
-        z-index: 30 !important;
         background: transparent !important;
+        z-index: 20 !important;
       }
 
       .header::before,
-      .header::after {
+      .header::after,
+      footer::before,
+      footer::after {
         content: "" !important;
         position: absolute !important;
         inset: 0 !important;
@@ -362,12 +367,14 @@
         pointer-events: none !important;
       }
 
-      .header::before {
+      .header::before,
+      footer::before {
         background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
         animation: dynamicFlipA 10s ease-in-out infinite !important;
       }
 
-      .header::after {
+      .header::after,
+      footer::after {
         background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
         animation: dynamicFlipB 10s ease-in-out infinite !important;
       }
@@ -423,15 +430,6 @@
       .header-gradient-home .img-dark,
       .header-gradient-all .img-dark {
         display: none !important;
-      }
-
-      /* 100% Solid #3E7B9D Footer Enforcement */
-      footer,
-      footer.bg-theme-light,
-      .footer-custom {
-        background: #3E7B9D !important;
-        background-color: #3E7B9D !important;
-        color: #ffffff !important;
       }
     </style>
   </head>
@@ -492,12 +490,6 @@
     }
     .dark .announcement {
       background-color: #222;
-    }
-    .event-item.expanded .event-details {
-      display: block !important;
-    }
-    .event-item.expanded .chevron-icon {
-      transform: rotate(-90deg) !important;
     }
   </style>
 
@@ -798,7 +790,7 @@
 </main>
 
     
-    <footer style="background-color: #3E7B9D !important;">
+    <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
   <div class="container">
     <div class="row items-center py-10">
       <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
@@ -841,8 +833,8 @@
       </div>
     </div>
   </div>
-  <div style="border-top: 1px solid rgba(255, 255, 255, 0.25);" class="py-7">
-    <div class="container text-center text-sm font-medium" style="color: rgba(255, 255, 255, 0.95) !important;">
+  <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
+    <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
       Physics Society IIT KGP
     </div>
   </div>
