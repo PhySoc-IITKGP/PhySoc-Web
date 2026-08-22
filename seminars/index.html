@@ -336,29 +336,25 @@
   rel="stylesheet"
   href="../css/style-lazy.min.1891ab9d1988b9b19756de1bbea47aecb95c7b5ab195f6fe52244b6eca5d8154.css"
   media="all"
-   />        <style>
+   />    <style>
       /* Universal Font Consistency */
       html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
       }
 
-      /* Animated Dynamic Header & Footer Gradient */
+      /* Animated Dynamic Header Gradient */
       .header,
       .header-gradient-home,
-      .header-gradient-all,
-      footer,
-      footer.bg-theme-light,
-      .footer-custom {
+      .header-gradient-all {
         position: relative !important;
         overflow: hidden !important;
+        border-bottom: 1px solid rgba(62, 123, 157, 0.25) !important;
+        z-index: 30 !important;
         background: transparent !important;
-        z-index: 20 !important;
       }
 
       .header::before,
-      .header::after,
-      footer::before,
-      footer::after {
+      .header::after {
         content: "" !important;
         position: absolute !important;
         inset: 0 !important;
@@ -366,31 +362,43 @@
         pointer-events: none !important;
       }
 
-      .header::before,
-      footer::before {
+      .header::before {
         background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
         animation: dynamicFlipA 10s ease-in-out infinite !important;
       }
 
-      .header::after,
-      footer::after {
+      .header::after {
         background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
         animation: dynamicFlipB 10s ease-in-out infinite !important;
       }
 
       @keyframes dynamicFlipA {
-        0%, 20% { opacity: 1; }
-        50%, 70% { opacity: 0; }
-        100% { opacity: 1; }
+        0%, 20% {
+          opacity: 1;
+        }
+        50%, 70% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
 
       @keyframes dynamicFlipB {
-        0%, 20% { opacity: 0; }
-        50%, 70% { opacity: 1; }
-        100% { opacity: 0; }
+        0%, 20% {
+          opacity: 0;
+        }
+        50%, 70% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
       }
 
-      .header .nav-link {
+      .header .nav-link,
+      .header-gradient-home .nav-link,
+      .header-gradient-all .nav-link {
         color: #121212 !important;
         font-size: 1.15rem !important;
         font-weight: 600 !important;
@@ -398,13 +406,33 @@
         transition: all 0.2s ease !important;
       }
 
-      .header .nav-link:hover {
+      .header .nav-link:hover,
+      .header-gradient-home .nav-link:hover,
+      .header-gradient-all .nav-link:hover {
         color: #3E7B9D !important;
         transform: translateY(-1px);
       }
 
-      .header .img-light { display: block !important; }
-      .header .img-dark { display: none !important; }
+      .header .img-light,
+      .header-gradient-home .img-light,
+      .header-gradient-all .img-light {
+        display: block !important;
+      }
+
+      .header .img-dark,
+      .header-gradient-home .img-dark,
+      .header-gradient-all .img-dark {
+        display: none !important;
+      }
+
+      /* 100% Solid #3E7B9D Footer Enforcement */
+      footer,
+      footer.bg-theme-light,
+      .footer-custom {
+        background: #3E7B9D !important;
+        background-color: #3E7B9D !important;
+        color: #ffffff !important;
+      }
     </style>
   </head>
 
@@ -676,7 +704,7 @@
     </main>
 
     
-    <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
+    <footer style="background-color: #3E7B9D !important;">
   <div class="container">
     <div class="row items-center py-10">
       <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
