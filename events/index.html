@@ -17,323 +17,332 @@
     <link rel="stylesheet" href="../css/style.min.75408a616c8d64a93d3b03e345cadd04f72b1cded1cd7b9819149db1a7264234.css" />
 
     <style>
-      /* Universal Font Consistency */
       html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
       }
 
-      /* Animated Dynamic Header & Footer Gradient */
-      .header,
-      .header-gradient-home,
-      .header-gradient-all,
-      footer,
-      footer.bg-theme-light,
-      .footer-custom,
+      /* Dynamic gradient header & footer */
+      .header, .header-gradient-home, .header-gradient-all,
+      footer, footer.bg-theme-light, .footer-custom,
       .calendar-dynamic-box {
         position: relative !important;
         overflow: hidden !important;
         background: transparent !important;
         z-index: 20 !important;
       }
-
-      .header::before,
-      .header::after,
-      footer::before,
-      footer::after,
-      .calendar-dynamic-box::before,
-      .calendar-dynamic-box::after {
+      .header::before, .header::after,
+      footer::before, footer::after,
+      .calendar-dynamic-box::before, .calendar-dynamic-box::after {
         content: "" !important;
         position: absolute !important;
         inset: 0 !important;
         z-index: -1 !important;
         pointer-events: none !important;
       }
-
-      .header::before,
-      footer::before,
-      .calendar-dynamic-box::before {
+      .header::before, footer::before, .calendar-dynamic-box::before {
         background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
         animation: dynamicFlipA 10s ease-in-out infinite !important;
       }
-
-      .header::after,
-      footer::after,
-      .calendar-dynamic-box::after {
+      .header::after, footer::after, .calendar-dynamic-box::after {
         background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
         animation: dynamicFlipB 10s ease-in-out infinite !important;
       }
-
       @keyframes dynamicFlipA {
-        0%, 20% {
-          opacity: 1;
-        }
-        50%, 70% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
+        0%, 20% { opacity: 1; }
+        50%, 70% { opacity: 0; }
+        100% { opacity: 1; }
       }
-
       @keyframes dynamicFlipB {
-        0%, 20% {
-          opacity: 0;
-        }
-        50%, 70% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
+        0%, 20% { opacity: 0; }
+        50%, 70% { opacity: 1; }
+        100% { opacity: 0; }
       }
-
-      .header .nav-link,
-      .header-gradient-home .nav-link,
-      .header-gradient-all .nav-link {
+      .header .nav-link, .header-gradient-home .nav-link, .header-gradient-all .nav-link {
         color: #121212 !important;
         font-size: 1.15rem !important;
         font-weight: 600 !important;
         letter-spacing: 0.015em !important;
         transition: all 0.2s ease !important;
       }
+      .header .nav-link:hover { color: #3E7B9D !important; transform: translateY(-1px); }
+      .header .img-light, .header-gradient-home .img-light, .header-gradient-all .img-light { display: block !important; }
+      .header .img-dark, .header-gradient-home .img-dark, .header-gradient-all .img-dark { display: none !important; }
 
-      .header .nav-link:hover,
-      .header-gradient-home .nav-link:hover,
-      .header-gradient-all .nav-link:hover {
-        color: #3E7B9D !important;
-        transform: translateY(-1px);
+      /* ─── MAGAZINE LAYOUT ─── */
+      .event-block {
+        display: flex;
+        align-items: flex-start;
+        gap: 48px;
+        margin-bottom: 80px;
+        padding-bottom: 72px;
+        border-bottom: 1.5px solid #e8e8e8;
+      }
+      .event-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+      /* photos-left / text-right */
+      .event-block.photos-left { flex-direction: row; }
+      /* text-left / photos-right */
+      .event-block.photos-right { flex-direction: row-reverse; }
+
+      /* Photo collage panel */
+      .event-photos {
+        flex: 0 0 52%;
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+      }
+      .event-photos .photo-main {
+        flex: 0 0 55%;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+      .event-photos .photo-main img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 4px;
+      }
+      .event-photos .photo-stack {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .event-photos .photo-stack img {
+        width: 100%;
+        flex: 1;
+        object-fit: cover;
+        display: block;
+        border-radius: 4px;
       }
 
-      .header .img-light,
-      .header-gradient-home .img-light,
-      .header-gradient-all .img-light {
-        display: block !important;
+      /* Text panel */
+      .event-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 4px;
       }
+      .event-title {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        font-size: 2.75rem !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.05em !important;
+        text-transform: uppercase !important;
+        color: #111111 !important;
+        line-height: 1.05 !important;
+        margin: 0 0 20px 0 !important;
+      }
+      .event-desc {
+        font-size: 1.02rem !important;
+        line-height: 1.78 !important;
+        color: #222222 !important;
+        text-align: justify !important;
+        margin: 0 !important;
+      }
+      .event-desc .hl { color: #e07b39 !important; font-weight: 600 !important; }
 
-      .header .img-dark,
-      .header-gradient-home .img-dark,
-      .header-gradient-all .img-dark {
-        display: none !important;
+      /* ─── CALENDAR SECTION ─── */
+      .calendar-section {
+        background: #f5f8fb;
+        border-top: 1.5px solid #e0eaf2;
+        padding: 60px 0;
+        margin-top: 80px;
+      }
+      .calendar-section h2 {
+        font-size: 2rem !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
+        color: #111111 !important;
+        margin-bottom: 8px !important;
+      }
+      .calendar-section p {
+        color: #555 !important;
+        font-size: 1rem !important;
+        margin-bottom: 32px !important;
       }
     </style>
   </head>
   <body>
-    <!-- Header -->
     <header class="header sticky top-0 z-30">
       <nav class="navbar container">
         <div class="order-0">
           <a class="navbar-brand block" href="../index.html">
-            <img
-              fetchpriority="high"
-              decoding="async"
-              class="img img-light"
-              width="250"
-              height="40"
-              src="../images/logo_hu_62a2c291369a66f0.webp"
-              alt="PhySoc IITKGP"
+            <img fetchpriority="high" decoding="async" class="img img-light" width="250" height="40"
+              src="../images/logo_hu_62a2c291369a66f0.webp" alt="PhySoc IITKGP"
               onerror="this.onerror=null;this.src='../images/logo_hu_2fca4d2ac2314e.jpg';" />
-            <img
-              fetchpriority="high"
-              decoding="async"
-              class="img img-dark"
-              width="250"
-              height="40"
-              src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp"
-              alt="PhySoc IITKGP"
+            <img fetchpriority="high" decoding="async" class="img img-dark" width="250" height="40"
+              src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp" alt="PhySoc IITKGP"
               onerror="this.onerror=null;this.src='../images/logo-darkmode_hu_fa721757c615f129.png';" />
           </a>
         </div>
-        
         <input id="nav-toggle" type="checkbox" class="hidden" />
-        <label
-          for="nav-toggle"
-          class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
-          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
-            <title>Menu Open</title>
-            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-          </svg>
-          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
-            <title>Menu Close</title>
-            <polygon
-              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-              transform="rotate(45 10 10)"></polygon>
-          </svg>
+        <label for="nav-toggle" class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
+          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20"><title>Menu Open</title><path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path></svg>
+          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20"><title>Menu Close</title><polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)"></polygon></svg>
         </label>
-        
-        <ul
-          id="nav-menu"
-          class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
-          <li class="nav-item">
-            <a class="nav-link" href="../about/index.html">Our Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../events/index.html">Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../resources/index.html">Resources</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../seminars/index.html">Seminars</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../sponsors/index.html">Sponsors</a>
-          </li>
+        <ul id="nav-menu" class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
+          <li class="nav-item"><a class="nav-link" href="../about/index.html">Our Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="../events/index.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resources/index.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="../seminars/index.html">Seminars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../sponsors/index.html">Sponsors</a></li>
         </ul>
       </nav>
-
-      <!-- Straight Divider Line Below Navbar -->
       <div class="container">
         <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
       </div>
-
-      <!-- Seamless Merged Banner Image (Aligned flush with PhySoc symbol on left and Sponsors on right) -->
+      <!-- Banner -->
       <div class="container pb-14" style="padding-top: 45px;">
         <div style="width: 100%; height: 520px; overflow: hidden; border-radius: 0; border: none; box-shadow: none;">
-          <img
-            src="../images/events_background.jpg"
-            alt="Events Banner"
+          <img src="../images/events_background.jpg" alt="Events Banner"
             style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; border-radius: 0; border: none;" />
         </div>
       </div>
     </header>
     <main>
-      
-      <!-- 4 Event Feature Sections (Clean Adjacent 50/50 Layout) -->
-      <section class="section py-16 bg-white dark:bg-darkmode-body">
+
+      <!-- ═══ MAGAZINE EDITORIAL EVENT BLOCKS ═══ -->
+      <section style="background: #ffffff; padding: 80px 0 0 0;">
         <div class="container">
-          
-          <!-- 1. FUNDE TALK (Photo Left, Text Right) -->
-          <div class="row items-center justify-between mb-24">
-            <div class="lg:col-6 mb-8 lg:mb-0">
-              <div class="w-full h-[320px] bg-[#eef5f8] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D] flex flex-col items-center justify-center p-6 text-center shadow-sm">
-                <span style="color: #3E7B9D; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase;">Photo Space</span>
+
+          <!-- ══ 1. FUNDE TALK — photos LEFT, text RIGHT ══ -->
+          <div class="event-block photos-left">
+
+            <!-- Photos: 1 large left + 2 stacked right -->
+            <div class="event-photos" style="height: 340px;">
+              <div class="photo-main">
+                <img src="../images/events/bean_1.png" alt="Funde Talk Photo 1" />
+              </div>
+              <div class="photo-stack">
+                <img src="../images/events/bean_2.png" alt="Funde Talk Photo 2" style="height: 50%;" />
+                <img src="../images/events/bean_3.png" alt="Funde Talk Photo 3" style="height: 50%;" />
               </div>
             </div>
-            <div class="lg:col-6 lg:pl-8 xl:pl-12">
-              <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
-                Funde Talk
-              </h2>
-              <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
-                Funde Talks are informal mentorship and guidance sessions hosted by senior students and alumni. These interactive catch-ups help students navigate academics, research internships, department electives, career pathways, and life at IIT Kharagpur in a relaxed, friendly setting.
+
+            <!-- Text -->
+            <div class="event-text">
+              <h2 class="event-title">Funde Talk</h2>
+              <p class="event-desc">
+                Funde Talks are PhySoc's <span class="hl">signature informal guidance sessions</span> — a relaxed catch-up between seniors and juniors. Drop by to discuss academics, elective choices, <span class="hl">research internships</span>, career pathways, and life at IIT Kharagpur. It's a <span class="hl">warm, open space</span> to meet people, share experiences, and unwind between lectures or study sessions.
               </p>
             </div>
+
           </div>
 
-          <!-- 2. PHYSICS TALK (Text Left, Photo Right) -->
-          <div class="row items-center justify-between mb-24 flex-col-reverse lg:flex-row">
-            <div class="lg:col-6 lg:pr-8 xl:pr-12 mb-8 lg:mb-0">
-              <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
-                Physics Talk
-              </h2>
-              <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
-                Physics Talks are our flagship seminar-style events where professors, distinguished researchers, and guest speakers present fascinating topics from quantum physics, astrophysics, condensed matter, and emerging frontiers. A great space to learn, explore, and ask questions.
+          <!-- ══ 2. PHYSICS TALK — text LEFT, photos RIGHT ══ -->
+          <div class="event-block photos-right">
+
+            <!-- Text -->
+            <div class="event-text">
+              <h2 class="event-title">Physics Talks</h2>
+              <p class="event-desc">
+                Physics Talks are PhySoc's <span class="hl">seminar-style events</span> where students, researchers, and <span class="hl">guest speakers</span> share ideas from across physics and related fields. These talks discuss <span class="hl">current research</span>, emerging technologies, and fascinating concepts in an accessible way. They're a great <span class="hl">opportunity</span> to learn something new, ask questions, and engage with the physics community.
               </p>
             </div>
-            <div class="lg:col-6">
-              <div class="w-full h-[320px] bg-[#eef5f8] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D] flex flex-col items-center justify-center p-6 text-center shadow-sm">
-                <span style="color: #3E7B9D; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase;">Photo Space</span>
+
+            <!-- Photos: 1 large left + 2 stacked right -->
+            <div class="event-photos" style="height: 340px;">
+              <div class="photo-main">
+                <img src="../images/events/talk_1.png" alt="Physics Talk Photo 1" />
+              </div>
+              <div class="photo-stack">
+                <img src="../images/events/talk_2.png" alt="Physics Talk Photo 2" style="height: 50%;" />
+                <img src="../images/events/talk_3.png" alt="Physics Talk Photo 3" style="height: 50%;" />
               </div>
             </div>
+
           </div>
 
-          <!-- 3. COMPETITIONS (Photo Left, Text Right) -->
-          <div class="row items-center justify-between mb-24">
-            <div class="lg:col-6 mb-8 lg:mb-0">
-              <div class="w-full h-[320px] bg-[#eef5f8] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D] flex flex-col items-center justify-center p-6 text-center shadow-sm">
-                <span style="color: #3E7B9D; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase;">Photo Space</span>
+          <!-- ══ 3. LAB TOURS — photos LEFT, text RIGHT ══ -->
+          <div class="event-block photos-left">
+
+            <!-- Photos -->
+            <div class="event-photos" style="height: 340px;">
+              <div class="photo-main">
+                <img src="../images/events/lab_1.png" alt="Lab Tour Photo 1" />
+              </div>
+              <div class="photo-stack">
+                <img src="../images/events/lab_2.png" alt="Lab Tour Photo 2" style="height: 50%;" />
+                <img src="../images/events/lab_3.png" alt="Lab Tour Photo 3" style="height: 50%;" />
               </div>
             </div>
-            <div class="lg:col-6 lg:pl-8 xl:pl-12">
-              <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
-                Competitions
-              </h2>
-              <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
-                PhySoc organizes challenging and fun physics competitions, quizzes, and problem-solving contests throughout the year. Test your conceptual understanding, collaborate with peers, and win exciting prizes in department-wide academic events.
+
+            <!-- Text -->
+            <div class="event-text">
+              <h2 class="event-title">Lab Tours</h2>
+              <p class="event-desc">
+                Lab Tours offer students an <span class="hl">insider's look</span> into the state-of-the-art physics research laboratories across the department. Guided by faculty and <span class="hl">research scholars</span>, participants explore experimental setups, advanced equipment, and <span class="hl">cutting-edge scientific research</span> happening right here on campus. A rare chance to see what real physics in action looks like.
               </p>
             </div>
+
           </div>
 
-          <!-- 4. LAB TOURS (Text Left, Photo Right) -->
-          <div class="row items-center justify-between mb-16 flex-col-reverse lg:flex-row">
-            <div class="lg:col-6 lg:pr-8 xl:pr-12 mb-8 lg:mb-0">
-              <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
-                Lab Tours
-              </h2>
-              <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
-                Lab Tours offer students an insider's look into state-of-the-art physics research laboratories across the department. Guided by faculty and research scholars, participants explore experimental setups, advanced equipment, and ongoing cutting-edge scientific research.
+          <!-- ══ 4. COMPETITIONS — text LEFT, photos RIGHT ══ -->
+          <div class="event-block photos-right">
+
+            <!-- Text -->
+            <div class="event-text">
+              <h2 class="event-title">Competitions</h2>
+              <p class="event-desc">
+                PhySoc organizes challenging and fun <span class="hl">physics competitions</span>, quizzes, and problem-solving contests throughout the year. Test your conceptual understanding, collaborate with peers, and win exciting prizes in <span class="hl">department-wide academic events</span> that celebrate curiosity and ingenuity. A great stage to <span class="hl">push your limits</span> and connect with like-minded peers.
               </p>
             </div>
-            <div class="lg:col-6">
-              <div class="w-full h-[320px] bg-[#eef5f8] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D] flex flex-col items-center justify-center p-6 text-center shadow-sm">
-                <span style="color: #3E7B9D; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase;">Photo Space</span>
+
+            <!-- Photos -->
+            <div class="event-photos" style="height: 340px;">
+              <div class="photo-main">
+                <img src="../images/competitions.jpeg" alt="Competitions Photo 1" />
+              </div>
+              <div class="photo-stack">
+                <img src="../images/gallery/group.JPG" alt="Competitions Photo 2" style="height: 50%;" />
+                <img src="../images/gallery/carnival1.jpeg" alt="Competitions Photo 3" style="height: 50%;" />
               </div>
             </div>
+
           </div>
 
         </div>
       </section>
 
-      <!-- Live Google Calendar Section -->
-      <section class="section py-16 bg-theme-light dark:bg-darkmode-theme-light border-t border-border/40 dark:border-darkmode-border/40">
+      <!-- ═══ EVENTS CALENDAR ═══ -->
+      <section class="calendar-section">
         <div class="container">
-          
-          <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#121212] dark:text-white mb-3">
-              Events Calendar
-            </h2>
-            <p class="text-text dark:text-darkmode-text text-base md:text-lg max-w-2xl">
-              Stay up to date with our upcoming talks, social mixers, lab visits, and special physics department gatherings.
-            </p>
-          </div>
+          <h2>Events Calendar</h2>
+          <p>Stay up to date with our upcoming talks, social mixers, lab visits, and special physics gatherings.</p>
 
-          <div class="row items-start">
-            <!-- Left Side: Calendar Box with Synchronized Dynamic Gradient -->
-            <div class="lg:col-6 mb-8 lg:mb-0">
-              <div class="calendar-dynamic-box p-6 sm:p-7 rounded-2xl shadow-lg border border-[#3E7B9D]/30 relative">
-                <h3 class="text-xl md:text-2xl font-bold text-[#121212] mb-4 text-left relative z-10">
-                  Event Details &amp; Announcements
-                </h3>
-                <div class="rounded-xl overflow-hidden shadow-inner p-1.5 relative z-10" style="background-color: #E4EFF5 !important;">
-                  <iframe
-                    src="https://calendar.google.com/calendar/embed?src=409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com&color=%233E7B9D&bgcolor=%23E4EFF5&mode=AGENDA&ctz=Asia%2FKolkata&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=1"
-                    style="border: 0; width: 100%; height: 500px; display: block; border-radius: 8px;"
-                    frameborder="0"
-                    scrolling="no">
-                  </iframe>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right Side: Blank Space -->
-            <div class="lg:col-6">
+          <div class="calendar-dynamic-box rounded-2xl shadow-lg border border-[#3E7B9D]/30 p-6 sm:p-8" style="max-width: 720px;">
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: #121212; margin-bottom: 16px; position: relative; z-index: 10;">
+              Upcoming Events &amp; Announcements
+            </h3>
+            <div class="rounded-xl overflow-hidden" style="position: relative; z-index: 10; background: #E4EFF5; padding: 6px;">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?src=409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com&color=%233E7B9D&bgcolor=%23E4EFF5&mode=AGENDA&ctz=Asia%2FKolkata&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=1"
+                style="border: 0; width: 100%; height: 480px; display: block; border-radius: 8px;"
+                frameborder="0" scrolling="no">
+              </iframe>
             </div>
           </div>
-
         </div>
       </section>
 
     </main>
-    <!-- Footer -->
     <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
   <div class="container">
     <div class="row items-center py-10">
       <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
         <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
       </div>
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
-        </ul>
-      </div>
+      <div class="lg:col-6 mb-8 text-center lg:mb-0"><ul></ul></div>
       <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
         <div class="inline-flex flex-col items-center text-center">
           <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
           <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
             <li>
-              <a
-                target="_blank"
-                aria-label="instagram"
-                rel="nofollow noopener"
-                href="https://www.instagram.com/physoc_iitkgp/"
+              <a target="_blank" aria-label="instagram" rel="nofollow noopener" href="https://www.instagram.com/physoc_iitkgp/"
                 style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
                 onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
                 onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
@@ -341,11 +350,7 @@
               </a>
             </li>
             <li>
-              <a
-                target="_blank"
-                aria-label="linkedin"
-                rel="nofollow noopener"
-                href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
+              <a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
                 style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
                 onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
                 onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
