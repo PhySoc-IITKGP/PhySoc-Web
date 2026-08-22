@@ -334,36 +334,29 @@
   href="./css/style-lazy.min.1891ab9d1988b9b19756de1bbea47aecb95c7b5ab195f6fe52244b6eca5d8154.css"
   media="all"
    />
-
-
       <style>
       .header-gradient-home {
-        background: linear-gradient(to right, #000000 0%, #0c1c25 35%, #1c3d50 70%, #3E7B9D 100%) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        background: linear-gradient(to right, #ffffff 0%, #f0f6f9 35%, #8cb4ca 75%, #3E7B9D 100%) !important;
+        border-bottom: 1px solid rgba(62, 123, 157, 0.2);
       }
       .header-gradient-home .nav-link {
-        color: rgba(255, 255, 255, 0.92) !important;
+        color: #121212 !important;
+        font-weight: 500;
       }
       .header-gradient-home .nav-link:hover {
-        color: #ffffff !important;
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-      }
-      .header-gradient-home .nav-dropdown-list {
-        background: #0d1e27 !important;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-      }
-      .header-gradient-home .nav-dropdown-link {
-        color: rgba(255, 255, 255, 0.85) !important;
-      }
-      .header-gradient-home .nav-dropdown-link:hover {
-        color: #ffffff !important;
-        background: rgba(62, 123, 157, 0.3) !important;
+        color: #3E7B9D !important;
       }
       .header-gradient-home .img-light {
-        display: none !important;
+        display: block !important;
       }
       .header-gradient-home .img-dark {
+        display: none !important;
+      }
+      .dark .header-gradient-home .img-light {
         display: block !important;
+      }
+      .dark .header-gradient-home .img-dark {
+        display: none !important;
       }
     </style>
   </head>
@@ -716,20 +709,20 @@
 
     <main>
       
-<section class="relative h-[560px] overflow-hidden w-full" style="background-color: #000000;"> 
+<section class="relative h-[560px] overflow-hidden w-full" style="background-color: #ffffff;"> 
   <!-- Single Static Hero Image: group.JPG -->
   <img src="./images/gallery/group.JPG" class="w-full h-full object-cover object-center absolute inset-0" alt="PhySoc IIT Kharagpur Group" />
   
-  <!-- Black to #3E7B9D Gradient Transition Overlay across the entire image -->
-  <div class="absolute inset-0 pointer-events-none z-5" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.72) 35%, rgba(62, 123, 157, 0.50) 70%, rgba(62, 123, 157, 0.90) 100%);"></div>
+  <!-- White to #3E7B9D Gradient Transition Overlay across the entire image -->
+  <div class="absolute inset-0 pointer-events-none z-5" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.78) 35%, rgba(62, 123, 157, 0.40) 70%, rgba(62, 123, 157, 0.88) 100%);"></div>
   
   <div class="container h-full absolute inset-0 flex items-center z-10 px-6 md:px-12">
     <div class="max-w-2xl text-left py-6">
-      <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold font-serif text-white uppercase tracking-wider leading-tight mb-3">
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold font-serif text-[#121212] uppercase tracking-wider leading-tight mb-3">
         THE PHYSICS SOCIETY<br />
         <span style="color: #3E7B9D;">IIT KHARAGPUR</span>
       </h1>
-      <p class="text-base md:text-lg text-white/90 font-sans mb-6 max-w-xl leading-relaxed">
+      <p class="text-base md:text-lg text-[#222222] font-sans mb-6 max-w-xl leading-relaxed font-medium">
         Fostering scientific curiosity, academic mentorship, research collaboration, and student community in the Department of Physics.
       </p>
       <a href="./events/index.html" class="custom-button px-8 py-3 text-base md:text-lg font-medium rounded-lg inline-block text-white transition-all shadow-lg hover:opacity-90" style="background-color: #3E7B9D !important; border-color: #3E7B9D !important;">
