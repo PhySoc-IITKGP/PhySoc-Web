@@ -734,22 +734,24 @@
     </div>
   </section>
 
-  <!-- Live Google Calendar Section -->
+    <!-- Live Google Calendar Section -->
   <section class="section py-16 bg-theme-light dark:bg-darkmode-theme-light border-t border-border/40 dark:border-darkmode-border/40">
-    <div class="container">
+    <div class="container" style="max-width: 1050px;">
       
-      <div class="mb-10 text-left">
-        <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#121212] dark:text-white mb-3">
+      <!-- Section Header -->
+      <div style="margin-bottom: 2.5rem; text-align: left;">
+        <h2 style="font-size: 2.2rem; font-weight: 800; color: #121212; margin-bottom: 0.5rem; font-family: serif;">
           Events Calendar
         </h2>
-        <p class="text-text dark:text-darkmode-text text-base md:text-lg max-w-2xl">
+        <p style="font-size: 1.05rem; line-height: 1.6; color: #4a5568; max-width: 600px;">
           Stay up to date with our upcoming talks, social mixers, lab visits, and special physics department gatherings.
         </p>
       </div>
 
-      <div class="row items-start">
-        <!-- Left Side: Shrunk Calendar Box -->
-        <div class="lg:col-6 mb-12 lg:mb-0">
+      <!-- Calendar Row matching upper grid columns -->
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 2.5rem;">
+        <!-- Left: Calendar Box perfectly aligned with upper left column -->
+        <div style="flex: 1 1 360px; max-width: 500px; width: 100%;">
           <div class="p-6 sm:p-7 rounded-2xl shadow-lg border border-white/20" style="background-color: #3E7B9D !important;">
             <h3 class="text-xl md:text-2xl font-bold font-serif text-white mb-4 text-left">
               Event Details &amp; Announcements
@@ -766,7 +768,7 @@
         </div>
 
         <!-- Right Side: Blank Space for future content -->
-        <div class="lg:col-6">
+        <div style="flex: 1 1 360px; max-width: 480px;">
         </div>
       </div>
 
