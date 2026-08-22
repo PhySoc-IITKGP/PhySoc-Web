@@ -59,7 +59,7 @@
 
       @keyframes dynamicFlipB {
         0%, 20% { opacity: 0; }
-        50%, 70% { opacity: 1; }
+        50%, 70% { opacity: 0; }
         100% { opacity: 0; }
       }
 
@@ -79,13 +79,19 @@
       .header .img-light { display: block !important; }
       .header .img-dark { display: none !important; }
 
-      /* Solid 100% Opaque #3E7B9D Footer */
+      /* 100% Pure Solid #3E7B9D Footer */
       footer,
       footer.bg-theme-light,
       .footer-custom {
-        background: #3E7B9D !important;
+        position: relative !important;
         background-color: #3E7B9D !important;
+        background: #3E7B9D !important;
         color: #ffffff !important;
+      }
+
+      footer::before,
+      footer::after {
+        display: none !important;
       }
     </style>
   </head>
@@ -211,10 +217,10 @@
       </section>
 
     </main>
-        <!-- Footer (Solid #3E7B9D: Cat on Left, Icons on Right, Disclaimer Below) -->
+            <!-- Footer (Solid #3E7B9D: Cat on Left, Icons on Right, Disclaimer Below) -->
     <footer style="background-color: #3E7B9D !important; background: #3E7B9D !important; color: #ffffff !important;">
       <div class="container">
-        <div class="row items-center py-8">
+        <div class="row items-center py-10">
           <!-- Left: Sleeping Cat Illustration -->
           <div class="col-6 text-left flex items-center justify-start">
             <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc Cat" style="height: 125px; width: auto; display: block;" />
@@ -251,8 +257,8 @@
       </div>
 
       <!-- Bottom Disclaimer Bar -->
-      <div style="border-top: 1px solid rgba(255, 255, 255, 0.2);" class="py-4">
-        <div class="container text-center text-sm font-medium text-white/90">
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.25);" class="py-6">
+        <div class="container text-center text-sm font-normal text-white/90">
           We are a student group of the Physic Department IITKGP. We take full responsibility for our organization and this web site.
         </div>
       </div>
