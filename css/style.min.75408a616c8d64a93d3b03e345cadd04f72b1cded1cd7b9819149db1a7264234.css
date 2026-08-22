@@ -22,11 +22,11 @@ section {
   background-image: linear-gradient(180deg, #f2f7fc 0%, #ebf4fb 100%) !important;
 }
 
-.bg-theme-light,
 footer,
 footer.bg-theme-light {
-  background: linear-gradient(180deg, #d4e8f9 0%, #c5e1f8 100%) !important;
-  border-top: 1px solid #90c2eb !important;
+  background: #3E7B9D !important;
+  background-color: #3E7B9D !important;
+  border-top: none !important;
 }
 
 a:hover {
