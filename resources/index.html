@@ -337,29 +337,41 @@
   href="../css/style-lazy.min.1891ab9d1988b9b19756de1bbea47aecb95c7b5ab195f6fe52244b6eca5d8154.css"
   media="all"
    />
-
-
       <style>
+      .header,
+      .header-gradient-home,
       .header-gradient-all {
         background: linear-gradient(to right, #ffffff 0%, #f0f6f9 35%, #8cb4ca 75%, #3E7B9D 100%) !important;
-        border-bottom: 1px solid rgba(62, 123, 157, 0.2);
+        border-bottom: 1px solid rgba(62, 123, 157, 0.2) !important;
       }
+      .header .nav-link,
+      .header-gradient-home .nav-link,
       .header-gradient-all .nav-link {
         color: #121212 !important;
         font-weight: 500;
       }
+      .header .nav-link:hover,
+      .header-gradient-home .nav-link:hover,
       .header-gradient-all .nav-link:hover {
         color: #3E7B9D !important;
       }
+      .header .img-light,
+      .header-gradient-home .img-light,
       .header-gradient-all .img-light {
         display: block !important;
       }
+      .header .img-dark,
+      .header-gradient-home .img-dark,
       .header-gradient-all .img-dark {
         display: none !important;
       }
+      .dark .header .img-light,
+      .dark .header-gradient-home .img-light,
       .dark .header-gradient-all .img-light {
         display: block !important;
       }
+      .dark .header .img-dark,
+      .dark .header-gradient-home .img-dark,
       .dark .header-gradient-all .img-dark {
         display: none !important;
       }
@@ -429,8 +441,7 @@
 
 
     
-    <header
-  class="header sticky top-0 z-30">
+    <header class="header sticky top-0 z-30" style="background: linear-gradient(to right, #ffffff 0%, #f0f6f9 35%, #8cb4ca 75%, #3E7B9D 100%) !important; border-bottom: 1px solid rgba(62, 123, 157, 0.2);">
   <nav class="navbar container">
     
     <div class="order-0">
