@@ -338,25 +338,52 @@
   media="all"
    />
       <style>
-      @keyframes headerGradientShift {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
       .header,
       .header-gradient-home,
       .header-gradient-all {
-        background: linear-gradient(90deg, #ffffff 0%, #9fc3d7 25%, #3E7B9D 50%, #9fc3d7 75%, #ffffff 100%) !important;
-        background-size: 200% 100% !important;
-        animation: headerGradientShift 3s ease-in-out infinite !important;
+        position: relative !important;
+        overflow: hidden !important;
         border-bottom: 1px solid rgba(62, 123, 157, 0.25) !important;
+        z-index: 30 !important;
+        background: transparent !important;
+      }
+
+      .header::before,
+      .header::after {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: -1 !important;
+        pointer-events: none !important;
+        transition: opacity 2s ease-in-out !important;
+      }
+
+      .header::before {
+        background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
+        animation: dynamicFlipA 4s ease-in-out infinite !important;
+      }
+
+      .header::after {
+        background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
+        animation: dynamicFlipB 4s ease-in-out infinite !important;
+      }
+
+      @keyframes dynamicFlipA {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes dynamicFlipB {
+        0%, 100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
       }
 
       .header .nav-link,
@@ -382,18 +409,6 @@
       .header .img-dark,
       .header-gradient-home .img-dark,
       .header-gradient-all .img-dark {
-        display: none !important;
-      }
-
-      .dark .header .img-light,
-      .dark .header-gradient-home .img-light,
-      .dark .header-gradient-all .img-light {
-        display: block !important;
-      }
-
-      .dark .header .img-dark,
-      .dark .header-gradient-home .img-dark,
-      .dark .header-gradient-all .img-dark {
         display: none !important;
       }
     </style>
