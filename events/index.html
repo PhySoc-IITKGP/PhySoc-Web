@@ -203,103 +203,139 @@
         </div>
       </div>
     </header>
-    <main>
+        <main>
 
       <!-- ═══ MAGAZINE EDITORIAL EVENT BLOCKS ═══ -->
       <section style="background: #ffffff; padding: 80px 0 0 0;">
         <div class="container">
 
-          <!-- ══ 1. FUNDE TALK — photos LEFT, text RIGHT ══ -->
-          <div class="event-block photos-left">
+          <!-- ══════════════════════════════════════════
+               ROW 1 — FUNDE TALK
+               Layout: [PHOTOS LEFT]  |  [TEXT RIGHT]
+               HTML order: photos first, text second
+          ══════════════════════════════════════════ -->
+          <div style="display: flex; align-items: flex-start; gap: 48px; margin-bottom: 80px; padding-bottom: 72px; border-bottom: 1.5px solid #e8e8e8;">
 
-            <!-- Photos: 1 large left + 2 stacked right -->
-            <div class="event-photos" style="height: 340px;">
-              <div class="photo-main">
-                <img src="../images/events/bean_1.png" alt="Funde Talk Photo 1" />
+            <!-- PHOTOS (LEFT) -->
+            <div style="flex: 0 0 52%; display: flex; gap: 8px; height: 340px;">
+              <div style="flex: 0 0 55%; overflow: hidden; border-radius: 4px;">
+                <img src="../images/events/bean_1.png" alt="Funde Talk 1"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
-              <div class="photo-stack">
-                <img src="../images/events/bean_2.png" alt="Funde Talk Photo 2" style="height: 50%;" />
-                <img src="../images/events/bean_3.png" alt="Funde Talk Photo 3" style="height: 50%;" />
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                <img src="../images/events/bean_2.png" alt="Funde Talk 2"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
+                <img src="../images/events/bean_3.png" alt="Funde Talk 3"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
             </div>
 
-            <!-- Text -->
-            <div class="event-text">
-              <h2 class="event-title">Funde Talk</h2>
-              <p class="event-desc">
-                Funde Talks are PhySoc's <span class="hl">signature informal guidance sessions</span> — a relaxed catch-up between seniors and juniors. Drop by to discuss academics, elective choices, <span class="hl">research internships</span>, career pathways, and life at IIT Kharagpur. It's a <span class="hl">warm, open space</span> to meet people, share experiences, and unwind between lectures or study sessions.
+            <!-- TEXT (RIGHT) -->
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 4px;">
+              <h2 style="font-family: system-ui, -apple-system, sans-serif !important; font-size: 2.75rem !important; font-weight: 900 !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; color: #111111 !important; line-height: 1.05 !important; margin: 0 0 20px 0 !important;">
+                Funde Talk
+              </h2>
+              <p style="font-size: 1.02rem !important; line-height: 1.78 !important; color: #222222 !important; text-align: justify !important; margin: 0 !important;">
+                Funde Talks are PhySoc's <span style="color:#e07b39; font-weight:600;">signature informal guidance sessions</span> — a relaxed catch-up between seniors and juniors. Drop by to discuss academics, elective choices, <span style="color:#e07b39; font-weight:600;">research internships</span>, career pathways, and life at IIT Kharagpur. It's a <span style="color:#e07b39; font-weight:600;">warm, open space</span> to meet people, share experiences, and unwind between lectures or study sessions.
               </p>
             </div>
 
           </div>
 
-          <!-- ══ 2. PHYSICS TALK — text LEFT, photos RIGHT ══ -->
-          <div class="event-block photos-right">
+          <!-- ══════════════════════════════════════════
+               ROW 2 — PHYSICS TALKS
+               Layout: [TEXT LEFT]  |  [PHOTOS RIGHT]
+               HTML order: text first, photos second
+          ══════════════════════════════════════════ -->
+          <div style="display: flex; align-items: flex-start; gap: 48px; margin-bottom: 80px; padding-bottom: 72px; border-bottom: 1.5px solid #e8e8e8;">
 
-            <!-- Text -->
-            <div class="event-text">
-              <h2 class="event-title">Physics Talks</h2>
-              <p class="event-desc">
-                Physics Talks are PhySoc's <span class="hl">seminar-style events</span> where students, researchers, and <span class="hl">guest speakers</span> share ideas from across physics and related fields. These talks discuss <span class="hl">current research</span>, emerging technologies, and fascinating concepts in an accessible way. They're a great <span class="hl">opportunity</span> to learn something new, ask questions, and engage with the physics community.
+            <!-- TEXT (LEFT) -->
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 4px;">
+              <h2 style="font-family: system-ui, -apple-system, sans-serif !important; font-size: 2.75rem !important; font-weight: 900 !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; color: #111111 !important; line-height: 1.05 !important; margin: 0 0 20px 0 !important;">
+                Physics Talks
+              </h2>
+              <p style="font-size: 1.02rem !important; line-height: 1.78 !important; color: #222222 !important; text-align: justify !important; margin: 0 !important;">
+                Physics Talks are PhySoc's <span style="color:#e07b39; font-weight:600;">seminar-style events</span> where students, researchers, and <span style="color:#e07b39; font-weight:600;">guest speakers</span> share ideas from across physics and related fields. These talks discuss <span style="color:#e07b39; font-weight:600;">current research</span>, emerging technologies, and fascinating concepts in an accessible way. They're a great <span style="color:#e07b39; font-weight:600;">opportunity</span> to learn something new, ask questions, and engage with the physics community.
               </p>
             </div>
 
-            <!-- Photos: 1 large left + 2 stacked right -->
-            <div class="event-photos" style="height: 340px;">
-              <div class="photo-main">
-                <img src="../images/events/talk_1.png" alt="Physics Talk Photo 1" />
+            <!-- PHOTOS (RIGHT) -->
+            <div style="flex: 0 0 52%; display: flex; gap: 8px; height: 340px;">
+              <div style="flex: 0 0 55%; overflow: hidden; border-radius: 4px;">
+                <img src="../images/events/talk_1.png" alt="Physics Talk 1"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
-              <div class="photo-stack">
-                <img src="../images/events/talk_2.png" alt="Physics Talk Photo 2" style="height: 50%;" />
-                <img src="../images/events/talk_3.png" alt="Physics Talk Photo 3" style="height: 50%;" />
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                <img src="../images/events/talk_2.png" alt="Physics Talk 2"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
+                <img src="../images/events/talk_3.png" alt="Physics Talk 3"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
             </div>
 
           </div>
 
-          <!-- ══ 3. LAB TOURS — photos LEFT, text RIGHT ══ -->
-          <div class="event-block photos-left">
+          <!-- ══════════════════════════════════════════
+               ROW 3 — LAB TOURS
+               Layout: [PHOTOS LEFT]  |  [TEXT RIGHT]
+               HTML order: photos first, text second
+          ══════════════════════════════════════════ -->
+          <div style="display: flex; align-items: flex-start; gap: 48px; margin-bottom: 80px; padding-bottom: 72px; border-bottom: 1.5px solid #e8e8e8;">
 
-            <!-- Photos -->
-            <div class="event-photos" style="height: 340px;">
-              <div class="photo-main">
-                <img src="../images/events/lab_1.png" alt="Lab Tour Photo 1" />
+            <!-- PHOTOS (LEFT) -->
+            <div style="flex: 0 0 52%; display: flex; gap: 8px; height: 340px;">
+              <div style="flex: 0 0 55%; overflow: hidden; border-radius: 4px;">
+                <img src="../images/events/lab_1.png" alt="Lab Tour 1"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
-              <div class="photo-stack">
-                <img src="../images/events/lab_2.png" alt="Lab Tour Photo 2" style="height: 50%;" />
-                <img src="../images/events/lab_3.png" alt="Lab Tour Photo 3" style="height: 50%;" />
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                <img src="../images/events/lab_2.png" alt="Lab Tour 2"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
+                <img src="../images/events/lab_3.png" alt="Lab Tour 3"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
             </div>
 
-            <!-- Text -->
-            <div class="event-text">
-              <h2 class="event-title">Lab Tours</h2>
-              <p class="event-desc">
-                Lab Tours offer students an <span class="hl">insider's look</span> into the state-of-the-art physics research laboratories across the department. Guided by faculty and <span class="hl">research scholars</span>, participants explore experimental setups, advanced equipment, and <span class="hl">cutting-edge scientific research</span> happening right here on campus. A rare chance to see what real physics in action looks like.
+            <!-- TEXT (RIGHT) -->
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 4px;">
+              <h2 style="font-family: system-ui, -apple-system, sans-serif !important; font-size: 2.75rem !important; font-weight: 900 !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; color: #111111 !important; line-height: 1.05 !important; margin: 0 0 20px 0 !important;">
+                Lab Tours
+              </h2>
+              <p style="font-size: 1.02rem !important; line-height: 1.78 !important; color: #222222 !important; text-align: justify !important; margin: 0 !important;">
+                Lab Tours offer students an <span style="color:#e07b39; font-weight:600;">insider's look</span> into state-of-the-art physics research laboratories across the department. Guided by faculty and <span style="color:#e07b39; font-weight:600;">research scholars</span>, participants explore experimental setups, advanced equipment, and <span style="color:#e07b39; font-weight:600;">cutting-edge scientific research</span> happening right here on campus. A rare chance to see real physics in action.
               </p>
             </div>
 
           </div>
 
-          <!-- ══ 4. COMPETITIONS — text LEFT, photos RIGHT ══ -->
-          <div class="event-block photos-right">
+          <!-- ══════════════════════════════════════════
+               ROW 4 — COMPETITIONS
+               Layout: [TEXT LEFT]  |  [PHOTOS RIGHT]
+               HTML order: text first, photos second
+          ══════════════════════════════════════════ -->
+          <div style="display: flex; align-items: flex-start; gap: 48px; margin-bottom: 0; padding-bottom: 0;">
 
-            <!-- Text -->
-            <div class="event-text">
-              <h2 class="event-title">Competitions</h2>
-              <p class="event-desc">
-                PhySoc organizes challenging and fun <span class="hl">physics competitions</span>, quizzes, and problem-solving contests throughout the year. Test your conceptual understanding, collaborate with peers, and win exciting prizes in <span class="hl">department-wide academic events</span> that celebrate curiosity and ingenuity. A great stage to <span class="hl">push your limits</span> and connect with like-minded peers.
+            <!-- TEXT (LEFT) -->
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 4px;">
+              <h2 style="font-family: system-ui, -apple-system, sans-serif !important; font-size: 2.75rem !important; font-weight: 900 !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; color: #111111 !important; line-height: 1.05 !important; margin: 0 0 20px 0 !important;">
+                Competitions
+              </h2>
+              <p style="font-size: 1.02rem !important; line-height: 1.78 !important; color: #222222 !important; text-align: justify !important; margin: 0 !important;">
+                PhySoc organizes challenging and fun <span style="color:#e07b39; font-weight:600;">physics competitions</span>, quizzes, and problem-solving contests throughout the year. Test your conceptual understanding, collaborate with peers, and win exciting prizes in <span style="color:#e07b39; font-weight:600;">department-wide academic events</span> that celebrate curiosity and ingenuity. A great stage to <span style="color:#e07b39; font-weight:600;">push your limits</span> and connect with like-minded peers.
               </p>
             </div>
 
-            <!-- Photos -->
-            <div class="event-photos" style="height: 340px;">
-              <div class="photo-main">
-                <img src="../images/competitions.jpeg" alt="Competitions Photo 1" />
+            <!-- PHOTOS (RIGHT) -->
+            <div style="flex: 0 0 52%; display: flex; gap: 8px; height: 340px;">
+              <div style="flex: 0 0 55%; overflow: hidden; border-radius: 4px;">
+                <img src="../images/competitions.jpeg" alt="Competitions 1"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
-              <div class="photo-stack">
-                <img src="../images/gallery/group.JPG" alt="Competitions Photo 2" style="height: 50%;" />
-                <img src="../images/gallery/carnival1.jpeg" alt="Competitions Photo 3" style="height: 50%;" />
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                <img src="../images/gallery/group.JPG" alt="Competitions 2"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
+                <img src="../images/gallery/carnival1.jpeg" alt="Competitions 3"
+                  style="width: 100%; height: 50%; object-fit: cover; display: block; border-radius: 4px;" />
               </div>
             </div>
 
@@ -309,10 +345,14 @@
       </section>
 
       <!-- ═══ EVENTS CALENDAR ═══ -->
-      <section class="calendar-section">
+      <section style="background: #f5f8fb; border-top: 1.5px solid #e0eaf2; padding: 60px 0; margin-top: 80px;">
         <div class="container">
-          <h2>Events Calendar</h2>
-          <p>Stay up to date with our upcoming talks, social mixers, lab visits, and special physics gatherings.</p>
+          <h2 style="font-size: 2rem !important; font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; color: #111111 !important; margin-bottom: 8px !important;">
+            Events Calendar
+          </h2>
+          <p style="color: #555 !important; font-size: 1rem !important; margin-bottom: 32px !important;">
+            Stay up to date with our upcoming talks, social mixers, lab visits, and special physics gatherings.
+          </p>
 
           <div class="calendar-dynamic-box rounded-2xl shadow-lg border border-[#3E7B9D]/30 p-6 sm:p-8" style="max-width: 720px;">
             <h3 style="font-size: 1.3rem; font-weight: 700; color: #121212; margin-bottom: 16px; position: relative; z-index: 10;">
