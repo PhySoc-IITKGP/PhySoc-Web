@@ -675,124 +675,99 @@
     </div>
   </section>
 
-  <!-- Featured Event Sections (With Clean Blank Photo Placeholders) -->
+  <!-- Featured 4 Event Sections (Alternating Layout) -->
   <section class="section py-20 bg-white dark:bg-darkmode-body">
     <div class="container max-w-6xl">
       
-      <!-- Row 1: BEAN TIME -->
+      <!-- 1st: FUNDE TALK (Photo Left, Text Right) -->
       <div class="row items-center justify-between mb-24">
-        <!-- Blank Photo Collage (1 Large Left + 2 Stacked Right) -->
-        <div class="lg:col-6 mb-10 lg:mb-0">
-          <div class="grid grid-cols-12 gap-3.5 h-[280px] sm:h-[340px]">
-            <div class="col-span-7 h-full">
-              <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-4 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                <svg class="w-8 h-8 text-[#3E7B9D]/60 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 1 (Main)</span>
-              </div>
-            </div>
-            <div class="col-span-5 flex flex-col gap-3.5 h-full">
-              <div class="h-1/2">
-                <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-2 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                  <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 2</span>
-                </div>
-              </div>
-              <div class="h-1/2">
-                <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-2 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                  <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 3</span>
-                </div>
-              </div>
-            </div>
+        <!-- Photo Space (Left) -->
+        <div class="lg:col-6 mb-8 lg:mb-0">
+          <div class="w-full h-[280px] sm:h-[320px] bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D]/35 flex flex-col items-center justify-center p-6 text-center hover:border-[#3E7B9D] transition-colors duration-200 shadow-sm">
+            <svg class="w-10 h-10 text-[#3E7B9D]/60 mb-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs font-bold text-[#3E7B9D] uppercase tracking-wider">Photo Space</span>
           </div>
         </div>
 
-        <!-- Text Content -->
+        <!-- Text Content (Right) -->
         <div class="lg:col-5 lg:ml-auto flex flex-col justify-center">
           <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
-            BEAN TIME
+            Funde Talk
           </h2>
           <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
-            Bean Time is PhySoc's regular casual coffee catch-up for physics students and enthusiasts. Drop by to grab a coffee (or any hot drink), take a break from classes, and chat with fellow students about physics, uni life, or anything else on your mind. It's a relaxed way to meet people in the community and unwind between lectures or study sessions.
+            Funde Talks are informal mentorship and guidance sessions hosted by senior students and alumni. These interactive catch-ups help students navigate academics, research internships, department electives, career pathways, and life at IIT Kharagpur in a relaxed, friendly setting.
           </p>
         </div>
       </div>
 
-      <!-- Row 2: PHYSICS TALKS (Alternating) -->
+      <!-- 2nd: PHYSICS TALK (Text Left, Photo Right) -->
       <div class="row items-center justify-between mb-24 flex-col-reverse lg:flex-row">
-        <!-- Text Content -->
-        <div class="lg:col-5 lg:mr-auto mb-10 lg:mb-0 flex flex-col justify-center">
+        <!-- Text Content (Left) -->
+        <div class="lg:col-5 lg:mr-auto mb-8 lg:mb-0 flex flex-col justify-center">
           <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
-            PHYSICS TALKS
+            Physics Talk
           </h2>
           <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
-            Physics Talks are PhySoc's seminar-style events where students, researchers, and guest speakers share ideas from across physics and related fields. These talks discuss current research, emerging technologies, and fascinating concepts in an accessible way. They're a great opportunity to learn something new, ask questions, and engage with the physics community.
+            Physics Talks are our flagship seminar-style events where professors, distinguished researchers, and guest speakers present fascinating topics from quantum physics, astrophysics, condensed matter, and emerging frontiers. A great space to learn, explore, and ask questions.
           </p>
         </div>
 
-        <!-- Blank Photo Collage (1 Large Left + 2 Stacked Right) -->
+        <!-- Photo Space (Right) -->
         <div class="lg:col-6">
-          <div class="grid grid-cols-12 gap-3.5 h-[280px] sm:h-[340px]">
-            <div class="col-span-7 h-full">
-              <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-4 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                <svg class="w-8 h-8 text-[#3E7B9D]/60 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 1 (Main)</span>
-              </div>
-            </div>
-            <div class="col-span-5 flex flex-col gap-3.5 h-full">
-              <div class="h-1/2">
-                <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-2 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                  <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 2</span>
-                </div>
-              </div>
-              <div class="h-1/2">
-                <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-2 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                  <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 3</span>
-                </div>
-              </div>
-            </div>
+          <div class="w-full h-[280px] sm:h-[320px] bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D]/35 flex flex-col items-center justify-center p-6 text-center hover:border-[#3E7B9D] transition-colors duration-200 shadow-sm">
+            <svg class="w-10 h-10 text-[#3E7B9D]/60 mb-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs font-bold text-[#3E7B9D] uppercase tracking-wider">Photo Space</span>
           </div>
         </div>
       </div>
 
-      <!-- Row 3: LAB TOURS -->
-      <div class="row items-center justify-between mb-12">
-        <!-- Blank Photo Collage (1 Large Left + 2 Stacked Right) -->
-        <div class="lg:col-6 mb-10 lg:mb-0">
-          <div class="grid grid-cols-12 gap-3.5 h-[280px] sm:h-[340px]">
-            <div class="col-span-7 h-full">
-              <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-4 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                <svg class="w-8 h-8 text-[#3E7B9D]/60 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 1 (Main)</span>
-              </div>
-            </div>
-            <div class="col-span-5 flex flex-col gap-3.5 h-full">
-              <div class="h-1/2">
-                <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-2 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                  <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 2</span>
-                </div>
-              </div>
-              <div class="h-1/2">
-                <div class="w-full h-full bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-xl border-2 border-dashed border-[#3E7B9D]/30 flex flex-col items-center justify-center p-2 text-center hover:border-[#3E7B9D] transition-colors duration-200">
-                  <span class="text-xs font-semibold text-[#3E7B9D]/80 uppercase tracking-wider">Photo 3</span>
-                </div>
-              </div>
-            </div>
+      <!-- 3rd: COMPETITIONS (Photo Left, Text Right) -->
+      <div class="row items-center justify-between mb-24">
+        <!-- Photo Space (Left) -->
+        <div class="lg:col-6 mb-8 lg:mb-0">
+          <div class="w-full h-[280px] sm:h-[320px] bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D]/35 flex flex-col items-center justify-center p-6 text-center hover:border-[#3E7B9D] transition-colors duration-200 shadow-sm">
+            <svg class="w-10 h-10 text-[#3E7B9D]/60 mb-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs font-bold text-[#3E7B9D] uppercase tracking-wider">Photo Space</span>
           </div>
         </div>
 
-        <!-- Text Content -->
+        <!-- Text Content (Right) -->
         <div class="lg:col-5 lg:ml-auto flex flex-col justify-center">
           <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
-            LAB TOURS
+            Competitions
           </h2>
           <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
-            Lab Tours give students the chance to visit physics research laboratories and see how real experiments are conducted. Guided by researchers or lab members, you'll learn about the equipment, techniques, and projects being developed at the university. It's a great way to explore different areas of physics research and see what working in a lab is really like.
+            PhySoc organizes challenging and fun physics competitions, quizzes, and problem-solving contests throughout the year. Test your conceptual understanding, collaborate with peers, and win exciting prizes in department-wide academic events.
           </p>
+        </div>
+      </div>
+
+      <!-- 4th: LAB TOURS (Text Left, Photo Right) -->
+      <div class="row items-center justify-between mb-12 flex-col-reverse lg:flex-row">
+        <!-- Text Content (Left) -->
+        <div class="lg:col-5 lg:mr-auto mb-8 lg:mb-0 flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
+            Lab Tours
+          </h2>
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
+            Lab Tours offer students an insider's look into state-of-the-art physics research laboratories across the department. Guided by faculty and research scholars, participants explore experimental setups, advanced equipment, and ongoing cutting-edge scientific research.
+          </p>
+        </div>
+
+        <!-- Photo Space (Right) -->
+        <div class="lg:col-6">
+          <div class="w-full h-[280px] sm:h-[320px] bg-[#f0f6f9] dark:bg-darkmode-theme-light rounded-2xl border-2 border-dashed border-[#3E7B9D]/35 flex flex-col items-center justify-center p-6 text-center hover:border-[#3E7B9D] transition-colors duration-200 shadow-sm">
+            <svg class="w-10 h-10 text-[#3E7B9D]/60 mb-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs font-bold text-[#3E7B9D] uppercase tracking-wider">Photo Space</span>
+          </div>
         </div>
       </div>
 
