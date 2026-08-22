@@ -665,50 +665,129 @@
   
 
     <main>
-      
   
-  
-  <section class="relative section-sm overflow-hidden w-full" style="background-image: url('/images/events_background.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 500px; width: 100%;">
-  <div class="container h-full flex items-center justify-center relative z-10">
-    <h1 class="text-4xl md:text-5xl font-bold font-serif text-white p-6 text-center" style="text-shadow: 0 2px 12px rgba(0,0,0,0.85);">
-      Upcoming Events &amp; Announcements
-    </h1>
-  </div>
-</section>
+  <!-- Hero Section -->
+  <section class="relative section-sm overflow-hidden w-full" style="background-image: url('../images/events_background.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 420px; width: 100%;">
+    <div class="container h-full flex items-center justify-center relative z-10">
+      <h1 class="text-4xl md:text-5xl font-bold font-serif text-white p-6 text-center" style="text-shadow: 0 2px 12px rgba(0,0,0,0.85);">
+        Events &amp; Activities
+      </h1>
+    </div>
+  </section>
 
-  
-  <section class="section py-12">
+  <!-- Featured Event Formats (Bean Time, Physics Talks, Lab Tours) -->
+  <section class="section py-16 bg-white dark:bg-darkmode-body">
     <div class="container">
+      
+      <!-- Row 1: BEAN TIME -->
+      <div class="row items-center justify-between mb-20">
+        <div class="lg:col-6 mb-8 lg:mb-0">
+          <div class="rounded-2xl overflow-hidden shadow-lg border border-border/40 hover:shadow-xl transition-all duration-300">
+            <img
+              src="../images/events/bean_time.png"
+              alt="Bean Time at PhySoc"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="lg:col-5 lg:ml-auto">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
+            BEAN TIME
+          </h2>
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
+            Bean Time is PhySoc's regular casual coffee catch-up for physics students and enthusiasts. Drop by to grab a coffee (or any hot drink), take a break from classes, and chat with fellow students about physics, uni life, or anything else on your mind. It's a relaxed way to meet people in the community and unwind between lectures or study sessions.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2: PHYSICS TALKS (Alternating) -->
+      <div class="row items-center justify-between mb-20 flex-col-reverse lg:flex-row">
+        <div class="lg:col-5 lg:mr-auto mb-8 lg:mb-0">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
+            PHYSICS TALKS
+          </h2>
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
+            Physics Talks are PhySoc's seminar-style events where students, researchers, and guest speakers share ideas from across physics and related fields. These talks discuss current research, emerging technologies, and fascinating concepts in an accessible way. They're a great opportunity to learn something new, ask questions, and engage with the physics community.
+          </p>
+        </div>
+        <div class="lg:col-6">
+          <div class="rounded-2xl overflow-hidden shadow-lg border border-border/40 hover:shadow-xl transition-all duration-300">
+            <img
+              src="../images/events/physics_talks.png"
+              alt="Physics Talks at PhySoc"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: LAB TOURS -->
+      <div class="row items-center justify-between mb-12">
+        <div class="lg:col-6 mb-8 lg:mb-0">
+          <div class="rounded-2xl overflow-hidden shadow-lg border border-border/40 hover:shadow-xl transition-all duration-300">
+            <img
+              src="../images/events/lab_tours.png"
+              alt="Lab Tours at PhySoc"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="lg:col-5 lg:ml-auto">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
+            LAB TOURS
+          </h2>
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
+            Lab Tours give students the chance to visit physics research laboratories and see how real experiments are conducted. Guided by researchers or lab members, you'll learn about the equipment, techniques, and projects being developed at the university. It's a great way to explore different areas of physics research and see what working in a lab is really like.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Live Google Calendar Section -->
+  <section class="section py-16 bg-theme-light dark:bg-darkmode-theme-light border-t border-border/40 dark:border-darkmode-border/40">
+    <div class="container">
+      
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-[#121212] dark:text-white mb-3">
+          Events Calendar
+        </h2>
+        <p class="text-text dark:text-darkmode-text text-base md:text-lg max-w-2xl mx-auto">
+          Stay up to date with our upcoming talks, social mixers, lab visits, and special physics department gatherings.
+        </p>
+      </div>
 
       <div class="row items-start">
-        <!-- Left Side: Live Google Calendar Event Details & Announcements (Agenda View - Auto-Synced Live) -->
+        <!-- Agenda View (Event Details & Announcements) -->
         <div class="lg:col-6 mb-12 lg:mb-0 lg:pr-4 xl:pr-6">
-          <div class="bg-theme-light dark:bg-darkmode-theme-light p-6 rounded-2xl border border-border/40 dark:border-darkmode-border/40 shadow-sm">
+          <div class="bg-white dark:bg-darkmode-body p-6 rounded-2xl border border-border/40 dark:border-darkmode-border/40 shadow-md">
             <h3 class="text-xl md:text-2xl font-semibold text-text-dark dark:text-white mb-4 flex items-center gap-2">
-              <span class="text-[#3E7B9D] font-bold text-2xl">•</span>
+              <span class="text-[#3E7B9D] font-bold text-2xl">📋</span>
               <span>Event Details &amp; Announcements</span>
             </h3>
             <iframe
-              src="https://calendar.google.com/calendar/embed?src=409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com&mode=AGENDA&ctz=Asia%2FKolkata&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%23ffffff"
-              style="border: 0; width: 100%; height: 520px;"
-              class="rounded-xl shadow-inner border border-border/30 dark:border-darkmode-border/30 bg-white"
+              src="https://calendar.google.com/calendar/embed?src=409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com&mode=AGENDA&ctz=Asia%2FKolkata&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=1"
+              style="border: 0; width: 100%; height: 500px; border-radius: 12px;"
               frameborder="0"
-              scrolling="auto">
+              scrolling="no">
             </iframe>
           </div>
         </div>
 
-        <!-- Right Side: Interactive Google Calendar Month Grid -->
+        <!-- Monthly Calendar View -->
         <div class="lg:col-6 lg:pl-4 xl:pl-6">
-          <div class="bg-theme-light dark:bg-darkmode-theme-light p-6 rounded-2xl border border-border/40 dark:border-darkmode-border/40 shadow-sm">
+          <div class="bg-white dark:bg-darkmode-body p-6 rounded-2xl border border-border/40 dark:border-darkmode-border/40 shadow-md">
             <h3 class="text-xl md:text-2xl font-semibold text-text-dark dark:text-white mb-4 flex items-center gap-2">
-              <span class="text-[#3E7B9D] font-bold text-2xl">•</span>
-              <span>Event Calendar Grid</span>
+              <span class="text-[#3E7B9D] font-bold text-2xl">📅</span>
+              <span>Monthly Schedule</span>
             </h3>
             <iframe
-              src="https://calendar.google.com/calendar/embed?src=409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com&mode=MONTH&ctz=Asia%2FKolkata&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%23ffffff"
-              style="border: 0; width: 100%; height: 520px;"
-              class="rounded-xl shadow-inner border border-border/30 dark:border-darkmode-border/30 bg-white"
+              src="https://calendar.google.com/calendar/embed?src=409587cb401864dd7f1f5d6dfd125ad3c3b4bf13018a20940bd4d6809d12ff13%40group.calendar.google.com&ctz=Asia%2FKolkata&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1"
+              style="border: 0; width: 100%; height: 500px; border-radius: 12px;"
               frameborder="0"
               scrolling="no">
             </iframe>
@@ -719,7 +798,7 @@
     </div>
   </section>
 
-    </main>
+</main>
 
     
     <footer style="background-color: #3E7B9D !important;">
