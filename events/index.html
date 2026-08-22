@@ -675,71 +675,131 @@
     </div>
   </section>
 
-  <!-- Featured Event Formats (Bean Time, Physics Talks, Lab Tours) -->
-  <section class="section py-16 bg-white dark:bg-darkmode-body">
-    <div class="container">
+  <!-- Featured Event Formats (1-to-1 Exact Layout) -->
+  <section class="section py-20 bg-white dark:bg-darkmode-body">
+    <div class="container max-w-6xl">
       
       <!-- Row 1: BEAN TIME -->
-      <div class="row items-center justify-between mb-20">
-        <div class="lg:col-6 mb-8 lg:mb-0">
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-border/40 hover:shadow-xl transition-all duration-300">
-            <img
-              src="../images/events/bean_time.png"
-              alt="Bean Time at PhySoc"
-              class="w-full h-auto object-cover"
-              loading="lazy"
-            />
+      <div class="row items-center justify-between mb-24">
+        <!-- Photo Collage (1 Large Left + 2 Stacked Right) -->
+        <div class="lg:col-6 mb-10 lg:mb-0">
+          <div class="grid grid-cols-12 gap-3 h-[280px] sm:h-[320px]">
+            <div class="col-span-7 h-full">
+              <img
+                src="../images/events/bean_1.png"
+                alt="Bean Time at PhySoc"
+                class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+              />
+            </div>
+            <div class="col-span-5 flex flex-col gap-3 h-full">
+              <div class="h-1/2">
+                <img
+                  src="../images/events/bean_2.png"
+                  alt="Bean Time Social"
+                  class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+              <div class="h-1/2">
+                <img
+                  src="../images/events/bean_3.png"
+                  alt="Bean Time Discussion"
+                  class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lg:col-5 lg:ml-auto">
-          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
+
+        <!-- Text Content -->
+        <div class="lg:col-5 lg:ml-auto flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
             BEAN TIME
           </h2>
-          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
             Bean Time is PhySoc's regular casual coffee catch-up for physics students and enthusiasts. Drop by to grab a coffee (or any hot drink), take a break from classes, and chat with fellow students about physics, uni life, or anything else on your mind. It's a relaxed way to meet people in the community and unwind between lectures or study sessions.
           </p>
         </div>
       </div>
 
-      <!-- Row 2: PHYSICS TALKS (Alternating) -->
-      <div class="row items-center justify-between mb-20 flex-col-reverse lg:flex-row">
-        <div class="lg:col-5 lg:mr-auto mb-8 lg:mb-0">
-          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
+      <!-- Row 2: PHYSICS TALKS (Alternating: Text Left + Collage Right) -->
+      <div class="row items-center justify-between mb-24 flex-col-reverse lg:flex-row">
+        <!-- Text Content -->
+        <div class="lg:col-5 lg:mr-auto mb-10 lg:mb-0 flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
             PHYSICS TALKS
           </h2>
-          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
             Physics Talks are PhySoc's seminar-style events where students, researchers, and guest speakers share ideas from across physics and related fields. These talks discuss current research, emerging technologies, and fascinating concepts in an accessible way. They're a great opportunity to learn something new, ask questions, and engage with the physics community.
           </p>
         </div>
+
+        <!-- Photo Collage (1 Large Left + 2 Stacked Right) -->
         <div class="lg:col-6">
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-border/40 hover:shadow-xl transition-all duration-300">
-            <img
-              src="../images/events/physics_talks.png"
-              alt="Physics Talks at PhySoc"
-              class="w-full h-auto object-cover"
-              loading="lazy"
-            />
+          <div class="grid grid-cols-12 gap-3 h-[280px] sm:h-[320px]">
+            <div class="col-span-7 h-full">
+              <img
+                src="../images/events/talk_1.png"
+                alt="Physics Talks Lecture Hall"
+                class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+              />
+            </div>
+            <div class="col-span-5 flex flex-col gap-3 h-full">
+              <div class="h-1/2">
+                <img
+                  src="../images/events/talk_2.png"
+                  alt="Physics Talk Speaker Panel"
+                  class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+              <div class="h-1/2">
+                <img
+                  src="../images/events/talk_3.png"
+                  alt="Physics Talk Q&A"
+                  class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Row 3: LAB TOURS -->
       <div class="row items-center justify-between mb-12">
-        <div class="lg:col-6 mb-8 lg:mb-0">
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-border/40 hover:shadow-xl transition-all duration-300">
-            <img
-              src="../images/events/lab_tours.png"
-              alt="Lab Tours at PhySoc"
-              class="w-full h-auto object-cover"
-              loading="lazy"
-            />
+        <!-- Photo Collage (1 Large Left + 2 Stacked Right) -->
+        <div class="lg:col-6 mb-10 lg:mb-0">
+          <div class="grid grid-cols-12 gap-3 h-[280px] sm:h-[320px]">
+            <div class="col-span-7 h-full">
+              <img
+                src="../images/events/lab_1.png"
+                alt="Lab Tour Students Visit"
+                class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+              />
+            </div>
+            <div class="col-span-5 flex flex-col gap-3 h-full">
+              <div class="h-1/2">
+                <img
+                  src="../images/events/lab_2.png"
+                  alt="Lab Tour Research Discussion"
+                  class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+              <div class="h-1/2">
+                <img
+                  src="../images/events/lab_3.png"
+                  alt="Lab Tour Apparatus"
+                  class="w-full h-full object-cover rounded-lg shadow-sm border border-border/30 hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lg:col-5 lg:ml-auto">
-          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase">
+
+        <!-- Text Content -->
+        <div class="lg:col-5 lg:ml-auto flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold font-serif text-[#121212] dark:text-white tracking-wide mb-4 uppercase text-center lg:text-left">
             LAB TOURS
           </h2>
-          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal">
+          <p class="text-text dark:text-darkmode-text text-base md:text-lg leading-relaxed font-normal text-justify lg:text-left">
             Lab Tours give students the chance to visit physics research laboratories and see how real experiments are conducted. Guided by researchers or lab members, you'll learn about the equipment, techniques, and projects being developed at the university. It's a great way to explore different areas of physics research and see what working in a lab is really like.
           </p>
         </div>
