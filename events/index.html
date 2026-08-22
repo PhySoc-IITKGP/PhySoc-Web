@@ -355,34 +355,39 @@
         inset: 0 !important;
         z-index: -1 !important;
         pointer-events: none !important;
-        transition: opacity 2s ease-in-out !important;
       }
 
       .header::before {
         background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
-        animation: dynamicFlipA 4s ease-in-out infinite !important;
+        animation: dynamicFlipA 10s ease-in-out infinite !important;
       }
 
       .header::after {
         background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
-        animation: dynamicFlipB 4s ease-in-out infinite !important;
+        animation: dynamicFlipB 10s ease-in-out infinite !important;
       }
 
       @keyframes dynamicFlipA {
-        0%, 100% {
+        0%, 20% {
           opacity: 1;
         }
-        50% {
+        50%, 70% {
           opacity: 0;
+        }
+        100% {
+          opacity: 1;
         }
       }
 
       @keyframes dynamicFlipB {
-        0%, 100% {
+        0%, 20% {
           opacity: 0;
         }
-        50% {
+        50%, 70% {
           opacity: 1;
+        }
+        100% {
+          opacity: 0;
         }
       }
 
