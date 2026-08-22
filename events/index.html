@@ -338,38 +338,59 @@
   media="all"
    />
       <style>
+      @keyframes headerGradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
       .header,
       .header-gradient-home,
       .header-gradient-all {
-        background: linear-gradient(to right, #ffffff 0%, #f0f6f9 35%, #8cb4ca 75%, #3E7B9D 100%) !important;
-        border-bottom: 1px solid rgba(62, 123, 157, 0.2) !important;
+        background: linear-gradient(90deg, #ffffff 0%, #9fc3d7 25%, #3E7B9D 50%, #9fc3d7 75%, #ffffff 100%) !important;
+        background-size: 200% 100% !important;
+        animation: headerGradientShift 3s ease-in-out infinite !important;
+        border-bottom: 1px solid rgba(62, 123, 157, 0.25) !important;
       }
+
       .header .nav-link,
       .header-gradient-home .nav-link,
       .header-gradient-all .nav-link {
         color: #121212 !important;
-        font-weight: 500;
+        font-weight: 600;
+        transition: color 0.2s ease;
       }
+
       .header .nav-link:hover,
       .header-gradient-home .nav-link:hover,
       .header-gradient-all .nav-link:hover {
         color: #3E7B9D !important;
       }
+
       .header .img-light,
       .header-gradient-home .img-light,
       .header-gradient-all .img-light {
         display: block !important;
       }
+
       .header .img-dark,
       .header-gradient-home .img-dark,
       .header-gradient-all .img-dark {
         display: none !important;
       }
+
       .dark .header .img-light,
       .dark .header-gradient-home .img-light,
       .dark .header-gradient-all .img-light {
         display: block !important;
       }
+
       .dark .header .img-dark,
       .dark .header-gradient-home .img-dark,
       .dark .header-gradient-all .img-dark {
@@ -447,7 +468,7 @@
 
 
     
-    <header class="header sticky top-0 z-30" style="background: linear-gradient(to right, #ffffff 0%, #f0f6f9 35%, #8cb4ca 75%, #3E7B9D 100%) !important; border-bottom: 1px solid rgba(62, 123, 157, 0.2);">
+    <header class="header sticky top-0 z-30">
   <nav class="navbar container">
     
     <div class="order-0">
