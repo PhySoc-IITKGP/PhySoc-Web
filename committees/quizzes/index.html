@@ -375,6 +375,46 @@
       .dark .header-gradient-all .img-dark {
         display: none !important;
       }
+
+      /* Universal #3E7B9D Footer Styling */
+      footer, .footer-custom, .bg-theme-light.dark\:bg-darkmode-theme-light {
+        background-color: #3E7B9D !important;
+        color: #ffffff !important;
+      }
+      footer a, footer p, footer div, footer span, footer i, footer .container {
+        color: #ffffff !important;
+      }
+      footer .social-icons li a {
+        color: #ffffff !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        transition: all 0.3s ease;
+      }
+      footer .social-icons li a:hover {
+        background: #ffffff !important;
+        color: #3E7B9D !important;
+        transform: translateY(-2px);
+      }
+      footer .border-t {
+        border-color: rgba(255, 255, 255, 0.25) !important;
+      }
+
+      /* Universal #3E7B9D Brand Theme Replacements */
+      .btn-primary, .custom-button, .bg-primary, [class*="bg-primary"] {
+        background-color: #3E7B9D !important;
+        border-color: #3E7B9D !important;
+      }
+      .text-primary, [class*="text-primary"], .fa-atom, .text-blue-600, .text-blue-500 {
+        color: #3E7B9D !important;
+      }
+      .border-primary, .border-blue-600, .border-blue-500 {
+        border-color: #3E7B9D !important;
+      }
     </style>
   </head>
 
@@ -660,53 +700,36 @@ PhySoc is hosting weekly sessions focused on problem-solving, competition prep, 
    </main>
 
     
-    <footer class="bg-theme-light dark:bg-darkmode-theme-light">
+    <footer class="footer-custom" style="background-color: #3E7B9D !important; color: #ffffff !important;">
   <div class="container">
     <div class="row items-center py-10">
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
-        
-        <img src="../../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0;" />
-        
+      <div class="lg:col-4 mb-8 text-center lg:mb-0 lg:text-left">
+        <span class="text-2xl font-bold font-serif text-white tracking-wide">
+          <span>Phy</span><span>Soc</span>
+        </span>
+        <p class="text-white/90 text-sm mt-1">Physics Society • IIT Kharagpur</p>
       </div>
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
-          
-        </ul>
+      <div class="lg:col-4 mb-8 text-center lg:mb-0">
       </div>
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
-        <ul class="social-icons">
-          
-            <li>
-              <a
-                target="_blank"
-                aria-label="instagram"
-                rel="nofollow noopener"
-                href="https://www.instagram.com/physoc_iitkgp/">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-          
-            <li>
-              <a
-                target="_blank"
-                aria-label="linkedin"
-                rel="nofollow noopener"
-                href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/">
-                <i class="fab fa-linkedin"></i>
-              </a>
-            </li>
-          
+      <div class="lg:col-4 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
+        <ul class="social-icons flex justify-center lg:justify-end gap-3">
+          <li>
+            <a target="_blank" aria-label="instagram" rel="nofollow noopener" href="https://www.instagram.com/physoc_iitkgp/">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="border-border dark:border-darkmode-border border-t py-7">
-    <div class="text-light dark:text-darkmode-light container text-center">
- We are a student group of the Physic Department IITKGP.
-        We take full responsibility for our organization and this web site.
-      
-      
-      
+  <div style="border-top: 1px solid rgba(255, 255, 255, 0.25);" class="py-6">
+    <div class="container text-center text-white/90 text-sm">
+      We are a student group of the Department of Physics, IIT Kharagpur. &copy; 2026 Physics Society IITKGP.
     </div>
   </div>
 </footer>
