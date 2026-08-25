@@ -115,10 +115,78 @@
       .header-gradient-all .img-dark {
         display: none !important;
       }
+
+      /* Hero Banner (3:2 Ratio with Top-Centered Label) */
+      .team-banner-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 3 / 2;
+        max-height: 560px;
+        overflow: hidden;
+        background-color: #1a3a5c;
+      }
+
+      .team-banner-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+      }
+
+      .team-banner-overlay-text {
+        position: absolute;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        background: rgba(18, 18, 18, 0.7);
+        backdrop-filter: blur(6px);
+        padding: 10px 28px;
+        border-radius: 8px;
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 1.6rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-bottom: 3px solid #3E7B9D;
+        white-space: nowrap;
+      }
+
+      /* 6-Column Responsive Team Grid */
+      .team-grid-container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 36px 16px;
+        justify-content: center;
+      }
+
+      @media (max-width: 1200px) {
+        .team-grid-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      @media (max-width: 850px) {
+        .team-grid-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .team-banner-overlay-text {
+          font-size: 1.2rem;
+          padding: 8px 18px;
+        }
+      }
+
+      @media (max-width: 550px) {
+        .team-grid-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Header -->
+    <!-- Header with Dynamic Gradient Transition -->
     <header class="header sticky top-0 z-30">
       <nav class="navbar container">
         <div class="order-0">
@@ -155,7 +223,7 @@
           <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
             <title>Menu Close</title>
             <polygon
-              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2"
               transform="rotate(45 10 10)"></polygon>
           </svg>
         </label>
@@ -164,16 +232,16 @@
           id="nav-menu"
           class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
           <li class="nav-item">
-            <a class="nav-link" href="../about/index.html">Our Team</a>
+            <a class="nav-link active" href="../about/index.html">Our Team</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../events/index.html">Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../resources/index.html">Resources</a>
+            <a class="nav-link" href="../seminars/index.html">Seminars</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../seminars/index.html">Seminars</a>
+            <a class="nav-link" href="../resources/index.html">Resources</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../sponsors/index.html">Sponsors</a>
@@ -186,254 +254,322 @@
         <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
       </div>
 
-      <!-- Full-Bleed Edge-to-Edge Widescreen Hero Banner (Option C) -->
-      <div style="width: 100%; padding-top: 45px; padding-bottom: 3.5rem;">
-        <div style="width: 100%; height: 600px; overflow: hidden; border-radius: 0; border: none; box-shadow: none;">
+      <!-- Banner (3:2 Aspect Ratio with "MEET OUR TEAM" label) -->
+      <div class="container pb-10" style="padding-top: 45px;">
+        <div class="team-banner-container">
           <img
-            src="../images/gallery/officers.png"
-            alt="Our Team Banner"
-            style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; border-radius: 0; border: none;" />
+            src="../images/gallery/officer.JPG"
+            alt="Meet Our Team Banner" />
+          <div class="team-banner-overlay-text">
+            MEET OUR TEAM
+          </div>
         </div>
       </div>
     </header>
+
     <main>
       
+      <!-- Subtitle Section -->
+      <section class="py-6 bg-white dark:bg-darkmode-body border-b border-border/30">
+        <div class="container text-center">
+          <p style="font-size: 1.15rem; font-weight: 600; color: #334155; margin: 0; letter-spacing: 0.015em;">
+            A group of dedicated physics students who make <span style="color: #3E7B9D; font-weight: 700;">PhySoc</span> events happen!
+          </p>
+        </div>
+      </section>
+
+      <!-- Team Members Grid (6 Columns of Circular Photos) -->
       <section class="section py-16 bg-white dark:bg-darkmode-body">
         <div class="container">
-          <div class="row">
-            <div class="lg:col-12">
-              <div class="content mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#121212] dark:text-white mb-4">
-                  Who Are We
-                </h2>
-                <p class="text-base md:text-lg text-text dark:text-darkmode-text leading-relaxed">
-                  We are a team of students of the Department of Physics who are passionate about, you guessed it, Physics. Our team has students ranging from all fields, core as well as non-core across all years of study and all domains.
-                </p>
+          <div class="team-grid-container">
+            <!-- Bhoomik Modi -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
+                <img src="../images/gallery/Officers/blank.png" alt="Bhoomik Modi" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-
-              <!-- Team Grid (4 persons per row) -->
-              <h3 id="Officers" class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white uppercase tracking-wide mb-10">
-                Our Team
-              </h3>
-
-              <div class="row" style="display: flex; flex-wrap: wrap; margin-left: -14px; margin-right: -14px; justify-content: flex-start;">
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
+                Bhoomik Modi
+              </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">President</div>
+            </div>
+            <!-- Sanjay -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
+                <img src="../images/gallery/Officers/blank.png" alt="Sanjay" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
+              </div>
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
+                Sanjay
+              </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Advisor</div>
+            </div>
+            <!-- Neeraj Laikara -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/neerajlaikara.png" alt="Neeraj Laikara" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Neeraj Laikara
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Secretary</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Kazi Wasim Raj -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/wasim.png" alt="Kazi Wasim Raj" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Kazi Wasim Raj
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Joint Secretary</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Neelabh Priyam Jha -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/neelabh.png" alt="Neelabh Priyam Jha" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Neelabh Priyam Jha
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Events Head</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
-                <img src="../images/gallery/Officers/blank.png" alt="Rakshita Desai" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
-              </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
-                Rakshita Desai
-              </div>
-            </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
-                <img src="../images/gallery/Officers/blank.png" alt="Sayak Moulic" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
-              </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
-                Sayak Moulic
-              </div>
-            </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Skanda K M -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/skandakm.png" alt="Skanda K M" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Skanda K M
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Research Coordinator</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Rakshita Desai -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
+                <img src="../images/gallery/Officers/blank.png" alt="Rakshita Desai" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
+              </div>
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
+                Rakshita Desai
+              </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
+            </div>
+            <!-- Sayak Moulic -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
+                <img src="../images/gallery/Officers/blank.png" alt="Sayak Moulic" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
+              </div>
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
+                Sayak Moulic
+              </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
+            </div>
+            <!-- Aman Kumar -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Aman Kumar" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Aman Kumar
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Rudraksh Thakur -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Rudraksh Thakur" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Rudraksh Thakur
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Gaurish Malik -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Gaurish Malik" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Gaurish Malik
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- KVVH Vasishta -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="KVVH Vasishta" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 KVVH Vasishta
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Padma Youdon -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Padma Youdon" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Padma Youdon
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Utkarsh Singh -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Utkarsh Singh" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Utkarsh Singh
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Avtar Jain -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Avtar Jain" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Avtar Jain
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Abir Dutta -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Abir Dutta" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Abir Dutta
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Aditya Senapati -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Aditya Senapati" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Aditya Senapati
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Darshana Katariya -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Darshana Katariya" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Darshana Katariya
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Jayant K. Kushwaha -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Jayant K. Kushwaha" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Jayant K. Kushwaha
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Pratham Matad -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Pratham Matad" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Pratham Matad
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Sidhant Jain -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/Sidhant Jain.png" alt="Sidhant Jain" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Sidhant Jain
               </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
-            <div style="flex: 0 0 25%; max-width: 25%; width: 25%; padding: 0 14px; box-sizing: border-box; text-align: center; margin-bottom: 3.5rem;">
-              <div style="width: 195px; height: 195px; max-width: 100%; border-radius: 20px; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09); border: 2px solid rgba(62, 123, 157, 0.25);">
+            <!-- Subhra Gour -->
+            <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 4px;">
+              <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; margin: 0 auto; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border: 2.5px solid rgba(62, 123, 157, 0.35); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='scale(1.06)';" onmouseout="this.style.transform='scale(1)';">
                 <img src="../images/gallery/Officers/blank.png" alt="Subhra Gour" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;" />
               </div>
-              <div style="font-weight: 800; font-size: 1.15rem; color: #121212; margin-top: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-weight: 800; font-size: 1rem; color: #121212; margin-top: 0.85rem; letter-spacing: 0.02em; line-height: 1.25;">
                 Subhra Gour
               </div>
-            </div>
-              </div>
+              <div style="font-size: 0.85rem; color: #3E7B9D; font-weight: 600; margin-top: 0.2rem; letter-spacing: 0.02em;">Officer</div>
             </div>
           </div>
         </div>
       </section>
 
     </main>
-    <!-- Footer -->
+
+    <!-- Footer with Dynamic Gradient Transition -->
     <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
-  <div class="container">
-    <div class="row items-center py-10">
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
-        <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
-      </div>
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
-        </ul>
-      </div>
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
-        <div class="inline-flex flex-col items-center text-center">
-          <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
-          <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
-            <li>
-              <a
-                target="_blank"
-                aria-label="instagram"
-                rel="nofollow noopener"
-                href="https://www.instagram.com/physoc_iitkgp/"
-                style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
-              </a>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                aria-label="linkedin"
-                rel="nofollow noopener"
-                href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
-                style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
-              </a>
-            </li>
-          </ul>
+      <div class="container">
+        <div class="row items-center py-10">
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+            <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
+          </div>
+          <div class="lg:col-6 mb-8 text-center lg:mb-0">
+            <ul>
+            </ul>
+          </div>
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
+            <div class="inline-flex flex-col items-center text-center">
+              <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
+              <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="instagram"
+                    rel="nofollow noopener"
+                    href="https://www.instagram.com/PhySoc_IItKGP/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="linkedin"
+                    rel="nofollow noopener"
+                    href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="youtube"
+                    rel="nofollow noopener"
+                    href="https://www.youtube.com/@physoc_iitkgp"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-youtube" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
-    <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
-      Physics Society IIT KGP
-    </div>
-  </div>
-</footer>
+      <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
+        <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
+          Physics Society IIT KGP
+        </div>
+      </div>
+    </footer>
 
     <script src="../js/main.min.c382e2105e67658eff86fe0a044cac3f838636947d327cd08f2b03f6a8b21f2e.js" defer></script>
     <script crossorigin="anonymous" src="../js/script.min.e47bd8989fcd86cba20150c3b02e9c9806d76d4d7b000a4b636d101f8a300ad6.js"></script>
