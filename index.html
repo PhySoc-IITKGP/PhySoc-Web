@@ -396,7 +396,7 @@
            SECTION 1: About us
            Left: Heading + Text paragraphs | Right: Image box
       ══════════════════════════════════════════════════════════ -->
-      <section class="section py-16 bg-white dark:bg-darkmode-body border-b border-border/40">
+      <section class="section py-10 bg-white dark:bg-darkmode-body border-b border-border/40">
         <div class="container">
           <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
             
@@ -434,7 +434,7 @@
            SECTION 2: Clicks
            Auto-rotating carousel of 6 photos with captions & navigation
       ══════════════════════════════════════════════════════════ -->
-      <section class="section py-16 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+      <section class="section py-10 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
         <div class="container">
           
           <div class="mb-8">
@@ -505,7 +505,7 @@
            SECTION 3: Get IN Touch & Location Map
            Left: Google Map embed | Right: Join Us button & Contact Info
       ══════════════════════════════════════════════════════════ -->
-      <section class="section py-16 bg-white dark:bg-darkmode-body">
+      <section class="section py-10 bg-white dark:bg-darkmode-body">
         <div class="container">
           <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
             
@@ -525,16 +525,7 @@
             <!-- Right Side: Get IN Touch Content (50% width) -->
             <div style="flex: 1 1 50%; width: 50%; min-width: 0; padding-left: 10px;">
               
-              <!-- Join Us Button -->
-              <div style="margin-bottom: 1.5rem;">
-                <a
-                  href="./about/index.html"
-                  style="display: inline-block; background: #3E7B9D; color: #ffffff; font-weight: 800; font-size: 1.15rem; padding: 14px 42px; border-radius: 8px; text-decoration: none; letter-spacing: 0.05em; transition: all 0.2s; box-shadow: 0 4px 14px rgba(62,123,157,0.35);"
-                  onmouseover="this.style.backgroundColor='#2b5e7d'; this.style.transform='translateY(-2px)';"
-                  onmouseout="this.style.backgroundColor='#3E7B9D'; this.style.transform='translateY(0)';">
-                  Join us
-                </a>
-              </div>
+              
 
               <!-- Heading -->
               <h2 style="font-size: 2.25rem; font-weight: 800; color: #121212; margin-bottom: 1.25rem; letter-spacing: 0.02em; line-height: 1.2;">
@@ -677,11 +668,20 @@
       }
       resetHeroTimer();
 
-      /* ── Clicks Auto-Rotating Carousel ── */
+      /* ── Clicks Auto-Rotating Carousel (One-Directional Infinite Loop) ── */
       var clicksTrack = document.getElementById('clicksTrack');
-      var clicksCards = document.querySelectorAll('.clicks-card');
+      var clicksOriginalCards = Array.from(document.querySelectorAll('.clicks-card'));
       var clicksIdx = 0;
       var clicksTimer = null;
+      var isTransitioning = false;
+
+      // Duplicate cards to enable smooth, seamless one-directional infinite loop
+      if (clicksTrack && clicksOriginalCards.length > 0) {
+        clicksOriginalCards.forEach(function(card) {
+          var clone = card.cloneNode(true);
+          clicksTrack.appendChild(clone);
+        });
+      }
 
       function getVisibleClicksCount() {
         if (window.innerWidth <= 600) return 1;
@@ -689,31 +689,55 @@
         return 3;
       }
 
-      function updateClicksPosition() {
-        if (!clicksTrack || !clicksCards.length) return;
-        var visible = getVisibleClicksCount();
-        var maxIdx = Math.max(0, clicksCards.length - visible);
-        if (clicksIdx > maxIdx) clicksIdx = 0;
-        if (clicksIdx < 0) clicksIdx = maxIdx;
-
-        var cardWidth = clicksCards[0].offsetWidth;
+      function getStepWidth() {
+        var allCards = document.querySelectorAll('.clicks-card');
+        if (!allCards.length) return 0;
+        var cardWidth = allCards[0].offsetWidth;
         var gap = 20;
-        var offset = clicksIdx * (cardWidth + gap);
-        clicksTrack.style.transform = 'translateX(-' + offset + 'px)';
+        return cardWidth + gap;
+      }
+
+      function updateClicksPosition(animate) {
+        if (!clicksTrack) return;
+        if (animate === false) {
+          clicksTrack.style.transition = 'none';
+        } else {
+          clicksTrack.style.transition = 'transform 0.5s ease-in-out';
+        }
+        var step = getStepWidth();
+        clicksTrack.style.transform = 'translateX(-' + (clicksIdx * step) + 'px)';
       }
 
       function nextClicksSlide() {
-        var visible = getVisibleClicksCount();
-        var maxIdx = Math.max(0, clicksCards.length - visible);
-        clicksIdx = (clicksIdx >= maxIdx) ? 0 : clicksIdx + 1;
-        updateClicksPosition();
+        if (isTransitioning || !clicksTrack) return;
+        isTransitioning = true;
+        clicksIdx++;
+        updateClicksPosition(true);
+
+        setTimeout(function() {
+          // If we reached the clone set, seamlessly jump to original set without animation
+          if (clicksIdx >= clicksOriginalCards.length) {
+            clicksIdx = 0;
+            updateClicksPosition(false);
+          }
+          isTransitioning = false;
+        }, 510);
       }
 
       function prevClicksSlide() {
-        var visible = getVisibleClicksCount();
-        var maxIdx = Math.max(0, clicksCards.length - visible);
-        clicksIdx = (clicksIdx <= 0) ? maxIdx : clicksIdx - 1;
-        updateClicksPosition();
+        if (isTransitioning || !clicksTrack) return;
+        isTransitioning = true;
+        if (clicksIdx <= 0) {
+          clicksIdx = clicksOriginalCards.length;
+          updateClicksPosition(false);
+          // Force reflow
+          void clicksTrack.offsetWidth;
+        }
+        clicksIdx--;
+        updateClicksPosition(true);
+        setTimeout(function() {
+          isTransitioning = false;
+        }, 510);
       }
 
       function resetClicksTimer() {
@@ -732,7 +756,7 @@
       }
 
       window.addEventListener('resize', function() {
-        updateClicksPosition();
+        updateClicksPosition(false);
       });
 
       resetClicksTimer();
