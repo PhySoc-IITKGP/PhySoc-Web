@@ -269,9 +269,24 @@
         transform: scale(1.08);
       }
 
+      /* Mobile Responsiveness Styles */
       @media (max-width: 900px) {
         .clicks-card {
           flex: 0 0 calc(50% - 10px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Makes side-by-side flex layouts stack into a column on mobile */
+        .responsive-flex {
+          flex-direction: column !important;
+          gap: 32px !important;
+        }
+        .responsive-child {
+          width: 100% !important;
+          flex: 1 1 100% !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
         }
       }
 
@@ -280,20 +295,20 @@
           flex: 0 0 100%;
         }
         .hero-overlay-text {
-        position: absolute;
-        left: 28px;
-        bottom: 28px;
-        z-index: 5;
-        background: transparent !important;
-        padding: 0 !important;
-        border: none !important;
-        color: #ffffff;
-        font-weight: 900;
-        font-size: 2rem;
-        letter-spacing: 0.04em;
-        line-height: 1.2;
-        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0,0,0,0.9);
-      }
+          position: absolute;
+          left: 28px;
+          bottom: 28px;
+          z-index: 5;
+          background: transparent !important;
+          padding: 0 !important;
+          border: none !important;
+          color: #ffffff;
+          font-weight: 900;
+          font-size: 2rem;
+          letter-spacing: 0.04em;
+          line-height: 1.2;
+          text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0,0,0,0.9);
+        }
       }
     </style>
   </head>
@@ -406,10 +421,10 @@
       ══════════════════════════════════════════════════════════ -->
       <section class="section py-10 bg-white dark:bg-darkmode-body border-b border-border/40">
         <div class="container">
-          <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
+          <div class="responsive-flex" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
             
             <!-- Left Text Content (58% width) -->
-            <div style="flex: 1 1 58%; width: 58%; min-width: 0;">
+            <div class="responsive-child" style="flex: 1 1 58%; width: 58%; min-width: 0;">
               <h2 style="font-size: 2.25rem; font-weight: 800; color: #121212; margin-bottom: 1.25rem; letter-spacing: 0.02em; line-height: 1.2;">
                 About us
               </h2>
@@ -425,7 +440,7 @@
             </div>
 
             <!-- Right Image Box (42% width) -->
-            <div style="flex: 1 1 42%; width: 42%; min-width: 0;">
+            <div class="responsive-child" style="flex: 1 1 42%; width: 42%; min-width: 0;">
               <div style="border: 2px solid rgba(62, 123, 157, 0.35); overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); width: 100%; border-radius: 4px;">
                 <img
                   src="./images/gallery/discuss.png"
@@ -515,10 +530,10 @@
       ══════════════════════════════════════════════════════════ -->
       <section class="section py-10 bg-white dark:bg-darkmode-body">
         <div class="container">
-          <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
+          <div class="responsive-flex" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
             
             <!-- Left Side: Interactive Map (50% width) -->
-            <div style="flex: 1 1 50%; width: 50%; min-width: 0;">
+            <div class="responsive-child" style="flex: 1 1 50%; width: 50%; min-width: 0;">
               <div style="border: 2px solid rgba(62, 123, 157, 0.35); overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); height: 420px; width: 100%; border-radius: 4px;">
                 <iframe
                   title="Department of Physics IIT Kharagpur Location"
@@ -531,10 +546,8 @@
             </div>
 
             <!-- Right Side: Get IN Touch Content (50% width) -->
-            <div style="flex: 1 1 50%; width: 50%; min-width: 0; padding-left: 10px;">
+            <div class="responsive-child" style="flex: 1 1 50%; width: 50%; min-width: 0; padding-left: 10px;">
               
-              
-
               <!-- Heading -->
               <h2 style="font-size: 2.25rem; font-weight: 800; color: #121212; margin-bottom: 1.25rem; letter-spacing: 0.02em; line-height: 1.2;">
                 Get IN Touch
