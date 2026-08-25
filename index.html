@@ -115,10 +115,182 @@
       .header-gradient-all .img-dark {
         display: none !important;
       }
+
+      /* Hero Banner Slider (3:2 Aspect Ratio) */
+      .hero-slider-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 3 / 2;
+        max-height: 560px;
+        overflow: hidden;
+        background-color: #1a3a5c;
+      }
+
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 1;
+      }
+
+      .hero-slide.active {
+        opacity: 1;
+        z-index: 2;
+      }
+
+      .hero-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+      }
+
+      .hero-overlay-text {
+        position: absolute;
+        left: 28px;
+        bottom: 28px;
+        z-index: 5;
+        background: rgba(18, 18, 18, 0.65);
+        backdrop-filter: blur(6px);
+        padding: 12px 22px;
+        border-radius: 8px;
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.5rem;
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+        border-left: 4px solid #3E7B9D;
+      }
+
+      .hero-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 6;
+        display: flex;
+        gap: 10px;
+      }
+
+      .hero-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.45);
+        border: 1.5px solid #ffffff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .hero-dot.active {
+        background: #ffffff;
+        width: 28px;
+        border-radius: 12px;
+      }
+
+      /* Clicks Slider */
+      .clicks-carousel-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .clicks-viewport {
+        overflow: hidden;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .clicks-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        gap: 20px;
+      }
+
+      .clicks-card {
+        flex: 0 0 calc(33.333% - 14px);
+        box-sizing: border-box;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .clicks-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      }
+
+      .clicks-card-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .clicks-card-caption {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #1e293b;
+        text-align: center;
+        border-top: 1px solid #f1f5f9;
+        background: #fafbfc;
+      }
+
+      .clicks-nav-btn {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        background: #ffffff;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #1e293b;
+        font-size: 1.2rem;
+        transition: all 0.2s ease;
+        z-index: 10;
+      }
+
+      .clicks-nav-btn:hover {
+        background: #3E7B9D;
+        color: #ffffff;
+        border-color: #3E7B9D;
+        transform: scale(1.08);
+      }
+
+      @media (max-width: 900px) {
+        .clicks-card {
+          flex: 0 0 calc(50% - 10px);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .clicks-card {
+          flex: 0 0 100%;
+        }
+        .hero-overlay-text {
+          font-size: 1.1rem;
+          padding: 8px 14px;
+          left: 14px;
+          bottom: 14px;
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Header -->
+    <!-- Header with Dynamic Gradient Transition -->
     <header class="header sticky top-0 z-30">
       <nav class="navbar container">
         <div class="order-0">
@@ -170,10 +342,10 @@
             <a class="nav-link" href="./events/index.html">Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./resources/index.html">Resources</a>
+            <a class="nav-link" href="./seminars/index.html">Seminars</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./seminars/index.html">Seminars</a>
+            <a class="nav-link" href="./resources/index.html">Resources</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./sponsors/index.html">Sponsors</a>
@@ -186,110 +358,385 @@
         <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
       </div>
 
-      <!-- Seamless Merged Banner Image (Aligned flush with PhySoc symbol on left and Sponsors on right) -->
+      <!-- Banner Image Slider (3:2 Ratio with Auto-Rotation & 3 Dots) -->
       <div class="container pb-14" style="padding-top: 45px;">
-        <div style="width: 100%; height: 520px; overflow: hidden; border-radius: 0; border: none; box-shadow: none;">
-          <img
-            src="./images/gallery/group.JPG"
-            alt="PhySoc IIT Kharagpur"
-            style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; border-radius: 0; border: none;" />
+        <div class="hero-slider-container">
+          <!-- Slide 1 -->
+          <div class="hero-slide active">
+            <img src="./images/gallery/group.JPG" alt="PhySoc IIT Kharagpur Banner" />
+          </div>
+          <!-- Slide 2 -->
+          <div class="hero-slide">
+            <img src="./images/gallery/calday.JPG" alt="PhySoc Calendar Celebration" />
+          </div>
+          <!-- Slide 3 -->
+          <div class="hero-slide">
+            <img src="./images/gallery/officer.JPG" alt="PhySoc Officer Gathering" />
+          </div>
+
+          <!-- Overlay Text -->
+          <div class="hero-overlay-text">
+            <div>Phy<span style="color: #63b3ed;">Soc</span></div>
+            <div style="font-size: 0.95rem; font-weight: 600; opacity: 0.9;">@ IITKGP</div>
+          </div>
+
+          <!-- 3 Dot Indicators -->
+          <div class="hero-dots" id="heroDots">
+            <div class="hero-dot active" onclick="setHeroSlide(0)"></div>
+            <div class="hero-dot" onclick="setHeroSlide(1)"></div>
+            <div class="hero-dot" onclick="setHeroSlide(2)"></div>
+          </div>
         </div>
       </div>
     </header>
+
     <main>
       
-      <!-- Welcome Content Section -->
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 1: About us
+           Left: Heading + Text paragraphs | Right: Image box
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-16 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <div class="row items-center justify-between">
+            
+            <!-- Left Text Content -->
+            <div class="md:col-7 lg:col-7 mb-8 md:mb-0">
+              <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white mb-6 tracking-wide">
+                About us
+              </h2>
+              <p class="mb-5 text-base md:text-lg text-text dark:text-darkmode-text leading-relaxed">
+                Welcome to PhySoc, the official student-led Physics Society of the Department of Physics at IIT Kharagpur. We are a passionate collective of undergraduates, postgraduates, and physics enthusiasts dedicated to cultivating scientific curiosity and community across campus.
+              </p>
+              <p class="mb-5 text-base md:text-lg text-text dark:text-darkmode-text leading-relaxed">
+                Our society serves as a bridge between faculty and students, organizing flagship seminar series, research colloquia, interactive guidance sessions, and academic competitions. We provide mentorship for internships, research pathways, and postgraduate opportunities while encouraging interdisciplinary exploration.
+              </p>
+              <p class="text-base md:text-lg text-text dark:text-darkmode-text leading-relaxed">
+                Whether you are exploring theoretical physics, condensed matter, quantum computing, astrophysics, or simply have a love for scientific discovery, PhySoc provides a vibrant platform to learn, collaborate, and grow.
+              </p>
+            </div>
+
+            <!-- Right Image Box -->
+            <div class="md:col-5 lg:col-5">
+              <div style="border: 2px solid rgba(62, 123, 157, 0.35); overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+                <img
+                  src="./images/gallery/carnival1.jpeg"
+                  alt="About PhySoc IIT Kharagpur"
+                  style="width: 100%; height: 360px; object-fit: cover; display: block;" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 2: Clicks
+           Auto-rotating carousel of 6 photos with captions & navigation
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-16 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          
+          <div class="mb-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white tracking-wide">
+              Clicks
+            </h2>
+          </div>
+
+          <div class="clicks-carousel-wrapper">
+            <!-- Prev Button -->
+            <button class="clicks-nav-btn" onclick="prevClicksSlide()" aria-label="Previous photos" style="margin-right: 12px;">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+
+            <!-- Viewport -->
+            <div class="clicks-viewport">
+              <div class="clicks-track" id="clicksTrack">
+                
+                <!-- Photo 1 -->
+                <div class="clicks-card">
+                  <img src="./images/gallery/carnival1.jpeg" alt="Department Carnival" class="clicks-card-img" />
+                  <div class="clicks-card-caption">Department Carnival &amp; Fresher Welcome</div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="clicks-card">
+                  <img src="./images/gallery/calday.JPG" alt="Calendar Celebration" class="clicks-card-img" />
+                  <div class="clicks-card-caption">Annual Calendar Day Celebration</div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="clicks-card">
+                  <img src="./images/gallery/officer.JPG" alt="Executive Team" class="clicks-card-img" />
+                  <div class="clicks-card-caption">PhySoc Executive Team Gathering</div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="clicks-card">
+                  <img src="./images/outreach.jpg" alt="Student Outreach" class="clicks-card-img" />
+                  <div class="clicks-card-caption">Student Outreach &amp; Interactive Sessions</div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="clicks-card">
+                  <img src="./images/competitions.jpeg" alt="Physics Competitions" class="clicks-card-img" />
+                  <div class="clicks-card-caption">Physics Competitions &amp; Problem Solving</div>
+                </div>
+
+                <!-- Photo 6 -->
+                <div class="clicks-card">
+                  <img src="./images/gallery/group.JPG" alt="Annual Gathering" class="clicks-card-img" />
+                  <div class="clicks-card-caption">Department of Physics Annual Meet</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Next Button -->
+            <button class="clicks-nav-btn" onclick="nextClicksSlide()" aria-label="Next photos" style="margin-left: 12px;">
+              <i class="fa fa-chevron-right"></i>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 3: Get IN Touch & Location Map
+           Left: Google Map embed | Right: Join Us button & Contact Info
+      ══════════════════════════════════════════════════════════ -->
       <section class="section py-16 bg-white dark:bg-darkmode-body">
         <div class="container">
           <div class="row items-center justify-between">
-            <div class="md:col-7 lg:col-6 mb-8 md:mb-0">
-              <h2 class="text-3xl md:text-4xl font-bold text-[#121212] dark:text-white mb-4">
-                Welcome to PhySoc! Physics Society IITKGP
+            
+            <!-- Left Side: Interactive Map -->
+            <div class="md:col-6 lg:col-6 mb-8 md:mb-0">
+              <div style="border: 2px solid rgba(62, 123, 157, 0.35); overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); height: 380px;">
+                <iframe
+                  title="Department of Physics IIT Kharagpur Location"
+                  src="https://maps.google.com/maps?q=Department+of+Physics+IIT+Kharagpur+Kharagpur+West+Bengal&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  style="border: 0; width: 100%; height: 100%; display: block;"
+                  allowfullscreen=""
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+
+            <!-- Right Side: Get IN Touch Content -->
+            <div class="md:col-6 lg:col-5 md:pl-6">
+              
+              <!-- Join Us Button -->
+              <div class="mb-6">
+                <a
+                  href="./about/index.html"
+                  style="display: inline-block; background: #3E7B9D; color: #ffffff; font-weight: 800; font-size: 1.15rem; padding: 14px 42px; border-radius: 8px; text-decoration: none; letter-spacing: 0.05em; transition: all 0.2s; box-shadow: 0 4px 14px rgba(62,123,157,0.35);"
+                  onmouseover="this.style.backgroundColor='#2b5e7d'; this.style.transform='translateY(-2px)';"
+                  onmouseout="this.style.backgroundColor='#3E7B9D'; this.style.transform='translateY(0)';">
+                  Join us
+                </a>
+              </div>
+
+              <!-- Heading -->
+              <h2 class="text-3xl md:text-4xl font-extrabold text-[#121212] dark:text-white mb-4 tracking-wide">
+                Get IN Touch
               </h2>
-              <p class="mb-8 text-base md:text-lg text-text dark:text-darkmode-text leading-relaxed">
-                As members of the PhySoc, we work within the department to provide a supportive community for everyone interested in physics:
-              </p>
-              <ul class="space-y-4">
-                <li class="relative pl-7 text-text dark:text-darkmode-text text-base leading-relaxed">
-                  <i class="fa fa-atom absolute left-0 top-1 text-[#3E7B9D]"></i>
-                  Hosting esteemed researchers to share recent breakthroughs and developments in modern physics.
-                </li>
-                <li class="relative pl-7 text-text dark:text-darkmode-text text-base leading-relaxed">
-                  <i class="fa fa-atom absolute left-0 top-1 text-[#3E7B9D]"></i>
-                  Providing a platform for seniors to share their research experiences, publications, and methodologies.
-                </li>
-                <li class="relative pl-7 text-text dark:text-darkmode-text text-base leading-relaxed">
-                  <i class="fa fa-atom absolute left-0 top-1 text-[#3E7B9D]"></i>
-                  Conducting "Fundae Talks" on internships, research fellowships, and PhD pathways to guide incoming batches.
-                </li>
-                <li class="relative pl-7 text-text dark:text-darkmode-text text-base leading-relaxed">
-                  <i class="fa fa-atom absolute left-0 top-1 text-[#3E7B9D]"></i>
-                  Encouraging student competence, research enthusiasm, and scientific responsibility within the department.
-                </li>
-                <li class="relative pl-7 text-text dark:text-darkmode-text text-base leading-relaxed">
-                  <i class="fa fa-atom absolute left-0 top-1 text-[#3E7B9D]"></i>
-                  Building collaborative bridges between IIT Kharagpur students and physics societies across other premier institutes.
-                </li>
-              </ul>
+
+              <!-- Body Text -->
+              <div class="text-base text-text dark:text-darkmode-text leading-relaxed space-y-3">
+                <p>
+                  Got an idea for an event you want us to run? Have a great quote you heard from a lecturer? Or do you want a question for us?
+                </p>
+                
+                <p class="font-medium">
+                  Feel free to contact us in whichever way is easiest:
+                </p>
+                
+                <div class="space-y-1.5 pt-1">
+                  <p>
+                    <strong>Email us at:</strong>
+                    <a href="mailto:phyiitkharagpur@gmail.com" class="text-[#3E7B9D] font-semibold underline hover:opacity-80 ml-1">
+                      phyiitkharagpur@gmail.com
+                    </a>
+                  </p>
+                  
+                  <p>
+                    <strong>Send us a message on instagram:</strong>
+                    <a href="https://www.instagram.com/PhySoc_IItKGP/" target="_blank" rel="noopener" class="text-[#3E7B9D] font-semibold underline hover:opacity-80 ml-1">
+                      @PhySoc_IItKGP
+                    </a>
+                  </p>
+                  
+                  <p>
+                    <strong>Office:</strong> Department of Physics, IIT KGP
+                  </p>
+                </div>
+              </div>
+
             </div>
-            <div class="md:col-5">
-              <img src="./images/gallery/carnival1.jpeg" alt="Welcome to IITKGP’s undergraduate physics community!" class="w-full h-auto rounded-2xl shadow-lg border border-border/30" />
-            </div>
+
           </div>
         </div>
       </section>
 
     </main>
-    <!-- Footer -->
+
+    <!-- Footer with Dynamic Gradient Transition -->
     <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
-  <div class="container">
-    <div class="row items-center py-10">
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
-        <img src="./images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
-      </div>
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
-        </ul>
-      </div>
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
-        <div class="inline-flex flex-col items-center text-center">
-          <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
-          <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
-            <li>
-              <a
-                target="_blank"
-                aria-label="instagram"
-                rel="nofollow noopener"
-                href="https://www.instagram.com/physoc_iitkgp/"
-                style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
-              </a>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                aria-label="linkedin"
-                rel="nofollow noopener"
-                href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
-                style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
-              </a>
-            </li>
-          </ul>
+      <div class="container">
+        <div class="row items-center py-10">
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+            <img src="./images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
+          </div>
+          <div class="lg:col-6 mb-8 text-center lg:mb-0">
+            <ul>
+            </ul>
+          </div>
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
+            <div class="inline-flex flex-col items-center text-center">
+              <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
+              <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="instagram"
+                    rel="nofollow noopener"
+                    href="https://www.instagram.com/PhySoc_IItKGP/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="linkedin"
+                    rel="nofollow noopener"
+                    href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="youtube"
+                    rel="nofollow noopener"
+                    href="https://www.youtube.com/@physoc_iitkgp"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-youtube" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
-    <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
-      Physics Society IIT KGP
-    </div>
-  </div>
-</footer>
+      <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
+        <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
+          Physics Society IIT KGP
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Scripts for Hero Slider and Clicks Carousel -->
+    <script>
+      /* ── Hero Banner Auto-Slider ── */
+      var currentHeroIdx = 0;
+      var heroSlides = document.querySelectorAll('.hero-slide');
+      var heroDots = document.querySelectorAll('.hero-dot');
+      var heroTimer = null;
+
+      function showHeroSlide(idx) {
+        if (!heroSlides.length) return;
+        currentHeroIdx = (idx + heroSlides.length) % heroSlides.length;
+        heroSlides.forEach(function(s, i) {
+          s.classList.toggle('active', i === currentHeroIdx);
+        });
+        heroDots.forEach(function(d, i) {
+          d.classList.toggle('active', i === currentHeroIdx);
+        });
+      }
+
+      function setHeroSlide(idx) {
+        showHeroSlide(idx);
+        resetHeroTimer();
+      }
+
+      function nextHeroSlide() {
+        showHeroSlide(currentHeroIdx + 1);
+      }
+
+      function resetHeroTimer() {
+        if (heroTimer) clearInterval(heroTimer);
+        heroTimer = setInterval(nextHeroSlide, 4500);
+      }
+      resetHeroTimer();
+
+      /* ── Clicks Auto-Rotating Carousel ── */
+      var clicksTrack = document.getElementById('clicksTrack');
+      var clicksCards = document.querySelectorAll('.clicks-card');
+      var clicksIdx = 0;
+      var clicksTimer = null;
+
+      function getVisibleClicksCount() {
+        if (window.innerWidth <= 600) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 3;
+      }
+
+      function updateClicksPosition() {
+        if (!clicksTrack || !clicksCards.length) return;
+        var visible = getVisibleClicksCount();
+        var maxIdx = Math.max(0, clicksCards.length - visible);
+        if (clicksIdx > maxIdx) clicksIdx = 0;
+        if (clicksIdx < 0) clicksIdx = maxIdx;
+
+        var cardWidth = clicksCards[0].offsetWidth;
+        var gap = 20;
+        var offset = clicksIdx * (cardWidth + gap);
+        clicksTrack.style.transform = 'translateX(-' + offset + 'px)';
+      }
+
+      function nextClicksSlide() {
+        var visible = getVisibleClicksCount();
+        var maxIdx = Math.max(0, clicksCards.length - visible);
+        clicksIdx = (clicksIdx >= maxIdx) ? 0 : clicksIdx + 1;
+        updateClicksPosition();
+      }
+
+      function prevClicksSlide() {
+        var visible = getVisibleClicksCount();
+        var maxIdx = Math.max(0, clicksCards.length - visible);
+        clicksIdx = (clicksIdx <= 0) ? maxIdx : clicksIdx - 1;
+        updateClicksPosition();
+      }
+
+      function resetClicksTimer() {
+        if (clicksTimer) clearInterval(clicksTimer);
+        clicksTimer = setInterval(nextClicksSlide, 3500);
+      }
+
+      var clicksContainer = document.querySelector('.clicks-carousel-wrapper');
+      if (clicksContainer) {
+        clicksContainer.addEventListener('mouseenter', function() {
+          if (clicksTimer) clearInterval(clicksTimer);
+        });
+        clicksContainer.addEventListener('mouseleave', function() {
+          resetClicksTimer();
+        });
+      }
+
+      window.addEventListener('resize', function() {
+        updateClicksPosition();
+      });
+
+      resetClicksTimer();
+    </script>
 
     <script src="./js/main.min.c382e2105e67658eff86fe0a044cac3f838636947d327cd08f2b03f6a8b21f2e.js" defer></script>
     <script crossorigin="anonymous" src="./js/script.min.e47bd8989fcd86cba20150c3b02e9c9806d76d4d7b000a4b636d101f8a300ad6.js"></script>
