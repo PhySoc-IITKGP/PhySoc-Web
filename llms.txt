@@ -2,7 +2,7 @@
 > Official departmental society of the Department of Physics at the Indian Institute of Technology Kharagpur (IIT KGP).
 
 ## Overview
-PhySoc (Physics Society) represents the undergraduate, postgraduate, and research scholar student community of the Department of Physics at IIT Kharagpur. We host academic seminars, national research conferences, outreach sessions, quizzes, hackathons, and curated study archives.
+PhySoc (Physics Society) represents the undergraduate student community of the Department of Physics at IIT Kharagpur. We host physics talks, various competitions, lab tours and many more .
 
 ## Website & Domain
 - Canonical URL: https://physoc-iitkgp.vercel.app/
@@ -13,10 +13,7 @@ PhySoc (Physics Society) represents the undergraduate, postgraduate, and researc
 - [About Us](https://physoc-iitkgp.vercel.app/about/): History, vision, governance structure, faculty advisors, and departmental leadership.
 - [Events](https://physoc-iitkgp.vercel.app/events/): Annual symposiums, guest colloquiums, student lectures, quantum computing workshops, and astrophysics stargazing sessions.
 - [Resources](https://physoc-iitkgp.vercel.app/resources/): Physics course notes, exam archives, curated study sheets, computational physics scripts, and research guides.
-- [Seminars Committee](https://physoc-iitkgp.vercel.app/committees/seminars/): Organization of weekly academic colloquia, faculty lectures, and student research presentations.
-- [Quizzes Committee](https://physoc-iitkgp.vercel.app/committees/quizzes/): Competitive physics quizzes, scientific brain teasers, and inter-hall physics competitions.
-- [Socials Committee](https://physoc-iitkgp.vercel.app/committees/socials/): Departmental meetups, orientation, sports fests, and cultural gatherings.
-- [Sponsorship & Outreach](https://physoc-iitkgp.vercel.app/committees/sponsors/): Industry partnerships, corporate outreach, research sponsorships, and high-school scientific mentorship.
+- [Sponsorship & Outreach](https://physoc-iitkgp.vercel.app/sponsors/): Industry partnerships, corporate outreach, research sponsorships, and high-school scientific mentorship.
 
 ## Contact & Connect
 - Website: https://physoc-iitkgp.vercel.app/
