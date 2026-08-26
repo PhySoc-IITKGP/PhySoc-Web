@@ -1,0 +1,51 @@
+# PhySoc IIT Kharagpur — Complete Society & Department Documentation
+
+## Identity & Mission
+The Physics Society (PhySoc), Department of Physics, IIT Kharagpur is the official student and academic body fostering research culture, theoretical intuition, computational modeling, and collaborative scientific discourse among physics students and faculty at IIT Kharagpur.
+
+- Official Domain: https://physoc-iitkgp.vercel.app
+- Institution: Indian Institute of Technology Kharagpur (IIT KGP)
+- Department: Department of Physics
+
+---
+
+## Complete Site Map & Directory
+
+### 1. Home Page (`https://physoc-iitkgp.vercel.app/`)
+- Hero section highlighting the society mission and core identity.
+- Featured highlights: Recent symposiums, upcoming colloquia, and community initiatives.
+- Instant search engine across all society pages and academic resources.
+- Quick links to resources, event calendars, and departmental notices.
+
+### 2. About Us (`https://physoc-iitkgp.vercel.app/about/`)
+- History and origins of PhySoc at IIT Kharagpur.
+- Faculty advisors and guiding professors from the Department of Physics.
+- Student leadership, office bearers, executive council, and sub-committees.
+- Mission statement: bridging foundational physics theory, modern experimental laboratories, and cutting-edge computational physics.
+
+### 3. Events & Colloquia (`https://physoc-iitkgp.vercel.app/events/`)
+- **Colloquium Series**: Weekly talks by visiting professors, national scientists, and alumni in quantum condensed matter, high-energy physics, nonlinear dynamics, and cosmology.
+- **Symposiums & Conferences**: Student Physics Symposium, poster sessions, and undergraduate research exhibitions.
+- **Workshops**: Python for Scientific Computing, Quantum Information basics, LaTeX typesetting, and Mathematica modeling.
+- **Stargazing & Astronomy Nights**: Observation camps and telescope workshops organized with the astrophysics group.
+
+### 4. Academic & Research Resources (`https://physoc-iitkgp.vercel.app/resources/`)
+- **Core Curriculum Notes**: Classical Mechanics, Electrodynamics, Quantum Mechanics I & II, Statistical Mechanics, Mathematical Methods in Physics.
+- **Laboratory Guides**: General Physics Lab, Optics Lab, Condensed Matter Lab, and Modern Physics experimental references.
+- **Computational Physics**: Code repositories, simulation notebooks, numerical analysis code (C++/Python).
+- **Exam Question Banks**: Mid-semester and End-semester archives with solution sketches.
+
+### 5. Committees
+- **Seminars Committee** (`https://physoc-iitkgp.vercel.app/committees/seminars/`): Curates speaker schedules, organizes colloquia, manages speaker Q&A.
+- **Quizzes Committee** (`https://physoc-iitkgp.vercel.app/committees/quizzes/`): Hosts departmental quizzes, annual inter-collegiate physics quiz, problem-of-the-week.
+- **Socials Committee** (`https://physoc-iitkgp.vercel.app/committees/socials/`): Organizes freshers' orientation, physics department sports tournaments, farewells, and networking mixers.
+- **Sponsors & Outreach** (`https://physoc-iitkgp.vercel.app/committees/sponsors/`): Handles alumni relations, industry partnerships, public science communication, and outreach programs for school students.
+
+---
+
+## Technical & SEO Specifications
+- Domain: https://physoc-iitkgp.vercel.app
+- Canonical URL Structure: `https://physoc-iitkgp.vercel.app/<section>/`
+- Open Graph / Twitter Card support enabled across all subpages.
+- Search Engine Sitemap: `https://physoc-iitkgp.vercel.app/sitemap.xml`
+- Robots directives: `https://physoc-iitkgp.vercel.app/robots.txt`
