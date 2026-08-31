@@ -46,7 +46,7 @@ window.requestPermission = async () => {
 
     const token = await getToken(messaging, {
       vapidKey:
-        "BOuyyOGhF9NlqDihzFLmZt60Acf5uosmZbQHQAUfNGSiijvw5CJzrbLT_hl217PBTOFrF4yNRDazzi7TCCXY_bA",
+        "BN9PxvQfayGitqRWXa4YXAOOZm-tmmhXDNcSZ1zc66EQ7ePuZEHOwqIfhJJd7wqvgbRsfQBANXLHY4PGy0gd_zo",
     });
 
     if (!token) {
