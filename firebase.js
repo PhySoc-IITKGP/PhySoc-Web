@@ -7,12 +7,13 @@ import {
 import { shouldShowPrompt, markPromptShown } from "./js/notification.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCHnReX2bXVl23ZCTy9B_999ppMKUR4udg",
-  authDomain: "auroritical-physoc-mirror.firebaseapp.com",
-  projectId: "auroritical-physoc-mirror",
-  storageBucket: "auroritical-physoc-mirror.firebasestorage.app",
-  messagingSenderId: "267376635317",
-  appId: "1:267376635317:web:84592356f1ecb66183bdfc",
+   apiKey: "AIzaSyC-hEoR15_jl3_Uen6-oZkqBySWB7U6LuA",
+  authDomain: "physoc-iitkgp.firebaseapp.com",
+  projectId: "physoc-iitkgp",
+  storageBucket: "physoc-iitkgp.firebasestorage.app",
+  messagingSenderId: "340020337012",
+  appId: "1:340020337012:web:74c211e87f613cdd4c3421",
+  measurementId: "G-M2K1YZPN4H"
 };
 
 const app = initializeApp(firebaseConfig);
