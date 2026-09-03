@@ -1,0 +1,588 @@
+<!doctype html>
+<html itemscope class="light" lang="en-us" itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="theme-name" content="hugoplate" />
+
+    <link rel="shortcut icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
+    <link rel="icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
+
+    <title>Ansatz | Official Web Magazine | PhySoc IITKGP</title>
+    <meta name="keywords" content="Ansatz, Physics Web Magazine, IIT Kharagpur, Physics Society, PhySoc, Sudhansu Datta Majumdar, Archives" />
+    <meta name="description" content="Ansatz — The Official Web Magazine of the Physics Society (PhySoc), Department of Physics, IIT Kharagpur." />
+    <meta name="author" content="PhySoc Web Team" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/style.min.75408a616c8d64a93d3b03e345cadd04f72b1cded1cd7b9819149db1a7264234.css" />
+
+    <style>
+      /* Universal Font Consistency */
+      html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
+      }
+
+      /* Animated Dynamic Header & Footer Gradient */
+      .header,
+      .header-gradient-home,
+      .header-gradient-all,
+      footer,
+      footer.bg-theme-light,
+      .footer-custom {
+        position: relative !important;
+        overflow: hidden !important;
+        background: transparent !important;
+        z-index: 20 !important;
+      }
+
+      .header::before,
+      .header::after,
+      footer::before,
+      footer::after {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: -1 !important;
+        pointer-events: none !important;
+      }
+
+      .header::before,
+      footer::before {
+        background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
+        animation: dynamicFlipA 10s ease-in-out infinite !important;
+      }
+
+      .header::after,
+      footer::after {
+        background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
+        animation: dynamicFlipB 10s ease-in-out infinite !important;
+      }
+
+      @keyframes dynamicFlipA {
+        0%, 20% {
+          opacity: 1;
+        }
+        50%, 70% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes dynamicFlipB {
+        0%, 20% {
+          opacity: 0;
+        }
+        50%, 70% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .header .nav-link,
+      .header-gradient-home .nav-link,
+      .header-gradient-all .nav-link {
+        color: #121212 !important;
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.015em !important;
+        transition: all 0.2s ease !important;
+      }
+
+      .header .nav-link:hover,
+      .header-gradient-home .nav-link:hover,
+      .header-gradient-all .nav-link:hover {
+        color: #3E7B9D !important;
+        transform: translateY(-1px);
+      }
+
+      .header .img-light,
+      .header-gradient-home .img-light,
+      .header-gradient-all .img-light {
+        display: block !important;
+      }
+
+      .header .img-dark,
+      .header-gradient-home .img-dark,
+      .header-gradient-all .img-dark {
+        display: none !important;
+      }
+
+      /* Hero Banner (3:2 Aspect Ratio matching Home & Team pages) */
+      .ansatz-banner-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 4000 / 2397; /* Exact 1.67:1 natural ratio of the full officers photo */
+        max-height: 540px;
+        overflow: hidden;
+        background-color: #1a3a5c;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      }
+
+      .ansatz-banner-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+
+      .ansatz-banner-overlay-text {
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        background: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 1.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-shadow: 0 3px 14px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0,0,0,0.9);
+      }
+
+      /* Section Headings */
+      .ansatz-heading {
+        font-size: 2.35rem;
+        font-weight: 900;
+        color: #121212;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.25rem;
+        line-height: 1.25;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .inline-ansatz-logo {
+        height: 1.15em;
+        width: auto;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 1px 0 5px;
+      }
+
+      /* 3-Column A-4 Size Document Preview Grid */
+      .a4-issues-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin: 28px 0;
+        width: 100%;
+      }
+
+      .a4-card-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 210 / 297; /* Exact Standard A-4 Size Ratio */
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: hidden;
+      }
+
+      .a4-card-wrapper:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+
+      .a4-preview-iframe {
+        width: 100%;
+        height: 100%;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        display: block;
+        background: transparent;
+      }
+
+      .a4-click-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 16px;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 40%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .a4-card-wrapper:hover .a4-click-overlay {
+        opacity: 1;
+      }
+
+      .a4-overlay-badge {
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 0.92rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: rgba(18, 18, 18, 0.88);
+        padding: 8px 14px;
+        border-radius: 6px;
+      }
+
+      /* Rounded Pill Buttons (Matching Hand-Drawn Sketch) */
+      .pill-btn-wireframe {
+        display: inline-block;
+        background: #ffffff;
+        color: #121212 !important;
+        font-weight: 800;
+        font-size: 1.05rem;
+        padding: 10px 30px;
+        border: 2px solid #121212;
+        border-radius: 30px;
+        text-decoration: none;
+        letter-spacing: 0.03em;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .pill-btn-wireframe:hover {
+        background: #121212;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      }
+
+      @media (max-width: 850px) {
+        .a4-issues-grid {
+          grid-template-columns: 1fr !important;
+          max-width: 420px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .ansatz-banner-overlay-text {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with Dynamic Gradient Transition -->
+    <header class="header sticky top-0 z-30">
+      <nav class="navbar container">
+        <div class="order-0">
+          <a class="navbar-brand block" href="../index.html">
+            <img
+              fetchpriority="high"
+              decoding="async"
+              class="img img-light"
+              width="250"
+              height="40"
+              src="../images/logo_hu_62a2c291369a66f0.webp"
+              alt="PhySoc IITKGP"
+              onerror="this.onerror=null;this.src='../images/logo_hu_2fca4d2ac2314e.jpg';" />
+            <img
+              fetchpriority="high"
+              decoding="async"
+              class="img img-dark"
+              width="250"
+              height="40"
+              src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp"
+              alt="PhySoc IITKGP"
+              onerror="this.onerror=null;this.src='../images/logo-darkmode_hu_fa721757c615f129.png';" />
+          </a>
+        </div>
+        
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+        <label
+          for="nav-toggle"
+          class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
+          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+            <title>Menu Open</title>
+            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+          </svg>
+          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+            <title>Menu Close</title>
+            <polygon
+              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2"
+              transform="rotate(45 10 10)"></polygon>
+          </svg>
+        </label>
+        
+        <ul
+          id="nav-menu"
+          class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../about/index.html">Our Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../events/index.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../ansatz/index.html">Ansatz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../resources/index.html">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../sponsors/index.html">Sponsors</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Straight Divider Line Below Navbar -->
+      <div class="container">
+        <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
+      </div>
+
+      <!-- Top Banner: Editors - Ansatz team (3:2 Aspect Ratio) -->
+      <div class="container pb-10" style="padding-top: 45px;">
+        <div class="ansatz-banner-container">
+          <img
+            src="../images/gallery/officers.JPG"
+            alt="Editors - Ansatz Team" />
+          <div class="ansatz-banner-overlay-text">
+            Editors- Ansatz team
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 1: WHAT IS |Ansatz> ?
+      ══════════════════════════════════════════════════════════ -->
+      <section class="bg-white dark:bg-darkmode-body border-b border-border/40" style="padding-top: 2.25rem; padding-bottom: 1.5rem;">
+        <div class="container" style="max-width: 960px;">
+          
+                              <h2 class="ansatz-heading">
+            <span>What is</span>
+            <img src="../images/aansatz.svg" alt="|Ansatz⟩" class="inline-ansatz-logo" />
+            <span>?</span>
+          </h2>
+
+          <p style="font-size: 1.05rem; color: #334155; line-height: 1.8; margin-bottom: 1.25rem;">
+            Ansatz is the official web magazine of the Physics Society (PhySoc) at the Department of Physics, IIT Kharagpur, with a rich history dating back to foundational departmental archives. Historically, it celebrated the milestones and legacy of our luminaries, including seminal tributes to pioneers like Prof. Sudhansu Datta Majumdar, but it has since evolved to encompass cutting-edge student research, scientific essays, creative physics writing, and colloquium insights.
+          </p>
+
+          <p style="font-size: 1.05rem; color: #334155; line-height: 1.8; margin: 0;">
+            The magazine is written and curated entirely by students, featuring articles about physics, research, ideas, and topics that writers are passionate about sharing. From foundational mechanics and quantum explorations to creative reflections on scientific concepts, Ansatz provides a vibrant space for students to communicate science in their own voice.
+          </p>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 2: LATEST ISSUES (3 A-4 SIZE DIRECT DRIVE PREVIEWS)
+      ══════════════════════════════════════════════════════════ -->
+      <section class="bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40" style="padding-top: 1.75rem; padding-bottom: 3.25rem;">
+        <div class="container" style="max-width: 960px;">
+          
+          <h2 style="font-size: 2.1rem; font-weight: 900; color: #121212; margin-bottom: 0.75rem; letter-spacing: -0.01em;">
+            Latest issues
+          </h2>
+          <p style="font-size: 1.05rem; color: #475569; line-height: 1.75; margin-bottom: 1.75rem;">
+            Explore the latest editions and special issues of Ansatz, featuring articles written by students across the IIT Kharagpur physics community. Each issue highlights new perspectives on physics, research insights, and creative explorations of science.
+          </p>
+
+<!-- 3 A-4 Size Drive Preview Cards -->
+<div class="a4-issues-grid">
+  
+  <!-- Issue 1 -->
+  <div class="a4-card-wrapper" style="position: relative; overflow: hidden; border: none !important; padding: 0 !important; margin: 0; box-shadow: none !important; background: transparent !important;">
+    <a
+      href="https://drive.google.com/file/d/11QSALAAm2AJoiC-g2Px9-vzOaZ29YJ0B/view?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display: block; text-decoration: none; border: none !important; padding: 0; margin: 0; outline: none !important;"
+    >
+      <img
+        alt="Issue 1 Cover"
+        src="https://drive.google.com/thumbnail?id=11QSALAAm2AJoiC-g2Px9-vzOaZ29YJ0B&sz=w1000"
+        loading="lazy"
+        style="width: 100%; height: auto; display: block; border: none !important; outline: none !important; margin: 0; padding: 0; object-fit: cover;"
+      />
+    </a>
+  </div>
+
+  <!-- Issue 2 -->
+  <div class="a4-card-wrapper" style="position: relative; overflow: hidden; border: none !important; padding: 0 !important; margin: 0; box-shadow: none !important; background: transparent !important;">
+    <a
+      href="https://drive.google.com/file/d/165lQ6BgK_GbW9JdK6EbTczQdoUlVVQBc/view?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display: block; text-decoration: none; border: none !important; padding: 0; margin: 0; outline: none !important;"
+    >
+      <img
+        alt="Issue 2 Cover"
+        src="https://drive.google.com/thumbnail?id=165lQ6BgK_GbW9JdK6EbTczQdoUlVVQBc&sz=w1000"
+        loading="lazy"
+        style="width: 100%; height: auto; display: block; border: none !important; outline: none !important; margin: 0; padding: 0; object-fit: cover;"
+      />
+    </a>
+  </div>
+
+  <!-- Issue 3 
+  <div class="a4-card-wrapper" style="position: relative; overflow: hidden; border: none !important; padding: 0 !important; margin: 0; box-shadow: none !important; background: transparent !important;">
+    <a
+      href="https://drive.google.com/file/d/1xfUqB6CKvLvuqCwhrAEzRPwTyEpS1BvF/view"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display: block; text-decoration: none; border: none !important; padding: 0; margin: 0; outline: none !important;"
+    >
+      <img
+        alt="Issue 3 Cover"
+        src="https://drive.google.com/thumbnail?id=1xfUqB6CKvLvuqCwhrAEzRPwTyEpS1BvF&sz=w1000"
+        loading="lazy"
+        style="width: 100%; height: auto; display: block; border: none !important; outline: none !important; margin: 0; padding: 0; object-fit: cover;"
+      />
+    </a>
+  </div> 
+  -->
+
+</div>
+          <!-- Bottom Action Row: Text on Left | "All Issues" Button on Right -->
+          <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 2rem;">
+            <p style="font-size: 1.02rem; color: #334155; line-height: 1.6; margin: 0; max-width: 600px;">
+              Looking for earlier volumes, legacy modules, and special editions? Browse our complete collection in the official archive repository.
+            </p>
+            <div>
+              <a
+                href="https://drive.google.com/drive/folders/1xX8SwvJjfG5RnlISWc27XUcmPd8KajrZ?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="pill-btn-wireframe">
+                All Issues
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 3: WANT TO CONTRIBUTE TO ANSATZ
+      ══════════════════════════════════════════════════════════ -->
+      <section class="bg-white dark:bg-darkmode-body" style="padding-top: 2.5rem; padding-bottom: 3.25rem;">
+        <div class="container" style="max-width: 960px;">
+          
+          <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 28px; flex-wrap: wrap;">
+            
+            <!-- Left Text Content -->
+            <div style="flex: 1 1 60%; min-width: 280px;">
+              <h2 style="font-size: 2.1rem; font-weight: 900; color: #121212; margin-bottom: 1rem; letter-spacing: -0.01em;">
+                Want to Contribute to Ansatz
+              </h2>
+              <p style="font-size: 1.05rem; color: #334155; line-height: 1.8; margin-bottom: 1rem;">
+                Are you a student with a passion for physics, science communication, or just a topic you want to share? Ansatz is written entirely by students, and we welcome contributions from anyone in the IIT Kharagpur physics community.
+              </p>
+              <p style="font-size: 1.05rem; color: #334155; line-height: 1.8; margin-bottom: 1.25rem;">
+                All articles involve the writers actively in the editing process and are reviewed before publication. This makes contributing a great way to gain experience in writing, revising, and presenting scientific content, giving you valuable practice for producing research articles in the future.
+              </p>
+              <p style="font-size: 0.98rem; color: #64748b; line-height: 1.7; margin: 0;">
+                Whether you want to write a popular science article, an academic piece, creative physics non-fiction, or a quirky paradox, we'd love to hear from you!
+              </p>
+            </div>
+
+            <!-- Right Action: Submit here Button -->
+            <div style="flex: 0 0 auto; padding-top: 10px;">
+              <a
+                href="mailto:phyiitkharagpur@gmail.com?subject=Ansatz%20Magazine%20Article%20Submission"
+                class="pill-btn-wireframe"
+                style="padding: 12px 34px; font-size: 1.1rem;">
+                Submit here
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer with Dynamic Gradient Transition -->
+    <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
+      <div class="container">
+        <div class="row items-center py-10">
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+            <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
+          </div>
+          <div class="lg:col-6 mb-8 text-center lg:mb-0">
+            <ul>
+            </ul>
+          </div>
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
+            <div class="inline-flex flex-col items-center text-center">
+              <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
+              <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="instagram"
+                    rel="nofollow noopener"
+                    href="https://www.instagram.com/PhySoc_IItKGP/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="linkedin"
+                    rel="nofollow noopener"
+                    href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="youtube"
+                    rel="nofollow noopener"
+                    href="https://www.youtube.com/@physoc_iitkgp"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-youtube" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
+        <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
+          Physics Society IIT KGP
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/main.min.c382e2105e67658eff86fe0a044cac3f838636947d327cd08f2b03f6a8b21f2e.js" defer></script>
+    <script crossorigin="anonymous" src="../js/script.min.e47bd8989fcd86cba20150c3b02e9c9806d76d4d7b000a4b636d101f8a300ad6.js"></script>
+    <script defer async crossorigin="anonymous" src="../js/script-lazy.min.c3e692e360f6f81f898b1fa3a19ee902e6b5bdbbbfa512bf221a0fe796fc9f7c.js"></script>
+  </body>
+</html>
