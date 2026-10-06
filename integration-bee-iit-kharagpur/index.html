@@ -18,7 +18,7 @@
 
     <style>
       /* Universal Font Consistency */
-      html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input, th, td {
+      html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
       }
 
@@ -98,12 +98,17 @@
 
       .header .img-light,
       .header-gradient-home .img-light,
-      .header-gradient-all .img-light { display: block !important; }
+      .header-gradient-all .img-light {
+        display: block !important;
+      }
+
       .header .img-dark,
       .header-gradient-home .img-dark,
-      .header-gradient-all .img-dark { display: none !important; }
+      .header-gradient-all .img-dark {
+        display: none !important;
+      }
 
-      /* Hero Banner (3:2 Ratio) */
+      /* Hero Banner */
       .events-banner-container {
         position: relative;
         width: 100%;
@@ -114,6 +119,7 @@
         background-color: #1a3a5c;
         border-radius: 4px;
       }
+
       .events-banner-container img {
         width: 100%;
         height: 100%;
@@ -122,91 +128,80 @@
         display: block;
       }
 
-      /* Clean Text Typography (No Boxes) */
-      .section-main-heading {
+      /* Tight Typography & Spacing (Identical to Resources page) */
+      .content h1.page-title {
         font-size: 2.25rem;
         font-weight: 900;
         color: #121212;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.04em;
         text-transform: uppercase;
+        margin-top: 0;
         margin-bottom: 1.25rem;
         line-height: 1.15;
       }
 
-      .subsection-heading {
-        font-size: 1.5rem;
+      .content h3 {
+        font-size: 1.55rem;
         font-weight: 700;
         color: #121212;
-        margin-bottom: 0.75rem;
+        margin-top: 1.75rem;
+        margin-bottom: 0.6rem;
         line-height: 1.3;
       }
 
-      .body-text {
+      .content p {
         font-size: 1.05rem;
         color: #334155;
-        line-height: 1.8;
-        margin-bottom: 1rem;
+        line-height: 1.75;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
       }
 
-      .body-list {
+      .content ul {
+        margin-top: 0.25rem;
+        margin-bottom: 0.75rem;
+        padding-left: 1.25rem;
+        list-style-type: disc;
+      }
+
+      .content li {
         font-size: 1.05rem;
         color: #334155;
-        line-height: 1.8;
-        margin: 0 0 1rem 0;
-        padding-left: 20px;
+        line-height: 1.75;
+        margin-bottom: 0.25rem;
       }
 
-      .body-list li {
-        margin-bottom: 0.5rem;
+      /* Hyperlinks: Black by default, PhySoc Blue on hover */
+      .content a,
+      .content a:visited {
+        color: #000000 !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+        transition: color 0.2s ease !important;
       }
 
-      /* Clean Table Styling */
-      .table-clean {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        border: 1px solid #e2e8f0;
-        border-radius: 6px;
-        overflow: hidden;
-        margin-top: 1rem;
-      }
-      .table-clean th {
-        background-color: #f8fafc;
-        color: #121212;
-        font-weight: 700;
-        font-size: 1rem;
-        padding: 12px 16px;
-        text-align: left;
-        border-bottom: 1px solid #e2e8f0;
-      }
-      .table-clean td {
-        padding: 12px 16px;
-        font-size: 0.95rem;
-        color: #334155;
-        border-bottom: 1px solid #e2e8f0;
-      }
-      .table-clean tr:last-child td {
-        border-bottom: none;
+      .content a:hover,
+      .content a:active {
+        color: #3E7B9D !important;
       }
 
-      /* Photo Gallery Grid Matching Wireframe */
+      /* Gallery Layout (Flat image grid, zero borders/boxes) */
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
-        gap: 16px;
+        gap: 12px;
         width: 100%;
+        margin-top: 0.75rem;
+        margin-bottom: 1.5rem;
       }
-      .gallery-box {
-        overflow: hidden;
-        border-radius: 4px;
-        background-color: #e2e8f0;
-      }
-      .gallery-box img {
+
+      .gallery-grid img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
       }
+
       .gallery-g1 { grid-column: span 6; height: 260px; }
       .gallery-g2 { grid-column: span 3; height: 260px; }
       .gallery-g3 { grid-column: span 3; height: 260px; }
@@ -220,13 +215,14 @@
         .gallery-g4 { grid-column: span 12; height: 260px; }
         .gallery-g5 { grid-column: span 12; height: 260px; }
       }
+
       @media (max-width: 600px) {
         .gallery-g2, .gallery-g3 { grid-column: span 12; height: 220px; }
       }
     </style>
   </head>
   <body>
-    <!-- Header with Dynamic Gradient Transition -->
+    <!-- Header -->
     <header class="header sticky top-0 z-30">
       <nav class="navbar container">
         <div class="order-0">
@@ -284,7 +280,7 @@
         <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
       </div>
 
-      <div class="container pb-10" style="padding-top: 45px;">
+      <div class="container pb-6" style="padding-top: 45px;">
         <div class="events-banner-container">
           <img
             src="../images/events/integration_bee_banner.png"
@@ -295,178 +291,107 @@
     </header>
 
     <main>
-
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 1: WHAT IS INTEGRATION BEE?
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-white dark:bg-darkmode-body border-b border-border/40">
+      <!-- Single continuous section with tight spacing matching Resources page -->
+      <section class="section py-10 bg-white dark:bg-darkmode-body">
         <div class="container">
-          <h1 class="section-main-heading">INTEGRATION BEE</h1>
-          <h2 class="subsection-heading">What is Integration Bee?</h2>
-          <p class="body-text">
-            The Integration Bee is PhySoc IIT Kharagpur’s premier annual calculus tournament, inspired by the renowned collegiate math bees. It brings together undergraduate and postgraduate students from all departments to put their integration prowess, analytical agility, and creative problem-solving techniques to the test against tricky, non-trivial integrals under strict time constraints.
-          </p>
-          <p class="body-text">
-            Whether you are a fresher mastering standard substitutions or an advanced enthusiast deploying Feynman’s trick, complex contour integration, and clever algebraic symmetries, the Integration Bee provides an exhilarating, high-energy arena for celebrating the sheer elegance of mathematics.
-          </p>
-          
-          <p class="body-text" style="font-weight: 600; color: #121212; margin-top: 1.5rem;">
-            Ready to take on the challenge?
-            <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" style="color: #3E7B9D; font-weight: 700; text-decoration: none; margin-left: 4px;">register here.</a>
-          </p>
-        </div>
-      </section>
+          <div class="row">
+            <div class="lg:col-12">
+              <div class="content">
 
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 2: COMPETITION FORMAT
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
-        <div class="container">
-          <h2 class="section-main-heading">COMPETITION FORMAT</h2>
-          
-          <h3 class="subsection-heading">Preliminary round</h3>
-          <ul class="body-list" style="list-style-type: disc;">
-            <li>Written test : 20 integrals in 45 min</li>
-            <li>Top 16 students qualify for playoff</li>
-          </ul>
-          
-          <h3 class="subsection-heading" style="margin-top: 2rem;">Playoff</h3>
-          <ul class="body-list" style="list-style-type: disc;">
-            <li>parallelly two students will solve integrals on boards</li>
-            <li>The one who solves early will get 1 point</li>
-            <li>Whoever will have more point will win.</li>
-          </ul>
-          
-          <div style="overflow-x: auto;">
-            <table class="table-clean" style="min-width: 600px;">
-              <thead>
-                <tr>
-                  <th>Round</th>
-                  <th>Progression</th>
-                  <th>Integrals</th>
-                  <th>Time Limit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Round - 1</td>
-                  <td>16 &rarr; 8</td>
-                  <td>total 5 integral</td>
-                  <td>6 min each</td>
-                </tr>
-                <tr>
-                  <td>Round - 2</td>
-                  <td>8 &rarr; 4</td>
-                  <td>total 5 integral</td>
-                  <td>6 min each</td>
-                </tr>
-                <tr>
-                  <td>Semifinal</td>
-                  <td>4 &rarr; 2</td>
-                  <td>total 7 integral</td>
-                  <td>10 min each</td>
-                </tr>
-                <tr>
-                  <td>Final</td>
-                  <td>2 &rarr; 1</td>
-                  <td>total 7 integral</td>
-                  <td>10 min each</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+                <!-- Heading -->
+                <h1 class="page-title">INTEGRATION BEE</h1>
 
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 3: EVENT DETAILS
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-white dark:bg-darkmode-body border-b border-border/40">
-        <div class="container">
-          <h2 class="section-main-heading">EVENTS DETAILS</h2>
-          
-          <h3 class="subsection-heading">Preliminary round : 10th october (6:30 to 7:15 pm)</h3>
-          <p class="body-text">Venue : to be emailed</p>
-          
-          <h3 class="subsection-heading" style="margin-top: 1.5rem;">Play off : 11th october (4:00pm to 7:30 pm)</h3>
-          <p class="body-text">Venue: Department of physics</p>
-        </div>
-      </section>
+                <!-- What is Integration Bee -->
+                <h3 id="what-is-integration-bee" style="margin-top: 0;">What is Integration Bee?</h3>
+                <p>
+                  The Integration Bee is PhySoc IIT Kharagpur’s premier annual calculus tournament, inspired by the renowned collegiate math bees. It brings together undergraduate and postgraduate students from all departments to put their integration prowess, analytical agility, and creative problem-solving techniques to the test against tricky, non-trivial integrals under strict time constraints.
+                </p>
+                <p>
+                  Whether you are a fresher mastering standard substitutions or an advanced enthusiast deploying Feynman’s trick, complex contour integration, and clever algebraic symmetries, the Integration Bee provides an exhilarating, high-energy arena for celebrating the sheer elegance of mathematics.
+                </p>
+                <p>
+                  Ready to take on the challenge? 
+                  <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">register here.</a>
+                </p>
 
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 4: PRIZES
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
-        <div class="container">
-          <h2 class="section-main-heading">PRIZES:</h2>
-          
-          <p class="body-text"><strong>1st place:</strong> Grand Integrator title, 2000 ₹ Cash, Tshirt, and goodies</p>
-          <p class="body-text"><strong>2nd place:</strong> 1000 ₹ Cash, Tshirt and goodies</p>
-          <p class="body-text"><strong>3rd place:</strong> 500 ₹ Cash, Tshirt and goodies</p>
-          <p class="body-text"><strong>4th place:</strong> 500 ₹ Cash, Tshirt and goodies</p>
-        </div>
-      </section>
+                <!-- Competition Format (Exactly as shown in your screenshot) -->
+                <h3 id="competition-format">Competition Format</h3>
 
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 5: INTEGRATION BEE QUESTIONS
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-white dark:bg-darkmode-body border-b border-border/40">
-        <div class="container">
-          <h2 class="section-main-heading">INTEGRATION BEE QUESTIONS:</h2>
-          
-          <h3 class="subsection-heading" style="margin-bottom: 0.2rem;">2026</h3>
-          <p class="body-text">
-            <a href="#" style="color: #3E7B9D; font-weight: bold; text-decoration: none;">Sample Question Paper - Preliminary round</a>
-          </p>
-          
-          <h3 class="subsection-heading" style="margin-top: 1.5rem; margin-bottom: 0.2rem;">2025</h3>
-          <p class="body-text">Yet to be update</p>
-        </div>
-      </section>
+                <p><strong>Qualifier (9:00 a.m. &ndash; 12:00 p.m.)</strong></p>
+                <ul>
+                  <li>Written test: 20 integrals in 60 minutes</li>
+                  <li>Top 16 scorers qualify for playoffs</li>
+                </ul>
 
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 6: PHYSOC INTEGRATION BEE GALLERY
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
-        <div class="container">
-          <h2 class="section-main-heading">PhySoc Integration Bee</h2>
-          
-          <div class="gallery-grid">
-            <div class="gallery-box gallery-g1">
-              <img src="../images/gallery/Integrationbee.png" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 1" />
-            </div>
-            <div class="gallery-box gallery-g2">
-              <img src="../images/gallery/group.JPG" onerror="this.onerror=null;this.src='../images/gallery/calday.JPG';" alt="Image 2" />
-            </div>
-            <div class="gallery-box gallery-g3">
-              <img src="../images/gallery/calday.JPG" onerror="this.onerror=null;this.src='../images/gallery/officers.JPG';" alt="Image 3" />
-            </div>
-            <div class="gallery-box gallery-g4">
-              <img src="../images/gallery/officers.JPG" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 4" />
-            </div>
-            <div class="gallery-box gallery-g5">
-              <img src="../images/gallery/freshers.png" onerror="this.onerror=null;this.src='../images/gallery/badminton.png';" alt="Image 5" />
+                <p><strong>Playoffs (1:00 p.m. &ndash; 4:00 p.m.)</strong></p>
+                <ul>
+                  <li>Single-elimination tournament on the blackboard</li>
+                  <li>Top 16 participate, remaining contestants cheer them in the audience.</li>
+                </ul>
+
+                <p>
+                  Round 1: 16 &rarr; 8 (first to solve 1 integral, 2 minutes)<br />
+                  Round 2: 8 &rarr; 4 (first to solve 1 integral, 2 minutes)<br />
+                  Round 3: 4 &rarr; 2 (first to solve 1 integral, 3 minutes )<br />
+                  Final: 2 &rarr; Champion (first to solve 2 integrals, 3 minutes each)
+                </p>
+
+                <!-- Events Details -->
+                <h3 id="events-details">Events Details</h3>
+                <p>
+                  <strong>Preliminary round:</strong> 10th October (6:30 to 7:15 pm)<br />
+                  Venue: to be emailed
+                </p>
+                <p>
+                  <strong>Play off:</strong> 11th October (4:00 pm to 7:30 pm)<br />
+                  Venue: Department of physics
+                </p>
+
+                <!-- Prizes -->
+                <h3 id="prizes">Prizes</h3>
+                <p>
+                  <strong>1st place:</strong> Grand Integrator title, 2000 ₹ Cash, Tshirt, and goodies<br />
+                  <strong>2nd place:</strong> 1000 ₹ Cash, Tshirt and goodies<br />
+                  <strong>3rd place:</strong> 500 ₹ Cash, Tshirt and goodies<br />
+                  <strong>4th place:</strong> 500 ₹ Cash, Tshirt and goodies
+                </p>
+
+                <!-- Past Questions -->
+                <h3 id="past-integration-bee-questions">Past Integration Bee Questions</h3>
+                <ul>
+                  <li>
+                    <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer">
+                      Sample Question Paper (2026) - Preliminary round
+                    </a>
+                  </li>
+                  <li>2025: Yet to be updated</li>
+                </ul>
+
+                <!-- Photo Gallery (No boxes, clean layout) -->
+                <h3 id="physoc-integration-bee">PhySoc Integration Bee</h3>
+                <div class="gallery-grid">
+                  <div class="gallery-g1"><img src="../images/gallery/Integrationbee.png" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 1" /></div>
+                  <div class="gallery-g2"><img src="../images/gallery/group.JPG" onerror="this.onerror=null;this.src='../images/gallery/calday.JPG';" alt="Image 2" /></div>
+                  <div class="gallery-g3"><img src="../images/gallery/calday.JPG" onerror="this.onerror=null;this.src='../images/gallery/officers.JPG';" alt="Image 3" /></div>
+                  <div class="gallery-g4"><img src="../images/gallery/officers.JPG" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 4" /></div>
+                  <div class="gallery-g5"><img src="../images/gallery/freshers.png" onerror="this.onerror=null;this.src='../images/gallery/badminton.png';" alt="Image 5" /></div>
+                </div>
+
+                <!-- Contact -->
+                <h3 id="questions-about-integration-bee">Questions about Integration Bee?</h3>
+                <p>
+                  Kaji Wasim Rai<br />
+                  Email: <a href="mailto:phyiitkharagpur@gmail.com">phyiitkharagpur@gmail.com</a>
+                </p>
+
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- ══════════════════════════════════════════════════════════
-           SECTION 7: QUESTIONS ABOUT INTEGRATION BEE?
-      ══════════════════════════════════════════════════════════ -->
-      <section class="section py-14 bg-white dark:bg-darkmode-body">
-        <div class="container">
-          <h2 class="subsection-heading">Questions about Integration Bee?</h2>
-          <p class="body-text" style="margin-bottom: 0;">Kaji Wasim Rai</p>
-          <p class="body-text">
-            Email: <a href="mailto:phyiitkharagpur@gmail.com" style="color: #3E7B9D; font-weight: bold; text-decoration: none;">phyiitkharagpur@gmail.com</a>
-          </p>
-        </div>
-      </section>
-
     </main>
 
-    <!-- Footer with Dynamic Gradient Transition -->
+    <!-- Footer -->
     <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
       <div class="container">
         <div class="row items-center py-10">
