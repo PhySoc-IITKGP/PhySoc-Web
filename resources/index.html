@@ -8,9 +8,9 @@
     <link rel="shortcut icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
     <link rel="icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
 
-    <title>Resources | PhySoc IITKGP</title>
-    <meta name="keywords" content="IITKGP, Physics, Physics Society, PhySoc" />
-    <meta name="description" content="PhySoc IITKGP website" />
+    <title>Integration Bee | PhySoc IITKGP</title>
+    <meta name="keywords" content="IITKGP, Physics, Physics Society, PhySoc, Integration Bee" />
+    <meta name="description" content="Integration Bee organized by the Physics Society (PhySoc), IIT Kharagpur." />
     <meta name="author" content="PhySoc Web Team" />
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
@@ -36,12 +36,9 @@
         z-index: 20 !important;
       }
 
-      .header::before,
-      .header::after,
-      footer::before,
-      footer::after,
-      .calendar-dynamic-box::before,
-      .calendar-dynamic-box::after {
+      .header::before, .header::after,
+      footer::before, footer::after,
+      .calendar-dynamic-box::before, .calendar-dynamic-box::after {
         content: "" !important;
         position: absolute !important;
         inset: 0 !important;
@@ -49,42 +46,26 @@
         pointer-events: none !important;
       }
 
-      .header::before,
-      footer::before,
-      .calendar-dynamic-box::before {
+      .header::before, footer::before, .calendar-dynamic-box::before {
         background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
         animation: dynamicFlipA 10s ease-in-out infinite !important;
       }
 
-      .header::after,
-      footer::after,
-      .calendar-dynamic-box::after {
+      .header::after, footer::after, .calendar-dynamic-box::after {
         background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
         animation: dynamicFlipB 10s ease-in-out infinite !important;
       }
 
       @keyframes dynamicFlipA {
-        0%, 20% {
-          opacity: 1;
-        }
-        50%, 70% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
+        0%, 20% { opacity: 1; }
+        50%, 70% { opacity: 0; }
+        100% { opacity: 1; }
       }
 
       @keyframes dynamicFlipB {
-        0%, 20% {
-          opacity: 0;
-        }
-        50%, 70% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
+        0%, 20% { opacity: 0; }
+        50%, 70% { opacity: 1; }
+        100% { opacity: 0; }
       }
 
       .header .nav-link,
@@ -103,17 +84,82 @@
         color: #3E7B9D !important;
         transform: translateY(-1px);
       }
-
-      .header .img-light,
-      .header-gradient-home .img-light,
-      .header-gradient-all .img-light {
-        display: block !important;
+      .header .nav-link.active {
+        color: #3E7B9D !important;
       }
 
-      .header .img-dark,
-      .header-gradient-home .img-dark,
-      .header-gradient-all .img-dark {
-        display: none !important;
+      .header .img-light, .header-gradient-home .img-light, .header-gradient-all .img-light { display: block !important; }
+      .header .img-dark, .header-gradient-home .img-dark, .header-gradient-all .img-dark { display: none !important; }
+
+      /* Custom Link Styling requested */
+      .content a {
+        color: #000000 !important; /* Black by default */
+        text-decoration: none !important; 
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+      .content a:hover {
+        color: #3E7B9D !important; /* PhySoc color on hover */
+      }
+
+      /* Hero Banner */
+      .events-banner-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 3 / 2;
+        max-height: 560px;
+        overflow: hidden;
+        background-color: #1a3a5c;
+      }
+      .events-banner-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+      }
+
+      /* Headings */
+      .event-heading {
+        font-size: 2.25rem;
+        font-weight: 900;
+        color: #121212;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 1.25rem;
+        line-height: 1.15;
+      }
+
+      /* Photo Gallery Grid (Pure Layout, Zero Boxes/Borders) */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 12px;
+        width: 100%;
+        margin-top: 1rem;
+      }
+      .gallery-grid img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .gallery-g1 { grid-column: span 6; height: 260px; }
+      .gallery-g2 { grid-column: span 3; height: 260px; }
+      .gallery-g3 { grid-column: span 3; height: 260px; }
+      .gallery-g4 { grid-column: span 7; height: 290px; }
+      .gallery-g5 { grid-column: span 5; height: 290px; }
+
+      @media (max-width: 900px) {
+        .gallery-g1 { grid-column: span 12; height: 260px; }
+        .gallery-g2 { grid-column: span 6; height: 220px; }
+        .gallery-g3 { grid-column: span 6; height: 220px; }
+        .gallery-g4 { grid-column: span 12; height: 260px; }
+        .gallery-g5 { grid-column: span 12; height: 260px; }
+      }
+      @media (max-width: 600px) {
+        .gallery-g2, .gallery-g3 { grid-column: span 12; height: 220px; }
       }
     </style>
   </head>
@@ -123,132 +169,216 @@
       <nav class="navbar container">
         <div class="order-0">
           <a class="navbar-brand block" href="../index.html">
-            <img
-              fetchpriority="high"
-              decoding="async"
-              class="img img-light"
-              width="250"
-              height="40"
-              src="../images/logo_hu_62a2c291369a66f0.webp"
-              alt="PhySoc IITKGP"
-              onerror="this.onerror=null;this.src='../images/logo_hu_2fca4d2ac2314e.jpg';" />
-            <img
-              fetchpriority="high"
-              decoding="async"
-              class="img img-dark"
-              width="250"
-              height="40"
-              src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp"
-              alt="PhySoc IITKGP"
-              onerror="this.onerror=null;this.src='../images/logo-darkmode_hu_fa721757c615f129.png';" />
+            <img fetchpriority="high" decoding="async" class="img img-light" width="250" height="40" src="../images/logo_hu_62a2c291369a66f0.webp" alt="PhySoc IITKGP" onerror="this.onerror=null;this.src='../images/logo_hu_2fca4d2ac2314e.jpg';" />
+            <img fetchpriority="high" decoding="async" class="img img-dark" width="250" height="40" src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp" alt="PhySoc IITKGP" onerror="this.onerror=null;this.src='../images/logo-darkmode_hu_fa721757c615f129.png';" />
           </a>
         </div>
         
         <input id="nav-toggle" type="checkbox" class="hidden" />
-        <label
-          for="nav-toggle"
-          class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
-          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
-            <title>Menu Open</title>
-            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-          </svg>
-          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
-            <title>Menu Close</title>
-            <polygon
-              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-              transform="rotate(45 10 10)"></polygon>
-          </svg>
+        <label for="nav-toggle" class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
+          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path></svg>
+          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20"><polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2" transform="rotate(45 10 10)"></polygon></svg>
         </label>
         
-        <ul
-          id="nav-menu"
-          class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../about/index.html">Our Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../events/index.html">Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="../Ansatz/index.html">Ansatz</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../resources/index.html">Resources</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../sponsors/index.html">Sponsors</a>
-          </li>
+        <ul id="nav-menu" class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../about/index.html">Our Team</a></li>
+          <li class="nav-item"><a class="nav-link active" href="../events/index.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="../Ansatz/index.html">Ansatz</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resources/index.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="../sponsors/index.html">Sponsors</a></li>
         </ul>
       </nav>
 
-      <!-- Straight Divider Line Below Navbar -->
+      <!-- Divider -->
       <div class="container">
         <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
       </div>
 
-      <!-- Seamless Merged Banner Image (Aligned flush with PhySoc symbol on left and Sponsors on right) -->
-      <div class="container pb-14" style="padding-top: 45px;">
-        <div style="width: 100%; height: 520px; overflow: hidden; border-radius: 0; border: none; box-shadow: none;">
-          <img
-            src="/images/resources_background.JPG"
-            alt="Resources Banner"
-            style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; border-radius: 0; border: none;" />
+      <!-- Banner -->
+      <div class="container pb-6" style="padding-top: 45px;">
+        <div class="events-banner-container">
+          <img src="../images/events/integration_bee_banner.png" onerror="this.onerror=null;this.src='../images/events_background.jpeg';" alt="Integration Bee Banner" />
         </div>
       </div>
     </header>
+
     <main>
       
-      <section class="section py-16 bg-white dark:bg-darkmode-body">
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 1: WHAT IS INTEGRATION BEE?
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <h1 class="event-heading">INTEGRATION BEE</h1>
+              <div class="content">
+                <h3 id="what-is-integration-bee">What is Integration Bee?</h3>
+                <p>
+                  The Integration Bee is PhySoc IIT Kharagpur’s premier annual calculus tournament, inspired by the renowned collegiate math bees. It brings together undergraduate and postgraduate students from all departments to put their integration prowess, analytical agility, and creative problem-solving techniques to the test against tricky, non-trivial integrals under strict time constraints.
+                </p>
+                <p>
+                  Whether you are a fresher mastering standard substitutions or an advanced enthusiast deploying Feynman’s trick, complex contour integration, and clever algebraic symmetries, the Integration Bee provides an exhilarating, high-energy arena for celebrating the sheer elegance of mathematics.
+                </p>
+                <p>Ready to take on the challenge? <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">Register here.</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 2: COMPETITION FORMAT (Styled exactly like reference)
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <h2 class="event-heading">COMPETITION FORMAT</h2>
+              <div class="content">
+                
+                <h3 id="preliminary-round">Preliminary round</h3>
+                <ul>
+                  <li>Written test : 20 integrals in 45 min</li>
+                  <li>Top 16 students qualify for playoffs</li>
+                </ul>
+
+                <h3 id="playoffs">Playoffs</h3>
+                <ul>
+                  <li>Parallelly two students will solve integrals on boards</li>
+                  <li>The one who solves early will get 1 point</li>
+                  <li>Whoever will have more points will win.</li>
+                </ul>
+
+                <p>
+                  Round 1: 16 &rarr; 8 (total 5 integrals, 6 min each)<br>
+                  Round 2: 8 &rarr; 4 (total 5 integrals, 6 min each)<br>
+                  Semifinal: 4 &rarr; 2 (total 7 integrals, 10 min each)<br>
+                  Final: 2 &rarr; Champion (total 7 integrals, 10 min each)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 3: EVENT DETAILS
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <h2 class="event-heading">EVENTS DETAILS</h2>
+              <div class="content">
+                <h3 id="prelim-details">Preliminary round (10th October)</h3>
+                <ul>
+                  <li>Time: 6:30 pm to 7:15 pm</li>
+                  <li>Venue: To be emailed</li>
+                </ul>
+                
+                <h3 id="playoff-details">Play off (11th October)</h3>
+                <ul>
+                  <li>Time: 4:00 pm to 7:30 pm</li>
+                  <li>Venue: Department of Physics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 4: PRIZES
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <h2 class="event-heading">PRIZES</h2>
+              <div class="content">
+                <ul>
+                  <li><span style="font-weight: 600;">1st place:</span> Grand Integrator title, 2000 ₹ Cash, Tshirt, and goodies</li>
+                  <li><span style="font-weight: 600;">2nd place:</span> 1000 ₹ Cash, Tshirt and goodies</li>
+                  <li><span style="font-weight: 600;">3rd place:</span> 500 ₹ Cash, Tshirt and goodies</li>
+                  <li><span style="font-weight: 600;">4th place:</span> 500 ₹ Cash, Tshirt and goodies</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 5: INTEGRATION BEE QUESTIONS
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <h2 class="event-heading">PAST INTEGRATION BEE QUESTIONS</h2>
+              <div class="content">
+                <ul>
+                  <li><a href="https://drive.google.com/" target="_blank" rel="noopener noreferrer">2026 Sample Question Paper - Preliminary round</a></li>
+                  <li>2025 Yet to be updated</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 6: PHYSOC INTEGRATION BEE GALLERY
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <h2 class="event-heading">PhySoc Integration Bee</h2>
+              <div class="gallery-grid">
+                <div class="gallery-g1">
+                  <img src="../images/gallery/Integrationbee.png" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 1" />
+                </div>
+                <div class="gallery-g2">
+                  <img src="../images/gallery/group.JPG" onerror="this.onerror=null;this.src='../images/gallery/calday.JPG';" alt="Image 2" />
+                </div>
+                <div class="gallery-g3">
+                  <img src="../images/gallery/calday.JPG" onerror="this.onerror=null;this.src='../images/gallery/officers.JPG';" alt="Image 3" />
+                </div>
+                <div class="gallery-g4">
+                  <img src="../images/gallery/officers.JPG" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 4" />
+                </div>
+                <div class="gallery-g5">
+                  <img src="../images/gallery/freshers.png" onerror="this.onerror=null;this.src='../images/gallery/badminton.png';" alt="Image 5" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 7: QUESTIONS ABOUT INTEGRATION BEE?
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-8 bg-white dark:bg-darkmode-body">
         <div class="container">
           <div class="row">
             <div class="lg:col-12">
               <div class="content">
-                
-                <h3 id="academic-support">Academic Support</h3>
-<p>
-
-<p><span style="font-weight: 500;">Phy'24</span> -Phy'24, made by Adith or ASR (Physics, Batch of 2028), this is a site that acts as an academic archive of the UG Physics Batch of 2028. It has the most comprehensive collection of course notes, reference books, study materials and other coursework information.</p>
-                <p>Barring a smalling hiatus in 2026, Phy’24 is back at adding new content as the 2028 batch progresses through the semesters. Big thanks to ASR for building and maintaining this very useful tool to the community!<p>
-                  <p>Click on the link below to access the platform.<p>
-<div class="flex justify-center gap-4">
-  <a href="https://sites.google.com/view/kgp-phy24/" 
-     style="
-       display: inline-block;
-       padding: 0.5rem 1rem;
-       font-size: 1rem;
-       font-weight: 500;
-       color: Black;
-       background-color: white;
-       border: 2px solid black;
-       border-radius: 0.375rem;
-       text-align: center;
-       text-decoration: none;
-       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-     "
-     onmouseover="this.style.color='white'; this.style.backgroundColor='black'; this.style.borderColor='white';"
-     onmouseout="this.style.color='black'; this.style.backgroundColor='white'; this.style.borderColor='black';">
-    Phy'24
-  </a>
-  </div>
-  <h3 id="academic-support">Academic Wing</h3>
-  <p><span style="font-weight: 500;">PAW</span>-Staring with this year (2026), PhySoc has launched the PhySoc Academic Wing (PAW) – a new team/initiative for second year students and above. PAW promotes peer-to-peer learning by encouraging senior-led discussions on specialized research topics between seniors and juniors. In addition to these research deep dives, we also host regular lectures on fundamental physics concepts, connecting core coursework to cutting edge science.</p>
-<p><span style="font-weight: 500;">Academic Wing Meeting</span> -Also known as PhySoc-AWMs, these are weekly research-mentorship sessions on Saturdays from 3:00PM to 5:00PM. Students get a chance to discuss and explore niche domains such as gravitational physics, biophysics, plasma physics and geophysics, mentored by senior and graduate students. This program connects coursework and research and provides junior students with the foundation and vision to pursue advanced projects and academic careers.</p>
-            <h3 id="advising">Advising</h3>
-<p><span style="font-weight: 500;">Student Counselor</span> - The first & often most relevant advisors, you can schedule appointments with our student advisorss <a href="mailto:sagarneelgh1107@gmail.com"
- target="_blank"
->Sagarneel</a> and  <a href="mailto:sanjaytn369@gmail.com"
- target="_blank"
->Sanjay</a> by clicking on their link. 
-Furthermore, if you are a new student, we strongly encourage you to contact the Physics Undergraduate Major Advisors & ask them to add you to the Physics Intended Major Email List and the Physics Central Ed Discussion. 
-Do reach out to our student advisors for any issues/queries, they are here to help.
-</div>
+                <h3 id="contact-questions">Questions about Integration Bee?</h3>
+                <p>Kaji Wasim Rai<br>
+                Email: <a href="mailto:phyiitkharagpur@gmail.com">phyiitkharagpur@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
     </main>
-    <!-- Footer -->
+
+    <!-- Footer with Dynamic Gradient Transition -->
     <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
       <div class="container">
         <div class="row items-center py-10">
@@ -256,46 +386,24 @@ Do reach out to our student advisors for any issues/queries, they are here to he
             <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
           </div>
           <div class="lg:col-6 mb-8 text-center lg:mb-0">
-            <ul>
-            </ul>
+            <ul></ul>
           </div>
           <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
             <div class="inline-flex flex-col items-center text-center">
               <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
               <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
                 <li>
-                  <a
-                    target="_blank"
-                    aria-label="instagram"
-                    rel="nofollow noopener"
-                    href="https://www.instagram.com/PhySoc_IItKGP/"
-                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                  <a target="_blank" aria-label="instagram" rel="nofollow noopener" href="https://www.instagram.com/PhySoc_IItKGP/" style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'" onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
                     <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
                   </a>
                 </li>
                 <li>
-                  <a
-                    target="_blank"
-                    aria-label="linkedin"
-                    rel="nofollow noopener"
-                    href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
-                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                  <a target="_blank" aria-label="linkedin" rel="nofollow noopener" href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/" style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'" onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
                     <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
                   </a>
                 </li>
                 <li>
-                  <a
-                    target="_blank"
-                    aria-label="youtube"
-                    rel="nofollow noopener"
-                    href="https://www.youtube.com/@PhySoc-IITKGP"
-                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
-                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
-                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                  <a target="_blank" aria-label="youtube" rel="nofollow noopener" href="https://www.youtube.com/@PhySoc-IITKGP" style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'" onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
                     <i class="fab fa-youtube" style="color: #ffffff !important; font-size: 1.3rem;"></i>
                   </a>
                 </li>
