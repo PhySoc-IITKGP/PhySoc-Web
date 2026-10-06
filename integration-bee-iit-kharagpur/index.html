@@ -1,113 +1,816 @@
 <!doctype html>
-<html class="light" lang="en-us" itemscope itemtype="https://schema.org/WebPage">
+<html itemscope class="light" lang="en-us" itemtype="http://schema.org/WebPage">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Integration Bee | PhySoc IIT Kharagpur</title>
-    <meta name="description" content="Join the PhySoc IIT Kharagpur Integration Bee on October 10, 2026. Open to all; register online." />
-    <meta name="theme-color" content="#5b250d" />
-    <link rel="icon" type="image/png" href="../images/logo2_hu_20f6f98a0862d010.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="theme-name" content="hugoplate" />
+
+    <link rel="shortcut icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
+    <link rel="icon" href="../images/logo2_hu_20f6f98a0862d010.png" type="image/x-icon">
+
+    <title>Integration Bee | PhySoc IITKGP</title>
+    <meta name="keywords" content="IITKGP, Physics, Physics Society, PhySoc, Integration Bee, Calculus, Competition" />
+    <meta name="description" content="Integration Bee organized by the Physics Society (PhySoc), IIT Kharagpur." />
+    <meta name="author" content="PhySoc Web Team" />
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/style.min.75408a616c8d64a93d3b03e345cadd04f72b1cded1cd7b9819149db1a7264234.css" />
-    <link rel="stylesheet" href="../css/integration-bee.css" />
+
+    <style>
+      /* Universal Font Consistency */
+      html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
+      }
+
+      /* Animated Dynamic Header & Footer Gradient */
+      .header,
+      .header-gradient-home,
+      .header-gradient-all,
+      footer,
+      footer.bg-theme-light,
+      .footer-custom,
+      .calendar-dynamic-box {
+        position: relative !important;
+        overflow: hidden !important;
+        background: transparent !important;
+        z-index: 20 !important;
+      }
+
+      .header::before,
+      .header::after,
+      footer::before,
+      footer::after,
+      .calendar-dynamic-box::before,
+      .calendar-dynamic-box::after {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: -1 !important;
+        pointer-events: none !important;
+      }
+
+      .header::before,
+      footer::before,
+      .calendar-dynamic-box::before {
+        background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
+        animation: dynamicFlipA 10s ease-in-out infinite !important;
+      }
+
+      .header::after,
+      footer::after,
+      .calendar-dynamic-box::after {
+        background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
+        animation: dynamicFlipB 10s ease-in-out infinite !important;
+      }
+
+      @keyframes dynamicFlipA {
+        0%, 20% {
+          opacity: 1;
+        }
+        50%, 70% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes dynamicFlipB {
+        0%, 20% {
+          opacity: 0;
+        }
+        50%, 70% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .header .nav-link,
+      .header-gradient-home .nav-link,
+      .header-gradient-all .nav-link {
+        color: #121212 !important;
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.015em !important;
+        transition: all 0.2s ease !important;
+      }
+
+      .header .nav-link:hover,
+      .header-gradient-home .nav-link:hover,
+      .header-gradient-all .nav-link:hover {
+        color: #3E7B9D !important;
+        transform: translateY(-1px);
+      }
+
+      .header .nav-link.active {
+        color: #3E7B9D !important;
+      }
+
+      .header .img-light,
+      .header-gradient-home .img-light,
+      .header-gradient-all .img-light {
+        display: block !important;
+      }
+
+      .header .img-dark,
+      .header-gradient-home .img-dark,
+      .header-gradient-all .img-dark {
+        display: none !important;
+      }
+
+      /* Hero Banner (3:2 Ratio) */
+      .events-banner-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 3 / 2;
+        max-height: 560px;
+        overflow: hidden;
+        background-color: #1a3a5c;
+        border-radius: 4px;
+      }
+
+      .events-banner-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+      }
+
+      /* Consistent Section Headings & Text */
+      .section-main-heading {
+        font-size: 2.25rem;
+        font-weight: 900;
+        color: #121212;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 1.25rem;
+        line-height: 1.15;
+      }
+
+      .section-sub-heading {
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: #121212;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.85rem;
+        line-height: 1.3;
+      }
+
+      .subsection-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+      }
+
+      .body-desc-text {
+        font-size: 1.05rem;
+        color: #334155;
+        line-height: 1.8;
+        margin: 0 0 1rem 0;
+      }
+
+      /* Themed Card & Frame Styling */
+      .themed-box {
+        background: #ffffff;
+        border: 2px solid rgba(62, 123, 157, 0.35);
+        border-radius: 6px;
+        padding: 24px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .themed-box:hover {
+        box-shadow: 0 10px 24px rgba(62, 123, 157, 0.12);
+      }
+
+      /* Clean Table Styling */
+      .table-custom {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1.5px solid rgba(62, 123, 157, 0.25);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+      .table-custom th {
+        background-color: #f1f5f9;
+        color: #121212;
+        font-weight: 700;
+        font-size: 1.02rem;
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1.5px solid rgba(62, 123, 157, 0.25);
+      }
+
+      .table-custom td {
+        padding: 14px 18px;
+        font-size: 1rem;
+        color: #334155;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .table-custom tr:last-child td {
+        border-bottom: none;
+      }
+
+      .table-custom tr:nth-child(even) td {
+        background-color: #fafbfc;
+      }
+
+      /* Photo Gallery Grid Matching Wireframe */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+        width: 100%;
+      }
+
+      .gallery-box {
+        border: 2px solid rgba(62, 123, 157, 0.35);
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        border-radius: 4px;
+        position: relative;
+        background-color: #e2e8f0;
+      }
+
+      .gallery-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-box:hover img {
+        transform: scale(1.03);
+      }
+
+      .gallery-g1 { grid-column: span 6; height: 260px; }
+      .gallery-g2 { grid-column: span 3; height: 260px; }
+      .gallery-g3 { grid-column: span 3; height: 260px; }
+      .gallery-g4 { grid-column: span 7; height: 290px; }
+      .gallery-g5 { grid-column: span 5; height: 290px; }
+
+      @media (max-width: 900px) {
+        .gallery-g1 { grid-column: span 12; height: 260px; }
+        .gallery-g2 { grid-column: span 6; height: 220px; }
+        .gallery-g3 { grid-column: span 6; height: 220px; }
+        .gallery-g4 { grid-column: span 12; height: 260px; }
+        .gallery-g5 { grid-column: span 12; height: 260px; }
+      }
+
+      @media (max-width: 600px) {
+        .gallery-g2, .gallery-g3 { grid-column: span 12; height: 220px; }
+      }
+
+      /* Prize Card Grid */
+      .prize-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .prize-card {
+        background: #ffffff;
+        border: 2px solid rgba(62, 123, 157, 0.35);
+        border-radius: 6px;
+        padding: 22px;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        position: relative;
+      }
+
+      .prize-rank {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #3E7B9D;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .prize-amount {
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: #121212;
+        margin-bottom: 6px;
+      }
+
+      .prize-extras {
+        font-size: 0.98rem;
+        color: #475569;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body>
+    <!-- Header with Dynamic Gradient Transition -->
     <header class="header sticky top-0 z-30">
-      <nav class="navbar container" aria-label="Main navigation">
-        <a class="navbar-brand block" href="../index.html" aria-label="PhySoc IIT Kharagpur home">
-          <img src="../images/logo_hu_62a2c291369a66f0.webp" alt="PhySoc IIT Kharagpur" width="250" height="40" />
-        </a>
-        <input id="nav-toggle" type="checkbox" class="hidden" />
-        <label for="nav-toggle" class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark" aria-label="Toggle navigation">
-          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0v-2z"></path>
-          </svg>
-          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M3 3l14 14M17 3L3 17" fill="none" stroke="currentColor" stroke-width="2"></path>
-          </svg>
-        </label>
-        <ul id="nav-menu" class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../about/index.html">Our Team</a></li>
-          <li class="nav-item"><a class="nav-link" href="../events/index.html">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Ansatz/index.html">Ansatz</a></li>
-          <li class="nav-item"><a class="nav-link" href="../resources/index.html">Resources</a></li>
-          <li class="nav-item"><a class="nav-link" href="../sponsors/index.html">Sponsors</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main class="bee-page">
-      <section class="bee-hero" aria-labelledby="bee-title">
-        <div class="bee-hero-copy">
-          <p class="bee-eyebrow">Physics Society · IIT Kharagpur</p>
-          <h1 id="bee-title">Integration <span>Bee</span></h1>
-          <p class="bee-intro">Put your integration skills to the test and compete for exciting prizes and goodies!</p>
-          <p class="bee-status">Open to all</p>
-          <a class="bee-register" href="https://docs.google.com/forms/d/e/1FAIpQLSfyNsNikKpHXeQjj7AmHKfvbReL5U3FDc_kcCVECIIYGJ83sw/viewform" target="_blank" rel="noopener noreferrer">
-            Register for the Integration Bee <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      <nav class="navbar container">
+        <div class="order-0">
+          <a class="navbar-brand block" href="../index.html">
+            <img
+              fetchpriority="high"
+              decoding="async"
+              class="img img-light"
+              width="250"
+              height="40"
+              src="../images/logo_hu_62a2c291369a66f0.webp"
+              alt="PhySoc IITKGP"
+              onerror="this.onerror=null;this.src='../images/logo_hu_2fca4d2ac2314e.jpg';" />
+            <img
+              fetchpriority="high"
+              decoding="async"
+              class="img img-dark"
+              width="250"
+              height="40"
+              src="../images/logo-darkmode_hu_ce06e59bade57f0d.webp"
+              alt="PhySoc IITKGP"
+              onerror="this.onerror=null;this.src='../images/logo-darkmode_hu_fa721757c615f129.png';" />
           </a>
         </div>
-        <figure class="bee-hero-image">
-          <img src="../images/integration-bee-2026-poster.png" alt="PhySoc Integration Bee poster: open to all on October 10 at the Department of Physics, with prizes of 2,000, 1,000, and two 500 rupee awards." />
-          <figcaption>Integration Bee · October 10, 2026</figcaption>
-        </figure>
-      </section>
+        
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+        <label
+          for="nav-toggle"
+          class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
+          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+            <title>Menu Open</title>
+            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+          </svg>
+          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+            <title>Menu Close</title>
+            <polygon
+              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2"
+              transform="rotate(45 10 10)"></polygon>
+          </svg>
+        </label>
+        
+        <ul
+          id="nav-menu"
+          class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:ml-auto lg:space-x-2 lg:pb-0 xl:space-x-6">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../about/index.html">Our Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../events/index.html">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Ansatz/index.html">Ansatz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../resources/index.html">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../sponsors/index.html">Sponsors</a>
+          </li>
+        </ul>
+      </nav>
 
-      <section class="bee-content" aria-labelledby="edition-title">
-        <div class="bee-section-heading">
-          <p class="bee-eyebrow">PhySoc IIT Kharagpur</p>
-          <h2 id="edition-title">Preliminary round</h2>
-          <p>Join us at the Department of Physics for the Integration Bee.</p>
+      <!-- Straight Divider Line Below Navbar -->
+      <div class="container">
+        <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
+      </div>
+
+      <!-- Banner (3:2 Aspect Ratio) -->
+      <div class="container pb-10" style="padding-top: 45px;">
+        <div class="events-banner-container">
+          <img
+            src="../images/events/integration_bee_banner.png"
+            onerror="this.onerror=null;this.src='../images/events_background.jpeg';"
+            alt="Integration Bee Banner" />
         </div>
+      </div>
+    </header>
 
-        <div class="bee-details">
-          <article class="bee-detail-card">
-            <span class="bee-detail-icon" aria-hidden="true"><i class="far fa-calendar-alt"></i></span>
-            <h3>Date</h3>
-            <p>October 10, 2026</p>
-          </article>
-          <article class="bee-detail-card">
-            <span class="bee-detail-icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></span>
-            <h3>Venue</h3>
-            <p>Department of Physics<br />IIT Kharagpur</p>
-          </article>
-          <article class="bee-detail-card">
-            <span class="bee-detail-icon" aria-hidden="true"><i class="fas fa-users"></i></span>
-            <h3>Who could join?</h3>
-            <p>Open to all</p>
-          </article>
-        </div>
+    <main>
 
-        <section class="bee-prizes" aria-labelledby="prizes-title">
-          <div>
-            <p class="bee-eyebrow">For the top solvers</p>
-            <h2 id="prizes-title">Prizes</h2>
-            <p class="bee-prizes-note">Cash prizes, PhySoc merchandise, and goodies.</p>
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 1: WHAT IS INTEGRATION BEE? & REGISTRATION
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <h1 class="section-main-heading">
+            INTEGRATION BEE
+          </h1>
+          <h2 class="section-sub-heading">
+            What is Integration Bee?
+          </h2>
+          <p class="body-desc-text">
+            The Integration Bee is PhySoc IIT Kharagpur’s premier annual calculus tournament, inspired by the renowned collegiate math bees. It brings together undergraduate and postgraduate students from all departments to put their integration prowess, analytical agility, and creative problem-solving techniques to the test against tricky, non-trivial integrals under strict time constraints.
+          </p>
+          <p class="body-desc-text">
+            Whether you are a fresher mastering standard substitutions or an advanced enthusiast deploying Feynman’s trick, complex contour integration, and clever algebraic symmetries, the Integration Bee provides an exhilarating, high-energy arena for celebrating the sheer elegance of mathematics.
+          </p>
+
+          <!-- Register Link without Underline and Bold (as requested in wireframe) -->
+          <div style="margin-top: 1.5rem; display: flex; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <p class="body-desc-text" style="margin: 0; font-size: 1.15rem; font-weight: 600; color: #121212;">
+              Ready to take on the challenge?
+              <a 
+                href="https://forms.google.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style="color: #3E7B9D; font-weight: 700; text-decoration: none; margin-left: 6px;">
+                register here.
+              </a>
+            </p>
           </div>
-          <ol class="bee-prize-list">
-            <li><span class="bee-medal">1</span><span><strong>₹2,000</strong><small>Shirt, cap, mug, and goodies</small></span></li>
-            <li><span class="bee-medal">2</span><span><strong>₹1,000</strong><small>Cap, mug, and goodies</small></span></li>
-            <li><span class="bee-medal">3</span><span><strong>₹500</strong><small>Cap and goodies</small></span></li>
-            <li><span class="bee-medal">4</span><span><strong>₹500</strong><small>Cap and goodies</small></span></li>
-          </ol>
-        </section>
-
-        <aside class="bee-update-note">
-          <strong>Questions about the event?</strong>
-          <p><a href="tel:+919679951538">Kazi Wasim Raj: +91 96799 51538</a><br /><a href="tel:+917294921059">Aman Kumar: +91 72949 21059</a></p>
-        </aside>
-        <p class="bee-back-link"><a href="../events/index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Explore all PhySoc events</a></p>
+        </div>
       </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 2: COMPETITION FORMAT
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          <h2 class="section-main-heading">
+            COMPETITION FORMAT
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 32px;">
+            <!-- Preliminary Round Details -->
+            <div class="themed-box">
+              <h3 class="subsection-title" style="color: #3E7B9D; font-size: 1.35rem;">
+                <i class="fas fa-pencil-alt mr-2" style="font-size: 1.1rem;"></i> Preliminary Round
+              </h3>
+              <ul style="list-style-type: disc; padding-left: 24px; margin: 0; color: #334155; font-size: 1.05rem; line-height: 1.85;">
+                <li style="margin-bottom: 6px;">
+                  <strong>Written test:</strong> 20 integrals in 45 min
+                </li>
+                <li>
+                  <strong>Top 16 students</strong> qualify for the playoff
+                </li>
+              </ul>
+            </div>
+
+            <!-- Playoff Details -->
+            <div class="themed-box">
+              <h3 class="subsection-title" style="color: #3E7B9D; font-size: 1.35rem;">
+                <i class="fas fa-chalkboard mr-2" style="font-size: 1.1rem;"></i> Playoff
+              </h3>
+              <ul style="list-style-type: disc; padding-left: 24px; margin: 0 0 20px 0; color: #334155; font-size: 1.05rem; line-height: 1.85;">
+                <li style="margin-bottom: 6px;">
+                  Parallelly two students will solve integrals on boards.
+                </li>
+                <li style="margin-bottom: 6px;">
+                  The one who solves earlier will get 1 point.
+                </li>
+                <li>
+                  Whoever has more points will win.
+                </li>
+              </ul>
+
+              <!-- Rounds Breakdown Table -->
+              <div style="overflow-x: auto; width: 100%;">
+                <table class="table-custom">
+                  <thead>
+                    <tr>
+                      <th>Round</th>
+                      <th>Progression</th>
+                      <th>Integrals</th>
+                      <th>Time Limit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Round - 1</strong></td>
+                      <td>16 &rarr; 8</td>
+                      <td>Total 5 integrals</td>
+                      <td>6 min each</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Round - 2</strong></td>
+                      <td>8 &rarr; 4</td>
+                      <td>Total 5 integrals</td>
+                      <td>6 min each</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Semifinal</strong></td>
+                      <td>4 &rarr; 2</td>
+                      <td>Total 7 integrals</td>
+                      <td>10 min each</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Final</strong></td>
+                      <td>2 &rarr; 1</td>
+                      <td>Total 7 integrals</td>
+                      <td>10 min each</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 3: EVENT DETAILS (TIMINGS & VENUE)
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <h2 class="section-main-heading">
+            EVENT DETAILS
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px;">
+            <!-- Preliminary Round Info -->
+            <div class="themed-box" style="border-left: 5px solid #3E7B9D;">
+              <h3 class="subsection-title" style="color: #121212;">
+                Preliminary Round
+              </h3>
+              <p class="body-desc-text" style="margin-bottom: 8px;">
+                <i class="far fa-calendar-alt mr-2" style="color: #3E7B9D; width: 20px;"></i>
+                <strong>Date & Time:</strong> 10th October (6:30 to 7:15 pm)
+              </p>
+              <p class="body-desc-text" style="margin-bottom: 0;">
+                <i class="fas fa-map-marker-alt mr-2" style="color: #3E7B9D; width: 20px;"></i>
+                <strong>Venue:</strong> To be emailed
+              </p>
+            </div>
+
+            <!-- Playoff Info -->
+            <div class="themed-box" style="border-left: 5px solid #3E7B9D;">
+              <h3 class="subsection-title" style="color: #121212;">
+                Play Off
+              </h3>
+              <p class="body-desc-text" style="margin-bottom: 8px;">
+                <i class="far fa-calendar-alt mr-2" style="color: #3E7B9D; width: 20px;"></i>
+                <strong>Date & Time:</strong> 11th October (4:00 pm to 7:30 pm)
+              </p>
+              <p class="body-desc-text" style="margin-bottom: 0;">
+                <i class="fas fa-map-marker-alt mr-2" style="color: #3E7B9D; width: 20px;"></i>
+                <strong>Venue:</strong> Department of Physics
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 4: PRIZES
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          <h2 class="section-main-heading">
+            PRIZES
+          </h2>
+
+          <div class="prize-grid">
+            <!-- 1st Place -->
+            <div class="prize-card">
+              <div class="prize-rank">
+                <i class="fas fa-trophy mr-1" style="color: #eab308;"></i> 1st Place
+              </div>
+              <div class="prize-amount">₹2000</div>
+              <div class="prize-extras">
+                <strong style="color: #3E7B9D; display: block; margin-bottom: 4px;">Grand Integrator Title</strong>
+                Cash, T-shirt, and goodies
+              </div>
+            </div>
+
+            <!-- 2nd Place -->
+            <div class="prize-card">
+              <div class="prize-rank">
+                <i class="fas fa-medal mr-1" style="color: #94a3b8;"></i> 2nd Place
+              </div>
+              <div class="prize-amount">₹1000</div>
+              <div class="prize-extras">
+                Cash, T-shirt, and goodies
+              </div>
+            </div>
+
+            <!-- 3rd Place -->
+            <div class="prize-card">
+              <div class="prize-rank">
+                <i class="fas fa-medal mr-1" style="color: #d97706;"></i> 3rd Place
+              </div>
+              <div class="prize-amount">₹500</div>
+              <div class="prize-extras">
+                Cash, T-shirt, and goodies
+              </div>
+            </div>
+
+            <!-- 4th Place -->
+            <div class="prize-card">
+              <div class="prize-rank">
+                <i class="fas fa-award mr-1" style="color: #3E7B9D;"></i> 4th Place
+              </div>
+              <div class="prize-amount">₹500</div>
+              <div class="prize-extras">
+                Cash, T-shirt, and goodies
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 5: INTEGRATION BEE QUESTIONS
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-white dark:bg-darkmode-body border-b border-border/40">
+        <div class="container">
+          <h2 class="section-main-heading">
+            INTEGRATION BEE QUESTIONS
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- 2026 Sample Paper -->
+            <div class="themed-box" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div>
+                <span style="display: inline-block; background: #3E7B9D; color: #ffffff; font-weight: 700; font-size: 0.9rem; padding: 2px 10px; border-radius: 4px; margin-bottom: 6px;">2026</span>
+                <h3 class="subsection-title" style="margin: 0; color: #121212;">
+                  Sample Question Paper - Preliminary Round
+                </h3>
+              </div>
+              <div>
+                <a 
+                  href="#" 
+                  style="color: #3E7B9D; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; font-size: 1.05rem;"
+                  onmouseover="this.style.color='#121212'" 
+                  onmouseout="this.style.color='#3E7B9D'">
+                  <i class="fas fa-file-pdf mr-2" style="font-size: 1.25rem;"></i> Download PDF
+                </a>
+              </div>
+            </div>
+
+            <!-- 2025 Archive -->
+            <div class="themed-box" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div>
+                <span style="display: inline-block; background: #64748b; color: #ffffff; font-weight: 700; font-size: 0.9rem; padding: 2px 10px; border-radius: 4px; margin-bottom: 6px;">2025</span>
+                <h3 class="subsection-title" style="margin: 0; color: #121212;">
+                  Previous Year Question Paper
+                </h3>
+              </div>
+              <div>
+                <span style="color: #64748b; font-weight: 700; font-style: italic; font-size: 1.05rem;">
+                  Yet to be updated
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 6: PHYSOC INTEGRATION BEE GALLERY
+           5-Image Layout matching Wireframe
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-[#f8fafc] dark:bg-darkmode-theme-light border-b border-border/40">
+        <div class="container">
+          <h2 class="section-main-heading">
+            PHYSOC INTEGRATION BEE
+          </h2>
+
+          <div class="gallery-grid">
+            <!-- Image 1 (Large left rectangle) -->
+            <div class="gallery-box gallery-g1">
+              <img 
+                src="../images/gallery/Integrationbee.png" 
+                onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" 
+                alt="PhySoc Integration Bee Image 1" />
+            </div>
+
+            <!-- Image 2 -->
+            <div class="gallery-box gallery-g2">
+              <img 
+                src="../images/gallery/group.JPG" 
+                onerror="this.onerror=null;this.src='../images/gallery/calday.JPG';" 
+                alt="PhySoc Integration Bee Image 2" />
+            </div>
+
+            <!-- Image 3 -->
+            <div class="gallery-box gallery-g3">
+              <img 
+                src="../images/gallery/calday.JPG" 
+                onerror="this.onerror=null;this.src='../images/gallery/officers.JPG';" 
+                alt="PhySoc Integration Bee Image 3" />
+            </div>
+
+            <!-- Image 4 (Wide bottom rectangle) -->
+            <div class="gallery-box gallery-g4">
+              <img 
+                src="../images/gallery/officers.JPG" 
+                onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" 
+                alt="PhySoc Integration Bee Image 4" />
+            </div>
+
+            <!-- Image 5 (Bottom right box) -->
+            <div class="gallery-box gallery-g5">
+              <img 
+                src="../images/gallery/freshers.png" 
+                onerror="this.onerror=null;this.src='../images/gallery/badminton.png';" 
+                alt="PhySoc Integration Bee Image 5" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           SECTION 7: QUESTIONS ABOUT INTEGRATION BEE? (CONTACT)
+      ══════════════════════════════════════════════════════════ -->
+      <section class="section py-14 bg-white dark:bg-darkmode-body">
+        <div class="container">
+          <h2 class="section-sub-heading" style="font-size: 1.85rem; margin-bottom: 1rem;">
+            Questions about Integration Bee?
+          </h2>
+          <div style="font-size: 1.05rem; color: #334155; line-height: 1.8;">
+            <p style="margin: 0 0 6px 0; font-weight: 700; color: #121212; font-size: 1.15rem;">
+              Kazi Wasim Rai
+            </p>
+            <p style="margin: 0;">
+              <strong>Email:</strong> 
+              <a 
+                href="mailto:phyiitkharagpur@gmail.com" 
+                style="color: #3E7B9D; font-weight: 700; text-decoration: none; margin-left: 4px;">
+                phyiitkharagpur@gmail.com
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
     </main>
 
-    <footer class="bee-footer">
+    <!-- Footer with Dynamic Gradient Transition -->
+    <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
       <div class="container">
-        <a href="../index.html">PhySoc IIT Kharagpur</a>
-        <p>Physics Society · Indian Institute of Technology Kharagpur</p>
+        <div class="row items-center py-10">
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+            <img src="../images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
+          </div>
+          <div class="lg:col-6 mb-8 text-center lg:mb-0">
+            <ul>
+            </ul>
+          </div>
+          <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 flex flex-col items-center lg:items-end justify-center">
+            <div class="inline-flex flex-col items-center text-center">
+              <p class="font-bold text-base mb-2.5 tracking-wide" style="color: #121212 !important; margin: 0 0 0.5rem 0; width: 100%; text-align: center;">Follow Us</p>
+              <ul class="social-icons flex items-center justify-center gap-3 m-0 p-0">
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="instagram"
+                    rel="nofollow noopener"
+                    href="https://www.instagram.com/PhySoc_IItKGP/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="linkedin"
+                    rel="nofollow noopener"
+                    href="https://www.linkedin.com/company/phy-soc-iit-kharagpur/"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    aria-label="youtube"
+                    rel="nofollow noopener"
+                    href="https://www.youtube.com/@PhySoc-IITKGP"
+                    style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
+                    onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
+                    <i class="fab fa-youtube" style="color: #ffffff !important; font-size: 1.3rem;"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(62, 123, 157, 0.25);" class="py-7">
+        <div class="container text-center text-sm font-medium" style="color: #121212 !important;">
+          Physics Society IIT KGP
+        </div>
       </div>
     </footer>
 
+    <script src="../js/main.min.c382e2105e67658eff86fe0a044cac3f838636947d327cd08f2b03f6a8b21f2e.js" defer></script>
+    <script crossorigin="anonymous" src="../js/script.min.e47bd8989fcd86cba20150c3b02e9c9806d76d4d7b000a4b636d101f8a300ad6.js"></script>
+    <script defer async crossorigin="anonymous" src="../js/script-lazy.min.c3e692e360f6f81f898b1fa3a19ee902e6b5bdbbbfa512bf221a0fe796fc9f7c.js"></script>
+  </body>
+</html>
     <script src="../js/main.min.c382e2105e67658eff86fe0a044cac3f838636947d327cd08f2b03f6a8b21f2e.js" defer></script>
   </body>
 </html>
