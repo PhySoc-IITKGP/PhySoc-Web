@@ -112,47 +112,64 @@
         display: block;
       }
 
-      /* Clean Content Typography */
-      .content h1.page-title {
-        font-size: 2.25rem;
-        font-weight: 900;
-        color: #121212;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        margin-top: 0;
-        margin-bottom: 1.25rem;
-        line-height: 1.15;
+      /* Primary Top Heading: Matching "What is |Ansatz⟩?" */
+      .main-page-heading {
+        font-size: 2.65rem !important;
+        font-weight: 800 !important;
+        color: #121212 !important;
+        letter-spacing: -0.015em !important;
+        line-height: 1.2 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1.25rem !important;
       }
 
-      .content h3 {
-        font-size: 1.55rem;
-        font-weight: 700;
-        color: #121212;
-        margin-top: 1.75rem;
-        margin-bottom: 0.6rem;
-        line-height: 1.3;
+      /* Section Headings: Matching "Latest issues" */
+      .section-heading {
+        font-size: 2.15rem !important;
+        font-weight: 800 !important;
+        color: #121212 !important;
+        letter-spacing: -0.01em !important;
+        line-height: 1.25 !important;
+        margin-top: 3.25rem !important;
+        margin-bottom: 0.85rem !important;
       }
 
+      .section-heading.first-heading {
+        margin-top: 0 !important;
+      }
+
+      /* Subhead (e.g., Qualifier, Playoffs) */
+      .sub-heading {
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        color: #121212 !important;
+        margin-top: 1.35rem !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.35 !important;
+      }
+
+      /* Body Paragraphs */
       .content p {
         font-size: 1.05rem;
         color: #334155;
-        line-height: 1.75;
+        line-height: 1.8;
         margin-top: 0;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.85rem;
       }
 
+      /* Bullet Lists */
       .content ul {
-        margin-top: 0.25rem;
-        margin-bottom: 0.75rem;
-        padding-left: 1.25rem;
+        margin-top: 0.35rem;
+        margin-bottom: 1rem;
+        padding-left: 1.35rem;
         list-style-type: disc;
       }
 
       .content li {
         font-size: 1.05rem;
         color: #334155;
-        line-height: 1.75;
-        margin-bottom: 0.25rem;
+        line-height: 1.8;
+        margin-bottom: 0.35rem;
       }
 
       /* Hyperlinks: Black by default, PhySoc Blue on hover */
@@ -169,15 +186,15 @@
         color: #3E7B9D !important;
       }
 
-      /* Two-Column Side-by-Side Flex Layout */
+      /* 2-Column Side-by-Side Flex Layout */
       .details-two-col {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 48px;
+        gap: 52px;
         width: 100%;
-        margin-top: 1.75rem;
+        margin-top: 3.25rem;
       }
 
       .col-left {
@@ -192,10 +209,11 @@
         min-width: 0;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 800px) {
         .details-two-col {
           flex-direction: column !important;
-          gap: 24px !important;
+          gap: 2rem !important;
+          margin-top: 2rem !important;
         }
         .col-left, .col-right {
           width: 100% !important;
@@ -203,13 +221,13 @@
         }
       }
 
-      /* Photo Gallery Layout (Flat, no borders/boxes) */
+      /* Flat Image Gallery Grid */
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
-        gap: 12px;
+        gap: 14px;
         width: 100%;
-        margin-top: 0.75rem;
+        margin-top: 1rem;
         margin-bottom: 1.5rem;
       }
 
@@ -315,11 +333,8 @@
             <div class="lg:col-12">
               <div class="content">
 
-                <!-- Heading -->
-                <h1 class="page-title">INTEGRATION BEE</h1>
-
-                <!-- What is Integration Bee -->
-                <h3 id="what-is-integration-bee" style="margin-top: 0;">What is Integration Bee?</h3>
+                <!-- 1. Top Primary Heading (Matching "What is |Ansatz⟩?") -->
+                <h1 class="main-page-heading" id="what-is-integration-bee">What is Integration Bee?</h1>
                 <p>
                   The Integration Bee is PhySoc IIT Kharagpur’s premier annual calculus tournament, inspired by the renowned collegiate math bees. It brings together undergraduate and postgraduate students from all departments to put their integration prowess, analytical agility, and creative problem-solving techniques to the test against tricky, non-trivial integrals under strict time constraints.
                 </p>
@@ -332,7 +347,7 @@
                 </p>
 
                 <!-- ══════════════════════════════════════════════════════
-                     SIDE-BY-SIDE LAYOUT
+                     SIDE-BY-SIDE 2-COLUMN LAYOUT
                      Left: Competition Format
                      Right: Events Details & Prizes
                 ══════════════════════════════════════════════════════ -->
@@ -340,21 +355,21 @@
                   
                   <!-- LEFT COLUMN: Competition Format -->
                   <div class="col-left">
-                    <h3 id="competition-format" style="margin-top: 0;">Competition Format</h3>
+                    <h2 class="section-heading first-heading" id="competition-format">Competition Format</h2>
 
-                    <p><strong>Qualifier (9:00 a.m. &ndash; 12:00 p.m.)</strong></p>
+                    <div class="sub-heading">Qualifier (9:00 a.m. &ndash; 12:00 p.m.)</div>
                     <ul>
                       <li>Written test: 20 integrals in 60 minutes</li>
                       <li>Top 16 scorers qualify for playoffs</li>
                     </ul>
 
-                    <p><strong>Playoffs (1:00 p.m. &ndash; 4:00 p.m.)</strong></p>
+                    <div class="sub-heading">Playoffs (1:00 p.m. &ndash; 4:00 p.m.)</div>
                     <ul>
                       <li>Single-elimination tournament on the blackboard</li>
                       <li>Top 16 participate, remaining contestants cheer them in the audience.</li>
                     </ul>
 
-                    <p>
+                    <p style="margin-top: 1rem;">
                       Round 1: 16 &rarr; 8 (first to solve 1 integral, 2 minutes)<br />
                       Round 2: 8 &rarr; 4 (first to solve 1 integral, 2 minutes)<br />
                       Round 3: 4 &rarr; 2 (first to solve 1 integral, 3 minutes )<br />
@@ -364,7 +379,7 @@
 
                   <!-- RIGHT COLUMN: Events Details & Prizes -->
                   <div class="col-right">
-                    <h3 id="events-details" style="margin-top: 0;">Events Details</h3>
+                    <h2 class="section-heading first-heading" id="events-details">Events Details</h2>
                     <p>
                       <strong>Preliminary round:</strong> 10th October (6:30 to 7:15 pm)<br />
                       Venue: to be emailed
@@ -374,7 +389,7 @@
                       Venue: Department of physics
                     </p>
 
-                    <h3 id="prizes">Prizes</h3>
+                    <h2 class="section-heading" id="prizes" style="margin-top: 2rem !important;">Prizes</h2>
                     <p>
                       <strong>1st place:</strong> Grand Integrator title, 2000 ₹ Cash, Tshirt, and goodies<br />
                       <strong>2nd place:</strong> 1000 ₹ Cash, Tshirt and goodies<br />
@@ -386,7 +401,7 @@
                 </div>
 
                 <!-- Past Questions -->
-                <h3 id="past-integration-bee-questions">Past Integration Bee Questions</h3>
+                <h2 class="section-heading" id="past-integration-bee-questions">Past Integration Bee Questions</h2>
                 <ul>
                   <li>
                     <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer">
@@ -397,7 +412,7 @@
                 </ul>
 
                 <!-- Photo Gallery (Flat layout, no boxes) -->
-                <h3 id="physoc-integration-bee">PhySoc Integration Bee</h3>
+                <h2 class="section-heading" id="physoc-integration-bee">PhySoc Integration Bee</h2>
                 <div class="gallery-grid">
                   <div class="gallery-g1"><img src="../images/gallery/Integrationbee.png" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 1" /></div>
                   <div class="gallery-g2"><img src="../images/gallery/group.JPG" onerror="this.onerror=null;this.src='../images/gallery/calday.JPG';" alt="Image 2" /></div>
@@ -407,7 +422,7 @@
                 </div>
 
                 <!-- Contact -->
-                <h3 id="questions-about-integration-bee">Questions about Integration Bee?</h3>
+                <h2 class="section-heading" id="questions-about-integration-bee">Questions about Integration Bee?</h2>
                 <p>
                   Kaji Wasim Rai<br />
                   Email: <a href="mailto:phyiitkharagpur@gmail.com">phyiitkharagpur@gmail.com</a>
