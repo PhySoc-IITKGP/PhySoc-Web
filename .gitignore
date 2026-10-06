@@ -1,0 +1,17 @@
+# Dependencies & build
+node_modules/
+.turbo/
+dist/
+.cache/
+
+# OS & environment
+.DS_Store
+Thumbs.db
+*.env
+*.env.local
+
+# SQL / DB dumps
+*.sql
+
+# Local test data may contain credentials or private content
+/test/

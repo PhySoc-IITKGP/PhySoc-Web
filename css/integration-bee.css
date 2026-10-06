@@ -1,0 +1,340 @@
+:root {
+  color-scheme: light;
+  --bee-ink: #4e220f;
+  --bee-brown: #682b0c;
+  --bee-amber: #f5b925;
+  --bee-cream: #fff8df;
+}
+
+body {
+  color: #352012;
+  background: #fffdf7;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.bee-page {
+  overflow: hidden;
+}
+
+.bee-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding: clamp(3rem, 8vw, 7rem) max(1.25rem, calc((100vw - 1120px) / 2));
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(245, 185, 37, 0.32), transparent 42%),
+    linear-gradient(135deg, #fff8df, #fffdf7 72%);
+}
+
+.bee-hero-copy {
+  max-width: 620px;
+}
+
+.bee-eyebrow {
+  margin: 0 0 0.75rem;
+  color: #9a5017;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bee-hero h1 {
+  margin: 0;
+  color: var(--bee-ink);
+  font-size: clamp(3.2rem, 8vw, 6.25rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.98;
+}
+
+.bee-hero h1 span {
+  color: #b87314;
+}
+
+.bee-intro {
+  max-width: 540px;
+  margin: 1.5rem 0;
+  color: #674a34;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.bee-status {
+  display: inline-flex;
+  margin: 0;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(104, 43, 12, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--bee-brown);
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.bee-register {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 1rem 0 0 0.5rem;
+  padding: 0.85rem 1.15rem;
+  border: 2px solid var(--bee-brown);
+  border-radius: 0.75rem;
+  background: var(--bee-brown);
+  color: white;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.bee-register:hover {
+  background: #fff;
+  color: var(--bee-brown);
+  transform: translateY(-2px);
+}
+
+.bee-register:focus-visible {
+  outline: 3px solid #d59222;
+  outline-offset: 3px;
+}
+
+.bee-hero-image {
+  position: relative;
+  margin: 0;
+  justify-self: center;
+  width: min(100%, 430px);
+  overflow: hidden;
+  border: 1px solid rgba(78, 34, 15, 0.16);
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0 12px 32px rgba(78, 34, 15, 0.12);
+}
+
+.bee-hero-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.bee-hero-image figcaption {
+  padding: 0.6rem 1rem;
+  color: #765a42;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.bee-content {
+  width: min(100% - 2.5rem, 1040px);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+}
+
+.bee-section-heading {
+  max-width: 660px;
+  margin-bottom: 2rem;
+}
+
+.bee-section-heading h2,
+.bee-prizes h2 {
+  margin: 0 0 0.6rem;
+  color: var(--bee-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.bee-section-heading > p:last-child,
+.bee-prizes-note {
+  margin: 0;
+  color: #715941;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.bee-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.bee-detail-card {
+  min-height: 190px;
+  padding: 1.5rem;
+  border: 1px solid #f0e1c1;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(78, 34, 15, 0.05);
+}
+
+.bee-detail-icon {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-bottom: 1.1rem;
+  place-items: center;
+  border-radius: 0.8rem;
+  background: #fff2c7;
+  color: #9b5715;
+  font-size: 1.1rem;
+}
+
+.bee-detail-card h3 {
+  margin: 0 0 0.45rem;
+  color: var(--bee-ink);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.bee-detail-card p {
+  margin: 0;
+  color: #715941;
+  line-height: 1.65;
+}
+
+.bee-prizes {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 2rem;
+  align-items: start;
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  background: #fff7e4;
+  color: #17344a;
+}
+
+.bee-prizes .bee-eyebrow {
+  color: #3e6683;
+}
+
+.bee-prizes h2 {
+  color: #17344a;
+}
+
+.bee-prizes-note {
+  color: #405363;
+}
+
+.bee-prize-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bee-prize-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(23, 52, 74, 0.16);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.bee-medal {
+  display: grid;
+  flex: 0 0 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #f5bd3c;
+  color: var(--bee-ink);
+  font-weight: 900;
+}
+
+.bee-prize-list li:nth-child(2) .bee-medal {
+  background: #d7d9dc;
+}
+
+.bee-prize-list li:nth-child(3) .bee-medal {
+  background: #c58b55;
+}
+
+.bee-prize-list strong,
+.bee-prize-list small {
+  display: block;
+}
+
+.bee-prize-list strong {
+  color: #17344a;
+  font-size: 1.1rem;
+}
+
+.bee-prize-list small {
+  margin-top: 0.15rem;
+  color: #405363;
+  font-size: 0.88rem;
+}
+
+.bee-update-note {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid #d59222;
+  border-radius: 0 0.8rem 0.8rem 0;
+  background: #fff5d6;
+  color: #60432c;
+  line-height: 1.65;
+}
+
+.bee-update-note p {
+  margin: 0.35rem 0 0;
+}
+
+.bee-back-link {
+  margin: 2rem 0 0;
+}
+
+.bee-back-link a {
+  color: #88420f;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.bee-footer {
+  padding: 2rem 0;
+  background: #fff4d5;
+  color: var(--bee-ink);
+  text-align: center;
+}
+
+.bee-footer a {
+  font-weight: 850;
+}
+
+.bee-footer p {
+  margin: 0.35rem 0 0;
+  color: #765a42;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .bee-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .bee-hero-image {
+    max-width: 430px;
+  }
+
+  .bee-details {
+    grid-template-columns: 1fr;
+  }
+
+  .bee-detail-card {
+    min-height: 0;
+  }
+
+  .bee-prizes {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
