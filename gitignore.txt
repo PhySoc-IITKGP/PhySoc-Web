@@ -13,4 +13,4 @@ Thumbs.db
 # SQL / DB dumps
 *.sql
 
-test/
+test/*
