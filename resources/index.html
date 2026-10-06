@@ -19,7 +19,7 @@
     <style>
       /* Universal Font Consistency */
       html, body, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input {
-        font-family: system-ui !important;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
       }
 
       /* Animated Dynamic Header & Footer Gradient */
@@ -116,7 +116,6 @@
         display: none !important;
       }
     </style>
-    <link rel="stylesheet" href="../css/resources.css" />
   </head>
   <body>
     <!-- Header -->
@@ -190,153 +189,64 @@
         <div style="width: 100%; height: 1.5px; background: rgba(18, 18, 18, 0.22); margin: 6px auto;"></div>
       </div>
 
-    </header>
-    <main class="resources-page" itemscope itemtype="https://schema.org/CollectionPage">
-      <meta itemprop="name" content="Physics course resources for IIT Kharagpur students" />
-      <meta itemprop="description" content="Course materials and academic support links for Physics students, with course listings from Semester 1 through Semester 5." />
-      <section class="resources-intro">
-        <div class="resources-container">
-          <p class="resources-eyebrow">PhySoc IIT Kharagpur · Student hub</p>
-          <h1>Physics resources</h1>
-          <p>Course materials, batch notes, academic support, and useful links for Physics students.</p>
-          <div class="resources-quicklinks" aria-label="Featured resource links">
-            <a class="resources-quicklink resources-quicklink-primary" href="https://sites.google.com/view/kgp-phy24/" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-book-open" aria-hidden="true"></i><span><strong>Phy'24 course archive</strong><small>Notes, books, and coursework</small></span><i class="fas fa-external-link-alt" aria-hidden="true"></i>
-            </a>
-            <a class="resources-quicklink" href="https://sites.google.com/view/kgp-phy24/general-resources" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-list" aria-hidden="true"></i><span><strong>General resources</strong><small>Browse the archive's shared links</small></span><i class="fas fa-external-link-alt" aria-hidden="true"></i>
-            </a>
-            <a class="resources-quicklink" href="https://drive.proton.me/urls/VV6M2GHWR8#JYP1CvGqL2E9" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-folder-open" aria-hidden="true"></i><span><strong>General course drive</strong><small>Shared Phy'24 materials</small></span><i class="fas fa-external-link-alt" aria-hidden="true"></i>
-            </a>
-            <a class="resources-quicklink" href="https://erp.iitkgp.ac.in/ERPWebServices/curricula/specialisationList_new_currver2.jsp?stuType=UG" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-university" aria-hidden="true"></i><span><strong>IIT KGP UG curricula</strong><small>Official curriculum information</small></span><i class="fas fa-external-link-alt" aria-hidden="true"></i>
-            </a>
-          </div>
-          <p class="resources-note">The course links below are maintained in the Phy'24 archive. Some Proton Drive materials may not open on campus Wi-Fi; try mobile data or Ethernet.</p>
+      <!-- Seamless Merged Banner Image (Aligned flush with PhySoc symbol on left and Sponsors on right) -->
+      <div class="container pb-14" style="padding-top: 45px;">
+        <div style="width: 100%; height: 520px; overflow: hidden; border-radius: 0; border: none; box-shadow: none;">
+          <img
+            src="/images/resources_background.JPG"
+            alt="Resources Banner"
+            style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; border-radius: 0; border: none;" />
         </div>
+      </div>
+    </header>
+    <main>
+      
+      <section class="section py-16 bg-white dark:bg-darkmode-body">
+        <div class="container">
+          <div class="row">
+            <div class="lg:col-12">
+              <div class="content">
+                
+                <h3 id="academic-support">Academic Support</h3>
+<p>
+
+<p><span style="font-weight: 500;">Phy'24</span> -Phy'24, made by Adith or ASR (Physics, Batch of 2028), this is a site that acts as an academic archive of the UG Physics Batch of 2028. It has the most comprehensive collection of course notes, reference books, study materials and other coursework information.</p>
+                <p>Barring a smalling hiatus in 2026, Phy’24 is back at adding new content as the 2028 batch progresses through the semesters. Big thanks to ASR for building and maintaining this very useful tool to the community!<p>
+                  <p>Click on the link below to access the platform.<p>
+<div class="flex justify-center gap-4">
+  <a href="https://sites.google.com/view/kgp-phy24/" 
+     style="
+       display: inline-block;
+       padding: 0.5rem 1rem;
+       font-size: 1rem;
+       font-weight: 500;
+       color: Black;
+       background-color: white;
+       border: 2px solid black;
+       border-radius: 0.375rem;
+       text-align: center;
+       text-decoration: none;
+       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+     "
+     onmouseover="this.style.color='white'; this.style.backgroundColor='black'; this.style.borderColor='white';"
+     onmouseout="this.style.color='black'; this.style.backgroundColor='white'; this.style.borderColor='black';">
+    Phy'24
+  </a>
+  </div>
+  <h3 id="academic-support">Academic Wing</h3>
+  <p><span style="font-weight: 500;">PAW</span>-Staring with this year (2026), PhySoc has launched the PhySoc Academic Wing (PAW) – a new team/initiative for second year students and above. PAW promotes peer-to-peer learning by encouraging senior-led discussions on specialized research topics between seniors and juniors. In addition to these research deep dives, we also host regular lectures on fundamental physics concepts, connecting core coursework to cutting edge science.</p>
+<p><span style="font-weight: 500;">Academic Wing Meeting</span> -Also known as PhySoc-AWMs, these are weekly research-mentorship sessions on Saturdays from 3:00PM to 5:00PM. Students get a chance to discuss and explore niche domains such as gravitational physics, biophysics, plasma physics and geophysics, mentored by senior and graduate students. This program connects coursework and research and provides junior students with the foundation and vision to pursue advanced projects and academic careers.</p>
+            <h3 id="advising">Advising</h3>
+<p><span style="font-weight: 500;">Student Counselor</span> - The first & often most relevant advisors, you can schedule appointments with our student advisorss <a href="mailto:sagarneelgh1107@gmail.com"
+ target="_blank"
+>Sagarneel</a> and  <a href="mailto:sanjaytn369@gmail.com"
+ target="_blank"
+>Sanjay</a> by clicking on their link. 
+Furthermore, if you are a new student, we strongly encourage you to contact the Physics Undergraduate Major Advisors & ask them to add you to the Physics Intended Major Email List and the Physics Central Ed Discussion. 
+Do reach out to our student advisors for any issues/queries, they are here to help.
+</div>
       </section>
 
-      <div class="resources-container resources-main">
-        <nav class="semester-nav" aria-label="Jump to a semester">
-          <span>Jump to:</span>
-          <a href="#semester-1">Semester 1</a>
-          <a href="#semester-2">Semester 2</a>
-          <a href="#semester-3">Semester 3</a>
-          <a href="#semester-4">Semester 4</a>
-          <a href="#semester-5">Semester 5</a>
-        </nav>
-
-        <div class="semester-list" itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList">
-          <meta itemprop="name" content="IIT Kharagpur Physics undergraduate courses, Semesters 1–5" />
-          <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderAscending" />
-          <section class="semester-section" id="semester-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList" aria-labelledby="semester-1-title">
-            <div class="semester-heading">
-              <div><p class="resources-eyebrow">Course materials</p><h2 id="semester-1-title" itemprop="name">Semester 1</h2></div>
-              <a class="semester-overview" href="https://sites.google.com/view/kgp-phy24/semester-1" target="_blank" rel="noopener noreferrer">Semester overview <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-            <div class="course-grid">
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-1/physics-of-waves-ph11003" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Physics of Waves</span><span class="course-code" itemprop="courseCode">PH11003</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-1/advanced-calculus-ma11003" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Advanced Calculus</span><span class="course-code" itemprop="courseCode">MA11003</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-1/basic-electronics-ec21201" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Basic Electronics</span><span class="course-code" itemprop="courseCode">EC21201</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-1/pds-cs11003" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">PDS</span><span class="course-code" itemprop="courseCode">CS11003</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-          </section>
-
-          <section class="semester-section" id="semester-2" itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList" aria-labelledby="semester-2-title">
-            <div class="semester-heading">
-              <div><p class="resources-eyebrow">Course materials</p><h2 id="semester-2-title" itemprop="name">Semester 2</h2></div>
-              <a class="semester-overview" href="https://sites.google.com/view/kgp-phy24/semester-2" target="_blank" rel="noopener noreferrer">Semester overview <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-            <div class="course-grid">
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-2/lanca-ma11004" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">LANCA</span><span class="course-code" itemprop="courseCode">MA11004</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-2/elec-tech-ee11003" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Elec Tech</span><span class="course-code" itemprop="courseCode">EE11003</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-2/basic-eng-mech-me11003" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Basic Engineering Mechanics</span><span class="course-code" itemprop="courseCode">ME11003</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-2/chemistry-cy11003" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Chemistry</span><span class="course-code" itemprop="courseCode">CY11003</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-          </section>
-
-          <section class="semester-section" id="semester-3" itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList" aria-labelledby="semester-3-title">
-            <div class="semester-heading">
-              <div><p class="resources-eyebrow">Course materials</p><h2 id="semester-3-title" itemprop="name">Semester 3</h2></div>
-              <a class="semester-overview" href="https://sites.google.com/view/kgp-phy24/semester-3" target="_blank" rel="noopener noreferrer">Semester overview <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-            <div class="course-grid">
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/cdsr-ph21205" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">CDSR</span><span class="course-code" itemprop="courseCode">PH21205</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/electromagnetism-ph21209" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Electromagnetism</span><span class="course-code" itemprop="courseCode">PH21209</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/prob-stats-ma20205" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Probability &amp; Statistics</span><span class="course-code" itemprop="courseCode">MA20205</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/maths-for-phy-1-ph20206" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Maths for Physics 1</span><span class="course-code" itemprop="courseCode">PH20206</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/lab-gpm-ph29205" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Lab: GPM</span><span class="course-code" itemprop="courseCode">PH29205</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/lab-em-ph29207" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Lab: EM</span><span class="course-code" itemprop="courseCode">PH29207</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-3/electives/intro-to-soc-psych-hs21221" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Intro to Social Psychology</span><span class="course-code" itemprop="courseCode">HS21221 · Elective</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-          </section>
-
-          <section class="semester-section" id="semester-4" itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList" aria-labelledby="semester-4-title">
-            <div class="semester-heading">
-              <div><p class="resources-eyebrow">Course materials</p><h2 id="semester-4-title" itemprop="name">Semester 4</h2></div>
-              <a class="semester-overview" href="https://sites.google.com/view/kgp-phy24/semester-4" target="_blank" rel="noopener noreferrer">Semester overview <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-            <div class="course-grid">
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-4/aiml-ai20001" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">AI/ML</span><span class="course-code" itemprop="courseCode">AI20001</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-4/thermal-physics-ph21210" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Thermal Physics</span><span class="course-code" itemprop="courseCode">PH21210</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-4/quantum-physics-ph21212" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Quantum Physics</span><span class="course-code" itemprop="courseCode">PH21212</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-4/optics-ph21214" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Optics</span><span class="course-code" itemprop="courseCode">PH21214</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-4/lab-tp-ph29208" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Lab: TP</span><span class="course-code" itemprop="courseCode">PH29208</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-4/lab-optics-ph29212" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Lab: Optics</span><span class="course-code" itemprop="courseCode">PH29212</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-          </section>
-
-          <section class="semester-section" id="semester-5" itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList" aria-labelledby="semester-5-title">
-            <div class="semester-heading">
-              <div><p class="resources-eyebrow">Course materials</p><h2 id="semester-5-title" itemprop="name">Semester 5</h2></div>
-              <a class="semester-overview" href="https://sites.google.com/view/kgp-phy24/semester-5" target="_blank" rel="noopener noreferrer">Semester overview <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-            <div class="course-grid">
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/maths-for-physics-2-ph30207" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Maths for Physics 2</span><span class="course-code" itemprop="courseCode">PH30207</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/electrodynamics-ph31205" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Electrodynamics</span><span class="course-code" itemprop="courseCode">PH31205</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/quantum-mechanics-ph31201" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Quantum Mechanics</span><span class="course-code" itemprop="courseCode">PH31201</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/classical-mechanics-ph31207" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Classical Mechanics</span><span class="course-code" itemprop="courseCode">PH31207</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/computational-physics-theory-ph30201" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Computational Physics Theory</span><span class="course-code" itemprop="courseCode">PH30201</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/lab-computational-physics-ph39209" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Lab: Computational Physics</span><span class="course-code" itemprop="courseCode">PH39209</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-              <a class="course-link" itemscope itemtype="https://schema.org/Course" itemprop="itemListElement url" href="https://sites.google.com/view/kgp-phy24/semester-5/lab-modern-physics-ph39201" target="_blank" rel="noopener noreferrer"><span class="course-name" itemprop="name">Lab: Modern Physics</span><span class="course-code" itemprop="courseCode">PH39201</span><i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
-            </div>
-          </section>
-        </div>
-
-        <section class="helpful-resources" aria-labelledby="helpful-resources-title">
-          <div class="section-heading">
-            <p class="resources-eyebrow">Beyond the course archive</p>
-            <h2 id="helpful-resources-title">Academic support &amp; helpful links</h2>
-          </div>
-          <div class="helpful-grid">
-            <article class="helpful-card">
-              <span class="helpful-icon"><i class="fas fa-users" aria-hidden="true"></i></span>
-              <h3>PhySoc Academic Wing</h3>
-              <p>Peer learning, senior-led research discussions, and lectures connecting core physics to current topics.</p>
-            </article>
-            <article class="helpful-card">
-              <span class="helpful-icon"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
-              <h3>Academic Wing Meetings</h3>
-              <p>Weekly PhySoc-AWM sessions on Saturdays, 3:00–5:00 PM, with student and graduate mentors.</p>
-            </article>
-            <article class="helpful-card">
-              <span class="helpful-icon"><i class="fas fa-user-friends" aria-hidden="true"></i></span>
-              <h3>Student counselors</h3>
-              <p>Reach out to student advisors for guidance, appointments, or help finding the right academic contact.</p>
-              <div class="helpful-actions">
-                <a class="helpful-button" href="mailto:sagarneelgh1107@gmail.com">Email Sagarneel</a>
-                <a class="helpful-button" href="mailto:sanjaytn369@gmail.com">Email Sanjay</a>
-              </div>
-            </article>
-            <article class="helpful-card">
-              <span class="helpful-icon"><i class="fas fa-info-circle" aria-hidden="true"></i></span>
-              <h3>New to the Physics major?</h3>
-              <p>Ask a Physics Undergraduate Major Advisor to add you to the Physics Intended Major email list and the Physics Central Ed Discussion.</p>
-            </article>
-          </div>
-        </section>
-      </div>
     </main>
     <!-- Footer -->
     <footer style="border-top: 1px solid rgba(62, 123, 157, 0.25);">
