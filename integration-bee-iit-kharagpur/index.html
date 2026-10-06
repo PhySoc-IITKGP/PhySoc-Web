@@ -36,12 +36,9 @@
         z-index: 20 !important;
       }
 
-      .header::before,
-      .header::after,
-      footer::before,
-      footer::after,
-      .calendar-dynamic-box::before,
-      .calendar-dynamic-box::after {
+      .header::before, .header::after,
+      footer::before, footer::after,
+      .calendar-dynamic-box::before, .calendar-dynamic-box::after {
         content: "" !important;
         position: absolute !important;
         inset: 0 !important;
@@ -49,16 +46,12 @@
         pointer-events: none !important;
       }
 
-      .header::before,
-      footer::before,
-      .calendar-dynamic-box::before {
+      .header::before, footer::before, .calendar-dynamic-box::before {
         background: linear-gradient(90deg, #ffffff 0%, #b0d3e4 40%, #3E7B9D 100%) !important;
         animation: dynamicFlipA 10s ease-in-out infinite !important;
       }
 
-      .header::after,
-      footer::after,
-      .calendar-dynamic-box::after {
+      .header::after, footer::after, .calendar-dynamic-box::after {
         background: linear-gradient(90deg, #3E7B9D 0%, #b0d3e4 60%, #ffffff 100%) !important;
         animation: dynamicFlipB 10s ease-in-out infinite !important;
       }
@@ -96,17 +89,8 @@
         color: #3E7B9D !important;
       }
 
-      .header .img-light,
-      .header-gradient-home .img-light,
-      .header-gradient-all .img-light {
-        display: block !important;
-      }
-
-      .header .img-dark,
-      .header-gradient-home .img-dark,
-      .header-gradient-all .img-dark {
-        display: none !important;
-      }
+      .header .img-light, .header-gradient-home .img-light, .header-gradient-all .img-light { display: block !important; }
+      .header .img-dark, .header-gradient-home .img-dark, .header-gradient-all .img-dark { display: none !important; }
 
       /* Hero Banner */
       .events-banner-container {
@@ -128,7 +112,7 @@
         display: block;
       }
 
-      /* Tight Typography & Spacing (Identical to Resources page) */
+      /* Clean Content Typography */
       .content h1.page-title {
         font-size: 2.25rem;
         font-weight: 900;
@@ -185,7 +169,41 @@
         color: #3E7B9D !important;
       }
 
-      /* Gallery Layout (Flat image grid, zero borders/boxes) */
+      /* Two-Column Side-by-Side Flex Layout */
+      .details-two-col {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 48px;
+        width: 100%;
+        margin-top: 1.75rem;
+      }
+
+      .col-left {
+        flex: 1 1 56%;
+        width: 56%;
+        min-width: 0;
+      }
+
+      .col-right {
+        flex: 1 1 44%;
+        width: 44%;
+        min-width: 0;
+      }
+
+      @media (max-width: 768px) {
+        .details-two-col {
+          flex-direction: column !important;
+          gap: 24px !important;
+        }
+        .col-left, .col-right {
+          width: 100% !important;
+          flex: 1 1 100% !important;
+        }
+      }
+
+      /* Photo Gallery Layout (Flat, no borders/boxes) */
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -291,7 +309,6 @@
     </header>
 
     <main>
-      <!-- Single continuous section with tight spacing matching Resources page -->
       <section class="section py-10 bg-white dark:bg-darkmode-body">
         <div class="container">
           <div class="row">
@@ -314,47 +331,59 @@
                   <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">register here.</a>
                 </p>
 
-                <!-- Competition Format (Exactly as shown in your screenshot) -->
-                <h3 id="competition-format">Competition Format</h3>
+                <!-- ══════════════════════════════════════════════════════
+                     SIDE-BY-SIDE LAYOUT
+                     Left: Competition Format
+                     Right: Events Details & Prizes
+                ══════════════════════════════════════════════════════ -->
+                <div class="details-two-col">
+                  
+                  <!-- LEFT COLUMN: Competition Format -->
+                  <div class="col-left">
+                    <h3 id="competition-format" style="margin-top: 0;">Competition Format</h3>
 
-                <p><strong>Qualifier (9:00 a.m. &ndash; 12:00 p.m.)</strong></p>
-                <ul>
-                  <li>Written test: 20 integrals in 60 minutes</li>
-                  <li>Top 16 scorers qualify for playoffs</li>
-                </ul>
+                    <p><strong>Qualifier (9:00 a.m. &ndash; 12:00 p.m.)</strong></p>
+                    <ul>
+                      <li>Written test: 20 integrals in 60 minutes</li>
+                      <li>Top 16 scorers qualify for playoffs</li>
+                    </ul>
 
-                <p><strong>Playoffs (1:00 p.m. &ndash; 4:00 p.m.)</strong></p>
-                <ul>
-                  <li>Single-elimination tournament on the blackboard</li>
-                  <li>Top 16 participate, remaining contestants cheer them in the audience.</li>
-                </ul>
+                    <p><strong>Playoffs (1:00 p.m. &ndash; 4:00 p.m.)</strong></p>
+                    <ul>
+                      <li>Single-elimination tournament on the blackboard</li>
+                      <li>Top 16 participate, remaining contestants cheer them in the audience.</li>
+                    </ul>
 
-                <p>
-                  Round 1: 16 &rarr; 8 (first to solve 1 integral, 2 minutes)<br />
-                  Round 2: 8 &rarr; 4 (first to solve 1 integral, 2 minutes)<br />
-                  Round 3: 4 &rarr; 2 (first to solve 1 integral, 3 minutes )<br />
-                  Final: 2 &rarr; Champion (first to solve 2 integrals, 3 minutes each)
-                </p>
+                    <p>
+                      Round 1: 16 &rarr; 8 (first to solve 1 integral, 2 minutes)<br />
+                      Round 2: 8 &rarr; 4 (first to solve 1 integral, 2 minutes)<br />
+                      Round 3: 4 &rarr; 2 (first to solve 1 integral, 3 minutes )<br />
+                      Final: 2 &rarr; Champion (first to solve 2 integrals, 3 minutes each)
+                    </p>
+                  </div>
 
-                <!-- Events Details -->
-                <h3 id="events-details">Events Details</h3>
-                <p>
-                  <strong>Preliminary round:</strong> 10th October (6:30 to 7:15 pm)<br />
-                  Venue: to be emailed
-                </p>
-                <p>
-                  <strong>Play off:</strong> 11th October (4:00 pm to 7:30 pm)<br />
-                  Venue: Department of physics
-                </p>
+                  <!-- RIGHT COLUMN: Events Details & Prizes -->
+                  <div class="col-right">
+                    <h3 id="events-details" style="margin-top: 0;">Events Details</h3>
+                    <p>
+                      <strong>Preliminary round:</strong> 10th October (6:30 to 7:15 pm)<br />
+                      Venue: to be emailed
+                    </p>
+                    <p>
+                      <strong>Play off:</strong> 11th October (4:00 pm to 7:30 pm)<br />
+                      Venue: Department of physics
+                    </p>
 
-                <!-- Prizes -->
-                <h3 id="prizes">Prizes</h3>
-                <p>
-                  <strong>1st place:</strong> Grand Integrator title, 2000 ₹ Cash, Tshirt, and goodies<br />
-                  <strong>2nd place:</strong> 1000 ₹ Cash, Tshirt and goodies<br />
-                  <strong>3rd place:</strong> 500 ₹ Cash, Tshirt and goodies<br />
-                  <strong>4th place:</strong> 500 ₹ Cash, Tshirt and goodies
-                </p>
+                    <h3 id="prizes">Prizes</h3>
+                    <p>
+                      <strong>1st place:</strong> Grand Integrator title, 2000 ₹ Cash, Tshirt, and goodies<br />
+                      <strong>2nd place:</strong> 1000 ₹ Cash, Tshirt and goodies<br />
+                      <strong>3rd place:</strong> 500 ₹ Cash, Tshirt and goodies<br />
+                      <strong>4th place:</strong> 500 ₹ Cash, Tshirt and goodies
+                    </p>
+                  </div>
+
+                </div>
 
                 <!-- Past Questions -->
                 <h3 id="past-integration-bee-questions">Past Integration Bee Questions</h3>
@@ -367,7 +396,7 @@
                   <li>2025: Yet to be updated</li>
                 </ul>
 
-                <!-- Photo Gallery (No boxes, clean layout) -->
+                <!-- Photo Gallery (Flat layout, no boxes) -->
                 <h3 id="physoc-integration-bee">PhySoc Integration Bee</h3>
                 <div class="gallery-grid">
                   <div class="gallery-g1"><img src="../images/gallery/Integrationbee.png" onerror="this.onerror=null;this.src='../images/gallery/discuss.png';" alt="Image 1" /></div>
