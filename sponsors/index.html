@@ -115,24 +115,6 @@
       .header-gradient-all .img-dark {
         display: none !important;
       }
-
-      /* Sponsor Card & Logo Sizing Fix */
-      .sm\:w-48,
-      .sponsor-card {
-        width: 12rem !important;
-        max-width: 100% !important;
-      }
-      .h-24 {
-        height: 6rem !important;
-      }
-      .max-w-\[120px\],
-      .sponsor-logo {
-        max-width: 120px !important;
-        width: 100% !important;
-        height: auto !important;
-        max-height: 48px !important;
-        object-fit: contain !important;
-      }
     </style>
   </head>
   <body>
@@ -257,13 +239,11 @@
     target="_blank"
     rel="noopener noreferrer"
     title="Jane Street"
-    class="group sponsor-card flex items-center justify-center w-full sm:w-[22.5rem] h-[10.5rem] p-5 bg-transparent rounded-2xl border border-border dark:border-darkmode-border shadow-sm hover:shadow-md hover:border-[#3E7B9D] dark:hover:border-[#3E7B9D] transition-all duration-300"
-    style="width: 22.5rem; max-width: 100%; height: 10.5rem; display: inline-flex;">
+    class="group flex items-center justify-center w-full sm:w-48 h-24 p-4 bg-transparent rounded-2xl border border-border dark:border-darkmode-border shadow-sm hover:shadow-md hover:border-[#3E7B9D] dark:hover:border-[#3E7B9D] transition-all duration-300">
     <img
       src="../images/jane-street.svg"
       alt="Jane Street"
-      class="sponsor-logo h-[60px] md:h-[72px] w-auto max-w-[240px] object-contain transition-transform duration-300 group-hover:scale-105 dark:brightness-0 dark:invert"
-      style="max-width: 240px; max-height: 84px; width: auto; height: auto;"
+      class="h-8 md:h-10 w-auto max-w-[120px] object-contain transition-transform duration-300 group-hover:scale-105 dark:brightness-0 dark:invert"
       onerror="this.onerror=null; this.src='../images/Jane_Street.png';" />
   </a>
 </div>
@@ -347,3 +327,4 @@
     <script defer async crossorigin="anonymous" src="../js/script-lazy.min.c3e692e360f6f81f898b1fa3a19ee902e6b5bdbbbfa512bf221a0fe796fc9f7c.js"></script>
   </body>
 </html>
+
