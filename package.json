@@ -1,0 +1,10 @@
+{
+  "name": "physoc-website-assets",
+  "private": true,
+  "scripts": {
+    "optimize:images": "node tools/optimize-images.cjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}
