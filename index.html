@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="theme-name" content="hugoplate" />
 
-    <link rel="icon" type="image/png" sizes="256x256" href="/images/favicon.png">
+    <link rel="icon" type="image/png" href="/images/logo2_hu_20f6f98a0862d010.png">
 
     <title>Physics Society, IIT Kharagpur | PhySoc IITKGP</title>
     <meta name="keywords" content="IITKGP, Physics, Physics Society, PhySoc" />
@@ -27,7 +27,7 @@
           "alternateName": "PhySoc IITKGP",
           "url": "https://physoc-iitkgp.vercel.app/",
           "areaServed": {"@type": "Place", "name": "Kharagpur, West Bengal, India"},
-          "knowsAbout": ["Physics", "theoretical physics", "experimental physics", "mathematics", "STEM education", "scientific communication", "physics competitions", "academic events", "student-led research", "IIT Kharagpur"],
+          "knowsAbout": [Physics, theoretical physics, experimental physics, mathematics, STEM education, scientific communication, physics competitions, academic events, student-led research, IIT Kharagpur],
           "parentOrganization": {"@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Kharagpur", "url": "https://www.iitkgp.ac.in/"}
         },
         {"@type": "WebSite", "@id": "https://physoc-iitkgp.vercel.app/#website", "url": "https://physoc-iitkgp.vercel.app/", "name": "PhySoc IITKGP", "publisher": {"@id": "https://physoc-iitkgp.vercel.app/#organization"}},
@@ -39,6 +39,7 @@
 
     <link rel="manifest" href="/manifest.webmanifest" />
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/style.min.75408a616c8d64a93d3b03e345cadd04f72b1cded1cd7b9819149db1a7264234.css" />
 
     <style>
@@ -204,7 +205,6 @@
       .hero-dot {
         width: 12px;
         height: 12px;
-        padding: 0;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.45);
         border: 1.5px solid #ffffff;
@@ -336,16 +336,6 @@
           text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0,0,0,0.9);
         }
       }
-      @media (prefers-reduced-motion: reduce) {
-        .header::before, .header::after,
-        footer::before, footer::after,
-        .calendar-dynamic-box::before, .calendar-dynamic-box::after {
-          animation: none !important;
-        }
-        .hero-slide, .clicks-track {
-          transition: none !important;
-        }
-      }
     </style>
   </head>
   <body>
@@ -359,11 +349,8 @@
               decoding="async"
               class="img img-light"
               width="250"
-              height="98"
-              style="height: auto;"
-              src="./images/optimized/logo-light-250.webp"
-              srcset="./images/optimized/logo-light-250.webp 250w, ./images/optimized/logo-light-500.webp 500w"
-              sizes="250px"
+              height="40"
+              src="./images/logo_hu_62a2c291369a66f0.webp"
               alt="PhySoc IITKGP"
               onerror="this.onerror=null;this.src='./images/logo_hu_2fca4d2ac2314e.jpg';" />
             <img
@@ -371,11 +358,8 @@
               decoding="async"
               class="img img-dark"
               width="250"
-              height="48"
-              style="height: auto;"
-              src="./images/optimized/logo-dark-250.webp"
-              srcset="./images/optimized/logo-dark-250.webp 250w, ./images/optimized/logo-dark-500.webp 500w"
-              sizes="250px"
+              height="40"
+              src="./images/logo-darkmode_hu_ce06e59bade57f0d.webp"
               alt="PhySoc IITKGP"
               onerror="this.onerror=null;this.src='./images/logo-darkmode_hu_fa721757c615f129.png';" />
           </a>
@@ -431,15 +415,15 @@
         <div class="hero-slider-container">
           <!-- Slide 1 -->
           <div class="hero-slide active">
-            <img src="./images/optimized/group-800.webp" srcset="./images/optimized/group-480.webp 480w, ./images/optimized/group-800.webp 800w, ./images/optimized/group-1280.webp 1280w, ./images/optimized/group-1600.webp 1600w" sizes="(min-width: 1320px) 1296px, calc(100vw - 48px)" width="1600" height="521" fetchpriority="high" loading="eager" decoding="async" alt="PhySoc members gathered outside the Physics Department" />
+            <img src="./images/gallery/group.JPG" alt="PhySoc IIT Kharagpur Banner" />
           </div>
           <!-- Slide 2 -->
           <div class="hero-slide">
-            <img src="./images/optimized/calday-800.webp" srcset="./images/optimized/calday-400.webp 400w, ./images/optimized/calday-800.webp 800w, ./images/optimized/calday-1280.webp 1280w, ./images/optimized/calday-1600.webp 1600w" sizes="(min-width: 1320px) 1296px, calc(100vw - 48px)" width="1600" height="1067" loading="lazy" decoding="async" alt="PhySoc Calendar Celebration" />
+            <img src="./images/gallery/calday.JPG" alt="PhySoc Calendar Celebration" />
           </div>
           <!-- Slide 3 -->
           <div class="hero-slide">
-            <img src="./images/optimized/officers-800.webp" srcset="./images/optimized/officers-480.webp 480w, ./images/optimized/officers-800.webp 800w, ./images/optimized/officers-1280.webp 1280w, ./images/optimized/officers-1600.webp 1600w" sizes="(min-width: 1320px) 1296px, calc(100vw - 48px)" width="1600" height="959" loading="lazy" decoding="async" alt="PhySoc Officer Gathering" />
+            <img src="./images/gallery/officers.JPG" alt="PhySoc Officer Gathering" />
           </div>
 
           <!-- Overlay Text -->
@@ -450,9 +434,9 @@
 
           <!-- 3 Dot Indicators -->
           <div class="hero-dots" id="heroDots">
-            <button type="button" class="hero-dot active" onclick="setHeroSlide(0)" aria-label="Show group photo" aria-pressed="true"></button>
-            <button type="button" class="hero-dot" onclick="setHeroSlide(1)" aria-label="Show calendar celebration" aria-pressed="false"></button>
-            <button type="button" class="hero-dot" onclick="setHeroSlide(2)" aria-label="Show officer gathering" aria-pressed="false"></button>
+            <div class="hero-dot active" onclick="setHeroSlide(0)"></div>
+            <div class="hero-dot" onclick="setHeroSlide(1)"></div>
+            <div class="hero-dot" onclick="setHeroSlide(2)"></div>
           </div>
         </div>
       </div>
@@ -489,11 +473,8 @@
             <div class="responsive-child" style="flex: 1 1 42%; width: 42%; min-width: 0;">
               <div style="border: 2px solid rgba(62, 123, 157, 0.35); overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); width: 100%; border-radius: 4px;">
                 <img
-                  src="./images/optimized/discuss-640.webp"
-                  srcset="./images/optimized/discuss-400.webp 400w, ./images/optimized/discuss-640.webp 640w, ./images/optimized/discuss-800.webp 800w"
-                  sizes="(max-width: 768px) calc(100vw - 48px), (min-width: 1320px) 520px, 42vw"
-                  width="640" height="515" loading="lazy" decoding="async"
-                  alt="Students discussing physics together"
+                  src="./images/gallery/discuss.png"
+                  alt="About PhySoc IIT Kharagpur"
                   style="width: 100%; height: 380px; object-fit: cover; display: block;" />
               </div>
             </div>
@@ -518,7 +499,7 @@
           <div class="clicks-carousel-wrapper">
             <!-- Prev Button -->
             <button class="clicks-nav-btn" onclick="prevClicksSlide()" aria-label="Previous photos" style="margin-right: 12px;">
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6" /></svg>
+              <i class="fa fa-chevron-left"></i>
             </button>
 
             <!-- Viewport -->
@@ -527,37 +508,37 @@
                 
                 <!-- Photo 1 -->
                 <div class="clicks-card">
-                  <img src="./images/optimized/badminton-400.webp" srcset="./images/optimized/badminton-400.webp 400w, ./images/optimized/badminton-640.webp 640w, ./images/optimized/badminton-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 160px), (max-width: 900px) 40vw, (min-width: 1320px) 380px, 30vw" width="400" height="267" loading="lazy" decoding="async" alt="Students playing badminton" class="clicks-card-img" />
+                  <img src="./images/gallery/badminton.png" alt="Department badminton " class="clicks-card-img" />
                   <div class="clicks-card-caption">Departmental Badminton Competition </div>
                 </div>
 
                 <!-- Photo 2 -->
                 <a class="clicks-card" href="./integration-bee-iit-kharagpur/index.html" aria-label="Learn more about the Integration Bee">
-                  <img src="./images/optimized/integration-bee-400.webp" srcset="./images/optimized/integration-bee-400.webp 400w, ./images/optimized/integration-bee-640.webp 640w, ./images/optimized/integration-bee-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 160px), (max-width: 900px) 40vw, (min-width: 1320px) 380px, 30vw" width="400" height="225" loading="lazy" decoding="async" alt="Participants competing at the blackboard" class="clicks-card-img" />
+                  <img src="./images/gallery/Integrationbee.png" alt="Integration Bee" class="clicks-card-img" />
                   <div class="clicks-card-caption">Integration Bee</div>
                 </a>
 
                 <!-- Photo 3 -->
                 <div class="clicks-card">
-                  <img src="./images/optimized/calday-400.webp" srcset="./images/optimized/calday-400.webp 400w, ./images/optimized/calday-640.webp 640w, ./images/optimized/calday-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 160px), (max-width: 900px) 40vw, (min-width: 1320px) 380px, 30vw" width="400" height="267" loading="lazy" decoding="async" alt="Sir Michael Berry speaking to students" class="clicks-card-img" />
+                  <img src="./images/gallery/calday.JPG" alt="Sir Michael Berry" class="clicks-card-img" />
                   <div class="clicks-card-caption">A Talk with Sir Michael Berry</div>
                 </div>
 
                 <!-- Photo 4 -->
                 <div class="clicks-card">
-                  <img src="./images/optimized/farewell-400.webp" srcset="./images/optimized/farewell-400.webp 400w, ./images/optimized/farewell-640.webp 640w, ./images/optimized/farewell-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 160px), (max-width: 900px) 40vw, (min-width: 1320px) 380px, 30vw" width="400" height="269" loading="lazy" decoding="async" alt="Graduating students celebrating together" class="clicks-card-img" />
+                  <img src="./images/gallery/farewell.png" alt="farewell" class="clicks-card-img" />
                   <div class="clicks-card-caption">Farewell 2026 Batch</div>
                 </div>
 
                 <!-- Photo 5 -->
                 <div class="clicks-card">
-                  <img src="./images/optimized/pawm-400.webp" srcset="./images/optimized/pawm-400.webp 400w, ./images/optimized/pawm-640.webp 640w, ./images/optimized/pawm-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 160px), (max-width: 900px) 40vw, (min-width: 1320px) 380px, 30vw" width="400" height="269" loading="lazy" decoding="async" alt="PhySoc members meeting and sharing ideas" class="clicks-card-img" />
+                  <img src="./images/gallery/pawm.png" alt="pawm" class="clicks-card-img" />
                   <div class="clicks-card-caption">PhySoc AWM</div>
                 </div>
 
                 <!-- Photo 6 -->
                 <div class="clicks-card">
-                  <img src="./images/optimized/freshers-400.webp" srcset="./images/optimized/freshers-400.webp 400w, ./images/optimized/freshers-640.webp 640w, ./images/optimized/freshers-800.webp 800w" sizes="(max-width: 600px) calc(100vw - 160px), (max-width: 900px) 40vw, (min-width: 1320px) 380px, 30vw" width="400" height="286" loading="lazy" decoding="async" alt="New students attending their department orientation" class="clicks-card-img" />
+                  <img src="./images/gallery/freshers.png" alt="freshers" class="clicks-card-img" />
                   <div class="clicks-card-caption">Departmental Orientation</div>
                 </div>
 
@@ -566,7 +547,7 @@
 
             <!-- Next Button -->
             <button class="clicks-nav-btn" onclick="nextClicksSlide()" aria-label="Next photos" style="margin-left: 12px;">
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6" /></svg>
+              <i class="fa fa-chevron-right"></i>
             </button>
           </div>
 
@@ -575,28 +556,23 @@
 
       <!-- ══════════════════════════════════════════════════════════
            SECTION 3: Get IN Touch & Location Map
-           Left: Department location | Right: Join Us button & Contact Info
+           Left: Google Map embed | Right: Join Us button & Contact Info
       ══════════════════════════════════════════════════════════ -->
       <section class="section py-10 bg-white dark:bg-darkmode-body">
         <div class="container">
           <div class="responsive-flex" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 48px; width: 100%;">
             
-            <!-- Left Side: Map link (50% width) -->
+            <!-- Left Side: Interactive Map (50% width) -->
             <div class="responsive-child" style="flex: 1 1 50%; width: 50%; min-width: 0;">
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Department+of+Physics+IIT+Kharagpur"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open the Department of Physics at IIT Kharagpur in Google Maps"
-                style="position: relative; display: flex; min-height: 280px; height: 420px; width: 100%; align-items: center; justify-content: center; overflow: hidden; border: 2px solid rgba(62, 123, 157, 0.35); border-radius: 4px; background: #253344; box-shadow: 0 6px 20px rgba(0,0,0,0.06); color: #fff; text-align: center; text-decoration: none;">
-                <img src="./images/optimized/gmap-iitkgp.webp" width="861" height="586" loading="lazy" decoding="async" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
-                <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10, 20, 32, 0.78), rgba(10, 20, 32, 0.08) 75%);"></span>
-                <span style="position: relative; z-index: 1; padding: 24px; text-shadow: 0 1px 4px rgba(0,0,0,0.75);">
-                  <strong style="display: block; font-size: 1.25rem;">Department of Physics</strong>
-                  <span style="display: block; margin-top: 8px;">IIT Kharagpur, West Bengal, India</span>
-                  <span style="display: inline-block; margin-top: 18px; padding: 10px 18px; border-radius: 4px; background: #3E7B9D; color: #fff; text-shadow: none;">Open in Google Maps</span>
-                </span>
-              </a>
+              <div style="border: 2px solid rgba(62, 123, 157, 0.35); overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); height: 420px; width: 100%; border-radius: 4px;">
+                <iframe
+                  title="Department of Physics IIT Kharagpur Location"
+                  src="https://maps.google.com/maps?q=Department+of+Physics+IIT+Kharagpur+Kharagpur+West+Bengal&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  style="border: 0; width: 100%; height: 100%; display: block;"
+                  allowfullscreen=""
+                  loading="lazy">
+                </iframe>
+              </div>
             </div>
 
             <!-- Right Side: Get IN Touch Content (50% width) -->
@@ -650,7 +626,7 @@
       <div class="container">
         <div class="row items-center py-10">
           <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
-            <img src="./images/ocf-hosted-penguin.svg" width="482" height="309" loading="lazy" decoding="async" alt="Open Computing Facility hosting badge" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
+            <img src="./images/ocf-hosted-penguin.svg" alt="PhySoc" style="border: 0; max-height: 125px; width: auto; display: inline-block;" />
           </div>
           <div class="lg:col-6 mb-8 text-center lg:mb-0">
             <ul>
@@ -669,7 +645,7 @@
                     style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
                     onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
                     onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                    <i aria-hidden="true" style="color: #ffffff !important; display: inline-flex;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg></i>
+                    <i class="fab fa-instagram" style="color: #ffffff !important; font-size: 1.3rem;"></i>
                   </a>
                 </li>
                 <li>
@@ -681,7 +657,7 @@
                     style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
                     onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
                     onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                    <i aria-hidden="true" style="color: #ffffff !important; display: inline-flex;"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="9" width="4" height="12" /><circle cx="5" cy="5" r="2" /><path d="M10 9h4v2c1-2 7-4 7 3v7h-4v-7c0-3-3-3-3 0v7h-4z" /></svg></i>
+                    <i class="fab fa-linkedin" style="color: #ffffff !important; font-size: 1.3rem;"></i>
                   </a>
                 </li>
                 <li>
@@ -693,7 +669,7 @@
                     style="display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; background-color: #121212 !important; border-radius: 8px; transition: all 0.2s;"
                     onmouseover="this.style.backgroundColor='#ffffff'; this.querySelector('i').style.color='#3E7B9D'"
                     onmouseout="this.style.backgroundColor='#121212'; this.querySelector('i').style.color='#ffffff'">
-                    <i aria-hidden="true" style="color: #ffffff !important; display: inline-flex;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4" /><path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none" /></svg></i>
+                    <i class="fab fa-youtube" style="color: #ffffff !important; font-size: 1.3rem;"></i>
                   </a>
                 </li>
               </ul>
@@ -711,7 +687,6 @@
     <!-- Interactive Scripts for Hero Slider and Clicks Carousel -->
     <script>
       /* ── Hero Banner Auto-Slider ── */
-      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var currentHeroIdx = 0;
       var heroSlides = document.querySelectorAll('.hero-slide');
       var heroDots = document.querySelectorAll('.hero-dot');
@@ -725,7 +700,6 @@
         });
         heroDots.forEach(function(d, i) {
           d.classList.toggle('active', i === currentHeroIdx);
-          d.setAttribute('aria-pressed', String(i === currentHeroIdx));
         });
       }
 
@@ -740,7 +714,7 @@
 
       function resetHeroTimer() {
         if (heroTimer) clearInterval(heroTimer);
-        if (!reducedMotion) heroTimer = setInterval(nextHeroSlide, 4500);
+        heroTimer = setInterval(nextHeroSlide, 4500);
       }
       resetHeroTimer();
 
@@ -755,8 +729,6 @@
       if (clicksTrack && clicksOriginalCards.length > 0) {
         clicksOriginalCards.forEach(function(card) {
           var clone = card.cloneNode(true);
-          clone.setAttribute('aria-hidden', 'true');
-          if (clone.matches('a')) clone.setAttribute('tabindex', '-1');
           clicksTrack.appendChild(clone);
         });
       }
@@ -780,7 +752,7 @@
         if (animate === false) {
           clicksTrack.style.transition = 'none';
         } else {
-          clicksTrack.style.transition = reducedMotion ? 'none' : 'transform 0.5s ease-in-out';
+          clicksTrack.style.transition = 'transform 0.5s ease-in-out';
         }
         var step = getStepWidth();
         clicksTrack.style.transform = 'translateX(-' + (clicksIdx * step) + 'px)';
@@ -820,7 +792,7 @@
 
       function resetClicksTimer() {
         if (clicksTimer) clearInterval(clicksTimer);
-        if (!reducedMotion) clicksTimer = setInterval(nextClicksSlide, 3500);
+        clicksTimer = setInterval(nextClicksSlide, 3500);
       }
 
       var clicksContainer = document.querySelector('.clicks-carousel-wrapper');
@@ -840,5 +812,8 @@
       resetClicksTimer();
     </script>
 
+    <script src="./js/main.min.c382e2105e67658eff86fe0a044cac3f838636947d327cd08f2b03f6a8b21f2e.js" defer></script>
+    <script crossorigin="anonymous" src="./js/script.min.e47bd8989fcd86cba20150c3b02e9c9806d76d4d7b000a4b636d101f8a300ad6.js"></script>
+    <script defer async crossorigin="anonymous" src="./js/script-lazy.min.c3e692e360f6f81f898b1fa3a19ee902e6b5bdbbbfa512bf221a0fe796fc9f7c.js"></script>
   </body>
 </html>
