@@ -2,9 +2,11 @@
   "name": "physoc-website-assets",
   "private": true,
   "scripts": {
-    "optimize:images": "node tools/optimize-images.cjs"
+    "optimize:images": "node tools/optimize-images.cjs",
+    "optimize:css": "node tools/optimize-css.cjs"
   },
   "devDependencies": {
+    "purgecss": "^8.0.0",
     "sharp": "^0.35.5"
   }
 }
