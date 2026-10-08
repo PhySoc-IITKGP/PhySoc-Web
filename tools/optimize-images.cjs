@@ -26,7 +26,7 @@ async function optimize() {
       const info = await sharp(path.join(root, 'images', source))
         .rotate()
         .resize({ width, withoutEnlargement: true })
-        .webp({ quality: name.startsWith('logo-') ? 85 : 75, effort: 6 })
+        .webp({ quality: name.startsWith('logo-') ? 90 : 85, effort: 6 })
         .toFile(target);
       console.log(`${path.basename(target)}: ${info.width}x${info.height}, ${Math.round(info.size / 1024)} KiB`);
     }
