@@ -1,1 +1,4 @@
-User-agent: *Allow: /Sitemap: https://physoc-iitkgp.vercel.app/sitemap.xml
+User-agent: *
+Allow: /
+
+Sitemap: https://physoc-iitkgp.vercel.app/sitemap.xml
